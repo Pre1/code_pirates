@@ -1,6 +1,14 @@
 import React, { Component } from "react";
-
+import { Droppable } from "react-beautiful-dnd";
 class index extends Component {
+  state = {
+    tags: this.props.tags
+  };
+  componentDidUpdate = prevProps => {
+    if (prevProps.tags !== this.props.tags) {
+      this.setState({ tags: this.props.tags });
+    }
+  };
   render() {
     return (
       <div
@@ -8,13 +16,33 @@ class index extends Component {
         className="m-3"
       >
         <p>Building:</p>
-        <div class="card text-center">
-          <div class="card-header" />
-          <div class="card-body">
-            <p class="card-text">Empty card</p>
-          </div>
-          <div class="card-footer text-muted" />
-        </div>
+        <Droppable droppableId="building">
+          {provided => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="card text-center"
+            >
+              <div className="card-footer text-muted" />
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+        {this.state.tags.map((tag, index) => (
+          <Droppable key={index} droppableId={`${tag}-${index}`}>
+            {provided => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className="card-body"
+                style={{ maxWidth: "300px", background: "purple" }}
+              >
+                <p className="card-text">{tag}</p>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        ))}
       </div>
     );
   }
