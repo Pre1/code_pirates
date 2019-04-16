@@ -28,7 +28,7 @@ class H1Block extends Block {
   }
 
   compile() {
-    let res = `<h1 className="PiratesCode>${this.children
+    let res = `<h1 className="PiratesCode">${this.children
       .map(child => child.compile())
       .join("")}</h1>`;
     return res;
@@ -44,7 +44,7 @@ class ImgBlock extends Block {
   compile() {
     return `<img className="PiratesCode" ${this.attr
       .map(at => `${Object.keys(at)[0]}="${Object.values(at)[0]}" `)
-      .join("")}/>`;
+      .join("")} />`;
   }
 }
 
@@ -52,6 +52,7 @@ class TextBlock extends Block {
   constructor(text = "Sample") {
     super([]);
     this.text = text;
+    this.name = "text";
   }
 
   compile() {
