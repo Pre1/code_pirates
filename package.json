@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "html-react-parser": "^0.7.0",
     "jquery": "^3.4.0",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
