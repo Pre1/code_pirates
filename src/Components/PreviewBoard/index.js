@@ -12,8 +12,20 @@ class index extends Component {
   render() {
     // [H1Block(), PBlock()].map(elm => elm.compile()).join("") => HTMLString
     let test = new Blocks.H1Block([new Blocks.TextBlock()]);
-    console.log("TCL: index -> render -> test", test);
-    console.log("TCL: index -> render -> test.compile()", test.compile());
+    let buildingBlocks = this.props.buildingBlocks;
+
+    console.log("=================");
+    console.log("TCL: index -> render -> buildingBlocks", buildingBlocks);
+    console.log("=================");
+
+    let testObj = this.props.buildingBlocks
+      .map(elm => elm.compile())
+      .join("\n");
+
+    console.log("TCL: index -> render -> testObj", testObj);
+
+    // console.log("TCL: index -> render -> test", test);
+    // console.log("TCL: index -> render -> test.compile()", test.compile());
     let data = html => {
       return {
         __html: html
@@ -36,7 +48,8 @@ class index extends Component {
         className="m-3"
       >
         <p>Preview:</p>
-        <div dangerouslySetInnerHTML={data(test.compile())} />
+        {/* <div dangerouslySetInnerHTML={data(test.compile())} /> */}
+        <div dangerouslySetInnerHTML={data(testObj)} />
         {/* {Parser(test.compile())} */}
       </div>
     );
