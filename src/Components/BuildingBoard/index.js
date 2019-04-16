@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Droppable } from "react-beautiful-dnd";
-class index extends Component {
+class BuildingBoard extends Component {
   state = {
     tags: this.props.tags
   };
@@ -53,4 +53,4 @@ class index extends Component {
   }
 }
 
-export default index;
+export default BuildingBoard;
