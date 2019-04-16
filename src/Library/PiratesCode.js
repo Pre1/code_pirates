@@ -14,7 +14,9 @@ class PBlock extends Block {
   }
 
   compile() {
-    let res = `<p>${this.children.map(child => child.compile()).join("")}</p>`;
+    let res = `<p className="PiratesCode">${this.children
+      .map(child => child.compile())
+      .join("")}</p>`;
     return res;
   }
 }
@@ -26,7 +28,7 @@ class H1Block extends Block {
   }
 
   compile() {
-    let res = `<h1>${this.children
+    let res = `<h1 className="PiratesCode>${this.children
       .map(child => child.compile())
       .join("")}</h1>`;
     return res;
@@ -40,7 +42,7 @@ class ImgBlock extends Block {
     this.attr = attr;
   }
   compile() {
-    return `<img ${this.attr
+    return `<img className="PiratesCode" ${this.attr
       .map(at => `${Object.keys(at)[0]}="${Object.values(at)[0]}" `)
       .join("")}/>`;
   }
