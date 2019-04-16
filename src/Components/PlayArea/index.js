@@ -39,7 +39,7 @@ class index extends Component {
     let newBlock;
     switch (draggableId) {
       case "p":
-        newBlock = new Blocks.PBlock();
+        newBlock = new Blocks.PBlock([new Blocks.TextBlock()]);
         break;
       case "h1":
         newBlock = new Blocks.H1Block();
@@ -47,6 +47,10 @@ class index extends Component {
       case "img":
         newBlock = new Blocks.ImgBlock();
         break;
+
+      default:
+        // I'll added it to you anass, arrgggg
+        console.log(`draggableId: ${draggableId} is NOT Implemented!!`);
     }
 
     //checks if the place im dropping the draggable in is the outer (buildingboard) or an element inside.
@@ -73,7 +77,8 @@ class index extends Component {
       //replace it in the list with the block inserted in the children
       newBB.splice(newBB.indexOf(BB), 1, {
         ...BB,
-        children: BB.children.concat(newBlock)
+        children: BB.children.concat(newBlock),
+        compile: BB.compile
       });
 
       this.setState({
@@ -91,7 +96,7 @@ class index extends Component {
               <BuildingBoard tags={this.state.buildingBlocks} />
             </div>
             <div style={{ float: "right", width: "700px" }}>
-              <PreviewBorad />
+              <PreviewBorad buildingBlocks={this.state.buildingBlocks} />
             </div>
           </div>
 
