@@ -29,7 +29,7 @@ class index extends Component {
           )}
         </Droppable>
         {this.state.tags.map((tag, index) => (
-          <Droppable key={index} droppableId={`${tag}-${index}`}>
+          <Droppable key={index} droppableId={`${tag.name}-${index}`}>
             {provided => (
               <div
                 ref={provided.innerRef}
@@ -37,7 +37,12 @@ class index extends Component {
                 className="card-body"
                 style={{ maxWidth: "300px", background: "purple" }}
               >
-                <p className="card-text">{tag}</p>
+                <p className="card-text">
+                  {tag.name}
+                  <br />
+                  {/* change the way the children are displayed pls @sitah ^_^ */}
+                  {tag.children.map(child => child.name)}
+                </p>
                 {provided.placeholder}
               </div>
             )}
