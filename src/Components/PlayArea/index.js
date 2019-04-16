@@ -8,7 +8,7 @@ import * as Blocks from "../../Library/PiratesCode";
 const initalState = {
   tags: ["p", "h1", "img"]
 };
-class index extends Component {
+class PlayArea extends Component {
   state = {
     listTags: initalState.tags,
     buildingBlocks: []
@@ -42,14 +42,14 @@ class index extends Component {
         newBlock = new Blocks.PBlock([new Blocks.TextBlock()]);
         break;
       case "h1":
-        newBlock = new Blocks.H1Block();
+        newBlock = new Blocks.H1Block([new Blocks.TextBlock()]);
         break;
       case "img":
         newBlock = new Blocks.ImgBlock();
         break;
 
       default:
-        // I'll added it to you anass, arrgggg
+        // I'll added it to you anas, arrgggg
         console.log(`draggableId: ${draggableId} is NOT Implemented!!`);
     }
 
@@ -107,4 +107,4 @@ class index extends Component {
   }
 }
 
-export default index;
+export default PlayArea;

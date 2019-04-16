@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Badge } from "react-bootstrap";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-class index extends Component {
+class ListOfBlock extends Component {
   render() {
     return (
       <Droppable droppableId="list">
@@ -36,4 +36,4 @@ class index extends Component {
   }
 }
 
-export default index;
+export default ListOfBlock;

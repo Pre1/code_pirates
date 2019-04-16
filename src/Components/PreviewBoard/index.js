@@ -8,30 +8,35 @@ import * as Blocks from "../../Library/PiratesCode";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions";
 
-class index extends Component {
+class PreviewBoard extends Component {
+  // state = {
+  //   buildingBlocks: this.props.buildingBlocks
+  // };
+  // componentDidUpdate = prevProps => {
+  //   if (prevProps.buildingBlocks !== this.props.buildingBlocks) {
+  //     this.setState({ buildingBlocks: this.props.buildingBlocks });
+  //   }
+  // };
+
   render() {
     // [H1Block(), PBlock()].map(elm => elm.compile()).join("") => HTMLString
-    let test = new Blocks.H1Block([new Blocks.TextBlock()]);
+    // let test = new Blocks.H1Block([new Blocks.TextBlock()]);
     let buildingBlocks = this.props.buildingBlocks;
 
     console.log("=================");
     console.log("TCL: index -> render -> buildingBlocks", buildingBlocks);
     console.log("=================");
 
-    let testObj = this.props.buildingBlocks
-      .map(elm => elm.compile())
-      .join("\n");
+    let testObj = buildingBlocks.map(elm => elm.compile()).join("\n");
 
     console.log("TCL: index -> render -> testObj", testObj);
-
-    // console.log("TCL: index -> render -> test", test);
-    // console.log("TCL: index -> render -> test.compile()", test.compile());
     let data = html => {
       return {
         __html: html
       };
     };
 
+    // this's here just for testing..
     let htmlStr = tag => {
       return `
           <div>
@@ -48,7 +53,6 @@ class index extends Component {
         className="m-3"
       >
         <p>Preview:</p>
-        {/* <div dangerouslySetInnerHTML={data(test.compile())} /> */}
         <div dangerouslySetInnerHTML={data(testObj)} />
         {/* {Parser(test.compile())} */}
       </div>
@@ -71,4 +75,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(index);
+)(PreviewBoard);

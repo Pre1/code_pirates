@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class index extends Component {
+class Instructions extends Component {
   render() {
     return (
       <div style={{ border: "5px solid black", height: "100px" }}>
@@ -10,4 +10,4 @@ class index extends Component {
   }
 }
 
-export default index;
+export default Instructions;
