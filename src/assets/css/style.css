@@ -1,0 +1,71 @@
+/* @import url('https://fonts.googleapis.com/css?family=El+Messiri'); */
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaijaan');
+
+
+body {
+    /* font-family: 'El Messiri', sans-serif; */
+    font-family: 'Baloo Bhaijaan', cursive;
+
+}
+
+.main-content {
+    height: 100%;
+}
+
+.list-of-blocks-board {
+    border: 2px solid lightcoral;
+    height: 150px;
+    max-height: 150px;
+    border-radius: 25px 25px 5px 5px;
+    flex-direction: column;
+    background-color: white;
+}
+
+.list-tags-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tag-block {
+    border: 1px solid rgb(233, 101, 101);
+    border-radius: 4px 4px 4px 4px;
+    background-color: lightcoral;
+    color: white;
+    display: flex;
+    height: 40px;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.building-board-area {
+    border-radius: 5px 5px 5px 5px;
+    width: 50%;
+    max-width: 50%;
+    border: 2px solid lightcoral;
+    height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.preview-borad-area {
+    border-radius: 5px 5px 5px 5px;
+    width: 48%;
+    max-width: 48%;
+    border: 2px solid lightcoral;
+    height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.instructions-board {
+    border: 2px solid lightcoral;
+    height: 150px;
+    max-height: 150px;
+    overflow-x: scroll;
+    border-radius: 5px 5px 25px 25px;
+    background-color: white;
+}

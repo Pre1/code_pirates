@@ -89,18 +89,32 @@ class PlayArea extends Component {
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div>
-          <ListOfBlock initalState={this.state.listTags} />
-          <div style={{ display: "inline-block" }}>
-            <div style={{ float: "left", width: "700px" }}>
-              <BuildingBoard tags={this.state.buildingBlocks} />
+        <div className="row justify-content-center mt-4">
+          <div className="col-12 main-content">
+            <h1>قراصنة البرمجة</h1>
+            <div className="row mt-4">
+              <div className="col-12 list-of-blocks-board">
+                <p className="mt-3">منطقة الأدوات</p>
+                <ListOfBlock initalState={this.state.listTags} />
+              </div>
             </div>
-            <div style={{ float: "right", width: "700px" }}>
-              <PreviewBorad buildingBlocks={this.state.buildingBlocks} />
+            <div className="row justify-content-center">
+              <div className="col-6 building-board-area my-3 mr-2">
+                <p className="mt-3">منطقة البناء</p>
+                <BuildingBoard tags={this.state.buildingBlocks} />
+              </div>
+              <div className="col-6 preview-borad-area my-3 ml-2">
+                <p className="mt-3">خريطتي</p>
+                <PreviewBorad buildingBlocks={this.state.buildingBlocks} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12 instructions-board">
+                <p className="mt-3">استمع لتعليمات القرصان</p>
+                <Instructions />
+              </div>
             </div>
           </div>
-
-          <Instructions />
         </div>
       </DragDropContext>
     );

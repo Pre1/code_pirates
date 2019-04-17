@@ -48,11 +48,7 @@ class PreviewBoard extends Component {
     };
 
     return (
-      <div
-        style={{ border: "5px solid black", height: "300px" }}
-        className="m-3"
-      >
-        <p>Preview:</p>
+      <div className="m-3">
         <div dangerouslySetInnerHTML={data(testObj)} />
         {/* {Parser(test.compile())} */}
       </div>

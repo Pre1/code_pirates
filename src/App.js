@@ -4,6 +4,10 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
+import "@atlaskit/css-reset";
+
+import style from "./assets/css/style.css";
+
 // Components
 import HomePage from "./Components/HomePage";
 

@@ -4,27 +4,25 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 class ListOfBlock extends Component {
   render() {
     return (
-      <Droppable droppableId="list">
+      <Droppable droppableId="list" direction="horizontal">
         {provided => (
           <div
-            style={{ border: "5px solid black", height: "100px" }}
+            className="col-12 mt-3 list-tags-container"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <p>List of Block:</p>
             {this.props.initalState.map((tag, index) => (
               <Draggable draggableId={tag} index={index} key={tag}>
                 {provided => (
-                  <Badge
-                    variant="secondary"
-                    className="m-2"
+                  <div
+                    className="mb-3 mr-2 tag-block"
                     style={{ minWidth: "200px", maxWidth: "400px" }}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                   >
                     {tag}
-                  </Badge>
+                  </div>
                 )}
               </Draggable>
             ))}

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/css-reset": "3.0.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
@@ -20,7 +21,8 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
