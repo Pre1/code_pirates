@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
+import ReactTooltip from "react-tooltip";
+
 // Connection with redux centeral store
 import * as actionTypes from "../../store/actions";
 import { connect } from "react-redux";
@@ -26,8 +28,10 @@ class ListOfBlock extends Component {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
+                      data-tip={tag.tip}
                     >
                       {tag.content}
+                      <ReactTooltip />
                     </div>
                   )}
                 </Draggable>
