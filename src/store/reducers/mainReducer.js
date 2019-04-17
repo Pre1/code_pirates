@@ -1,18 +1,16 @@
 import * as actionTypes from "../actions/types";
 
 const initialState = {
-  msg: "Hi from mainReducer.js file"
+  tags: [
+    { id: "p", content: "<p> </p>" },
+    { id: "h1", content: "<h1> </h1>" },
+    { id: "img", content: "<img />" }
+  ],
+  buildingBlocks: []
 };
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SAY_HI:
-      alert(state.msg);
-      return {
-        ...state,
-        msg: `Hi ${action.payload} from mainReducer.js file`
-      };
-
     default:
       return state;
   }

@@ -17,9 +17,9 @@ class BuildingBoard extends Component {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="card text-center"
+              className="card text-center building-container"
             >
-              <div className="card-footer text-muted" />
+              <div className="card-footer text-muted building-container" />
               {provided.placeholder}
             </div>
           )}

@@ -5,6 +5,11 @@ import PreviewBorad from "../PreviewBoard";
 import Instructions from "../Instructions";
 import { DragDropContext } from "react-beautiful-dnd";
 import * as Blocks from "../../Library/PiratesCode";
+
+// Connection with redux centeral store
+import * as actionTypes from "../../store/actions";
+import { connect } from "react-redux";
+
 const initalState = {
   tags: ["p", "h1", "img"]
 };
@@ -95,7 +100,7 @@ class PlayArea extends Component {
             <div className="row mt-4">
               <div className="col-12 list-of-blocks-board">
                 <p className="mt-3">منطقة الأدوات</p>
-                <ListOfBlock initalState={this.state.listTags} />
+                <ListOfBlock />
               </div>
             </div>
             <div className="row justify-content-center">
@@ -110,7 +115,7 @@ class PlayArea extends Component {
             </div>
             <div className="row">
               <div className="col-12 instructions-board">
-                <p className="mt-3">استمع لتعليمات القرصان</p>
+                <p className="mt-3">ماذا يقول كبير القراصنة</p>
                 <Instructions />
               </div>
             </div>
@@ -121,4 +126,9 @@ class PlayArea extends Component {
   }
 }
 
-export default PlayArea;
+const mapStateToProps = state => ({
+  tags: state.mainReducer.tags,
+  buildingBlocks: state.mainReducer.buildingBlocks
+});
+
+export default connect(mapStateToProps)(PlayArea);

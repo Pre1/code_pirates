@@ -1,8 +1,13 @@
 import React, { Component } from "react";
-import { Badge } from "react-bootstrap";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+
+// Connection with redux centeral store
+import * as actionTypes from "../../store/actions";
+import { connect } from "react-redux";
+
 class ListOfBlock extends Component {
   render() {
+    console.log("ListOfBlocks", this.props.tags);
     return (
       <Droppable droppableId="list" direction="horizontal">
         {provided => (
@@ -11,21 +16,22 @@ class ListOfBlock extends Component {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {this.props.initalState.map((tag, index) => (
-              <Draggable draggableId={tag} index={index} key={tag}>
-                {provided => (
-                  <div
-                    className="mb-3 mr-2 tag-block"
-                    style={{ minWidth: "200px", maxWidth: "400px" }}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                  >
-                    {tag}
-                  </div>
-                )}
-              </Draggable>
-            ))}
+            {this.props.tags &&
+              this.props.tags.map((tag, index) => (
+                <Draggable draggableId={tag.id} index={index} key={tag.id}>
+                  {provided => (
+                    <div
+                      className="mb-3 mr-2 tag-block"
+                      style={{ minWidth: "200px", maxWidth: "400px" }}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      {tag.content}
+                    </div>
+                  )}
+                </Draggable>
+              ))}
             {provided.placeholder}
           </div>
         )}
@@ -34,4 +40,8 @@ class ListOfBlock extends Component {
   }
 }
 
-export default ListOfBlock;
+const mapStateToProps = state => ({
+  tags: state.mainReducer.tags
+});
+
+export default connect(mapStateToProps)(ListOfBlock);
