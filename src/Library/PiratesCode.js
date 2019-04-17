@@ -36,7 +36,7 @@ class H1Block extends Block {
 }
 
 class ImgBlock extends Block {
-  constructor(children, attr = [{ src: "#" }, { alt: "sampleImage" }]) {
+  constructor(children, attr = [{ src: "#" }, { alt: "حافظ على الراية" }]) {
     super(children);
     this.name = "img";
     this.attr = attr;

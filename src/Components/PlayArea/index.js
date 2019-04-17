@@ -6,6 +6,8 @@ import Instructions from "../Instructions";
 import { DragDropContext } from "react-beautiful-dnd";
 import * as Blocks from "../../Library/PiratesCode";
 
+import ReactTooltip from "react-tooltip";
+
 // Connection with redux centeral store
 import * as actionTypes from "../../store/actions";
 import { connect } from "react-redux";
@@ -44,30 +46,26 @@ class PlayArea extends Component {
     let newBlock;
     switch (draggableId) {
       case "p":
-        newBlock = new Blocks.PBlock([new Blocks.TextBlock()]);
+        newBlock = new Blocks.PBlock([new Blocks.TextBlock("صغير بس فنان")]);
         break;
       case "h1":
-        newBlock = new Blocks.H1Block([new Blocks.TextBlock()]);
+        newBlock = new Blocks.H1Block([new Blocks.TextBlock("رهييب")]);
         break;
       case "img":
         newBlock = new Blocks.ImgBlock();
         break;
 
       default:
-        // I'll added it to you anas, arrgggg
-        console.log(`draggableId: ${draggableId} is NOT Implemented!!`);
     }
 
     //checks if the place im dropping the draggable in is the outer (buildingboard) or an element inside.
     if (destination.droppableId === "building") {
       //pretty clear
+      this.handleDroppingBlock(newBlock);
       this.setState({
         buildingBlocks: this.state.buildingBlocks.concat(newBlock)
       });
     } else {
-      //log the 'id' thing im dropping into
-      console.log("TCL: index -> droppableId", destination.droppableId);
-
       //make a copy of the buildingBlocks
       let newBB = this.state.buildingBlocks.slice();
 
@@ -75,9 +73,6 @@ class PlayArea extends Component {
       let BB = newBB.find(
         (bb, index) => `${bb.name}-${index}` === destination.droppableId
       );
-
-      //log the obj
-      console.log("TCL: index -> BB", BB);
 
       //replace it in the list with the block inserted in the children
       newBB.splice(newBB.indexOf(BB), 1, {
@@ -91,6 +86,14 @@ class PlayArea extends Component {
       });
     }
   };
+
+  handleDroppingBlock = newBlock => {
+    console.log(
+      "TCL: PlayArea -> handleDroppingBlock -> handleDroppingBlock",
+      newBlock
+    );
+  };
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -101,6 +104,10 @@ class PlayArea extends Component {
               <div className="col-12 list-of-blocks-board">
                 <p className="mt-3">منطقة الأدوات</p>
                 <ListOfBlock />
+                <p data-tip="hello world">
+                  Tooltip
+                  <ReactTooltip />
+                </p>
               </div>
             </div>
             <div className="row justify-content-center">
@@ -128,7 +135,8 @@ class PlayArea extends Component {
 
 const mapStateToProps = state => ({
   tags: state.mainReducer.tags,
-  buildingBlocks: state.mainReducer.buildingBlocks
+  buildingBlocks: state.mainReducer.buildingBlocks,
+  textObj: state.mainReducer.textObj
 });
 
 export default connect(mapStateToProps)(PlayArea);

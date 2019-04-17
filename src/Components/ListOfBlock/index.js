@@ -33,6 +33,12 @@ class ListOfBlock extends Component {
                 </Draggable>
               ))}
             {provided.placeholder}
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-toggle="tooltip"
+              title="Disabled tooltip"
+            />
           </div>
         )}
       </Droppable>
