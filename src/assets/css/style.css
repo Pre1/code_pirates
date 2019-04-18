@@ -18,9 +18,9 @@ body {
     max-height: 200px;
     width: 80%;
     max-width: 80%;
-    padding-right: 80px;
     border-radius: 25px 5px 5px 5px;
     flex-direction: column;
+    overflow-x: scroll; 
     background-color: white;
 }
 
@@ -28,6 +28,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: scroll; 
+    padding-right: 5px !important;
+    
 }
 
 .tag-block {
@@ -36,10 +39,12 @@ body {
     background-color: lightcoral;
     color: white;
     display: flex;
-    height: 40px;
-    width: 100px;
+    height: 35px;
+    padding-right: 40px;
+    padding-left: 40px;
     justify-content: center;
     align-items: center;
+    
     
 }
 

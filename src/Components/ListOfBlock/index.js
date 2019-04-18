@@ -14,7 +14,7 @@ class ListOfBlock extends Component {
       <Droppable droppableId="list" direction="horizontal">
         {provided => (
           <div
-            className="col-12 mt-3 list-tags-container"
+            className="col-12 mt-5 list-tags-container"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
@@ -23,8 +23,7 @@ class ListOfBlock extends Component {
                 <Draggable draggableId={tag.id} index={index} key={tag.id}>
                   {provided => (
                     <div
-                      className="mb-3 mr-2 tag-block"
-                      style={{ minWidth: "200px", maxWidth: "400px" }}
+                      class="alert alert-primary tag-block mr-2 "
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
@@ -37,12 +36,6 @@ class ListOfBlock extends Component {
                 </Draggable>
               ))}
             {provided.placeholder}
-            <span
-              class="d-inline-block"
-              tabindex="0"
-              data-toggle="tooltip"
-              title="Disabled tooltip"
-            />
           </div>
         )}
       </Droppable>
