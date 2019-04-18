@@ -6,7 +6,7 @@ class LevelCard extends Component {
     const { level, name } = this.props;
     return (
       <div className="col-lg-4 col-md-6 col-12 my-1">
-        <Link to={`/levels/${level.id}`} className="card">
+        <Link to={level.isAvailable && `/level/${level.id}`} className="card">
           <div className="image">
             <img
               className="card-img-top img-fluid"
