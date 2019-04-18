@@ -4,7 +4,7 @@ import { Draggable, Droppable, DragDropContext } from "react-beautiful-dnd";
 import ReactTooltip from "react-tooltip";
 
 // Connection with redux centeral store
-import * as actionTypes from "../../store/actions";
+import * as actionTypes from "../../../store/actions";
 import { connect } from "react-redux";
 
 class ListOfBlock extends Component {
