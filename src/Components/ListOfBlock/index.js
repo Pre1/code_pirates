@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Draggable, Droppable } from "react-beautiful-dnd";
+import { Draggable, Droppable, DragDropContext } from "react-beautiful-dnd";
 
 import ReactTooltip from "react-tooltip";
 
@@ -8,9 +8,21 @@ import * as actionTypes from "../../store/actions";
 import { connect } from "react-redux";
 
 class ListOfBlock extends Component {
+  // onDragEnd = result => {
+  //   const { destination, source, draggableId } = result;
+
+  //   if (!destination) {
+  //     return;
+  //   }
+
+  //   if (destination.droppableId === source.droppableId) {
+  //     return;
+  //   }
+  // };
   render() {
     console.log("ListOfBlocks", this.props.tags);
     return (
+      // <DragDropContext onDragEnd={this.onDragEnd}>
       <Droppable droppableId="list" direction="horizontal">
         {provided => (
           <div
@@ -46,6 +58,7 @@ class ListOfBlock extends Component {
           </div>
         )}
       </Droppable>
+      // </DragDropContext>
     );
   }
 }

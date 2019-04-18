@@ -1,1 +1,2 @@
-export const SAY_HI = "SAY_HI";
+export const ADD_BLOCK = "ADD_BLOCK";
+export const SET_BB = "SET_BB";
