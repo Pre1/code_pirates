@@ -54,6 +54,7 @@ class PlayArea extends Component {
         break;
 
       default:
+        break;
     }
 
     //checks if the place im dropping the draggable in is the outer (buildingboard) or an element inside.
