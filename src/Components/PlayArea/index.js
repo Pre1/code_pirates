@@ -7,17 +7,13 @@ import * as Blocks from "../../Library/PiratesCode";
 import ReactTooltip from "react-tooltip";
 import assistant from "../../assets/images/pirateBird.png";
 
-// Connecting with redux centeral store
+// Connection with redux centeral store
+import * as actionCreators from "../../store/actions";
 import { connect } from "react-redux";
 
-const initalState = {
-  tags: ["p", "h1", "img"]
-};
+
 class PlayArea extends Component {
-  state = {
-    listTags: initalState.tags,
-    buildingBlocks: []
-  };
+  
   onDragEnd = result => {
     // gets the destination ({droppableId:"", index:""}), source ({droppableId:"", index:""}), draggableId
     const { destination, source, draggableId } = result;
@@ -27,10 +23,12 @@ class PlayArea extends Component {
       //stops anything from happening by exiting the function early
       return;
     }
-
+    if (destination.droppableId === source.droppableId) {
+      return;
+    }
     //checks if im just putting the thing i pulled back to it's original drop point
     if (
-      destination.droppableId === source.droppableId ||
+      destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
       //stops anything from happening by exiting the function early
@@ -41,6 +39,8 @@ class PlayArea extends Component {
     here we're creating a new block object from the amazing PiratesCode library 
     (this will later be integrated in library)
     */
+
+    console.log("TCL: PlayArea -> draggableId", draggableId);
     let newBlock;
     switch (draggableId) {
       case "p":
@@ -60,13 +60,12 @@ class PlayArea extends Component {
     //checks if the place im dropping the draggable in is the outer (buildingboard) or an element inside.
     if (destination.droppableId === "building") {
       //pretty clear
-      this.handleDroppingBlock(newBlock);
-      this.setState({
-        buildingBlocks: this.state.buildingBlocks.concat(newBlock)
-      });
+      console.log("TCL: PlayArea -> clear");
+
+      this.props.onAddBlock(newBlock);
     } else {
       //make a copy of the buildingBlocks
-      let newBB = this.state.buildingBlocks.slice();
+      let newBB = this.props.buildingBlocks.slice();
 
       //find the object im droping into
       let BB = newBB.find(
@@ -80,9 +79,8 @@ class PlayArea extends Component {
         compile: BB.compile
       });
 
-      this.setState({
-        buildingBlocks: newBB
-      });
+      console.log("TCL: PlayArea -> newBBBBBBBB", newBB);
+      this.props.onSetBB(newBB);
     }
   };
 
@@ -92,7 +90,6 @@ class PlayArea extends Component {
       newBlock
     );
   };
-
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -116,11 +113,11 @@ class PlayArea extends Component {
             <div className="row justify-content-center">
               <div className="col-6 building-board-area my-3 mr-2">
                 <h2 className="mt-3">منطقة البناء</h2>
-                <BuildingBoard tags={this.state.buildingBlocks} />
+                <BuildingBoard tags={this.props.buildingBlocks} />
               </div>
               <div className="col-6 preview-borad-area my-3 ml-2">
                 <h2 className="mt-3">شاشة العرض</h2>
-                <PreviewBorad buildingBlocks={this.state.buildingBlocks} />
+                <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
               </div>
             </div>
           </div>
@@ -136,4 +133,11 @@ const mapStateToProps = state => ({
   textObj: state.mainReducer.textObj
 });
 
-export default connect(mapStateToProps)(PlayArea);
+const mapDispatchToProps = dispatch => ({
+  onAddBlock: block => dispatch(actionCreators.addBuildingBlock(block)),
+  onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlayArea);
