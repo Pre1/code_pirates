@@ -54,7 +54,7 @@ class PlayArea extends Component {
         break;
 
       default:
-        break;
+        console.error(`draggableId: ${draggableId} is NOT Implemented!!`);
     }
 
     //checks if the place im dropping the draggable in is the outer (buildingboard) or an element inside.
