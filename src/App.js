@@ -12,7 +12,7 @@ import style from "./assets/css/style.css";
 
 // Components
 import HomePage from "./Components/HomePage";
-import Playarea from "./Components/PlayArea";
+import Playarea from "./Components/Level/PlayArea";
 import LevelList from "./Components/LevelList";
 class App extends Component {
   render() {
@@ -25,8 +25,6 @@ class App extends Component {
             <Route path="/levels" component={LevelList} />
             <Redirect path="/" />
           </Switch>
-
-          {/* <div>frfers</div> */}
         </div>
       </div>
     );

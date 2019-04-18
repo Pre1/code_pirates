@@ -3,12 +3,12 @@ import ListOfBlock from "../ListOfBlock";
 import BuildingBoard from "../BuildingBoard";
 import PreviewBorad from "../PreviewBoard";
 import { DragDropContext } from "react-beautiful-dnd";
-import * as Blocks from "../../Library/PiratesCode";
+import * as Blocks from "../../../Library/PiratesCode";
 import ReactTooltip from "react-tooltip";
-import assistant from "../../assets/images/pirateBird.png";
+import assistant from "../../../assets/images/pirateBird.png";
 
 // Connection with redux centeral store
-import * as actionCreators from "../../store/actions";
+import * as actionCreators from "../../../store/actions";
 import { connect } from "react-redux";
 
 class PlayArea extends Component {

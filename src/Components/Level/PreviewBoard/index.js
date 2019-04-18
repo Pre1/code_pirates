@@ -3,10 +3,10 @@ import Parser from "html-react-parser";
 // import * as data from "./data";
 
 // Our beutiful library
-import * as Blocks from "../../Library/PiratesCode";
+import * as Blocks from "../../../Library/PiratesCode";
 
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions";
+import * as actionCreators from "../../../store/actions";
 
 class PreviewBoard extends Component {
   // state = {
