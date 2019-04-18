@@ -69,13 +69,28 @@ class PlayArea extends Component {
       let BB = newBB.find(
         (bb, index) => `${bb.name}-${index}` === destination.droppableId
       );
-
+      BB.children.push(newBlock);
+      switch (BB.name) {
+        case "p":
+          newBlock = new Blocks.PBlock(BB.children);
+          break;
+        case "h1":
+          newBlock = new Blocks.H1Block(BB.children);
+          break;
+        default:
+          console.error(`BB.name: ${BB.name} is NOT working!!`);
+      }
       //replace it in the list with the block inserted in the children
-      newBB.splice(newBB.indexOf(BB), 1, {
-        ...BB,
-        children: BB.children.concat(newBlock),
-        compile: BB.compile
-      });
+      newBB.splice(
+        newBB.indexOf(BB),
+        1,
+        // {
+        //   ...BB,
+        //   children: BB.children.concat(newBlock),
+        //   compile: BB.compile
+        // }
+        newBlock
+      );
 
       console.log("TCL: PlayArea -> newBBBBBBBB", newBB);
       this.props.onSetBB(newBB);

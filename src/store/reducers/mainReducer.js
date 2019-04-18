@@ -17,6 +17,11 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         buildingBlocks: state.buildingBlocks.concat(action.payload)
       };
+    case actionTypes.DELETE_BLOCK:
+      return {
+        ...state,
+        buildingBlocks: state.buildingBlocks.filter(bb => bb !== action.payload)
+      };
     case actionTypes.SET_BB:
       return {
         ...state,
