@@ -1,34 +1,44 @@
 import React, { Component } from "react";
-import { Badge } from "react-bootstrap";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+
+// Connection with redux centeral store
+import * as actionTypes from "../../store/actions";
+import { connect } from "react-redux";
+
 class ListOfBlock extends Component {
   render() {
+    console.log("ListOfBlocks", this.props.tags);
     return (
-      <Droppable droppableId="list">
+      <Droppable droppableId="list" direction="horizontal">
         {provided => (
           <div
-            style={{ border: "5px solid black", height: "100px" }}
+            className="col-12 mt-3 list-tags-container"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <p>List of Block:</p>
-            {this.props.initalState.map((tag, index) => (
-              <Draggable draggableId={tag} index={index} key={tag}>
-                {provided => (
-                  <Badge
-                    variant="secondary"
-                    className="m-2"
-                    style={{ minWidth: "200px", maxWidth: "400px" }}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                  >
-                    {tag}
-                  </Badge>
-                )}
-              </Draggable>
-            ))}
+            {this.props.tags &&
+              this.props.tags.map((tag, index) => (
+                <Draggable draggableId={tag.id} index={index} key={tag.id}>
+                  {provided => (
+                    <div
+                      className="mb-3 mr-2 tag-block"
+                      style={{ minWidth: "200px", maxWidth: "400px" }}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      {tag.content}
+                    </div>
+                  )}
+                </Draggable>
+              ))}
             {provided.placeholder}
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-toggle="tooltip"
+              title="Disabled tooltip"
+            />
           </div>
         )}
       </Droppable>
@@ -36,4 +46,8 @@ class ListOfBlock extends Component {
   }
 }
 
-export default ListOfBlock;
+const mapStateToProps = state => ({
+  tags: state.mainReducer.tags
+});
+
+export default connect(mapStateToProps)(ListOfBlock);

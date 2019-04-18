@@ -11,19 +11,15 @@ class BuildingBoard extends Component {
   };
   render() {
     return (
-      <div
-        style={{ border: "5px solid black", height: "300px" }}
-        className="m-3"
-      >
-        <p>Building:</p>
+      <div className="m-3">
         <Droppable droppableId="building">
           {provided => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="card text-center"
+              className="card text-center building-container"
             >
-              <div className="card-footer text-muted" />
+              <div className="card-footer text-muted building-container" />
               {provided.placeholder}
             </div>
           )}

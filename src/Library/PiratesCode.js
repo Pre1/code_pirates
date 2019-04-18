@@ -51,6 +51,7 @@ class H1Block extends Block {
   jsxCompile() {}
 }
 
+
 class HBlock extends Block {
   constructor(children, lvl = 1) {
     super(children);
@@ -77,7 +78,7 @@ class HBlock extends Block {
 }
 
 class ImgBlock extends Block {
-  constructor(jsxAttr = { src: "#" }) {
+  constructor(jsxAttr = { src: "#", alt:"حافظ على الراية" }) {
     super([]);
     this.name = "img";
     this.jsxAttr = jsxAttr;
@@ -99,7 +100,7 @@ class ImgBlock extends Block {
   }
 
   jsxCompile(className = "ImgPiratesCode") {
-    return <img className={className} {...this.jsxAttr} alt="test" />;
+    return <img className={className} {...this.jsxAttr} />;
   }
 }
 
