@@ -12,6 +12,16 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.ADD_BLOCK:
+      return {
+        ...state,
+        buildingBlocks: state.buildingBlocks.concat(action.payload)
+      };
+    case actionTypes.SET_BB:
+      return {
+        ...state,
+        buildingBlocks: action.payload
+      };
     default:
       return state;
   }
