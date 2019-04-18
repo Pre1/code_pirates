@@ -6,8 +6,6 @@ import Instructions from "../Instructions";
 import { DragDropContext } from "react-beautiful-dnd";
 import * as Blocks from "../../Library/PiratesCode";
 
-import ReactTooltip from "react-tooltip";
-
 // Connection with redux centeral store
 import * as actionTypes from "../../store/actions";
 import { connect } from "react-redux";
@@ -32,7 +30,7 @@ class PlayArea extends Component {
 
     //checks if im just putting the thing i pulled back to it's original drop point
     if (
-      destination.droppableId === source.droppableId &&
+      destination.droppableId === source.droppableId ||
       destination.index === source.index
     ) {
       //stops anything from happening by exiting the function early
@@ -56,6 +54,7 @@ class PlayArea extends Component {
         break;
 
       default:
+        break;
     }
 
     //checks if the place im dropping the draggable in is the outer (buildingboard) or an element inside.
@@ -104,10 +103,6 @@ class PlayArea extends Component {
               <div className="col-12 list-of-blocks-board">
                 <p className="mt-3">منطقة الأدوات</p>
                 <ListOfBlock />
-                <p data-tip="hello world">
-                  Tooltip
-                  <ReactTooltip />
-                </p>
               </div>
             </div>
             <div className="row justify-content-center">
