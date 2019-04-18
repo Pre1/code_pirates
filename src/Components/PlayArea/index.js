@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import ListOfBlock from "../ListOfBlock";
 import BuildingBoard from "../BuildingBoard";
 import PreviewBorad from "../PreviewBoard";
-import Instructions from "../Instructions";
 import { DragDropContext } from "react-beautiful-dnd";
 import * as Blocks from "../../Library/PiratesCode";
+import ReactTooltip from "react-tooltip";
+import assistant from "../../assets/images/pirateBird.png";
 
-// Connection with redux centeral store
-import * as actionTypes from "../../store/actions";
+// Connecting with redux centeral store
 import { connect } from "react-redux";
 
 const initalState = {
@@ -99,26 +99,28 @@ class PlayArea extends Component {
         <div className="row justify-content-center mt-4">
           <div className="col-12 main-content">
             <h1>قراصنة البرمجة</h1>
-            <div className="row mt-4">
-              <div className="col-12 list-of-blocks-board">
-                <p className="mt-3">منطقة الأدوات</p>
+            <div className="row mt-4 justify-content-center">
+              <div className="col-10 mr-2 list-of-blocks-board">
+                <h2 className="mt-3">منطقة الأدوات</h2>
                 <ListOfBlock />
+              </div>
+              <div className="col-2 ml-2 instructions-board">
+                <img
+                  src={assistant}
+                  style={{ width: "100%", marginTop: "15%" }}
+                  data-tip="أهلا بالقرصان الصغير"
+                />
+                <ReactTooltip />
               </div>
             </div>
             <div className="row justify-content-center">
               <div className="col-6 building-board-area my-3 mr-2">
-                <p className="mt-3">منطقة البناء</p>
+                <h2 className="mt-3">منطقة البناء</h2>
                 <BuildingBoard tags={this.state.buildingBlocks} />
               </div>
               <div className="col-6 preview-borad-area my-3 ml-2">
-                <p className="mt-3">خريطتي</p>
+                <h2 className="mt-3">شاشة العرض</h2>
                 <PreviewBorad buildingBlocks={this.state.buildingBlocks} />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12 instructions-board">
-                <p className="mt-3">ماذا يقول كبير القراصنة</p>
-                <Instructions />
               </div>
             </div>
           </div>
