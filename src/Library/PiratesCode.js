@@ -1,9 +1,15 @@
+import React, { Component } from "react";
+
 class Block {
   constructor(children = []) {
     this.children = children;
   }
   compile() {
     console.log("Implement me!!");
+  }
+
+  jsxCompile() {
+    return this.compile();
   }
 }
 
@@ -13,11 +19,19 @@ class PBlock extends Block {
     this.name = "p";
   }
 
-  compile() {
-    let res = `<p className="PiratesCode">${this.children
-      .map(child => child.compile())
-      .join("")}</p>`;
-    return res;
+  compile(className = "PiratesCode") {
+    return `
+      <p className=${className}>
+        ${this.children.map(child => child.compile()).join("")}
+      </p>`;
+  }
+
+  jsxCompile(className = "PPiratesCode") {
+    return (
+      <p className={className}>
+        {this.children.map(child => child.jsxCompile())}
+      </p>
+    );
   }
 }
 
@@ -27,24 +41,65 @@ class H1Block extends Block {
     this.name = "h1";
   }
 
-  compile() {
-    let res = `<h1 className="PiratesCode">${this.children
-      .map(child => child.compile())
-      .join("")}</h1>`;
-    return res;
+  compile(className = "HeadPiratesCode") {
+    return `
+      <h1 className=${className}>
+          ${this.children.map(child => child.compile()).join("")}
+      </h1>`;
+  }
+
+  jsxCompile() {}
+}
+
+class HBlock extends Block {
+  constructor(children, lvl = 1) {
+    super(children);
+    this.lvl = lvl;
+    this.name = `h${this.lvl}`;
+  }
+
+  compile(className = "HeadPiratesCode") {
+    return `
+      <${this.name} className=${className}>
+        ${this.children.map(child => child.compile()).join("")}
+      </${this.name}>`;
+  }
+
+  // React.createElement(component, props, ...children)
+  jsxCompile(className = "HeadPiratesCode") {
+    let heading = React.createElement(
+      `${this.name}`,
+      { className: `${className}` },
+      `${this.children.map(child => child.jsxCompile())}`
+    );
+    return heading;
   }
 }
 
 class ImgBlock extends Block {
-  constructor(children, attr = [{ src: "#" }, { alt: "sampleImage" }]) {
-    super(children);
+  constructor(jsxAttr = { src: "#" }) {
+    super([]);
     this.name = "img";
-    this.attr = attr;
+    this.jsxAttr = jsxAttr;
   }
-  compile() {
-    return `<img className="PiratesCode" ${this.attr
-      .map(at => `${Object.keys(at)[0]}="${Object.values(at)[0]}" `)
-      .join("")} />`;
+
+  compile(className = "ImgPiratesCode") {
+    let attr = Object.entries(this.jsxAttr);
+
+    let imgBlock = `
+    <img className=${className} 
+        ${attr.map(([k, v]) => `${k}="${v}"`).join(" ")} 
+    />`;
+
+    console.log("====================");
+    console.log("TCL: compile -> imgBlock", imgBlock);
+    console.log("====================");
+
+    return imgBlock;
+  }
+
+  jsxCompile(className = "ImgPiratesCode") {
+    return <img className={className} {...this.jsxAttr} alt="test" />;
   }
 }
 
@@ -58,6 +113,63 @@ class TextBlock extends Block {
   compile() {
     return this.text;
   }
+
+  jsxCompile() {
+    return this.compile();
+  }
 }
 
-export { TextBlock, PBlock, H1Block, ImgBlock };
+class ListBlock extends Block {
+  constructor(children, ordered = false) {
+    super(children);
+    this.name = ordered ? "ol" : "ul";
+  }
+
+  compile(className = "ListPiratesCode") {
+    return `
+      <${this.name} className=${className}>
+          ${this.children.map(child => child.compile()).join("")}
+      </${this.name}>`;
+  }
+
+  jsxCompile(className = "ListPiratesCode") {
+    let list = React.createElement(
+      `${this.name}`,
+      { className: `${className}` },
+      this.children.map(child => child.jsxCompile())
+    );
+    return list;
+  }
+}
+
+class ListItemBlock extends Block {
+  constructor(children, key = "") {
+    super(children);
+    this.name = "li";
+    this.key = key;
+  }
+
+  compile(className = "ListItemPiratesCode") {
+    return `
+      <li className=${className}>
+          ${this.children.map(child => child.compile()).join("")}
+      </li>`;
+  }
+
+  jsxCompile(className = "ListItemPiratesCode") {
+    return (
+      <li className={className} key={this.key}>
+        {this.children.map(child => child.jsxCompile())}
+      </li>
+    );
+  }
+}
+export {
+  TextBlock,
+  PBlock,
+  H1Block,
+  ImgBlock,
+  HBlock,
+  ListBlock,
+  ListItemBlock
+};
