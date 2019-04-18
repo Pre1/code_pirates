@@ -14,10 +14,13 @@ body {
 
 .list-of-blocks-board {
     border: 2px solid lightcoral;
-    height: 150px;
-    max-height: 150px;
-    border-radius: 25px 25px 5px 5px;
+    height: 200px;
+    max-height: 200px;
+    width: 80%;
+    max-width: 80%;
+    border-radius: 25px 5px 5px 5px;
     flex-direction: column;
+    overflow-x: scroll; 
     background-color: white;
 }
 
@@ -25,6 +28,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: scroll; 
+    padding-right: 5px !important;
+    
 }
 
 .tag-block {
@@ -33,10 +39,12 @@ body {
     background-color: lightcoral;
     color: white;
     display: flex;
-    height: 40px;
-    width: 100px;
+    height: 35px;
+    padding-right: 40px;
+    padding-left: 40px;
     justify-content: center;
     align-items: center;
+    
     
 }
 
@@ -45,8 +53,8 @@ body {
     width: 50%;
     max-width: 50%;
     border: 2px solid lightcoral;
-    height: 300px;
-    max-height: 300px;
+    height: 400px;
+    max-height: 400px;
     overflow-y: scroll;
     background-color: white;
 }
@@ -61,16 +69,18 @@ body {
     width: 48%;
     max-width: 48%;
     border: 2px solid lightcoral;
-    height: 300px;
-    max-height: 300px;
+    height: 400px;
+    max-height: 400px;
     overflow-y: scroll;
+    background-color: white;
 }
 
 .instructions-board {
     border: 2px solid lightcoral;
-    height: 150px;
-    max-height: 150px;
-    overflow-x: scroll;
-    border-radius: 5px 5px 25px 25px;
+    width: 20%;
+    max-width: 20%;
+    height: 200px;
+    max-height: 200px;
+    border-radius: 5px 25px 5px 5px;
     background-color: white;
 }
