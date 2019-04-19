@@ -130,3 +130,13 @@ body {
      background-color: #1fc997;
      border-color: #16ab7f;
  }
+
+ .footer {
+    font-size: 20px;
+    color: #c5c5c5;
+ }
+
+ .footer-heart {
+    color: #e11f5a;
+ }
+
