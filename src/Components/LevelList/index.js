@@ -17,7 +17,7 @@ class LevelList extends Component {
     return (
       <div className="my-2">
         <h2 className="mb-4" style={{ color: "#c5c5c5", fontSize: "60px" }}>
-          جـزيـرة HTML
+          {this.props.lang[0] && this.props.lang[0].name}
         </h2>
         <div className="row justify-content-center">{levelCards}</div>
       </div>
@@ -27,7 +27,8 @@ class LevelList extends Component {
 
 const mapStateToProps = state => {
   return {
-    levels: state.levelReducer.levels
+    lang: state.languagesReducer.lang,
+    levels: state.levelsReducer.levels
   };
 };
 

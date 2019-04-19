@@ -14,12 +14,14 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
 import mainReducer from "./store/reducers/mainReducer";
-import leveReducer from "./store/reducers/levelsReducer";
+import levelsReducer from "./store/reducers/levelsReducer";
+import languagesReducer from "./store/reducers/languagesReducer";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   mainReducer: mainReducer,
-  levelReducer: leveReducer
+  levelsReducer: levelsReducer,
+  languagesReducer: languagesReducer
 });
 
 const store = createStore(
