@@ -27,7 +27,12 @@ class LevelCard extends Component {
               </Link>
             </button>
             <button className="col-2 btn-light ml-4">
-              <img src={lightImg} />
+              <Link
+                to={level.isAvailable && `/level/content`}
+                style={{ color: "#fff", textDecoration: "none" }}
+              >
+                <img src={lightImg} />
+              </Link>
             </button>
           </div>
           <br />
