@@ -17,13 +17,13 @@ import LevelList from "./Components/LevelList";
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container text-center">
         <div className="row justify-content-center mt-4">
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/level/:levelID" component={Playarea} />
             <Route path="/levels" component={LevelList} />
-            <Redirect path="/" />
+            <Redirect path="/levels" />
           </Switch>
         </div>
       </div>

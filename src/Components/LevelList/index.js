@@ -11,13 +11,15 @@ class LevelList extends Component {
     console.log("TCL: LevelList -> render -> levels", levels);
 
     const levelCards = levels.map(lvl => (
-      <LevelCard key={lvl.id} level={lvl} name={`lvl-${lvl.id}`} />
+      <LevelCard key={lvl.id} level={lvl} name={lvl.name} />
     ));
 
     return (
       <div className="my-2">
-        <h3 className="my-2">Levels</h3>
-        <div className="row">{levelCards}</div>
+        <h2 className="mb-4" style={{ color: "#c5c5c5", fontSize: "60px" }}>
+          جـزيـرة HTML
+        </h2>
+        <div className="row justify-content-center">{levelCards}</div>
       </div>
     );
   }
