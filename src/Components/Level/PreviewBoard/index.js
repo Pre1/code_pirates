@@ -49,9 +49,9 @@ class PreviewBoard extends Component {
     };
 
     return (
-      <div className="">
+      <div className="boat">
         <div dangerouslySetInnerHTML={data(testObj)} />
-        {testObj}
+        {/* {testObj} */}
         {/* {Parser(test.compile())} */}
         <LevelOne />
       </div>

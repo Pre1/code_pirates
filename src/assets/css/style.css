@@ -173,6 +173,7 @@ body {
 .Pirate {
   margin-top: 90%;
   /* margin-right: 70%; */
+}
 
 .overlay {
   position: fixed; /* Sit on top of the page content */
