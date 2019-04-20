@@ -2,41 +2,42 @@ import * as actionTypes from "../actions/types";
 
 // for testing
 import pirateBird from "../../assets/images/pirateBird.png";
+import unlockedLevel from "../../assets/images/unlockedLevel.png";
 
 const initialState = {
   levels: [
     {
       id: 1,
-      name: "level",
-      imageUrl: pirateBird,
+      name: "أساسيات اللغة",
+      imageUrl: unlockedLevel,
       isAvailable: true,
       isPass: false
     },
     {
       id: 2,
-      name: "level",
-      imageUrl: pirateBird,
+      name: "العناصر الرئيسية",
+      imageUrl: unlockedLevel,
       isAvailable: false,
       isPass: false
     },
     {
       id: 3,
-      name: "level",
-      imageUrl: pirateBird,
+      name: "الصور",
+      imageUrl: unlockedLevel,
       isAvailable: false,
       isPass: false
     },
     {
       id: 4,
-      name: "level",
-      imageUrl: pirateBird,
+      name: "العناوين",
+      imageUrl: unlockedLevel,
       isAvailable: false,
       isPass: false
     },
     {
       id: 5,
-      name: "level",
-      imageUrl: pirateBird,
+      name: "تنسيقات الكلام",
+      imageUrl: unlockedLevel,
       isAvailable: false,
       isPass: false
     }

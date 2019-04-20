@@ -2,8 +2,9 @@
 @import url("https://fonts.googleapis.com/css?family=Baloo+Bhaijaan");
 
 body {
-  /* font-family: 'El Messiri', sans-serif; */
-  font-family: "Baloo Bhaijaan", cursive;
+    /* font-family: 'El Messiri', sans-serif; */
+    font-family: 'Baloo Bhaijaan', cursive;
+    direction: rtl;
 }
 
 .main-content {
@@ -188,3 +189,151 @@ body {
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 }
+
+.img-level {
+    border: 2px solid #e5e5e5!important;
+    border-radius: 16px!important;
+}
+
+.btn-light {
+    background-color: #5bd3e4;
+    color: #fff;
+    border-width: 2px 2px 4px;
+    border-color: #3db4c5;
+    border-radius: 16px;
+    border-style: solid;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    line-height: 20px;
+    -webkit-tap-highlight-color: transparent;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: -webkit-filter .2s;
+    transition: filter .2s;
+    transition: filter .2s,-webkit-filter .2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    height: 48px;
+ }
+
+ .green-btn {
+     background-color: #1fc997;
+     border-color: #16ab7f;
+ }
+
+ .footer {
+    font-size: 20px;
+    color: #c5c5c5;
+ }
+
+ .footer-heart {
+    color: #e11f5a;
+ }
+
+ .content-container {
+    border: 2px solid #f1f1f1;
+    height: 100%;
+    min-height: 600px;
+    border-radius: 16px;
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+ }
+
+ .content-header {
+    padding: 30px; 
+    height: 100%;
+    min-height: 120px;
+    color: #fff;
+    background-color: #1fc997;
+    border-radius: 16px 16px 0px 0px;
+
+ }
+
+ .content-start-btn {
+    background-color: #fff;
+    color: #fff;
+    border-width: 2px 2px 4px;
+    border-color: #3db4c5;
+    border-radius: 16px;
+    border-style: solid;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    line-height: 20px;
+    -webkit-tap-highlight-color: transparent;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: -webkit-filter .2s;
+    transition: filter .2s;
+    transition: filter .2s,-webkit-filter .2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    height: 48px;
+    background-color: #f3fffb;
+     border-color: #c3ffed;
+ }
+
+ .content-back-btn {
+    background-color: #fff;
+    color: #fff;
+    border-width: 2px 2px 4px;
+    border-color: #3db4c5;
+    border-radius: 16px;
+    border-style: solid;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    line-height: 20px;
+    -webkit-tap-highlight-color: transparent;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: -webkit-filter .2s;
+    transition: filter .2s;
+    transition: filter .2s,-webkit-filter .2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    height: 48px;
+    background-color: #1fc997;
+    border-color: #1fc997;
+    padding-left: 0px!important;
+ }
