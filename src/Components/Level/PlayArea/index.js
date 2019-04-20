@@ -17,7 +17,10 @@ import styled from "styled-components";
 
 let Overlay = styled.div`
   position: fixed; /* Sit on top of the page content */
-  visibility: ${props => (props.overlay ? "visible" : "hidden")};
+  visibility: ${props => {
+    console.log("TCL: props", props.children);
+    return props.overlay ? "visible" : "hidden";
+  }};
   width: 100%;
   height: 100%;
   top: 0;

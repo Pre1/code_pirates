@@ -4,7 +4,7 @@ import ReactTooltip from "react-tooltip";
 import assistant from "../../../assets/images/pirateBird.png";
 import barrel from "../../../assets/images/barrel.png";
 import { connect } from "react-redux";
-import style from "../../../assets/css/style.css";
+// import Sound from "react-sound";
 
 class Instruction extends Component {
   showOverlay = () => {

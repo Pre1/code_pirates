@@ -7,24 +7,38 @@ import preview from "../../../assets/images/tutorial/preview.gif";
 import guide from "../../../assets/images/tutorial/guide.gif";
 
 export default class Tutorial extends Component {
+  state = {
+    index: 0,
+    direction: null
+  };
+
+  handleSelect = (selectedIndx, e) => {
+    console.log("TCL: Tutorial -> handleSelect -> e", e);
+    this.setState({
+      index: selectedIndx,
+      direction: e.direction
+    });
+  };
+
   render() {
     let toggle = this.props.toggleOverlay;
+    let { index, direction } = this.state;
 
     return (
       <div className="Container my-5">
-        <Carousel>
+        <Carousel
+          activeIndex={index}
+          direction={direction}
+          onSelect={this.handleSelect}
+          interval="10000"
+          indicators={false}
+        >
           <Carousel.Item>
             <img className=" w-50" src={tutorial_1} alt="First slide" />
             <Carousel.Caption>
               <div style={{ marginTop: "50px" }}>
-                <h3>First slide label</h3>
-                <p style={{ color: "black" }}>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
+                <h3>عنوان اول شريحة</h3>
+                <p style={{ color: "black" }}>اهلا بكم في كوكب البيزا</p>
               </div>
             </Carousel.Caption>
           </Carousel.Item>
@@ -33,9 +47,9 @@ export default class Tutorial extends Component {
             <img className="w-25" src={building} alt="Third slide" />
 
             <Carousel.Caption className="my-2">
-              <h3>Second slide label</h3>
+              <h3>عنوان ثاني شريحة</h3>
               <p style={{ color: "black" }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                اهلا بكم في كوكب البيزا اهلا بكم في كوكب البيزا
               </p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -44,10 +58,8 @@ export default class Tutorial extends Component {
             <img className="w-50" src={preview} alt="Third slide" />
 
             <Carousel.Caption className="my-5">
-              <h3>Third slide label</h3>
-              <p style={{ color: "black" }}>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
+              <h3>عنوان ثالث شريحة</h3>
+              <p style={{ color: "black" }}>اهلا بكم في كوكب البيزا</p>
             </Carousel.Caption>
           </Carousel.Item>
 
@@ -55,10 +67,8 @@ export default class Tutorial extends Component {
             <img className="w-25" src={guide} alt="Third slide" />
 
             <Carousel.Caption className="my-5">
-              <h3>Fourth slide label</h3>
-              <p style={{ color: "black" }}>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
+              <h3>عنوان رابع شريحة</h3>
+              <p style={{ color: "black" }}>انا هنا للمساعدة</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

@@ -51,11 +51,14 @@ const levelsReducer = (state = initialState, action) => {
       let lvl = { ...newLevels.find(obj => obj.id === action.payload) };
       let nexLvl = { ...newLevels.find(obj => obj.id === action.payload + 1) };
 
+      if (nexLvl.id) {
+        nexLvl.isAvailable = true;
+        newLevels.splice(nexLvl.id - 1, 1, nexLvl);
+      }
+
       lvl.isPass = true;
-      nexLvl.isAvailable = true;
 
       newLevels.splice(lvl.id - 1, 1, lvl);
-      newLevels.splice(nexLvl.id - 1, 1, nexLvl);
 
       return {
         levels: newLevels
