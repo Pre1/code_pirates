@@ -7,15 +7,29 @@ import { connect } from "react-redux";
 // import Sound from "react-sound";
 
 class Instruction extends Component {
-  showOverlay = () => {
-    let test = document.getElementsByClassName("overlay")[0].style.display;
-    console.log("TCL: Instruction -> showOverlay -> test", test);
-    document.getElementsByClassName("overlay")[0].style.display =
-      test === "none" ? "block" : "none";
+  state = {
+    trigger: false
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(
+      "TCL: Instruction -> componentDidUpdate -> prevProps",
+      prevProps
+    );
+    console.log(
+      "TCL: Instruction -> componentDidUpdate -> this.props",
+      this.props
+    );
+  }
+
   render() {
+    let { buildingBlocks } = this.props;
+
+    console.log("TCL: Instruction -> render -> buildingBlocks", buildingBlocks);
+
     return (
       <div onClick={() => this.props.toggleOverlay()}>
+        <p data-tip="hello world">Tooltip</p>
         <img
           src={assistant}
           style={{ width: "100%", marginTop: "15%" }}
@@ -42,7 +56,9 @@ class Instruction extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    buildingBlocks: state.mainReducer.buildingBlocks
+  };
 };
 
 const mapDispatchToProps = dispatch => {

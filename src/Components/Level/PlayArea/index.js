@@ -33,10 +33,9 @@ let Overlay = styled.div`
   cursor: pointer;
 `;
 
-
 class PlayArea extends Component {
   state = {
-    overlay: true
+    overlay: false
   };
   onDragEnd = result => {
     // gets the destination ({droppableId:"", index:""}), source ({droppableId:"", index:""}), draggableId
