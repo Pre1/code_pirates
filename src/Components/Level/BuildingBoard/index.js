@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Droppable } from "react-beautiful-dnd";
+import { connect } from "react-redux";
+import TextBlock from "./TextBlock";
+import * as actionCreators from "../../../store/actions";
 class BuildingBoard extends Component {
   state = {
     tags: this.props.tags
@@ -8,6 +11,10 @@ class BuildingBoard extends Component {
     if (prevProps.tags !== this.props.tags) {
       this.setState({ tags: this.props.tags });
     }
+  };
+  deleteBlock = block => {
+    console.log("TCL: BuildingBoard -> block", block.target);
+    this.props.onDeleteBlock(block);
   };
   render() {
     return (
@@ -31,13 +38,57 @@ class BuildingBoard extends Component {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
                 className="card-body"
-                style={{ maxWidth: "300px", background: "purple" }}
+                style={{
+                  maxWidth: "300px",
+                  background: "#f08080",
+                  border: "3px solid #e96565",
+                  borderRadius: "10px"
+                }}
               >
-                <p className="card-text">
-                  {tag.name}
+                <button
+                  style={{
+                    paddingLeft: "50%",
+                    paddingRight: "50%",
+                    background: "lightpink",
+                    color: "white",
+                    border: "3px solid #e96565",
+                    borderRadius: "10px"
+                  }}
+                  onClick={() => this.deleteBlock(tag)}
+                >
+                  <span>X</span>
+                </button>
+                <p className="card-text" style={{ color: "white" }}>
+                  {"<" + tag.name + ">"}
                   <br />
                   {/* change the way the children are displayed pls @sitah ^_^ */}
-                  {tag.children.map(child => child.name)}
+                  {tag.children.map(child => {
+                    if (child.name === "text") {
+                      return (
+                        <TextBlock
+                          tags={this.state.tags}
+                          tag={tag}
+                          provided={provided}
+                          index={index}
+                        />
+                      );
+                    }
+                    return (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        className="card-body"
+                        style={{
+                          maxWidth: "300px",
+                          background: "#e96565",
+                          border: "3px solid #e96565",
+                          borderRadius: "10px"
+                        }}
+                      >
+                        {child.name}
+                      </div>
+                    );
+                  })}
                 </p>
                 {provided.placeholder}
               </div>
@@ -48,5 +99,12 @@ class BuildingBoard extends Component {
     );
   }
 }
-
-export default BuildingBoard;
+const mapDispatchToProps = dispatch => {
+  return {
+    onDeleteBlock: block => dispatch(actionCreators.deleteBlock(block))
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(BuildingBoard);
