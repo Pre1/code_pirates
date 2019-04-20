@@ -23,7 +23,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route path="/level/:levelID" component={Playarea} />
             <Route path="/levels" component={LevelList} />
-            <Redirect path="/" />
+            <Redirect to="/" />
           </Switch>
         </div>
       </div>

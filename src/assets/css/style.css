@@ -1,86 +1,95 @@
 /* @import url('https://fonts.googleapis.com/css?family=El+Messiri'); */
-@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaijaan');
-
+@import url("https://fonts.googleapis.com/css?family=Baloo+Bhaijaan");
 
 body {
-    /* font-family: 'El Messiri', sans-serif; */
-    font-family: 'Baloo Bhaijaan', cursive;
-
+  /* font-family: 'El Messiri', sans-serif; */
+  font-family: "Baloo Bhaijaan", cursive;
 }
 
 .main-content {
-    height: 100%;
+  height: 100%;
 }
 
 .list-of-blocks-board {
-    border: 2px solid lightcoral;
-    height: 200px;
-    max-height: 200px;
-    width: 80%;
-    max-width: 80%;
-    border-radius: 25px 5px 5px 5px;
-    flex-direction: column;
-    overflow-x: scroll; 
-    background-color: white;
+  border: 2px solid lightcoral;
+  height: 200px;
+  max-height: 200px;
+  width: 80%;
+  max-width: 80%;
+  border-radius: 25px 5px 5px 5px;
+  flex-direction: column;
+  overflow-x: scroll;
+  background-color: white;
 }
 
 .list-tags-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: scroll; 
-    padding-right: 5px !important;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: scroll;
+  padding-right: 5px !important;
 }
 
 .tag-block {
-    border: 1px solid rgb(233, 101, 101);
-    border-radius: 4px 4px 4px 4px;
-    background-color: lightcoral;
-    color: white;
-    display: flex;
-    height: 35px;
-    padding-right: 40px;
-    padding-left: 40px;
-    justify-content: center;
-    align-items: center;
-    
-    
+  border: 1px solid rgb(233, 101, 101);
+  border-radius: 4px 4px 4px 4px;
+  background-color: lightcoral;
+  color: white;
+  display: flex;
+  height: 35px;
+  padding-right: 40px;
+  padding-left: 40px;
+  justify-content: center;
+  align-items: center;
 }
 
 .building-board-area {
-    border-radius: 5px 5px 5px 5px;
-    width: 50%;
-    max-width: 50%;
-    border: 2px solid lightcoral;
-    height: 400px;
-    max-height: 400px;
-    overflow-y: scroll;
-    background-color: white;
+  border-radius: 5px 5px 5px 5px;
+  width: 50%;
+  max-width: 50%;
+  border: 2px solid lightcoral;
+  height: 400px;
+  max-height: 400px;
+  overflow-y: scroll;
+  background-color: white;
 }
 
 .building-container {
-    background-color: aquamarine;
-    height: 100%;
+  background-color: aquamarine;
+  height: 100%;
 }
 
 .preview-borad-area {
-    border-radius: 5px 5px 5px 5px;
-    width: 48%;
-    max-width: 48%;
-    border: 2px solid lightcoral;
-    height: 400px;
-    max-height: 400px;
-    overflow-y: scroll;
-    background-color: white;
+  border-radius: 5px 5px 5px 5px;
+  width: 48%;
+  max-width: 48%;
+  border: 2px solid lightcoral;
+  height: 400px;
+  max-height: 400px;
+  overflow-y: scroll;
+  background-color: white;
 }
 
 .instructions-board {
-    border: 2px solid lightcoral;
-    width: 20%;
-    max-width: 20%;
-    height: 200px;
-    max-height: 200px;
-    border-radius: 5px 25px 5px 5px;
-    background-color: white;
+  border: 2px solid lightcoral;
+  width: 20%;
+  max-width: 20%;
+  height: 200px;
+  max-height: 200px;
+  border-radius: 5px 25px 5px 5px;
+  background-color: white;
+}
+
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
 }

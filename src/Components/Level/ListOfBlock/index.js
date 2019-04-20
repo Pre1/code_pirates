@@ -35,7 +35,7 @@ class ListOfBlock extends Component {
                 <Draggable draggableId={tag.id} index={index} key={tag.id}>
                   {provided => (
                     <div
-                      class="alert alert-primary tag-block mr-2 "
+                      className="alert alert-primary tag-block mr-2 "
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
