@@ -10,6 +10,9 @@ const initialState = {
       id: 1,
       name: "أساسيات اللغة",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: true,
       isPass: false
     },
@@ -17,6 +20,9 @@ const initialState = {
       id: 2,
       name: "العناصر الرئيسية",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: false,
       isPass: false
     },
@@ -24,6 +30,9 @@ const initialState = {
       id: 3,
       name: "الصور",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: false,
       isPass: false
     },
@@ -31,6 +40,9 @@ const initialState = {
       id: 4,
       name: "العناوين",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: false,
       isPass: false
     },
@@ -38,6 +50,9 @@ const initialState = {
       id: 5,
       name: "تنسيقات الكلام",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: false,
       isPass: false
     }
@@ -64,6 +79,20 @@ const levelsReducer = (state = initialState, action) => {
       return {
         levels: newLevels
       };
+
+    case actionTypes.GET_LEVEL_GOALS:
+      return state.find(lvl => lvl.id === action.payload).goals;
+
+    case actionTypes.SET_LEVEL_GOALS:
+      let { id, goals } = action.payload;
+      let lvlObj = state.find(lvl => lvl.id === id);
+
+      lvlObj.goals = goals;
+
+      // we don't want to trigger a re-render when we set
+      // lvl goals the first time
+      return lvlObj;
+
     default:
       return state;
   }

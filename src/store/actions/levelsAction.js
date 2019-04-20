@@ -6,3 +6,17 @@ export const finishLvl = id => {
     payload: id
   };
 };
+
+export const getLevelGoals = id => {
+  return {
+    type: actionTypes.GET_LEVEL_GOALS,
+    payload: id
+  };
+};
+
+export const setLevelGoals = (id, goals) => {
+  return {
+    type: actionTypes.SET_LEVEL_GOALS,
+    payload: { id: id, goals: goals }
+  };
+};
