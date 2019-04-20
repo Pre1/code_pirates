@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 import TextBlock from "./TextBlock";
-import * as actionCreators from "../../store/actions";
+import * as actionCreators from "../../../store/actions";
 class BuildingBoard extends Component {
   state = {
     tags: this.props.tags

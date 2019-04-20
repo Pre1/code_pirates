@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actionCreators from "../../../store/actions";
-import * as Blocks from "../../../Library/PiratesCode";
+import * as actionCreators from "../../../../store/actions";
+import * as Blocks from "../../../../Library/PiratesCode";
 
 function mapStateToProps(state) {
   return {};
