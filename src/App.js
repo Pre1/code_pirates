@@ -14,6 +14,7 @@ import style from "./assets/css/style.css";
 import HomePage from "./Components/HomePage";
 import Playarea from "./Components/Level/PlayArea";
 import LevelList from "./Components/LevelList";
+import LevelOne from "./Components/Level/LevelOne";
 class App extends Component {
   render() {
     return (
@@ -23,6 +24,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route path="/level/:levelID" component={Playarea} />
             <Route path="/levels" component={LevelList} />
+            <Route path="/preview" component={LevelOne} />
             <Redirect path="/" />
           </Switch>
         </div>

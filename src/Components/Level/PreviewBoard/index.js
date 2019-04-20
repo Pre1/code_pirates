@@ -7,6 +7,7 @@ import * as Blocks from "../../../Library/PiratesCode";
 
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions";
+import LevelOne from "../LevelOne";
 
 class PreviewBoard extends Component {
   // state = {
@@ -48,9 +49,11 @@ class PreviewBoard extends Component {
     };
 
     return (
-      <div className="m-3">
+      <div className="">
         <div dangerouslySetInnerHTML={data(testObj)} />
+        {testObj}
         {/* {Parser(test.compile())} */}
+        <LevelOne />
       </div>
     );
   }

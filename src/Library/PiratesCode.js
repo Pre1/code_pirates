@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import boat from "../assets/images/Pirate Ship.png";
+// import boat from "../assets/images/boat.png";
 
 class Block {
   constructor(children = []) {
@@ -51,7 +53,6 @@ class H1Block extends Block {
   jsxCompile() {}
 }
 
-
 class HBlock extends Block {
   constructor(children, lvl = 1) {
     super(children);
@@ -78,13 +79,13 @@ class HBlock extends Block {
 }
 
 class ImgBlock extends Block {
-  constructor(jsxAttr = { src: "#", alt:"حافظ على الراية" }) {
+  constructor(jsxAttr = { src: `${boat}`, alt: "سفينة" }) {
     super([]);
     this.name = "img";
     this.jsxAttr = jsxAttr;
   }
 
-  compile(className = "ImgPiratesCode") {
+  compile(className = "boat") {
     let attr = Object.entries(this.jsxAttr);
 
     let imgBlock = `
@@ -99,7 +100,7 @@ class ImgBlock extends Block {
     return imgBlock;
   }
 
-  jsxCompile(className = "ImgPiratesCode") {
+  jsxCompile(className = "boat") {
     return <img className={className} {...this.jsxAttr} />;
   }
 }

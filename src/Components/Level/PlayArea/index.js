@@ -10,6 +10,7 @@ import assistant from "../../../assets/images/pirateBird.png";
 // Connection with redux centeral store
 import * as actionCreators from "../../../store/actions";
 import { connect } from "react-redux";
+import Sound from "react-sound";
 
 class PlayArea extends Component {
   onDragEnd = result => {
@@ -112,8 +113,8 @@ class PlayArea extends Component {
               <h2 className="mt-3">منطقة البناء</h2>
               <BuildingBoard tags={this.props.buildingBlocks} />
             </div>
-            <div className="col-6 preview-borad-area my-3 ml-2">
-              <h2 className="mt-3">شاشة العرض</h2>
+            <div className="col-6 preview-borad-area my-3 ml-2 waves">
+              {/* <h2 className="mt-3">شاشة العرض</h2> */}
               <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
             </div>
           </div>
