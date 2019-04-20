@@ -14,6 +14,7 @@ import style from "./assets/css/style.css";
 import HomePage from "./Components/HomePage";
 import Playarea from "./Components/Level/PlayArea";
 import LevelList from "./Components/LevelList";
+import LevelOne from "./Components/Level/LevelOne";
 class App extends Component {
   render() {
     return (
