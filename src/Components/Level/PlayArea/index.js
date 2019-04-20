@@ -4,14 +4,40 @@ import BuildingBoard from "../BuildingBoard";
 import PreviewBorad from "../PreviewBoard";
 import { DragDropContext } from "react-beautiful-dnd";
 import * as Blocks from "../../../Library/PiratesCode";
-import ReactTooltip from "react-tooltip";
-import assistant from "../../../assets/images/pirateBird.png";
+
+import { Link } from "react-router-dom";
+
+import Instruction from "../Instruction";
+import Tutorial from "./Tutorial";
 
 // Connection with redux centeral store
 import * as actionCreators from "../../../store/actions";
 import { connect } from "react-redux";
 
+import styled from "styled-components";
+
+let Overlay = styled.div`
+  position: fixed; /* Sit on top of the page content */
+  visibility: ${props => {
+    console.log("TCL: props", props.children);
+    return props.overlay ? "visible" : "hidden";
+  }};
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  cursor: pointer;
+`;
+
+
 class PlayArea extends Component {
+  state = {
+    overlay: true
+  };
   onDragEnd = result => {
     // gets the destination ({droppableId:"", index:""}), source ({droppableId:"", index:""}), draggableId
     const { destination, source, draggableId } = result;
@@ -88,23 +114,30 @@ class PlayArea extends Component {
       newBlock
     );
   };
+
+  toggleOverlay = () => {
+    this.setState(prevState => ({ overlay: !prevState.overlay }));
+  };
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="col-12 main-content">
-          <h1>قراصنة البرمجة</h1>
+        <div className="col-12 main-content text-center">
+          <Link style={{ textDecorationLine: "none" }} to="/levels">
+            <h1>قراصنة البرمجة</h1>
+          </Link>
+
+          <Overlay overlay={this.state.overlay}>
+            <Tutorial toggleOverlay={this.toggleOverlay} />
+          </Overlay>
+
           <div className="row mt-4 justify-content-center">
             <div className="col-10 mr-2 list-of-blocks-board">
               <h2 className="mt-3">منطقة الأدوات</h2>
               <ListOfBlock />
             </div>
             <div className="col-2 ml-2 instructions-board">
-              <img
-                src={assistant}
-                style={{ width: "100%", marginTop: "15%" }}
-                data-tip="أهلا بالقرصان الصغير"
-              />
-              <ReactTooltip />
+              <Instruction toggleOverlay={this.toggleOverlay} />
             </div>
           </div>
           <div className="row justify-content-center">
@@ -112,8 +145,8 @@ class PlayArea extends Component {
               <h2 className="mt-3">منطقة البناء</h2>
               <BuildingBoard tags={this.props.buildingBlocks} />
             </div>
-            <div className="col-6 preview-borad-area my-3 ml-2">
-              <h2 className="mt-3">شاشة العرض</h2>
+            <div className="col-6 preview-borad-area my-3 ml-2 waves">
+              {/* <h2 className="mt-3">شاشة العرض</h2> */}
               <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
             </div>
           </div>

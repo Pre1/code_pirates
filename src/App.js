@@ -30,7 +30,7 @@ class App extends Component {
             <Route exact path="/level/content" component={Content} />
             <Route path="/level/:levelID" component={Playarea} />
             <Route path="/levels" component={LevelList} />
-            <Redirect path="/levels" />
+            <Redirect to="/levels" />
           </Switch>
         </div>
         <div className="row my-5 justify-content-center">
@@ -38,7 +38,7 @@ class App extends Component {
           <FontAwesomeIcon className="footer footer-heart" icon={faHeart} />
           <span className="footer">
             {" "}
-            بواسطة فريق السعادة في معسكر طويق الأول
+            بواسطة فريق السعادة في معسكر طويق البرمجي | ٢٠١٩
           </span>
         </div>
       </div>
