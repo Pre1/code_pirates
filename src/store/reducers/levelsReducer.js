@@ -8,35 +8,35 @@ const initialState = {
   levels: [
     {
       id: 1,
-      name: "أساسيات اللغة",
+      name: "أساسيات الجزيزة",
       imageUrl: unlockedLevel,
       isAvailable: true,
       isPass: false
     },
     {
       id: 2,
-      name: "العناصر الرئيسية",
+      name: "العناوين الصارخة",
       imageUrl: unlockedLevel,
       isAvailable: false,
       isPass: false
     },
     {
       id: 3,
-      name: "الصور",
+      name: "أدوات النجاة",
       imageUrl: unlockedLevel,
       isAvailable: false,
       isPass: false
     },
     {
       id: 4,
-      name: "العناوين",
+      name: "أوامر القبطان",
       imageUrl: unlockedLevel,
       isAvailable: false,
       isPass: false
     },
     {
       id: 5,
-      name: "تنسيقات الكلام",
+      name: "التجهيز للحرب",
       imageUrl: unlockedLevel,
       isAvailable: false,
       isPass: false
