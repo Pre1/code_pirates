@@ -337,3 +337,17 @@ body {
     border-color: #1fc997;
     padding-left: 0px!important;
  }
+
+ .content-title {
+  color: #575d67;
+  font-size: 30px;
+ }
+
+ .content-body {
+  color: #9fa1a5;
+  font-size: 20px;
+ }
+
+ .tag {
+   color: #e11f5a
+ }

@@ -8,7 +8,7 @@ const initialState = {
   levels: [
     {
       id: 1,
-      name: "أساسيات اللغة",
+      name: "أساسيات الجزيزة",
       imageUrl: unlockedLevel,
 
       goals: ["HTML", "Head", "Title", "Body"],
@@ -18,7 +18,7 @@ const initialState = {
     },
     {
       id: 2,
-      name: "العناصر الرئيسية",
+      name: "العناوين الصارخة",
       imageUrl: unlockedLevel,
 
       goals: [],
@@ -28,7 +28,7 @@ const initialState = {
     },
     {
       id: 3,
-      name: "الصور",
+      name: "أدوات النجاة",
       imageUrl: unlockedLevel,
 
       goals: [],
@@ -38,7 +38,7 @@ const initialState = {
     },
     {
       id: 4,
-      name: "العناوين",
+      name: "أوامر القبطان",
       imageUrl: unlockedLevel,
 
       goals: [],
@@ -48,7 +48,7 @@ const initialState = {
     },
     {
       id: 5,
-      name: "تنسيقات الكلام",
+      name: "التجهيز للحرب",
       imageUrl: unlockedLevel,
 
       goals: [],

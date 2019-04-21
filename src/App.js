@@ -38,7 +38,7 @@ class App extends Component {
           <FontAwesomeIcon className="footer footer-heart" icon={faHeart} />
           <span className="footer">
             {" "}
-            بواسطة فريق السعادة في معسكر طويق البرمجي | ٢٠١٩
+            بواسطة فريق السعادة في معسكر طويق البرمجي | 2019
           </span>
         </div>
       </div>
