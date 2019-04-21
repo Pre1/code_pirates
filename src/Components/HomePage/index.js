@@ -4,10 +4,13 @@ import Treasure from "../../assets/images/Treasure Map.png";
 class HomePage extends Component {
   render() {
     return (
-      <div className="m-5">
+      <div className="">
         <h1>هل أنت مستعد لرحلة البحث عن الكنز؟</h1>
-        <div>
-          <img src={Treasure} alt="Treasure" width="1000px" height="800px" />
+        <div class="sailboat">
+          <img
+            class="pirate"
+            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2127168/css-animation-techniques-tricks-tips-effects.png"
+          />
         </div>
       </div>
     );

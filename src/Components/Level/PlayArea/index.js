@@ -33,7 +33,6 @@ let Overlay = styled.div`
   cursor: pointer;
 `;
 
-
 class PlayArea extends Component {
   state = {
     overlay: true
@@ -160,7 +159,7 @@ class PlayArea extends Component {
               <h2 className="mt-3">منطقة البناء</h2>
               <BuildingBoard tags={this.props.buildingBlocks} />
             </div>
-            <div className="col-6 preview-borad-area my-3 ml-2 waves">
+            <div className="col-6 preview-borad-area my-3 ml-2">
               {/* <h2 className="mt-3">شاشة العرض</h2> */}
               <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
             </div>

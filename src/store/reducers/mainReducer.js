@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/types";
 
 const initialState = {
   tags: [
+    // { id: "html", content: "<html> </html>", tip: "هيكلة الصفحة" },
     { id: "p", content: "<p> </p>", tip: "صغير بس فنان" },
     { id: "h1", content: "<h1> </h1>", tip: "رهييب" },
     { id: "img", content: "<img />", tip: "حافظ على الراية" }
