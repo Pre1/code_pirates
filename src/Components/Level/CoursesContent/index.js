@@ -103,7 +103,6 @@ class CoursesContent extends Component {
                 <div
                   className="col-12 text-left "
                   style={{
-                    backgroundColor: "lightGrey",
                     marginLeft: "3%",
                     backgroundColor: "#282c33",
                     padding: "20px 40px 20px 40px",
