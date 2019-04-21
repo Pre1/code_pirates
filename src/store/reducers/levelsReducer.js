@@ -10,6 +10,9 @@ const initialState = {
       id: 1,
       name: "أساسيات اللغة",
       imageUrl: unlockedLevel,
+
+      goals: ["HTML", "Head", "Title", "Body"],
+
       isAvailable: true,
       isPass: false
     },
@@ -17,6 +20,9 @@ const initialState = {
       id: 2,
       name: "العناصر الرئيسية",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: false,
       isPass: false
     },
@@ -24,6 +30,9 @@ const initialState = {
       id: 3,
       name: "الصور",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: false,
       isPass: false
     },
@@ -31,6 +40,9 @@ const initialState = {
       id: 4,
       name: "العناوين",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: false,
       isPass: false
     },
@@ -38,10 +50,15 @@ const initialState = {
       id: 5,
       name: "تنسيقات الكلام",
       imageUrl: unlockedLevel,
+
+      goals: [],
+
       isAvailable: false,
       isPass: false
     }
-  ]
+  ],
+
+  currentGoals: ["testcurrentGoals"]
 };
 
 const levelsReducer = (state = initialState, action) => {
@@ -64,6 +81,26 @@ const levelsReducer = (state = initialState, action) => {
       return {
         levels: newLevels
       };
+
+    case actionTypes.GET_LEVEL_GOALS:
+      let currentGoals = state.levels.find(lvl => lvl.id === +action.payload)
+        .goals;
+      return {
+        ...state,
+        currentGoals: currentGoals
+      };
+
+    case actionTypes.SET_LEVEL_GOALS:
+      let { id, goals } = action.payload;
+      let lvlObj = state.levels.find(lvl => lvl.id === +id);
+
+      lvlObj.goals = goals;
+
+      return {
+        ...state,
+        currentGoals: goals
+      };
+
     default:
       return state;
   }

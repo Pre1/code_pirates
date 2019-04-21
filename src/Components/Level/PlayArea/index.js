@@ -33,7 +33,6 @@ let Overlay = styled.div`
   cursor: pointer;
 `;
 
-
 class PlayArea extends Component {
   state = {
     overlay: true
@@ -134,6 +133,8 @@ class PlayArea extends Component {
     this.setState(prevState => ({ overlay: !prevState.overlay }));
   };
 
+  componentDidMount() {}
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -152,7 +153,10 @@ class PlayArea extends Component {
               <ListOfBlock />
             </div>
             <div className="col-2 ml-2 instructions-board">
-              <Instruction toggleOverlay={this.toggleOverlay} />
+              <Instruction
+                toggleOverlay={this.toggleOverlay}
+                overlay={this.state.overlay}
+              />
             </div>
           </div>
           <div className="row justify-content-center">
