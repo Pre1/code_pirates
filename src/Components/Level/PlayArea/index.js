@@ -37,87 +37,99 @@ class PlayArea extends Component {
   state = {
     overlay: true
   };
+  searchTree = (block, blockID, newBlock) => {
+    /*  
+    check if the block id from the object is the same as the one we're dropping into
+    if it is, insert whatever we dropped into its children.
+    */
+    console.log("TCL: PlayArea -> searchTree -> block.id", block.id);
+
+    if (block.id === blockID) {
+      // add to children
+      block.children.push(newBlock);
+      console.log(
+        "TCL: PlayArea -> searchTree -> block.children",
+        block.children
+      );
+
+      switch (block.name) {
+        case "p":
+          newBlock = new Blocks.PBlock(
+            block.children,
+            `child-${block.name}-${block.children.length}`
+          );
+          break;
+        case "h1":
+          newBlock = new Blocks.H1Block(
+            block.children,
+            `child-${block.name}-${block.children.length}`
+          );
+          break;
+        default:
+          console.error(`block.name: ${block.name} is NOT working!!`);
+      }
+      // console.log("TCL: PlayArea -> searchTree -> block", block);
+      return block;
+    } else if (block.children.length) {
+      let i;
+      let result = null;
+      for (i = 0; result == null && i < block.children.length; i++) {
+        result = this.searchTree(block.children[i], blockID, newBlock);
+      }
+      return result;
+    }
+    return null;
+  };
+
   onDragEnd = result => {
-    // gets the destination ({droppableId:"", index:""}), source ({droppableId:"", index:""}), draggableId
     const { destination, source, draggableId } = result;
 
-    //check if im not dropping in a place that's not a droppable
     if (!destination) {
-      //stops anything from happening by exiting the function early
       return;
     }
+
     if (destination.droppableId === source.droppableId) {
       return;
     }
-    //checks if im just putting the thing i pulled back to it's original drop point
+    // console.log(
+    //   "TCL: PlayArea -> destination.droppableId",
+    //   destination.droppableId
+    // );
+
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
-      //stops anything from happening by exiting the function early
       return;
     }
 
-    /*
-    here we're creating a new block object from the amazing PiratesCode library 
-    (this will later be integrated in library)
-    */
-
-    console.log("TCL: PlayArea -> draggableId", draggableId);
     let newBlock;
     switch (draggableId) {
       case "p":
-        newBlock = new Blocks.PBlock([new Blocks.TextBlock("صغير بس فنان")]);
+        newBlock = new Blocks.PBlock(
+          [new Blocks.TextBlock("صغير بس فنان")],
+          `p-${this.props.buildingBlocks.length}`
+        );
         break;
       case "h1":
-        newBlock = new Blocks.H1Block([new Blocks.TextBlock("رهييب")]);
+        newBlock = new Blocks.H1Block(
+          [new Blocks.TextBlock("رهييب")],
+          `h1-${this.props.buildingBlocks.length}`
+        );
         break;
       case "img":
         newBlock = new Blocks.ImgBlock();
         break;
-
       default:
         console.error(`draggableId: ${draggableId} is NOT Implemented!!`);
     }
 
-    //checks if the place im dropping the draggable in is the outer (buildingboard) or an element inside.
     if (destination.droppableId === "building") {
-      //pretty clear
-      console.log("TCL: PlayArea -> clear");
-
       this.props.onAddBlock(newBlock);
     } else {
-      //make a copy of the buildingBlocks
       let newBB = this.props.buildingBlocks.slice();
-
-      //find the object im droping into
-      let BB = newBB.find(
-        (bb, index) => `${bb.name}-${index}` === destination.droppableId
-      );
-      BB.children.push(newBlock);
-      switch (BB.name) {
-        case "p":
-          newBlock = new Blocks.PBlock(BB.children);
-          break;
-        case "h1":
-          newBlock = new Blocks.H1Block(BB.children);
-          break;
-        default:
-          console.error(`BB.name: ${BB.name} is NOT working!!`);
-      }
-      //replace it in the list with the block inserted in the children
-      newBB.splice(
-        newBB.indexOf(BB),
-        1,
-        // {
-        //   ...BB,
-        //   children: BB.children.concat(newBlock),
-        //   compile: BB.compile
-        // }
-        newBlock
-      );
-
-      console.log("TCL: PlayArea -> newBBBBBBBB", newBB);
+      let BB = { children: [...newBB], id: "building" };
+      this.searchTree(BB, destination.droppableId, newBlock);
       this.props.onSetBB(newBB);
     }
   };

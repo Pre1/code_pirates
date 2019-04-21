@@ -5,7 +5,9 @@ import * as actionCreators from "../../../../store/actions";
 import * as Blocks from "../../../../Library/PiratesCode";
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    buildingBlocks: state.mainReducer.buildingBlocks
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -15,37 +17,24 @@ function mapDispatchToProps(dispatch) {
 }
 class TextBlock extends Component {
   handleChange = event => {
-    const ts = this.props.tags.slice();
-    const i = event.target.name.split("-")[2];
-    const obj = ts.find((block, index) => {
-      return index === +i;
-    });
-    const fs = obj.children.find(child => child.name === "text");
-    console.log("TCL: BuildingBoard -> fs", fs);
-    if (fs.name === "text") {
-      obj.children.splice(
-        obj.children.indexOf(fs),
-        1,
-        new Blocks.TextBlock(event.target.value)
-      );
-    }
-    console.log("TCL: BuildingBoard -> ts", ts);
-    this.props.onSetBB(ts);
+    console.log("TCL: TextBlock -> this.props.tag", this.props.tag);
+    let newBB = this.props.buildingBlocks.slice();
+    let BB = { children: [...newBB], id: "building" };
+    console.log("TCL: TextBlock -> BB", BB);
+    console.log("TCL: TextBlock -> event.target.value", event.target.value);
+
+    this.props.searchTreeText(
+      BB,
+      this.props.tag.id,
+      new Blocks.TextBlock(event.target.value)
+    );
+    console.log("searchTreeText wtf");
+    this.props.onSetBB(newBB);
   };
   render() {
     const { provided, tag, index } = this.props;
     return (
-      <div
-        ref={provided.innerRef}
-        {...provided.droppableProps}
-        className="card-body"
-        style={{
-          maxWidth: "300px",
-          background: "#e96565",
-          border: "3px solid #e96565",
-          borderRadius: "10px"
-        }}
-      >
+      <div>
         <input
           name={`text-${tag.name}-${index}`}
           type="text"
@@ -59,6 +48,6 @@ class TextBlock extends Component {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(TextBlock);
