@@ -34,7 +34,7 @@ class Instruction extends Component {
 
     let goals = this.props.goals;
 
-    // console.log("TCL: Instruction -> componentDidMount -> goals", goals);
+    console.log("TCL: Instruction -> componentDidMount -> goals", goals);
 
     if (!this.props.overlay) {
       ReactTooltip.show(findDOMNode(this.refs.instruct));
@@ -50,14 +50,14 @@ class Instruction extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log(
-    //   "TCL: Instruction -> componentDidUpdate -> prevProps",
-    //   prevProps
-    // );
-    // console.log(
-    //   "TCL: Instruction -> componentDidUpdate -> this.props",
-    //   this.props
-    // );
+    console.log(
+      "TCL: Instruction -> componentDidUpdate -> prevProps",
+      prevProps
+    );
+    console.log(
+      "TCL: Instruction -> componentDidUpdate -> this.props",
+      this.props
+    );
 
     let { overlay } = this.props;
     let { instruct, currentInstruct, next } = this.state;
@@ -91,7 +91,7 @@ class Instruction extends Component {
   render() {
     let { buildingBlocks } = this.props;
     let { instruct, currentInstruct } = this.state;
-    // console.log("TCL: Instruction -> render -> buildingBlocks", buildingBlocks);
+    console.log("TCL: Instruction -> render -> buildingBlocks", buildingBlocks);
 
     return (
       <div>
