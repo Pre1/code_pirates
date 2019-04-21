@@ -47,28 +47,7 @@ class PlayArea extends Component {
     if (block.id === blockID) {
       // add to children
       block.children.push(newBlock);
-      console.log(
-        "TCL: PlayArea -> searchTree -> block.children",
-        block.children
-      );
 
-      switch (block.name) {
-        case "p":
-          newBlock = new Blocks.PBlock(
-            block.children,
-            `child-${block.name}-${block.children.length}`
-          );
-          break;
-        case "h1":
-          newBlock = new Blocks.H1Block(
-            block.children,
-            `child-${block.name}-${block.children.length}`
-          );
-          break;
-        default:
-          console.error(`block.name: ${block.name} is NOT working!!`);
-      }
-      // console.log("TCL: PlayArea -> searchTree -> block", block);
       return block;
     } else if (block.children.length) {
       let i;
