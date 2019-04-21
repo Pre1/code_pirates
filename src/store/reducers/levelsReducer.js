@@ -11,7 +11,7 @@ const initialState = {
       name: "أساسيات اللغة",
       imageUrl: unlockedLevel,
 
-      goals: [],
+      goals: ["HTML", "Head", "Title", "Body"],
 
       isAvailable: true,
       isPass: false
@@ -56,7 +56,9 @@ const initialState = {
       isAvailable: false,
       isPass: false
     }
-  ]
+  ],
+
+  currentGoals: ["testcurrentGoals"]
 };
 
 const levelsReducer = (state = initialState, action) => {
@@ -81,17 +83,23 @@ const levelsReducer = (state = initialState, action) => {
       };
 
     case actionTypes.GET_LEVEL_GOALS:
-      return state.find(lvl => lvl.id === action.payload).goals;
+      let currentGoals = state.levels.find(lvl => lvl.id === +action.payload)
+        .goals;
+      return {
+        ...state,
+        currentGoals: currentGoals
+      };
 
     case actionTypes.SET_LEVEL_GOALS:
       let { id, goals } = action.payload;
-      let lvlObj = state.find(lvl => lvl.id === id);
+      let lvlObj = state.levels.find(lvl => lvl.id === +id);
 
       lvlObj.goals = goals;
 
-      // we don't want to trigger a re-render when we set
-      // lvl goals the first time
-      return lvlObj;
+      return {
+        ...state,
+        currentGoals: goals
+      };
 
     default:
       return state;
