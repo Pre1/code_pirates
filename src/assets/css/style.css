@@ -2,9 +2,9 @@
 @import url("https://fonts.googleapis.com/css?family=Baloo+Bhaijaan");
 
 body {
-    /* font-family: 'El Messiri', sans-serif; */
-    font-family: 'Baloo Bhaijaan', cursive;
-    direction: rtl;
+  /* font-family: "El Messiri", sans-serif; */
+  font-family: "Baloo Bhaijaan", cursive;
+  direction: rtl;
 }
 
 .main-content {
@@ -82,11 +82,20 @@ body {
   border-radius: 5px 25px 5px 5px;
   background-color: white;
 }
-
+.head {
+  width: 100%;
+  height: 70px;
+  background-image: url("../images/flat_chrome.png");
+  background-repeat: no-repeat;
+}
+.border {
+  border: 5px solid black;
+  height: 595px;
+}
 .waves {
-  background: #ccf0f9 url("../images/Island a.png") repeat 70% -100px;
-  height: 800px;
-  background-size: 520px;
+  background: #0077be url("../images/island.png") repeat-x 15% -100px;
+  height: 595px;
+  background-size: 470px;
   -webkit-animation: bg-move 5s ease-in infinite;
 }
 .boat {
@@ -191,114 +200,222 @@ body {
 }
 
 .img-level {
-    border: 2px solid #e5e5e5!important;
-    border-radius: 16px!important;
+  border: 2px solid #e5e5e5 !important;
+  border-radius: 16px !important;
 }
 
 .btn-light {
-    background-color: #5bd3e4;
-    color: #fff;
-    border-width: 2px 2px 4px;
-    border-color: #3db4c5;
-    border-radius: 16px;
-    border-style: solid;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 15px;
-    line-height: 20px;
-    -webkit-tap-highlight-color: transparent;
-    text-align: center;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    transition: -webkit-filter .2s;
-    transition: filter .2s;
-    transition: filter .2s,-webkit-filter .2s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    font-weight: 700;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-    -webkit-box-flex: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0;
-    height: 48px;
- }
+  background-color: #5bd3e4;
+  color: #fff;
+  border-width: 2px 2px 4px;
+  border-color: #3db4c5;
+  border-radius: 16px;
+  border-style: solid;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 20px;
+  -webkit-tap-highlight-color: transparent;
+  text-align: center;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-filter 0.2s;
+  transition: filter 0.2s;
+  transition: filter 0.2s, -webkit-filter 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  -webkit-box-flex: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  height: 48px;
+}
 
- .green-btn {
-     background-color: #1fc997;
-     border-color: #16ab7f;
- }
+.green-btn {
+  background-color: #1fc997;
+  border-color: #16ab7f;
+}
 
- .footer {
-    font-size: 20px;
-    color: #c5c5c5;
- }
+.footer {
+  font-size: 20px;
+  color: #c5c5c5;
+}
 
- .footer-heart {
-    color: #e11f5a;
- }
+.footer-heart {
+  color: #e11f5a;
+}
 
- .content-container {
-    border: 2px solid #f1f1f1;
-    height: 100%;
-    min-height: 600px;
-    border-radius: 16px;
-    padding-left: 0px!important;
-    padding-right: 0px!important;
- }
+.content-container {
+  border: 2px solid #f1f1f1;
+  height: 100%;
+  min-height: 600px;
+  border-radius: 16px;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
 
- .content-header {
-    padding: 30px; 
-    height: 100%;
-    min-height: 120px;
-    color: #fff;
-    background-color: #1fc997;
-    border-radius: 16px 16px 0px 0px;
+.content-header {
+  padding: 30px;
+  height: 100%;
+  min-height: 120px;
+  color: #fff;
+  background-color: #1fc997;
+  border-radius: 16px 16px 0px 0px;
+}
 
- }
+.content-start-btn {
+  background-color: #fff;
+  color: #fff;
+  border-width: 2px 2px 4px;
+  border-color: #3db4c5;
+  border-radius: 16px;
+  border-style: solid;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 20px;
+  -webkit-tap-highlight-color: transparent;
+  text-align: center;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-filter 0.2s;
+  transition: filter 0.2s;
+  transition: filter 0.2s, -webkit-filter 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  -webkit-box-flex: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  height: 48px;
+  background-color: #f3fffb;
+  border-color: #c3ffed;
+}
 
- .content-start-btn {
-    background-color: #fff;
-    color: #fff;
-    border-width: 2px 2px 4px;
-    border-color: #3db4c5;
-    border-radius: 16px;
-    border-style: solid;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 15px;
-    line-height: 20px;
-    -webkit-tap-highlight-color: transparent;
-    text-align: center;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    transition: -webkit-filter .2s;
-    transition: filter .2s;
-    transition: filter .2s,-webkit-filter .2s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    font-weight: 700;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-    -webkit-box-flex: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0;
-    height: 48px;
-    background-color: #f3fffb;
-     border-color: #c3ffed;
- }
+.content-back-btn {
+  background-color: #fff;
+  color: #fff;
+  border-width: 2px 2px 4px;
+  border-color: #3db4c5;
+  border-radius: 16px;
+  border-style: solid;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 20px;
+  -webkit-tap-highlight-color: transparent;
+  text-align: center;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-filter 0.2s;
+  transition: filter 0.2s;
+  transition: filter 0.2s, -webkit-filter 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  -webkit-box-flex: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  height: 48px;
+  background-color: #1fc997;
+  border-color: #1fc997;
+  padding-left: 0px !important;
+}
+.box {
+  width: 70px;
+  height: 75px;
+  border: 2px solid white;
+  border-radius: 0.3em;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 0px 40px black;
+  transform: scale(2);
+}
+
+.wave {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  left: -50%;
+  bottom: -190%;
+  border-radius: 33%;
+  transition: all 1.4s linear;
+  animation: waves 2.4s linear infinite;
+}
+
+.lightblue {
+  background: linear-gradient(to right, #eaecc6, #2bc0e4);
+}
+
+@keyframes waves {
+  0% {
+    transform: rotate(0);
+    border-radius: 30%;
+    /* bottom: -170px; */
+  }
+  45% {
+    border-radius: 39%;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-radius: 30%;
+    /* bottom: -80px; */
+  }
+}
+
+@keyframes go-left-right {
+  /* give it a name: "go-left-right" */
+  from {
+    left: 0px;
+  }
+  /* animate from left: 0px */
+  to {
+    left: calc(100% - 100px);
+  } /* animate to left: 100%-50px */
+}
+
+.pirate {
+  height: 690px;
+  width: auto !important;
+}
+
+.sailboat {
+  animation: go-left-right 5s infinite alternate;
+  /* apply the animation "go-left-right" to the element
+     duration 3 seconds
+     number of times: infinite
+     alternate direction every time
+  */
+
+  position: relative;
+  width: 50px;
+  height: 20px;
+}
+
 
  .content-back-btn {
     background-color: #fff;
@@ -351,3 +468,4 @@ body {
  .tag {
    color: #e11f5a
  }
+

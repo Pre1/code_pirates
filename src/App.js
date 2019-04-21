@@ -27,6 +27,7 @@ class App extends Component {
         <div className="row justify-content-center mt-4">
           <Switch>
             <Route exact path="/" component={HomePage} />
+
             <Route exact path="/level/content" component={Content} />
             <Route path="/level/:levelID" component={Playarea} />
             <Route path="/levels" component={LevelList} />
