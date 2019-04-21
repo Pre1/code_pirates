@@ -129,6 +129,7 @@ class PlayArea extends Component {
     } else {
       let newBB = this.props.buildingBlocks.slice();
       let BB = { children: [...newBB], id: "building" };
+      console.log("Hi Meeee ======>", BB);
       this.searchTree(BB, destination.droppableId, newBlock);
       this.props.onSetBB(newBB);
     }
@@ -177,7 +178,6 @@ class PlayArea extends Component {
               <BuildingBoard tags={this.props.buildingBlocks} />
             </div>
             <div className="col-6 preview-borad-area my-3 ml-2">
-              {/* <h2 className="mt-3">شاشة العرض</h2> */}
               <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
             </div>
           </div>

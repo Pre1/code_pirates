@@ -13,7 +13,7 @@ export default class Tutorial extends Component {
   };
 
   handleSelect = (selectedIndx, e) => {
-    console.log("TCL: Tutorial -> handleSelect -> e", e);
+    console.log("TCL: Tutorial -> handleSelect -> e", selectedIndx);
     this.setState({
       index: selectedIndx,
       direction: e.direction
@@ -44,7 +44,7 @@ export default class Tutorial extends Component {
           </Carousel.Item>
 
           <Carousel.Item>
-            <img className="w-25" src={building} alt="Third slide" />
+            <img className="w-25" src={building} alt="Second slide" />
 
             <Carousel.Caption className="my-2">
               <h3>عنوان ثاني شريحة</h3>
@@ -64,7 +64,7 @@ export default class Tutorial extends Component {
           </Carousel.Item>
 
           <Carousel.Item>
-            <img className="w-25" src={guide} alt="Third slide" />
+            <img className="w-25" src={guide} alt="Fourth slide" />
 
             <Carousel.Caption className="my-5">
               <h3>عنوان رابع شريحة</h3>

@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-// import boat from "../assets/images/Pirate Ship.png";
+import React from "react";
 import boat from "../assets/images/boat.png";
 
 class Block {
@@ -8,12 +7,151 @@ class Block {
     this.description = description;
     this.id = id;
   }
+
   compile() {
     console.log("Implement me!!");
   }
 
   jsxCompile() {
     return this.compile();
+  }
+}
+
+class HTMLBlock extends Block {
+  constructor(children, id) {
+    super(children, id);
+    this.id = id;
+    this.name = `html`;
+  }
+
+  compile(className = "HTMLPiratesCode") {
+    return `
+      <$div className="${className}>"
+        ${this.children.map(child => child.compile()).join("")}
+      </$div>`;
+  }
+
+  jsxCompile(className = "HTMLPiratesCode") {
+    return (
+      <div className={className}>
+        {this.children.map(child => child.jsxCompile())}
+      </div>
+    );
+  }
+}
+
+class HeadBlock extends Block {
+  constructor(children, id) {
+    super(children, id);
+    this.id = id;
+    this.name = `head`;
+  }
+
+  compile(className = "HeadPiratesCode") {
+    return `
+      <$div className="${className}>"
+        ${this.children.map(child => child.compile()).join("")}
+      </$div>`;
+  }
+
+  jsxCompile(className = "HeadPiratesCode") {
+    return (
+      <div className={className}>
+        {this.children.map(child => child.jsxCompile())}
+      </div>
+    );
+  }
+}
+
+class TitleBlock extends Block {
+  constructor(children, id) {
+    super(children, id);
+    this.id = id;
+    this.name = `title`;
+  }
+
+  compile(className = "TitlePiratesCode") {
+    return `
+      <$div className="${className}>"
+        ${this.children.map(child => child.compile()).join("")}
+      </$div>`;
+  }
+
+  jsxCompile(className = "TitlePiratesCode") {
+    return (
+      <div className={className}>
+        {this.children.map(child => child.jsxCompile())}
+      </div>
+    );
+  }
+}
+
+class BodyBlock extends Block {
+  constructor(children, id) {
+    super(children, id);
+    this.description = "";
+    this.id = id;
+    this.name = `body`;
+  }
+
+  compile(className = "BodyPiratesCode") {
+    return `
+      <$div className="${className}>"
+        ${this.children.map(child => child.compile()).join("")}
+      </$div>`;
+  }
+
+  jsxCompile(className = "BodyPiratesCode") {
+    return (
+      <div className={className}>
+        {this.children.map(child => child.jsxCompile())}
+      </div>
+    );
+  }
+}
+
+class TextBlock extends Block {
+  constructor(text = "Sample", id, description) {
+    super([], id, description);
+    this.description = description;
+    this.id = id;
+    this.text = text;
+    this.name = "text";
+  }
+
+  compile(className = "TextPirateBird") {
+    return `<span className="${className}>" ${this.text} </span>`;
+  }
+
+  jsxCompile(className = "TextPirateBird") {
+    return <span className={className}>{this.text}</span>;
+  }
+}
+
+class HBlock extends Block {
+  constructor(children, id, lvl = 1, description = "") {
+    super(children, id, description);
+    this.description = "";
+    this.id = id;
+    this.lvl = lvl;
+    this.name = `h${this.lvl}`;
+  }
+
+  compile(className = "HPiratesCode") {
+    return `
+      <${this.name} className="${className}>"
+        ${this.children.map(child => child.compile()).join("")}
+      </${this.name}>`;
+  }
+
+  // React.createElement(component, props, ...children)
+  jsxCompile(className = "HPiratesCode") {
+    let heading = React.createElement(
+      `${this.name}`,
+      { className: `${className}` },
+      this.children.map(child => child.jsxCompile())
+    );
+    return heading;
   }
 }
 
@@ -41,58 +179,9 @@ class PBlock extends Block {
   }
 }
 
-class H1Block extends Block {
-  constructor(children, id, description = "") {
-    super(children, id, description);
-    this.name = "h1";
-    this.description = "";
-    this.id = id;
-  }
-
-  compile(className = "HeadPiratesCode") {
-    return `
-      <h1 className="${className}>"
-          ${this.children.map(child => child.compile()).join("")}
-      </h1>`;
-  }
-
-  jsxCompile() {}
-}
-
-class HBlock extends Block {
-  constructor(children, id, lvl = 1, description = "") {
-    super(children, id, description);
-    this.description = "";
-    this.id = id;
-    this.lvl = lvl;
-    this.name = `h${this.lvl}`;
-  }
-
-  compile(className = "HeadPiratesCode") {
-    return `
-      <${this.name} className="${className}>"
-        ${this.children.map(child => child.compile()).join("")}
-      </${this.name}>`;
-  }
-
-  // React.createElement(component, props, ...children)
-  jsxCompile(className = "HeadPiratesCode") {
-    let heading = React.createElement(
-      `${this.name}`,
-      { className: `${className}` },
-      this.children.map(child => child.jsxCompile())
-    );
-    return heading;
-  }
-}
-
 class ImgBlock extends Block {
   // TODO: put boat back
-  constructor(
-    jsxAttr = { src: `${boat}`, alt: "سفينة" },
-    id,
-    description = ""
-  ) {
+  constructor(jsxAttr = { src: `${boat}`, alt: "صورة" }, id, description = "") {
     super([], id, description);
     this.description = description;
     this.id = id;
@@ -117,24 +206,6 @@ class ImgBlock extends Block {
 
   jsxCompile(className = "boat") {
     return <img className={className} {...this.jsxAttr} />;
-  }
-}
-
-class TextBlock extends Block {
-  constructor(text = "Sample", id, description) {
-    super([], id, description);
-    this.description = description;
-    this.id = id;
-    this.text = text;
-    this.name = "text";
-  }
-
-  compile(className = "textPirateBird") {
-    return `<span className="${className}>" ${this.text} </span>`;
-  }
-
-  jsxCompile(className = "textPirateBird") {
-    return <span className={className}>{this.text}</span>;
   }
 }
 
@@ -188,85 +259,34 @@ class ListItemBlock extends Block {
   }
 }
 
-class HTMLBlock extends Block {
-  constructor(children, id) {
-    super(children, id);
-    this.id = id;
-    this.name = `html`;
-  }
-
-  compile(className = "HTMLPiratesCode") {
-    return `
-      <$div className="${className}>"
-        ${this.children.map(child => child.compile()).join("")}
-      </$div>`;
-  }
-
-  jsxCompile(className = "HTMLPiratesCode") {
-    return (
-      <div className={className}>
-        {this.children.map(child => child.jsxCompile())}
-      </div>
-    );
-  }
-}
-
-class BodyBlock extends Block {
-  constructor(children, id) {
-    super(children, id);
+class H1Block extends Block {
+  constructor(children, id, description = "") {
+    super(children, id, description);
+    this.name = "h1";
     this.description = "";
     this.id = id;
-    this.name = `body`;
   }
 
-  compile(className = "BodyPiratesCode") {
+  compile(className = "H1PiratesCode") {
     return `
-      <$div className="${className}>"
-        ${this.children.map(child => child.compile()).join("")}
-      </$div>`;
+      <h1 className="${className}>"
+          ${this.children.map(child => child.compile()).join("")}
+      </h1>`;
   }
 
-  jsxCompile(className = "BodyPiratesCode") {
-    return (
-      <div className={className}>
-        {this.children.map(child => child.jsxCompile())}
-      </div>
-    );
-  }
-}
-
-class TitleBlock extends Block {
-  constructor(children, id) {
-    super(children, id);
-    this.id = id;
-    this.name = `title`;
-  }
-
-  compile(className = "BodyPiratesCode") {
-    return `
-      <$div className="${className}>"
-        ${this.children.map(child => child.compile()).join("")}
-      </$div>`;
-  }
-
-  jsxCompile(className = "BodyPiratesCode") {
-    return (
-      <div className={className}>
-        {this.children.map(child => child.jsxCompile())}
-      </div>
-    );
-  }
+  jsxCompile() {}
 }
 
 export {
+  HTMLBlock,
+  HeadBlock,
+  TitleBlock,
+  BodyBlock,
   TextBlock,
-  PBlock,
-  H1Block,
-  ImgBlock,
   HBlock,
+  PBlock,
+  ImgBlock,
   ListBlock,
   ListItemBlock,
-  HTMLBlock,
-  BodyBlock,
-  TitleBlock
+  H1Block
 };

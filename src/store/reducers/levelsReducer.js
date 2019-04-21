@@ -1,7 +1,5 @@
 import * as actionTypes from "../actions/types";
 
-// for testing
-import pirateBird from "../../assets/images/pirateBird.png";
 import unlockedLevel from "../../assets/images/unlockedLevel.png";
 
 const initialState = {
@@ -64,12 +62,14 @@ const initialState = {
 const levelsReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FINISH_LVL:
+      // To have a copy of levels array
       let newLevels = state.levels.slice();
 
       let lvl = { ...newLevels.find(obj => obj.id === action.payload) };
       let nexLvl = { ...newLevels.find(obj => obj.id === action.payload + 1) };
 
       if (nexLvl.id) {
+        // To make the next level available
         nexLvl.isAvailable = true;
         newLevels.splice(nexLvl.id - 1, 1, nexLvl);
       }

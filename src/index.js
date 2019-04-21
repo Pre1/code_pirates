@@ -16,15 +16,13 @@ import thunk from "redux-thunk";
 import mainReducer from "./store/reducers/mainReducer";
 import levelsReducer from "./store/reducers/levelsReducer";
 import languagesReducer from "./store/reducers/languagesReducer";
-import gameLevelReducer from "./store/reducers/gameLevelReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   mainReducer: mainReducer,
   levelsReducer: levelsReducer,
-  languagesReducer: languagesReducer,
-  gameLevelReducer: gameLevelReducer
+  languagesReducer: languagesReducer
 });
 
 const store = createStore(
