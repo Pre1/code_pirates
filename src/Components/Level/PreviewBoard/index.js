@@ -49,7 +49,7 @@ class PreviewBoard extends Component {
     };
 
     return (
-      <div className="boat">
+      <div className="">
         <div dangerouslySetInnerHTML={data(testObj)} />
         {/* {testObj} */}
         {/* {Parser(test.compile())} */}

@@ -27,7 +27,7 @@ class PBlock extends Block {
 
   compile(className = "PiratesCode") {
     return `
-      <p className="${className}">
+      <p className="${className}>"
         ${this.children.map(child => child.compile()).join("")}
       </p>`;
   }
@@ -51,7 +51,7 @@ class H1Block extends Block {
 
   compile(className = "HeadPiratesCode") {
     return `
-      <h1 className="${className}">
+      <h1 className="${className}>"
           ${this.children.map(child => child.compile()).join("")}
       </h1>`;
   }
@@ -70,7 +70,7 @@ class HBlock extends Block {
 
   compile(className = "HeadPiratesCode") {
     return `
-      <${this.name} className="${className}">
+      <${this.name} className="${className}>"
         ${this.children.map(child => child.compile()).join("")}
       </${this.name}>`;
   }
@@ -130,7 +130,7 @@ class TextBlock extends Block {
   }
 
   compile(className = "textPirateBird") {
-    return `<span className="${className}"> ${this.text} </span>`;
+    return `<span className="${className}>" ${this.text} </span>`;
   }
 
   jsxCompile(className = "textPirateBird") {
@@ -148,7 +148,7 @@ class ListBlock extends Block {
 
   compile(className = "ListPiratesCode") {
     return `
-      <${this.name} className=${className}>
+      <${this.name} className="${className}>"
           ${this.children.map(child => child.compile()).join("")}
       </${this.name}>`;
   }
@@ -174,7 +174,7 @@ class ListItemBlock extends Block {
 
   compile(className = "ListItemPiratesCode") {
     return `
-      <li className=${className}>
+      <li className="${className}>"
           ${this.children.map(child => child.compile()).join("")}
       </li>`;
   }
@@ -197,7 +197,7 @@ class HTMLBlock extends Block {
 
   compile(className = "HTMLPiratesCode") {
     return `
-      <$div className=${className}>
+      <$div className="${className}>"
         ${this.children.map(child => child.compile()).join("")}
       </$div>`;
   }
@@ -221,7 +221,7 @@ class BodyBlock extends Block {
 
   compile(className = "BodyPiratesCode") {
     return `
-      <$div className=${className}>
+      <$div className="${className}>"
         ${this.children.map(child => child.compile()).join("")}
       </$div>`;
   }
@@ -244,7 +244,7 @@ class TitleBlock extends Block {
 
   compile(className = "BodyPiratesCode") {
     return `
-      <$div className=${className}>
+      <$div className="${className}>"
         ${this.children.map(child => child.compile()).join("")}
       </$div>`;
   }

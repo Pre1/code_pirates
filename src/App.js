@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import "./App.css";
 // Bootstrap Setup
@@ -27,6 +27,7 @@ class App extends Component {
         <div className="row justify-content-center mt-4">
           <Switch>
             <Route exact path="/" component={HomePage} />
+
             <Route exact path="/level/content" component={Content} />
             <Route path="/level/:levelID" component={Playarea} />
             <Route path="/levels" component={LevelList} />
@@ -38,7 +39,7 @@ class App extends Component {
           <FontAwesomeIcon className="footer footer-heart" icon={faHeart} />
           <span className="footer">
             {" "}
-            بواسطة فريق السعادة في معسكر طويق البرمجي | ٢٠١٩
+            بواسطة فريق السعادة في معسكر طويق البرمجي | 2019
           </span>
         </div>
       </div>
@@ -46,4 +47,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

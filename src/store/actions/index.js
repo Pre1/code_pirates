@@ -3,4 +3,5 @@ export {
   setBuildingBlocks,
   deleteBlock
 } from "./mainActions";
-export { finishLvl } from "./levelsAction";
+
+export { finishLvl, getLevelGoals, setLevelGoals } from "./levelsAction";

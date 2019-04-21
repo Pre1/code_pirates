@@ -145,6 +145,8 @@ class PlayArea extends Component {
     this.setState(prevState => ({ overlay: !prevState.overlay }));
   };
 
+  componentDidMount() {}
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -163,7 +165,10 @@ class PlayArea extends Component {
               <ListOfBlock />
             </div>
             <div className="col-2 ml-2 instructions-board">
-              <Instruction toggleOverlay={this.toggleOverlay} />
+              <Instruction
+                toggleOverlay={this.toggleOverlay}
+                overlay={this.state.overlay}
+              />
             </div>
           </div>
           <div className="row justify-content-center">
@@ -171,7 +176,7 @@ class PlayArea extends Component {
               <h2 className="mt-3">منطقة البناء</h2>
               <BuildingBoard tags={this.props.buildingBlocks} />
             </div>
-            <div className="col-6 preview-borad-area my-3 ml-2 waves">
+            <div className="col-6 preview-borad-area my-3 ml-2">
               {/* <h2 className="mt-3">شاشة العرض</h2> */}
               <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
             </div>
