@@ -49,7 +49,7 @@ class H1Block extends Block {
     this.id = id;
   }
 
-  compile(className = "HeadPiratesCode") {
+  compile(className = "HPiratesCode") {
     return `
       <h1 className="${className}">
           ${this.children.map(child => child.compile()).join("")}
@@ -211,6 +211,30 @@ class HTMLBlock extends Block {
   }
 }
 
+class HeadBlock extends Block {
+  constructor(children, id) {
+    super(children, id);
+    this.description = "";
+    this.id = id;
+    this.name = `body`;
+  }
+
+  compile(className = "HeaderPiratesCode") {
+    return `
+      <$div className="${className}">
+        ${this.children.map(child => child.compile()).join("")}
+      </$div>`;
+  }
+
+  jsxCompile(className = "HeaderPiratesCode") {
+    return (
+      <div className={className}>
+        {this.children.map(child => child.jsxCompile())}
+      </div>
+    );
+  }
+}
+
 class BodyBlock extends Block {
   constructor(children, id) {
     super(children, id);
@@ -268,5 +292,6 @@ export {
   ListItemBlock,
   HTMLBlock,
   BodyBlock,
-  TitleBlock
+  TitleBlock,
+  HeadBlock
 };
