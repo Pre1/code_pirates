@@ -18,10 +18,7 @@ import styled from "styled-components";
 
 let Overlay = styled.div`
   position: fixed; /* Sit on top of the page content */
-  visibility: ${props => {
-    console.log("TCL: props", props.children);
-    return props.overlay ? "visible" : "hidden";
-  }};
+  visibility: ${props => (props.overlay ? "visible" : "hidden")};
   width: 100%;
   height: 100%;
   top: 0;
@@ -35,7 +32,7 @@ let Overlay = styled.div`
 
 class PlayArea extends Component {
   state = {
-    overlay: true
+    overlay: false
   };
   searchTree = (block, blockID, newBlock) => {
     /*  

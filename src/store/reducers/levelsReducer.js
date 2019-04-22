@@ -11,13 +11,20 @@ const initialState = {
       name: "أساسيات الجزيزة",
       imageUrl: unlockedLevel,
 
-      goals: ["HTML", "Head", "Title", "Body"],
+      goals: `
+      <p className="PiratesCode">
+        <span className="textPirateBird"> صغير بس فنان </span>
+      </p>`,
+      
+      goalsList: ["HTML", "Head", "Title", "Body"],
+      
       tags: [
         { id: "html", content: "<html> </html>", tip: "الحاوية" },
         { id: "head", content: "<head> </head>", tip: "الرأس" },
         { id: "body", content: "<body> </body>", tip: "الجسم" },
         { id: "title", content: "<title> </title>", tip: "العنوان" }
       ],
+
       isAvailable: true,
       isPass: false
     },
@@ -26,7 +33,10 @@ const initialState = {
       name: "العناوين الصارخة",
       imageUrl: unlockedLevel,
 
-      goals: [],
+      goals: ``,
+      
+      goalsList = [],
+      
       tags: [{ id: "p", content: "<p> </p>", tip: "الحاوية" }],
       isAvailable: false,
       isPass: false
@@ -36,7 +46,10 @@ const initialState = {
       name: "أدوات النجاة",
       imageUrl: unlockedLevel,
 
-      goals: [],
+      goals: ``,
+      
+      goalsList = [],
+      
       tags: [],
       isAvailable: false,
       isPass: false
@@ -46,7 +59,10 @@ const initialState = {
       name: "أوامر القبطان",
       imageUrl: unlockedLevel,
 
-      goals: [],
+      goals: ``,
+      
+      goalsList = [],
+      
       tags: [],
       isAvailable: false,
       isPass: false
@@ -56,7 +72,10 @@ const initialState = {
       name: "التجهيز للحرب",
       imageUrl: unlockedLevel,
 
-      goals: [],
+      goals: ``,
+      
+      goalsList = [],
+      
       tags: [],
       isAvailable: false,
       isPass: false
@@ -104,6 +123,12 @@ const levelsReducer = (state = initialState, action) => {
       return {
         ...state,
         currentGoals: goals
+      };
+
+    case actionTypes.REST_LEVEL_GOALS:
+      return {
+        ...state,
+        currentGoals: ""
       };
 
     default:

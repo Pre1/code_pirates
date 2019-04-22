@@ -416,56 +416,54 @@ body {
   height: 20px;
 }
 
+.content-back-btn {
+  background-color: #fff;
+  color: #fff;
+  border-width: 2px 2px 4px;
+  border-color: #3db4c5;
+  border-radius: 16px;
+  border-style: solid;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 20px;
+  -webkit-tap-highlight-color: transparent;
+  text-align: center;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-filter 0.2s;
+  transition: filter 0.2s;
+  transition: filter 0.2s, -webkit-filter 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  -webkit-box-flex: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  height: 48px;
+  background-color: #1fc997;
+  border-color: #1fc997;
+  padding-left: 0px !important;
+}
 
- .content-back-btn {
-    background-color: #fff;
-    color: #fff;
-    border-width: 2px 2px 4px;
-    border-color: #3db4c5;
-    border-radius: 16px;
-    border-style: solid;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 15px;
-    line-height: 20px;
-    -webkit-tap-highlight-color: transparent;
-    text-align: center;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    transition: -webkit-filter .2s;
-    transition: filter .2s;
-    transition: filter .2s,-webkit-filter .2s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    font-weight: 700;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-    -webkit-box-flex: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0;
-    height: 48px;
-    background-color: #1fc997;
-    border-color: #1fc997;
-    padding-left: 0px!important;
- }
-
- .content-title {
+.content-title {
   color: #575d67;
   font-size: 30px;
- }
+}
 
- .content-body {
+.content-body {
   color: #9fa1a5;
   font-size: 20px;
- }
+}
 
- .tag {
-   color: #e11f5a
- }
-
+.tag {
+  color: #e11f5a;
+}
