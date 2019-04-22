@@ -4,18 +4,28 @@ import { connect } from "react-redux";
 import Block from "./Block";
 import * as Blocks from "../../../Library/PiratesCode";
 import * as actionCreators from "../../../store/actions";
+
 class BuildingBoard extends Component {
   state = {
     tags: this.props.tags
   };
+
   componentDidUpdate = prevProps => {
     if (prevProps.tags !== this.props.tags) {
       this.setState({ tags: this.props.tags });
     }
   };
+
+  /**
+   * AzizCR: these methods seem out of place.
+   * They should be part of the block library.
+   */
   searchTreeDelete = (block, blockID) => {
     console.log("TCL: BuildingBoard -> searchTreeDelete -> blockID", blockID);
     console.log("TCL: BuildingBoard -> searchTreeDelete -> block", block);
+    /**
+     * AzizCR: this whole thing could be simplified using a find
+     */
     if (block.children.map(child => child.id).includes(blockID)) {
       block.children.splice(
         block.children.indexOf(block.children.find(c => c.id === blockID)),
@@ -41,6 +51,9 @@ class BuildingBoard extends Component {
         1,
         newText
       );
+      /**
+       * AzizCR: remove dead code before merging.
+       */
       // switch (block.name) {
       //   case "p":
       //     block = new Blocks.PBlock(

@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-// import boat from "../assets/images/Pirate Ship.png";
+import React from "react";
 import boat from "../assets/images/boat.png";
 
 class Block {
@@ -18,12 +17,17 @@ class Block {
 }
 
 class PBlock extends Block {
-  constructor(children, id, description = "") {
-    super(children, id, description);
-    this.name = "p";
-    this.description = "";
-    this.id = id;
-  }
+  /**
+   * AzizCR: these constructors seem redundant. They're exactly the same as the super constructor.
+   */
+  // constructor(children, id, description = "") {
+  //   super(children, id, description);
+  //   this.name = "p";
+  //   this.description = "";
+  //   this.id = id;
+  // }
+
+  name = "p";
 
   compile(className = "PiratesCode") {
     return `

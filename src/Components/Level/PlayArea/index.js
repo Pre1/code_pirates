@@ -16,6 +16,9 @@ import { connect } from "react-redux";
 
 import styled from "styled-components";
 
+/**
+ * AzizCR: Fantastic use of styled components!
+ */
 let Overlay = styled.div`
   position: fixed; /* Sit on top of the page content */
   visibility: ${props => {
