@@ -21,3 +21,16 @@ export const setLevelGoals = (courseId, levelId, goals) => {
     payload: { courseId: courseId, levelId: levelId, goals: goals }
   };
 };
+
+export const setLevelInstruction = instruction => {
+  return {
+    type: actionTypes.SET_INSTRUCTION,
+    payload: instruction
+  };
+};
+
+export const resetLevelGoals = () => {
+  return {
+    type: actionTypes.REST_LEVEL_GOALS
+  };
+};

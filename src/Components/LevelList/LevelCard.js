@@ -19,16 +19,22 @@ class LevelCard extends Component {
         </div>
         <div className="card-body">
           <div className="row justify-content-center">
-            <button className="col-5 btn-light green-btn ml-4">
+            {level.isAvailable ? (
               <Link
                 to={
                   level.isAvailable && `/course/${courseId}/level/${level.id}`
                 }
-                style={{ color: "#fff", textDecoration: "none" }}
               >
-                ابدأ التحدي
+                <button className="col-10 btn-light green-btn ml-4">
+                  ابدأ التحدي
+                </button>
               </Link>
-            </button>
+            ) : (
+              <button className="col-10 btn-light green-btn my-4" disabled>
+                مغلق
+              </button>
+            )}
+
             <button className="col-2 btn-light ml-4">
               <Link
                 to={

@@ -18,7 +18,7 @@ import style from "./assets/css/style.css";
 import HomePage from "./Components/HomePage";
 import Playarea from "./Components/Level/PlayArea";
 import LevelList from "./Components/LevelList";
-import Content from "./Components/Level/CoursesContent";
+import Content from "./Components/Level/CoursesContent/CoursesContentMD";
 
 class App extends Component {
   render() {
@@ -27,7 +27,6 @@ class App extends Component {
         <div className="row justify-content-center mt-4">
           <Switch>
             <Route exact path="/" component={HomePage} />
-
             <Route
               exact
               path="/course/:courseID/level/:levelID/content"
@@ -38,9 +37,11 @@ class App extends Component {
               component={Playarea}
             />
             <Route path="/course/:courseID" component={LevelList} />
+            <Route path="/level/:levelID" component={Playarea} />
             <Redirect to="/course/1" />
           </Switch>
         </div>
+
         <div className="row my-5 justify-content-center">
           <span className="footer"> صنع بـ </span>
           <FontAwesomeIcon className="footer footer-heart" icon={faHeart} />

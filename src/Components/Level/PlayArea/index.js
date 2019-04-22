@@ -18,10 +18,7 @@ import styled from "styled-components";
 
 let Overlay = styled.div`
   position: fixed; /* Sit on top of the page content */
-  visibility: ${props => {
-    console.log("TCL: props", props.children);
-    return props.overlay ? "visible" : "hidden";
-  }};
+  visibility: ${props => (props.overlay ? "visible" : "hidden")};
   width: 100%;
   height: 100%;
   top: 0;
@@ -35,7 +32,10 @@ let Overlay = styled.div`
 
 class PlayArea extends Component {
   state = {
-    overlay: true
+    overlay: false,
+    level: {},
+    tags: [],
+    allTags: []
   };
 
   searchTree = (block, blockID, newBlock) => {
@@ -59,6 +59,18 @@ class PlayArea extends Component {
       return result;
     }
     return null;
+  };
+
+  putTagBack = tag => {
+    console.log("TCL: PlayArea -> tag", tag);
+
+    console.log(
+      "TCL: PlayArea -> this.state.allTags.find(t => t.id === tag)",
+      this.state.allTags
+    );
+    this.setState({
+      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag))
+    });
   };
 
   onDragEnd = result => {
@@ -93,6 +105,29 @@ class PlayArea extends Component {
           `h1-${this.props.buildingBlocks.length}`
         );
         break;
+      case "html":
+        newBlock = new Blocks.HTMLBlock(
+          [],
+          `html-${this.props.buildingBlocks.length}`
+        );
+        break;
+      case "head":
+        // newBlock = new Blocks.HeadBlock(
+        //   `head-${this.props.buildingBlocks.length}`
+        // );
+        break;
+      case "body":
+        newBlock = new Blocks.BodyBlock(
+          [],
+          `body-${this.props.buildingBlocks.length}`
+        );
+        break;
+      case "title":
+        newBlock = new Blocks.TitleBlock(
+          [new Blocks.TextBlock()],
+          `title-${this.props.buildingBlocks.length}`
+        );
+        break;
       case "img":
         newBlock = new Blocks.ImgBlock();
         break;
@@ -101,11 +136,23 @@ class PlayArea extends Component {
     }
 
     if (destination.droppableId === "building") {
+      this.state.tags.splice(
+        this.state.tags.indexOf(
+          this.state.tags.find(tag => tag.id === draggableId)
+        ),
+        1
+      );
       this.props.onAddBlock(newBlock);
     } else {
       let newBB = this.props.buildingBlocks.slice();
       let BB = { children: [...newBB], id: "building" };
       this.searchTree(BB, destination.droppableId, newBlock);
+      this.state.tags.splice(
+        this.state.tags.indexOf(
+          this.state.tags.find(tag => tag.id === draggableId)
+        ),
+        1
+      );
       this.props.onSetBB(newBB);
     }
   };
@@ -121,8 +168,49 @@ class PlayArea extends Component {
     this.setState(prevState => ({ overlay: !prevState.overlay }));
   };
 
-  componentDidMount() {}
+  componentDidMount = () => {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
 
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    const tags = currentLevel.tags;
+
+    this.setState({
+      level: currentLevel,
+      tags: tags,
+      allTags: tags
+    });
+  };
+
+  componentDidUpdate = prevProps => {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    const tags = currentLevel.tags;
+
+    if (prevProps.match.params.levelID !== this.props.match.params.levelID) {
+      this.setState({
+        level: currentLevel,
+        tags: tags,
+        allTags: tags
+      });
+    }
+  };
   render() {
     const selectedCourseId = this.props.match.params.courseID;
     const selectedLevelId = this.props.match.params.levelID;
@@ -142,7 +230,7 @@ class PlayArea extends Component {
         <div className="col-12 main-content text-center">
           <Link
             style={{ textDecorationLine: "none" }}
-            to="/course/${selectedCourseId}"
+            to={`/course/${selectedCourseId}`}
           >
             <h1>{currentLevel.name}</h1>
           </Link>
@@ -167,10 +255,16 @@ class PlayArea extends Component {
           <div className="row justify-content-center">
             <div className="col-6 building-board-area my-3 mr-2">
               <h2 className="mt-3">منطقة البناء</h2>
-              <BuildingBoard />
+              <BuildingBoard
+                putTagBack={this.putTagBack}
+                blocks={this.props.buildingBlocks}
+              />
             </div>
             <div className="col-6 preview-borad-area my-3 ml-2">
-              <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
+              <PreviewBorad
+                level={currentLevel}
+                buildingBlocks={this.props.buildingBlocks}
+              />
             </div>
           </div>
         </div>

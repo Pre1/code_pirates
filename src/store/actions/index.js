@@ -4,4 +4,10 @@ export {
   deleteBlock
 } from "./mainActions";
 
-export { finishLvl, getLevelGoals, setLevelGoals } from "./coursesActions";
+export {
+  finishLvl,
+  getLevelGoals,
+  setLevelGoals,
+  resetLevelGoals,
+  setLevelInstruction
+} from "./coursesActions";

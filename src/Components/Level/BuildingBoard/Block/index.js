@@ -27,11 +27,11 @@ class Block extends Component {
     console.log("TCL: Block -> newBBA AFTER", newBB);
     this.props.onSetBB(newBB);
 
-    // this.props.onDeleteBlock(block);
+    this.props.onDeleteBlock(block);
   };
 
   render() {
-    const { block, index, searchTreeText } = this.props;
+    const { block, index, blocks, searchTreeText } = this.props;
 
     return (
       <div
@@ -80,12 +80,24 @@ class Block extends Component {
                   {block.children.map((child, cindex) => {
                     if (child.name === "text") {
                       return (
-                        <TextBlock
-                          searchTreeText={searchTreeText}
-                          // tags={tags} // *** Ask Anas if he use it or not *** //
-                          block={block}
-                          index={cindex}
-                        />
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                          className="card-body"
+                          style={{
+                            maxWidth: "300px",
+                            background: "#e96565",
+                            border: "3px solid #e96565",
+                            borderRadius: "10px"
+                          }}
+                        >
+                          <TextBlock
+                            searchTreeText={searchTreeText}
+                            blocks={blocks}
+                            block={block}
+                            index={cindex}
+                          />
+                        </div>
                       );
                     }
                     return <div />;
@@ -111,6 +123,7 @@ class Block extends Component {
             );
           }
         })}
+        <p style={{ color: "white" }}>{"</" + block.name + ">"}</p>
       </div>
     );
   }
