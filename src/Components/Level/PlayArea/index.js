@@ -70,10 +70,6 @@ class PlayArea extends Component {
     if (destination.droppableId === source.droppableId) {
       return;
     }
-    // console.log(
-    //   "TCL: PlayArea -> destination.droppableId",
-    //   destination.droppableId
-    // );
 
     if (
       destination.droppableId === source.droppableId &&
