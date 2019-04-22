@@ -15,9 +15,9 @@ const initialState = {
       <p className="PiratesCode">
         <span className="textPirateBird"> صغير بس فنان </span>
       </p>`,
-      
+
       goalsList: ["HTML", "Head", "Title", "Body"],
-      
+
       tags: [
         { id: "html", content: "<html> </html>", tip: "الحاوية" },
         { id: "head", content: "<head> </head>", tip: "الرأس" },
@@ -34,9 +34,9 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: ``,
-      
-      goalsList = [],
-      
+
+      goalsList: [],
+
       tags: [{ id: "p", content: "<p> </p>", tip: "الحاوية" }],
       isAvailable: false,
       isPass: false
@@ -47,9 +47,9 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: ``,
-      
-      goalsList = [],
-      
+
+      goalsList: [],
+
       tags: [],
       isAvailable: false,
       isPass: false
@@ -60,9 +60,9 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: ``,
-      
-      goalsList = [],
-      
+
+      goalsList: [],
+
       tags: [],
       isAvailable: false,
       isPass: false
@@ -73,9 +73,9 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: ``,
-      
-      goalsList = [],
-      
+
+      goalsList: [],
+
       tags: [],
       isAvailable: false,
       isPass: false
