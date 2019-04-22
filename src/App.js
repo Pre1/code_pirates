@@ -29,9 +29,12 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
 
             <Route exact path="/level/content" component={Content} />
-            <Route path="/level/:levelID" component={Playarea} />
-            <Route path="/levels" component={LevelList} />
-            <Redirect to="/levels" />
+            <Route
+              path="/course/:courseID/level/:levelID"
+              component={Playarea}
+            />
+            <Route path="/course/:courseID" component={LevelList} />
+            <Redirect to="/course/1" />
           </Switch>
         </div>
         <div className="row my-5 justify-content-center">

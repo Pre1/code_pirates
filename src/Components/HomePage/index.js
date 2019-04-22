@@ -1,24 +1,39 @@
 import React, { Component } from "react";
-import Treasure from "../../assets/images/Treasure Map.png";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class HomePage extends Component {
   render() {
-    return (
-      <div className="">
-        <h1>هل أنت مستعد لرحلة البحث عن الكنز؟</h1>
-
-        <Link to={`/levels`}>
-         <div class="sailboat">
-            <img
-              class="pirate"
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2127168/css-animation-techniques-tricks-tips-effects.png"
-            />
+    let courses = this.props.courses.map(course => {
+      return (
+        <div className="row justify-content-center my-5">
+          <div>
+            <Link to={`/course/${course.id}`}>
+              <div class="sailboat">
+                <img src={course.imageUrl} class="pirate" />
+              </div>
+            </Link>
           </div>
-        </Link>
+        </div>
+      );
+    });
+    console.log("Ayman: HomePage => render => courses", courses);
+
+    return (
+      <div>
+        <h1>هل أنت مستعد لرحلة البحث عن الكنز؟</h1>
+        <div className="row justify-content-center my-5">
+          <div className="col-12">{courses}</div>
+        </div>
       </div>
     );
   }
 }
 
-export default HomePage;
+const mapStateToProps = state => {
+  return {
+    courses: state.coursesReducer.courses
+  };
+};
+
+export default connect(mapStateToProps)(HomePage);
