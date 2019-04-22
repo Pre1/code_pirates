@@ -28,7 +28,11 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
 
-            <Route exact path="/level/content" component={Content} />
+            <Route
+              exact
+              path="/course/:courseID/level/:levelID/content"
+              component={Content}
+            />
             <Route
               path="/course/:courseID/level/:levelID"
               component={Playarea}

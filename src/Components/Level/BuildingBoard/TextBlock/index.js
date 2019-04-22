@@ -4,17 +4,6 @@ import { connect } from "react-redux";
 import * as actionCreators from "../../../../store/actions";
 import * as Blocks from "../../../../Library/PiratesCode";
 
-function mapStateToProps(state) {
-  return {
-    buildingBlocks: state.mainReducer.buildingBlocks
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB))
-  };
-}
 class TextBlock extends Component {
   handleChange = event => {
     console.log("TCL: TextBlock -> this.props.tag", this.props.tag);
@@ -32,19 +21,30 @@ class TextBlock extends Component {
     this.props.onSetBB(newBB);
   };
   render() {
-    const { provided, tag, index } = this.props;
+    const { provided, block, index } = this.props;
     return (
       <div>
         <input
-          name={`text-${tag.name}-${index}`}
+          name={`text-${block.name}-${index}`}
           type="text"
-          //   value={this.state[`text-${tag.name}-${index}`]}
           onChange={this.handleChange}
         />
         <label> النص</label>
       </div>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    buildingBlocks: state.mainReducer.buildingBlocks
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB))
+  };
 }
 
 export default connect(

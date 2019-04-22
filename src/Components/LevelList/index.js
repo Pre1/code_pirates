@@ -11,10 +11,8 @@ class LevelList extends Component {
       course => course.id === +selectedCourseId
     );
 
-    console.log("TCL: LevelList -> render -> currentCourse", currentCourse);
-
     const levelCards = currentCourse.levels.map(lvl => (
-      <LevelCard key={lvl.id} level={lvl} name={lvl.name} />
+      <LevelCard key={lvl.id} courseId={selectedCourseId} level={lvl} />
     ));
 
     return (

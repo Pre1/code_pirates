@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ListOfBlock from "../ListOfBlock";
+import ListOfTags from "../ListOfTags";
 import BuildingBoard from "../BuildingBoard";
 import PreviewBorad from "../PreviewBoard";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -37,6 +37,7 @@ class PlayArea extends Component {
   state = {
     overlay: true
   };
+
   searchTree = (block, blockID, newBlock) => {
     /*  
     check if the block id from the object is the same as the one we're dropping into
@@ -123,11 +124,27 @@ class PlayArea extends Component {
   componentDidMount() {}
 
   render() {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    const tags = currentLevel.tags;
+
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="col-12 main-content text-center">
-          <Link style={{ textDecorationLine: "none" }} to="/levels">
-            <h1>قراصنة البرمجة</h1>
+          <Link
+            style={{ textDecorationLine: "none" }}
+            to="/course/${selectedCourseId}"
+          >
+            <h1>{currentLevel.name}</h1>
           </Link>
 
           <Overlay overlay={this.state.overlay}>
@@ -136,23 +153,23 @@ class PlayArea extends Component {
 
           <div className="row mt-4 justify-content-center">
             <div className="col-10 mr-2 list-of-blocks-board">
-              <h2 className="mt-3">منطقة الأدوات</h2>
-              <ListOfBlock />
+              <h2 className="mt-3">منطقة الوسوم</h2>
+              <ListOfTags tags={tags} />
             </div>
             <div className="col-2 ml-2 instructions-board">
               <Instruction
                 toggleOverlay={this.toggleOverlay}
                 overlay={this.state.overlay}
+                goals={currentLevel.goals}
               />
             </div>
           </div>
           <div className="row justify-content-center">
             <div className="col-6 building-board-area my-3 mr-2">
               <h2 className="mt-3">منطقة البناء</h2>
-              <BuildingBoard tags={this.props.buildingBlocks} />
+              <BuildingBoard />
             </div>
             <div className="col-6 preview-borad-area my-3 ml-2">
-              {/* <h2 className="mt-3">شاشة العرض</h2> */}
               <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
             </div>
           </div>
@@ -163,9 +180,8 @@ class PlayArea extends Component {
 }
 
 const mapStateToProps = state => ({
-  tags: state.mainReducer.tags,
-  buildingBlocks: state.mainReducer.buildingBlocks,
-  textObj: state.mainReducer.textObj
+  courses: state.coursesReducer.courses,
+  buildingBlocks: state.mainReducer.buildingBlocks
 });
 
 const mapDispatchToProps = dispatch => ({

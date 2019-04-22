@@ -13,6 +13,7 @@ const initialState = {
       titleColor: "#ea6228",
       isAvailable: true,
       isPass: false,
+      currentGoal: "",
       levels: [
         {
           id: 1,
@@ -90,9 +91,7 @@ const initialState = {
           isAvailable: false,
           isPass: false
         }
-      ],
-
-      currentGoal: ["testcurrentGoal"]
+      ]
     },
     {
       id: 2,
@@ -101,8 +100,8 @@ const initialState = {
       titleColor: "#29a4d9",
       isAvailable: false,
       isPass: false,
-      levels: [],
-      currentGoal: ["testcurrentGoal"]
+      currentGoal: "",
+      levels: []
     },
     {
       id: 3,
@@ -111,14 +110,57 @@ const initialState = {
       titleColor: "#f6d43c",
       isAvailable: false,
       isPass: false,
-      levels: [],
-      currentGoal: ["testcurrentGoal"]
+      currentGoal: "",
+      levels: []
     }
   ]
 };
 
 const coursesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.FINISH_LVL:
+      let newLevels = state.levels.slice();
+
+      let lvl = { ...newLevels.find(obj => obj.id === action.payload) };
+      let nexLvl = { ...newLevels.find(obj => obj.id === action.payload + 1) };
+
+      if (nexLvl.id) {
+        nexLvl.isAvailable = true;
+        newLevels.splice(nexLvl.id - 1, 1, nexLvl);
+      }
+
+      lvl.isPass = true;
+
+      newLevels.splice(lvl.id - 1, 1, lvl);
+
+      return {
+        levels: newLevels
+      };
+
+    case actionTypes.GET_LEVEL_GOALS:
+      let currentCourse = state.courses.find(
+        course => course.id === +action.payload.courseId
+      );
+      console.log(
+        "Ayman: coursesReducer => GET_LEVEL_GOALS case => currentCourse",
+        currentCourse
+      );
+      return {
+        ...state,
+        currentGoals: currentCourse
+      };
+
+    // case actionTypes.SET_LEVEL_GOALS: // *** ask Abdullah if we use it or not *** //
+    // let { id, goals } = action.payload;
+    // let lvlObj = state.levels.find(lvl => lvl.id === +id);
+
+    // lvlObj.goals = goals;
+
+    // return {
+    //   ...state,
+    //   currentGoals: goals
+    // };
+
     default:
       return state;
   }

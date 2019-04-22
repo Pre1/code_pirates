@@ -6,7 +6,7 @@ import * as actionCreators from "../../../../store/actions";
 
 class Block extends Component {
   state = {
-    children: this.props.tag.children,
+    children: this.props.block.children,
     bb: this.props.buildingBlocks
   };
   componentDidUpdate = prevProps => {
@@ -31,7 +31,7 @@ class Block extends Component {
   };
 
   render() {
-    const { tag, index, tags, searchTreeText } = this.props;
+    const { block, index, searchTreeText } = this.props;
 
     return (
       <div
@@ -43,7 +43,7 @@ class Block extends Component {
           borderRadius: "10px"
         }}
       >
-        <Droppable key={index} droppableId={`${tag.name}-${index}`}>
+        <Droppable key={index} droppableId={`${block.name}-${index}`}>
           {provided => (
             <div
               ref={provided.innerRef}
@@ -57,14 +57,15 @@ class Block extends Component {
                   border: "3px solid #e96565",
                   borderRadius: "10px"
                 }}
-                onClick={() => this.deleteBlock(tag)}
+                onClick={() => this.deleteBlock(block)}
               >
                 <span>X</span>
               </button>
+
               <p className="card-text" style={{ color: "white" }}>
-                {"<" + tag.name + ">"}
+                {"<" + block.name + ">"}
                 <br />
-                {/* change the way the children are displayed pls @sitah ^_^ */}
+
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
@@ -76,13 +77,13 @@ class Block extends Component {
                     borderRadius: "10px"
                   }}
                 >
-                  {tag.children.map((child, cindex) => {
+                  {block.children.map((child, cindex) => {
                     if (child.name === "text") {
                       return (
                         <TextBlock
                           searchTreeText={searchTreeText}
-                          tags={tags}
-                          tag={tag}
+                          // tags={tags} // *** Ask Anas if he use it or not *** //
+                          block={block}
                           index={cindex}
                         />
                       );
@@ -95,7 +96,7 @@ class Block extends Component {
             </div>
           )}
         </Droppable>
-        {tag.children.map((child, cindex) => {
+        {block.children.map((child, cindex) => {
           if (child.name !== "text") {
             return (
               <Block
@@ -103,8 +104,8 @@ class Block extends Component {
                 buildingBlocks={this.props.buildingBlocks}
                 searchTreeDelete={this.props.searchTreeDelete}
                 searchTreeText={searchTreeText}
-                tag={child}
-                tags={tag.children}
+                block={child}
+                blocks={block.children}
                 index={cindex}
               />
             );

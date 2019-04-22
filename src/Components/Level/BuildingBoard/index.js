@@ -70,6 +70,7 @@ class BuildingBoard extends Component {
   };
 
   render() {
+    let buildingBlocks = this.props.buildingBlocks;
     return (
       <div className="m-3 building-container">
         <Droppable droppableId="building">
@@ -87,15 +88,16 @@ class BuildingBoard extends Component {
             </div>
           )}
         </Droppable>
-        {this.state.tags.map((tag, index) => (
+
+        {buildingBlocks.map((block, index) => (
           <Block
             onSetBB={this.props.onSetBB}
-            buildingBlocks={this.props.buildingBlocks}
+            buildingBlocks={buildingBlocks}
             searchTreeDelete={this.searchTreeDelete}
             searchTreeText={this.searchTreeText}
-            tag={tag}
+            block={block}
             index={index}
-            tags={this.state.tags}
+            // tags={this.state.tags} // *** Ask Anas if he use it or not *** //
           />
         ))}
       </div>

@@ -27,14 +27,23 @@ class Instruction extends Component {
   };
 
   async componentDidMount() {
-    let id = this.props.match.params.levelID;
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
 
-    // await this.props.setGoals(id, ["HTML block", "Head", "Title", "Body"]);
-    await this.props.getGoals(id);
+    await this.props.getGoals(selectedCourseId, selectedLevelId);
 
+    // Set level's goals
     let goals = this.props.goals;
 
     console.log("TCL: Instruction -> componentDidMount -> goals", goals);
+    console.log(
+      "TCL: Instruction -> componentDidMount -> coursId",
+      this.props.coursId
+    );
+    console.log(
+      "TCL: Instruction -> componentDidMount -> levelId",
+      this.props.levelId
+    );
 
     if (!this.props.overlay) {
       ReactTooltip.show(findDOMNode(this.refs.instruct));
@@ -104,29 +113,17 @@ class Instruction extends Component {
             id="instructBird"
             src={assistant}
             style={{ width: "100%", marginTop: "15%" }}
-            // data-tip="أهلا بالقرصان الصغير"
             data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
             ref="instruct"
             data-place="top"
-            // data-offset="{'left': -30, 'top': -50}"
             data-event="focus"
             data-for="instructBird"
-            // data-tip
           />
           <ReactTooltip
             id="instructBird"
             afterShow={e => console.log("img img img", e)}
             afterHide={e => console.log("img img img", e)}
-            // place="left"
-            // offset={{ left: -50, top: 110 }}
-
-            // getContent={[
-            //   () => {
-            //     return ["أهلا بالقرصان الصغير"];
-            //   },
-            //   1000
-            // ]}
           />
 
           <img
@@ -149,15 +146,14 @@ class Instruction extends Component {
 
 const mapStateToProps = state => {
   return {
-    buildingBlocks: state.mainReducer.buildingBlocks,
-    goals: state.levelsReducer.currentGoals
+    buildingBlocks: state.mainReducer.buildingBlocks
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getGoals: id => dispatch(actionCreators.getLevelGoals(id)),
-    setGoals: (id, goals) => dispatch(actionCreators.setLevelGoals(id, goals))
+    getGoals: id => dispatch(actionCreators.getLevelGoals(id))
+    // setGoals: (id, goals) => dispatch(actionCreators.setLevelGoals(id, goals))
   };
 };
 
