@@ -12,7 +12,12 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: ["HTML", "Head", "Title", "Body"],
-
+      tags: [
+        { id: "html", content: "<html> </html>", tip: "الحاوية" },
+        { id: "head", content: "<head> </head>", tip: "الرأس" },
+        { id: "body", content: "<body> </body>", tip: "الجسم" },
+        { id: "title", content: "<title> </title>", tip: "العنوان" }
+      ],
       isAvailable: true,
       isPass: false
     },
@@ -22,7 +27,7 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: [],
-
+      tags: [{ id: "p", content: "<p> </p>", tip: "الحاوية" }],
       isAvailable: false,
       isPass: false
     },
@@ -32,7 +37,7 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: [],
-
+      tags: [],
       isAvailable: false,
       isPass: false
     },
@@ -42,7 +47,7 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: [],
-
+      tags: [],
       isAvailable: false,
       isPass: false
     },
@@ -52,7 +57,7 @@ const initialState = {
       imageUrl: unlockedLevel,
 
       goals: [],
-
+      tags: [],
       isAvailable: false,
       isPass: false
     }

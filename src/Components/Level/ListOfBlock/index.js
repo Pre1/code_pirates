@@ -19,6 +19,21 @@ class ListOfBlock extends Component {
   //     return;
   //   }
   // };
+
+  state = {
+    tags: []
+  };
+  componentDidMount = () => {
+    this.setState({
+      tags: this.props.levels.find(lvl => lvl.id == this.props.levelID).tags
+    });
+  };
+  componentDidUpdate = prevProps => {
+    if (prevProps.levelID !== this.props.levelID)
+      this.setState({
+        tags: this.props.levels.find(lvl => lvl.id === this.props.levelID).tags
+      });
+  };
   render() {
     console.log("ListOfBlocks", this.props.tags);
     return (
@@ -30,8 +45,8 @@ class ListOfBlock extends Component {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {this.props.tags &&
-              this.props.tags.map((tag, index) => (
+            {this.state.tags &&
+              this.state.tags.map((tag, index) => (
                 <Draggable draggableId={tag.id} index={index} key={tag.id}>
                   {provided => (
                     <div
@@ -57,7 +72,7 @@ class ListOfBlock extends Component {
 }
 
 const mapStateToProps = state => ({
-  tags: state.mainReducer.tags
+  levels: state.levelsReducer.levels
 });
 
 export default connect(mapStateToProps)(ListOfBlock);
