@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+/**
+ * AzizCR: remove dead imports before merging
+ */
 import pirateBird from "../../assets/images/pirateBird.png";
 
 // Components
@@ -9,6 +12,9 @@ class LevelList extends Component {
   render() {
     let levels = this.props.levels;
 
+    /**
+     * AzizCR: clean up debugging before merging code
+     */
     console.log("TCL: LevelList -> render -> levels", levels);
 
     const levelCards = levels.map(lvl => (
@@ -21,6 +27,10 @@ class LevelList extends Component {
           className="mb-4"
           style={{
             color: `${this.props.lang[0].titleColor}`,
+            /**
+             * AzizCR: Inline styling is great for dynamic styling
+             * but use CSS or stlying objects for static styles.
+             */
             fontSize: "60px"
           }}
         >
