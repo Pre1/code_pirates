@@ -468,17 +468,26 @@ body {
   color: #e11f5a;
 }
 
-.zerozero pre {
-  /* text-align: left; */
-  width: 70%;
+.markdownPB pre {
+  top: 10px;
+  padding-top: 30px;
+  width: 100%;
   margin: 10em;
-  padding: 20px;
+  padding: 10px;
 }
 
-.zerozero {
+.markdownPB {
   font-family: "Baloo Bhaijaan", cursive;
-  padding: 3em;
+  padding: 1em;
 }
-.zerozero h2 {
+.markdownPB h2 {
   color: #4d535c;
+}
+
+.markdownPB p {
+  color: #9fa1a5;
+}
+
+.markdownPB ul {
+  margin-top: 20px;
 }
