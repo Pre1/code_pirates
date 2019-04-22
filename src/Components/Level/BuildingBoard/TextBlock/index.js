@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch) {
 }
 class TextBlock extends Component {
   handleChange = event => {
-    console.log("TCL: TextBlock -> this.props.tag", this.props.tag);
+    console.log("TCL: TextBlock -> this.props.block", this.props.block);
     let newBB = this.props.buildingBlocks.slice();
     let BB = { children: [...newBB], id: "building" };
     console.log("TCL: TextBlock -> BB", BB);
@@ -25,20 +25,20 @@ class TextBlock extends Component {
 
     this.props.searchTreeText(
       BB,
-      this.props.tag.id,
+      this.props.block.id,
       new Blocks.TextBlock(event.target.value)
     );
     console.log("searchTreeText wtf");
     this.props.onSetBB(newBB);
   };
   render() {
-    const { provided, tag, index } = this.props;
+    const { provided, block, index } = this.props;
     return (
       <div>
         <input
-          name={`text-${tag.name}-${index}`}
+          name={`text-${block.name}-${index}`}
           type="text"
-          //   value={this.state[`text-${tag.name}-${index}`]}
+          //   value={this.state[`text-${block.name}-${index}`]}
           onChange={this.handleChange}
         />
         <label> النص</label>

@@ -25,13 +25,13 @@ class ListOfBlock extends Component {
   };
   componentDidMount = () => {
     this.setState({
-      tags: this.props.levels.find(lvl => lvl.id == this.props.levelID).tags
+      tags: this.props.tags
     });
   };
   componentDidUpdate = prevProps => {
-    if (prevProps.levelID !== this.props.levelID)
+    if (prevProps.tags !== this.props.tags)
       this.setState({
-        tags: this.props.levels.find(lvl => lvl.id === this.props.levelID).tags
+        tags: this.props.tags
       });
   };
   render() {

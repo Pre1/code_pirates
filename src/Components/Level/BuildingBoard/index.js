@@ -6,21 +6,19 @@ import * as Blocks from "../../../Library/PiratesCode";
 import * as actionCreators from "../../../store/actions";
 class BuildingBoard extends Component {
   state = {
-    tags: this.props.tags
+    blocks: this.props.blocks
   };
   componentDidUpdate = prevProps => {
-    if (prevProps.tags !== this.props.tags) {
-      this.setState({ tags: this.props.tags });
+    if (prevProps.blocks !== this.props.blocks) {
+      this.setState({ blocks: this.props.blocks });
     }
   };
+
   searchTreeDelete = (block, blockID) => {
-    console.log("TCL: BuildingBoard -> searchTreeDelete -> blockID", blockID);
-    console.log("TCL: BuildingBoard -> searchTreeDelete -> block", block);
-    if (block.children.map(child => child.id).includes(blockID)) {
-      block.children.splice(
-        block.children.indexOf(block.children.find(c => c.id === blockID)),
-        1
-      );
+    const blockObj = block.children.find(c => c.id === blockID);
+    if (blockObj) {
+      block.children.splice(block.children.indexOf(blockObj), 1);
+      this.props.putTagBack(blockObj.name);
       return block;
     } else if (block.children.length) {
       let i;
@@ -34,29 +32,12 @@ class BuildingBoard extends Component {
   };
 
   searchTreeText = (block, blockID, newText) => {
-    console.log("TCL: BuildingBoard -> searchTreeText -> searchTreeText");
     if (block.id === blockID) {
       block.children.splice(
         block.children.indexOf(block.children.find(c => c.name === "text")),
         1,
         newText
       );
-      // switch (block.name) {
-      //   case "p":
-      //     block = new Blocks.PBlock(
-      //       block.children,
-      //       `child-${block.name}-${block.children.length}`
-      //     );
-      //     break;
-      //   case "h1":
-      //     block = new Blocks.H1Block(
-      //       block.children,
-      //       `child-${block.name}-${block.children.length}`
-      //     );
-      //     break;
-      //   default:
-      //     console.error(`block.name: ${block.name} is NOT working!!`);
-      // }
       return block;
     } else if (block.children.length) {
       let i;
@@ -87,15 +68,15 @@ class BuildingBoard extends Component {
             </div>
           )}
         </Droppable>
-        {this.state.tags.map((tag, index) => (
+        {this.state.blocks.map((block, index) => (
           <Block
             onSetBB={this.props.onSetBB}
             buildingBlocks={this.props.buildingBlocks}
             searchTreeDelete={this.searchTreeDelete}
             searchTreeText={this.searchTreeText}
-            tag={tag}
+            block={block}
             index={index}
-            tags={this.state.tags}
+            blocks={this.state.blocks}
           />
         ))}
       </div>

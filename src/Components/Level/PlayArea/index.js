@@ -32,8 +32,14 @@ let Overlay = styled.div`
 
 class PlayArea extends Component {
   state = {
-    overlay: false
+    overlay: false,
+    level: {},
+    tags: [],
+    allTags: this.props.levels.find(
+      lvl => lvl.id === +this.props.match.params.levelID
+    ).tags
   };
+
   searchTree = (block, blockID, newBlock) => {
     /*  
     check if the block id from the object is the same as the one we're dropping into
@@ -55,6 +61,18 @@ class PlayArea extends Component {
       return result;
     }
     return null;
+  };
+
+  putTagBack = tag => {
+    console.log("TCL: PlayArea -> tag", tag);
+
+    console.log(
+      "TCL: PlayArea -> this.state.allTags.find(t => t.id === tag)",
+      this.state.allTags
+    );
+    this.setState({
+      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag))
+    });
   };
 
   onDragEnd = result => {
@@ -124,11 +142,23 @@ class PlayArea extends Component {
     }
 
     if (destination.droppableId === "building") {
+      this.state.tags.splice(
+        this.state.tags.indexOf(
+          this.state.tags.find(tag => tag.id === draggableId)
+        ),
+        1
+      );
       this.props.onAddBlock(newBlock);
     } else {
       let newBB = this.props.buildingBlocks.slice();
       let BB = { children: [...newBB], id: "building" };
       this.searchTree(BB, destination.droppableId, newBlock);
+      this.state.tags.splice(
+        this.state.tags.indexOf(
+          this.state.tags.find(tag => tag.id === draggableId)
+        ),
+        1
+      );
       this.props.onSetBB(newBB);
     }
   };
@@ -144,10 +174,43 @@ class PlayArea extends Component {
     this.setState(prevState => ({ overlay: !prevState.overlay }));
   };
 
-  componentDidUpdate() {
-    console.log("TCL: PlayArea -> componentDidUpdate -> hehe");
-  }
+  componentDidMount = () => {
+    this.setState({
+      level: this.props.levels.find(
+        lvl => lvl.id === +this.props.match.params.levelID
+      ),
+      tags: [
+        ...this.props.levels.find(
+          lvl => lvl.id === +this.props.match.params.levelID
+        ).tags
+      ],
+      allTags: [
+        ...this.props.levels.find(
+          lvl => lvl.id === +this.props.match.params.levelID
+        ).tags
+      ]
+    });
+  };
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.match.params.levelID !== this.props.match.params.levelID) {
+      this.setState({
+        level: this.props.levels.find(
+          lvl => lvl.id === +this.props.match.params.levelID
+        ),
+        tags: [
+          ...this.props.levels.find(
+            lvl => lvl.id === +this.props.match.params.levelID
+          ).tags
+        ],
+        allTags: [
+          ...this.props.levels.find(
+            lvl => lvl.id === +this.props.match.params.levelID
+          ).tags
+        ]
+      });
+    }
+  };
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -163,7 +226,7 @@ class PlayArea extends Component {
           <div className="row mt-4 justify-content-center">
             <div className="col-10 mr-2 list-of-blocks-board">
               <h2 className="mt-3">منطقة الأدوات</h2>
-              <ListOfBlock levelID={this.props.match.params.levelID} />
+              <ListOfBlock tags={this.state.tags} />
             </div>
             <div className="col-2 ml-2 instructions-board">
               <Instruction
@@ -175,12 +238,15 @@ class PlayArea extends Component {
           <div className="row justify-content-center">
             <div className="col-6 building-board-area my-3 mr-2">
               <h2 className="mt-3">منطقة البناء</h2>
-              <BuildingBoard tags={this.props.buildingBlocks} />
+              <BuildingBoard
+                putTagBack={this.putTagBack}
+                blocks={this.props.buildingBlocks}
+              />
             </div>
             <div className="col-6 preview-borad-area my-3 ml-2">
               {/* <h2 className="mt-3">شاشة العرض</h2> */}
               <PreviewBorad
-                levelID={this.props.match.params.levelID}
+                level={this.state.level}
                 buildingBlocks={this.props.buildingBlocks}
               />
             </div>
@@ -192,9 +258,9 @@ class PlayArea extends Component {
 }
 
 const mapStateToProps = state => ({
-  tags: state.mainReducer.tags,
   buildingBlocks: state.mainReducer.buildingBlocks,
-  textObj: state.mainReducer.textObj
+  textObj: state.mainReducer.textObj,
+  levels: state.levelsReducer.levels
 });
 
 const mapDispatchToProps = dispatch => ({

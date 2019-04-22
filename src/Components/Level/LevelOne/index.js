@@ -8,34 +8,14 @@ class LevelOne extends Component {
     buildingBlocks: []
   };
 
-  levelSearchTree = (block, name) => {
-    if (block.name === name) {
-      return block;
-    } else if (block.children.length) {
-      let i;
-      let result = null;
-      for (i = 0; result == null && i < block.children.length; i++) {
-        result = this.levelSearchTree(block.children[i], name);
-      }
-      return result;
-    }
-    return null;
-  };
-
-  setTag = (bb, name) => {
-    if (!this.state.buildingBlocks.find(block => block.name === name)) {
-      return this.levelSearchTree(bb, name);
-    }
-  };
-
   setView = () => {
     this.props.buildingBlocks.map(bb => {
       let html, body, head, title;
 
-      html = this.setTag(bb, "html");
-      body = this.setTag(bb, "body");
-      head = this.setTag(bb, "head");
-      title = this.setTag(bb, "title");
+      html = this.props.setTag(bb, "html");
+      body = this.props.setTag(bb, "body");
+      head = this.props.setTag(bb, "head");
+      title = this.props.setTag(bb, "title");
 
       if (html) {
         this.setState({
@@ -56,7 +36,7 @@ class LevelOne extends Component {
 
       if (title) {
         this.setState({
-          title: this.levelSearchTree(bb, "text").text
+          title: this.props.levelSearchTree(bb, "text").text
         });
       } else if (!title) {
         this.setState({
@@ -64,6 +44,7 @@ class LevelOne extends Component {
         });
       }
     });
+
     if (!this.props.buildingBlocks.length) {
       this.setState({
         head: "",
@@ -97,32 +78,7 @@ class LevelOne extends Component {
           >
             {this.state.title}
           </p>
-        </div>
-        <div className={this.state.active}>
-          {/* <button className="btn btn-danger" onClick={this.htmlClick}>
-            html
-          </button>
-          <button className="btn btn-warning" onClick={this.headClick}>
-            head
-          </button>
-          <button className="btn btn-dark" onClick={this.handelClick}>
-            body
-          </button> */}
-          {/* <div className="cloud"> */}
-          {/* <img src={cloud} alt={cloud} width="100px" height="100px" />
-        </div> */}
-
-          {/* <div className="boat">
-          <div className="Pirate">
-            <img src={Pirate} alt="Pirate" />
-          </div>
-        </div> */}
-          {/* <div className="">
-          <img width="510px" height="520px" />
-        </div> */}
-          {/* <div className="box">
-            <div className="wave lightblue" />
-          </div> */}
+          <div className={this.state.active} />
         </div>
       </div>
     );
