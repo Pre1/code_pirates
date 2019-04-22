@@ -6,7 +6,6 @@ import * as actionCreators from "../../../../store/actions";
 
 class Block extends Component {
   state = {
-    children: this.props.tag.children,
     bb: this.props.buildingBlocks
   };
   componentDidUpdate = prevProps => {
@@ -65,31 +64,32 @@ class Block extends Component {
                 {"<" + tag.name + ">"}
                 <br />
                 {/* change the way the children are displayed pls @sitah ^_^ */}
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  className="card-body"
-                  style={{
-                    maxWidth: "300px",
-                    background: "#e96565",
-                    border: "3px solid #e96565",
-                    borderRadius: "10px"
-                  }}
-                >
-                  {tag.children.map((child, cindex) => {
-                    if (child.name === "text") {
-                      return (
+
+                {tag.children.map((child, cindex) => {
+                  if (child.name === "text") {
+                    return (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        className="card-body"
+                        style={{
+                          maxWidth: "300px",
+                          background: "#e96565",
+                          border: "3px solid #e96565",
+                          borderRadius: "10px"
+                        }}
+                      >
                         <TextBlock
                           searchTreeText={searchTreeText}
                           tags={tags}
                           tag={tag}
                           index={cindex}
                         />
-                      );
-                    }
-                    return <div />;
-                  })}
-                </div>
+                      </div>
+                    );
+                  }
+                  return <div />;
+                })}
               </p>
               {provided.placeholder}
             </div>
@@ -110,6 +110,7 @@ class Block extends Component {
             );
           }
         })}
+        <p style={{ color: "white" }}>{"</" + tag.name + ">"}</p>
       </div>
     );
   }

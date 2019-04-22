@@ -10,50 +10,32 @@ import * as actionCreators from "../../../store/actions";
 import LevelOne from "../LevelOne";
 
 class PreviewBoard extends Component {
-  // state = {
-  //   buildingBlocks: this.props.buildingBlocks
-  // };
-  // componentDidUpdate = prevProps => {
-  //   if (prevProps.buildingBlocks !== this.props.buildingBlocks) {
-  //     this.setState({ buildingBlocks: this.props.buildingBlocks });
-  //   }
-  // };
+  state = {
+    buildingBlocks: this.props.buildingBlocks
+  };
+  componentDidUpdate = prevProps => {
+    if (prevProps.buildingBlocks !== this.props.buildingBlocks) {
+      this.setState({ buildingBlocks: this.props.buildingBlocks });
+    }
+  };
 
   render() {
     // [H1Block(), PBlock()].map(elm => elm.compile()).join("") => HTMLString
     // let test = new Blocks.H1Block([new Blocks.TextBlock()]);
-    let buildingBlocks = this.props.buildingBlocks;
-
-    console.log("=================");
-    console.log("TCL: index -> render -> buildingBlocks", buildingBlocks);
-    console.log("=================");
-
-    let testObj = buildingBlocks.map(elm => elm.compile()).join("\n");
-
-    console.log("TCL: index -> render -> testObj", testObj);
-    let data = html => {
-      return {
-        __html: html
-      };
-    };
-
-    // this's here just for testing..
-    let htmlStr = tag => {
-      return `
-          <div>
-            <${tag}>
-                This's a test
-            <${tag}>		
-          </div>
-      `;
-    };
-
+    let level;
+    switch (this.props.levelID) {
+      case "1":
+        level = <LevelOne buildingBlocks={this.state.buildingBlocks} />;
+        break;
+      default:
+        level = <></>;
+    }
     return (
       <div className="">
-        <div dangerouslySetInnerHTML={data(testObj)} />
+        {/* <div dangerouslySetInnerHTML={data(testObj)} /> */}
         {/* {testObj} */}
         {/* {Parser(test.compile())} */}
-        <LevelOne />
+        {level}
       </div>
     );
   }
@@ -61,7 +43,7 @@ class PreviewBoard extends Component {
 
 const mapStateToProps = state => {
   return {
-    // buildingBlocks: state.mainReducer,
+    // buildingBlocks: state.mainReducer.buildingBlocks
   };
 };
 

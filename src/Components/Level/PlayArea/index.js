@@ -96,6 +96,29 @@ class PlayArea extends Component {
           `h1-${this.props.buildingBlocks.length}`
         );
         break;
+      case "html":
+        newBlock = new Blocks.HTMLBlock(
+          [],
+          `html-${this.props.buildingBlocks.length}`
+        );
+        break;
+      case "head":
+        // newBlock = new Blocks.HeadBlock(
+        //   `head-${this.props.buildingBlocks.length}`
+        // );
+        break;
+      case "body":
+        newBlock = new Blocks.BodyBlock(
+          [],
+          `body-${this.props.buildingBlocks.length}`
+        );
+        break;
+      case "title":
+        newBlock = new Blocks.TitleBlock(
+          [new Blocks.TextBlock()],
+          `title-${this.props.buildingBlocks.length}`
+        );
+        break;
       case "img":
         newBlock = new Blocks.ImgBlock();
         break;
@@ -124,7 +147,9 @@ class PlayArea extends Component {
     this.setState(prevState => ({ overlay: !prevState.overlay }));
   };
 
-  componentDidMount() {}
+  componentDidUpdate() {
+    console.log("TCL: PlayArea -> componentDidUpdate -> hehe");
+  }
 
   render() {
     return (
@@ -141,7 +166,7 @@ class PlayArea extends Component {
           <div className="row mt-4 justify-content-center">
             <div className="col-10 mr-2 list-of-blocks-board">
               <h2 className="mt-3">منطقة الأدوات</h2>
-              <ListOfBlock />
+              <ListOfBlock levelID={this.props.match.params.levelID} />
             </div>
             <div className="col-2 ml-2 instructions-board">
               <Instruction
@@ -157,7 +182,10 @@ class PlayArea extends Component {
             </div>
             <div className="col-6 preview-borad-area my-3 ml-2">
               {/* <h2 className="mt-3">شاشة العرض</h2> */}
-              <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
+              <PreviewBorad
+                levelID={this.props.match.params.levelID}
+                buildingBlocks={this.props.buildingBlocks}
+              />
             </div>
           </div>
         </div>
