@@ -8,5 +8,6 @@ export {
   finishLvl,
   getLevelGoals,
   setLevelGoals,
-  resetLevelGoals
+  resetLevelGoals,
+  setLevelInstruction
 } from "./levelsAction";

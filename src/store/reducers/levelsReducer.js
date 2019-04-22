@@ -81,12 +81,17 @@ const initialState = {
       isPass: false
     }
   ],
-
+  currentInstruction: [],
   currentGoals: ["testcurrentGoals"]
 };
 
 const levelsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.SET_INSTRUCTION:
+      return {
+        ...state,
+        currentInstruction: action.payload
+      };
     case actionTypes.FINISH_LVL:
       let newLevels = state.levels.slice();
 

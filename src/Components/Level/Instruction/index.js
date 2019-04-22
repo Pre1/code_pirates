@@ -50,8 +50,12 @@ class Instruction extends Component {
 
     await this.props.getGoals(id);
 
+    console.log(
+      "TCL: Instruction -> lvlInstruct",
+      this.props.currentInstruction
+    );
+
     let goals = this.props.goals;
-    console.log("TCL: Instruction -> componentDidMount -> goals", goals);
 
     if (!this.props.overlay) {
       ReactTooltip.show(findDOMNode(this.refs.instruct));
@@ -82,18 +86,6 @@ class Instruction extends Component {
 
     let goals = compactWhitespace(this.props.goals);
     if (prevStrHTML !== curStrHTML && goals !== curStrHTML) {
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> curStrHTML",
-        curStrHTML
-      );
-      console.log("Instruction *************************");
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> prevStrHTML",
-        prevStrHTML
-      );
-
-      console.log("Instruction *************************");
-
       let { critics } = this.state;
       let say = critics.getRandom();
       this.setState({
@@ -103,12 +95,7 @@ class Instruction extends Component {
     }
 
     if (goals) {
-      console.log("TCL: Instruction -> goalsgoals -> ", goals);
-      console.log("TCL: Instruction -> goalsgoals 12-> ", curStrHTML);
-
       if (goals === curStrHTML) {
-        console.log("TCL: Instruction -> zerozero -> آحسنت لقد اجتزت المرحلة");
-
         this.props.resetGoals();
 
         this.setState({
@@ -117,20 +104,6 @@ class Instruction extends Component {
         });
       }
     }
-
-    console.log("Instruction =============================");
-    console.log("Instruction =============================");
-    console.log(
-      "TCL: Instruction -> componentDidUpdate -> prevStrHTML",
-      prevStrHTML
-    );
-
-    console.log(
-      "TCL: Instruction -> componentDidUpdate -> strHTML",
-      curStrHTML
-    );
-    console.log("Instruction =============================");
-    console.log("Instruction =============================");
 
     // check if the overlay is dism
     if (!overlay && !next) {
@@ -144,10 +117,6 @@ class Instruction extends Component {
       instruct[currentInstruct] &&
       currentInstruct <= instruct.length
     ) {
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> currentInstruct",
-        currentInstruct
-      );
       ReactTooltip.show(findDOMNode(this.refs.instruct));
 
       setTimeout(() => {
@@ -249,7 +218,8 @@ class Instruction extends Component {
 const mapStateToProps = state => {
   return {
     buildingBlocks: state.mainReducer.buildingBlocks,
-    goals: state.levelsReducer.currentGoals
+    goals: state.levelsReducer.currentGoals,
+    currentInstruction: state.levelsReducer.currentInstruction
   };
 };
 
