@@ -30,7 +30,7 @@ class Block extends Component {
   };
 
   render() {
-    const { tag, index, tags, searchTreeText } = this.props;
+    const { block, index, blocks, searchTreeText } = this.props;
 
     return (
       <div
@@ -42,7 +42,7 @@ class Block extends Component {
           borderRadius: "10px"
         }}
       >
-        <Droppable key={index} droppableId={`${tag.name}-${index}`}>
+        <Droppable key={index} droppableId={`${block.name}-${index}`}>
           {provided => (
             <div
               ref={provided.innerRef}
@@ -56,16 +56,16 @@ class Block extends Component {
                   border: "3px solid #e96565",
                   borderRadius: "10px"
                 }}
-                onClick={() => this.deleteBlock(tag)}
+                onClick={() => this.deleteBlock(block)}
               >
                 <span>X</span>
               </button>
               <p className="card-text" style={{ color: "white" }}>
-                {"<" + tag.name + ">"}
+                {"<" + block.name + ">"}
                 <br />
                 {/* change the way the children are displayed pls @sitah ^_^ */}
 
-                {tag.children.map((child, cindex) => {
+                {block.children.map((child, cindex) => {
                   if (child.name === "text") {
                     return (
                       <div
@@ -81,8 +81,8 @@ class Block extends Component {
                       >
                         <TextBlock
                           searchTreeText={searchTreeText}
-                          tags={tags}
-                          tag={tag}
+                          blocks={blocks}
+                          block={block}
                           index={cindex}
                         />
                       </div>
@@ -95,7 +95,7 @@ class Block extends Component {
             </div>
           )}
         </Droppable>
-        {tag.children.map((child, cindex) => {
+        {block.children.map((child, cindex) => {
           if (child.name !== "text") {
             return (
               <Block
@@ -103,14 +103,14 @@ class Block extends Component {
                 buildingBlocks={this.props.buildingBlocks}
                 searchTreeDelete={this.props.searchTreeDelete}
                 searchTreeText={searchTreeText}
-                tag={child}
-                tags={tag.children}
+                block={child}
+                blocks={block.children}
                 index={cindex}
               />
             );
           }
         })}
-        <p style={{ color: "white" }}>{"</" + tag.name + ">"}</p>
+        <p style={{ color: "white" }}>{"</" + block.name + ">"}</p>
       </div>
     );
   }
