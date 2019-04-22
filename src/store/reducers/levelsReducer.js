@@ -11,7 +11,10 @@ const initialState = {
       name: "أساسيات الجزيزة",
       imageUrl: unlockedLevel,
 
-      goals: ["HTML", "Head", "Title", "Body"],
+      goals: `
+      <p className="PiratesCode">
+        <span className="textPirateBird"> صغير بس فنان </span>
+      </p>`,
 
       isAvailable: true,
       isPass: false
@@ -99,6 +102,12 @@ const levelsReducer = (state = initialState, action) => {
       return {
         ...state,
         currentGoals: goals
+      };
+
+    case actionTypes.REST_LEVEL_GOALS:
+      return {
+        ...state,
+        currentGoals: ""
       };
 
     default:

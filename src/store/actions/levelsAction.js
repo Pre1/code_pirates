@@ -20,3 +20,9 @@ export const setLevelGoals = (id, goals) => {
     payload: { id: id, goals: goals }
   };
 };
+
+export const resetLevelGoals = () => {
+  return {
+    type: actionTypes.REST_LEVEL_GOALS
+  };
+};
