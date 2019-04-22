@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actionCreators from "../../../store/actions";
 class LevelOne extends Component {
   state = {
     active: "",
     head: "",
     title: "",
-    buildingBlocks: []
+    buildingBlocks: [],
+    instructions: [
+      ["1-do this!", "1- how about this"],
+      ["2-do that"],
+      ["3-haha"],
+      ["yay!!"]
+    ],
+    currentInstruction: [],
+    steps: []
   };
 
   setView = () => {
@@ -16,8 +25,17 @@ class LevelOne extends Component {
       body = this.props.setTag(bb, "body");
       head = this.props.setTag(bb, "head");
       title = this.props.setTag(bb, "title");
-
+      const { currentInstruction } = this.state;
       if (html) {
+        // checks if i have the step done or not
+        if (!this.state.steps.includes(currentInstruction)) {
+          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+          this.setState({
+            steps: this.state.steps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[1]
+          });
+          this.props.onSetInstruction(this.state.instructions[1]);
+        }
         this.setState({
           head: "head",
           active: "border"
@@ -25,6 +43,14 @@ class LevelOne extends Component {
       }
 
       if (body) {
+        if (!this.state.steps.includes(currentInstruction)) {
+          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+          this.setState({
+            steps: this.state.steps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[2]
+          });
+          this.props.onSetInstruction(this.state.instructions[2]);
+        }
         this.setState({
           active: "waves"
         });
@@ -35,6 +61,14 @@ class LevelOne extends Component {
       }
 
       if (title) {
+        if (!this.state.steps.includes(currentInstruction)) {
+          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+          this.setState({
+            steps: this.state.steps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[3]
+          });
+          this.props.onSetInstruction(this.state.instructions[3]);
+        }
         this.setState({
           title: this.props.levelSearchTree(bb, "text").text
         });
@@ -54,10 +88,12 @@ class LevelOne extends Component {
     }
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.setState({
-      buildingBlocks: this.props.buildingBlocks
+      buildingBlocks: this.props.buildingBlocks,
+      currentInstruction: this.state.instructions[0]
     });
+    await this.props.onSetInstruction(this.state.instructions[0]);
     this.setView();
   };
 
@@ -78,15 +114,26 @@ class LevelOne extends Component {
           >
             {this.state.title}
           </p>
-          <div className={this.state.active} />
         </div>
+        <div className={this.state.active} />
       </div>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     // buildingBlocks: state.mainReducer.buildingBlocks
   };
 };
-export default connect(mapStateToProps)(LevelOne);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSetInstruction: instruction =>
+      dispatch(actionCreators.setLevelInstruction(instruction))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LevelOne);
