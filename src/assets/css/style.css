@@ -467,3 +467,18 @@ body {
 .tag {
   color: #e11f5a;
 }
+
+.zerozero pre {
+  /* text-align: left; */
+  width: 70%;
+  margin: 10em;
+  padding: 20px;
+}
+
+.zerozero {
+  font-family: "Baloo Bhaijaan", cursive;
+  padding: 3em;
+}
+.zerozero h2 {
+  color: #4d535c;
+}

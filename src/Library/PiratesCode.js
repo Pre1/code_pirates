@@ -216,7 +216,7 @@ class HeadBlock extends Block {
     super(children, id);
     this.description = "";
     this.id = id;
-    this.name = `body`;
+    this.name = `head`;
   }
 
   compile(className = "HeaderPiratesCode") {
