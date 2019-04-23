@@ -118,9 +118,10 @@ class PlayArea extends Component {
         );
         break;
       case "head":
-        // newBlock = new Blocks.HeadBlock(
-        //   `head-${this.props.buildingBlocks.length}`
-        // );
+        newBlock = new Blocks.HeadBlock(
+          [],
+          `head-${this.props.buildingBlocks.length}`
+        );
         break;
       case "body":
         newBlock = new Blocks.BodyBlock(

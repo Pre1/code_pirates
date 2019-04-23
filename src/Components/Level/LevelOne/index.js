@@ -10,10 +10,11 @@ class LevelOne extends Component {
     title: "",
     buildingBlocks: [],
     instructions: [
-      ["1-do this!", "1- how about this"],
-      ["2-do that"],
-      ["3-haha"],
-      ["yay!!"]
+      ["ضع <html> في منطقة البناء"],
+      ["ضع <body> في <html>"],
+      ["ضع <head> في <html>"],
+      ["ضع <title> في <head>"],
+      [" لقد فزت!!"]
     ],
     currentInstruction: [],
     steps: []
@@ -27,6 +28,7 @@ class LevelOne extends Component {
       body = this.props.setTag(bb, "body");
       head = this.props.setTag(bb, "head");
       title = this.props.setTag(bb, "title");
+
       const { currentInstruction } = this.state;
       if (html) {
         // checks if i have the step done or not
@@ -39,7 +41,7 @@ class LevelOne extends Component {
           this.props.onSetInstruction(this.state.instructions[1]);
         }
         this.setState({
-          head: "head",
+          // head: "head",
           active: "border"
         });
       }
@@ -62,7 +64,7 @@ class LevelOne extends Component {
         });
       }
 
-      if (title) {
+      if (head) {
         if (!this.state.steps.includes(currentInstruction)) {
           // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
           this.setState({
@@ -70,6 +72,24 @@ class LevelOne extends Component {
             currentInstruction: this.state.instructions[3]
           });
           this.props.onSetInstruction(this.state.instructions[3]);
+        }
+        this.setState({
+          head: "head"
+        });
+      } else if (!head) {
+        this.setState({
+          head: ""
+        });
+      }
+
+      if (title) {
+        if (!this.state.steps.includes(currentInstruction)) {
+          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+          this.setState({
+            steps: this.state.steps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[4]
+          });
+          this.props.onSetInstruction(this.state.instructions[4]);
         }
         this.setState({
           title: this.props.levelSearchTree(bb, "text").text
