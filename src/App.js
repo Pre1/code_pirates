@@ -18,7 +18,8 @@ import style from "./assets/css/style.css";
 import HomePage from "./Components/HomePage";
 import Playarea from "./Components/Level/PlayArea";
 import LevelList from "./Components/LevelList";
-import Content from "./Components/Level/CoursesContent";
+// import Content from "./Components/Level/CoursesContent";
+import Content from "./Components/Level/CoursesContent/CoursesContentMD";
 
 class App extends Component {
   render() {
@@ -29,7 +30,6 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
 
             <Route exact path="/level/content" component={Content} />
-
             <Route path="/level/:levelID" component={Playarea} />
 
             <Route path="/levels" component={LevelList} />

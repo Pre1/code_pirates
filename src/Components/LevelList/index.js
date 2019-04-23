@@ -29,9 +29,7 @@ class LevelList extends Component {
           </h2>
         </div>
 
-        <div className="row justify-content-center animatedCard">
-          {levelCards}
-        </div>
+        <div className="row justify-content-center ">{levelCards}</div>
         <br />
       </div>
     );

@@ -1,24 +1,111 @@
 import React, { Component } from "react";
-// import boat from "../../../assets/images/Pirate Ship & Pirates.png";
-// import boat from "../../../assets/images/boat.png";
-// import cloud from "../../../assets/images/Cloud blue.png";
-// import Pirate from "../../../assets/images/Pirate 1.png";
+
+import { connect } from "react-redux";
+import * as actionCreators from "../../../store/actions";
 
 class LevelOne extends Component {
   state = {
     active: "",
     head: "",
-    title: ""
+    title: "",
+    buildingBlocks: [],
+    instructions: [
+      ["1-do this!", "1- how about this"],
+      ["2-do that"],
+      ["3-haha"],
+      ["yay!!"]
+    ],
+    currentInstruction: [],
+    steps: []
   };
-  handelClick = () => {
-    this.setState({ active: "waves" });
+
+  setView = () => {
+    this.props.buildingBlocks.map(bb => {
+      let html, body, head, title;
+
+      html = this.props.setTag(bb, "html");
+      body = this.props.setTag(bb, "body");
+      head = this.props.setTag(bb, "head");
+      title = this.props.setTag(bb, "title");
+      const { currentInstruction } = this.state;
+      if (html) {
+        // checks if i have the step done or not
+        if (!this.state.steps.includes(currentInstruction)) {
+          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+          this.setState({
+            steps: this.state.steps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[1]
+          });
+          this.props.onSetInstruction(this.state.instructions[1]);
+        }
+        this.setState({
+          head: "head",
+          active: "border"
+        });
+      }
+
+      if (body) {
+        if (!this.state.steps.includes(currentInstruction)) {
+          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+          this.setState({
+            steps: this.state.steps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[2]
+          });
+          this.props.onSetInstruction(this.state.instructions[2]);
+        }
+        this.setState({
+          active: "waves"
+        });
+      } else if (!body) {
+        this.setState({
+          active: ""
+        });
+      }
+
+      if (title) {
+        if (!this.state.steps.includes(currentInstruction)) {
+          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+          this.setState({
+            steps: this.state.steps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[3]
+          });
+          this.props.onSetInstruction(this.state.instructions[3]);
+        }
+        this.setState({
+          title: this.props.levelSearchTree(bb, "text").text
+        });
+      } else if (!title) {
+        this.setState({
+          title: ""
+        });
+      }
+    });
+
+    if (!this.props.buildingBlocks.length) {
+      this.setState({
+        head: "",
+        active: "",
+        title: ""
+      });
+    }
   };
-  htmlClick = () => {
-    this.setState({ head: "head", active: "border" });
+
+  componentDidMount = async () => {
+    this.setState({
+      buildingBlocks: this.props.buildingBlocks,
+      currentInstruction: this.state.instructions[0]
+    });
+    await this.props.onSetInstruction(this.state.instructions[0]);
+    this.setView();
   };
-  headClick = () => {
-    this.setState({ title: "القرصان الصغير" });
+
+  componentDidUpdate = prevProps => {
+    if (prevProps.buildingBlocks !== this.props.buildingBlocks) {
+      this.setState({ buildingBlocks: this.props.buildingBlocks });
+      this.setView();
+    }
   };
+
   render() {
     return (
       <div>
@@ -30,35 +117,25 @@ class LevelOne extends Component {
             {this.state.title}
           </p>
         </div>
-        <div className={this.state.active}>
-          <button className="btn btn-danger" onClick={this.htmlClick}>
-            html
-          </button>
-          <button className="btn btn-warning" onClick={this.headClick}>
-            head
-          </button>
-          <button className="btn btn-dark" onClick={this.handelClick}>
-            body
-          </button>
-          {/* <div className="cloud"> */}
-          {/* <img src={cloud} alt={cloud} width="100px" height="100px" />
-        </div> */}
-
-          {/* <div className="boat">
-          <div className="Pirate">
-            <img src={Pirate} alt="Pirate" />
-          </div>
-        </div> */}
-          {/* <div className="">
-          <img width="510px" height="520px" />
-        </div> */}
-          {/* <div className="box">
-            <div className="wave lightblue" />
-          </div> */}
-        </div>
+        <div className={this.state.active} />
       </div>
     );
   }
 }
 
-export default LevelOne;
+const mapStateToProps = state => {
+  return {
+    // buildingBlocks: state.mainReducer.buildingBlocks
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSetInstruction: instruction =>
+      dispatch(actionCreators.setLevelInstruction(instruction))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LevelOne);

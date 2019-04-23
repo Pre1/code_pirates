@@ -5,3 +5,5 @@ export const DELETE_BLOCK = "DELETE_BLOCK";
 export const FINISH_LVL = "FINISH_LVL";
 export const GET_LEVEL_GOALS = "GET_LEVEL_GOALS";
 export const SET_LEVEL_GOALS = "SET_LEVEL_GOALS";
+export const REST_LEVEL_GOALS = "REST_LEVEL_GOALS";
+export const SET_INSTRUCTION = "SET_INSTRUCTION";

@@ -5,7 +5,7 @@ import PreviewBorad from "../PreviewBoard";
 import { DragDropContext } from "react-beautiful-dnd";
 import * as Blocks from "../../../Library/PiratesCode";
 
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Instruction from "../Instruction";
 import Tutorial from "./Tutorial";
@@ -18,10 +18,7 @@ import styled from "styled-components";
 
 let Overlay = styled.div`
   position: fixed; /* Sit on top of the page content */
-  visibility: ${props => {
-    console.log("TCL: props", props.children);
-    return props.overlay ? "visible" : "hidden";
-  }};
+  visibility: ${props => (props.overlay ? "visible" : "hidden")};
   width: 100%;
   height: 100%;
   top: 0;
@@ -35,8 +32,14 @@ let Overlay = styled.div`
 
 class PlayArea extends Component {
   state = {
-    overlay: true
+    overlay: false,
+    level: {},
+    tags: [],
+    allTags: this.props.levels.find(
+      lvl => lvl.id === +this.props.match.params.levelID
+    ).tags
   };
+
   searchTree = (block, blockID, newBlock) => {
     /*  
     check if the block id from the object is the same as the one we're dropping into
@@ -47,28 +50,7 @@ class PlayArea extends Component {
     if (block.id === blockID) {
       // add to children
       block.children.push(newBlock);
-      console.log(
-        "TCL: PlayArea -> searchTree -> block.children",
-        block.children
-      );
 
-      switch (block.name) {
-        case "p":
-          newBlock = new Blocks.PBlock(
-            block.children,
-            `child-${block.name}-${block.children.length}`
-          );
-          break;
-        case "h1":
-          newBlock = new Blocks.H1Block(
-            block.children,
-            `child-${block.name}-${block.children.length}`
-          );
-          break;
-        default:
-          console.error(`block.name: ${block.name} is NOT working!!`);
-      }
-      // console.log("TCL: PlayArea -> searchTree -> block", block);
       return block;
     } else if (block.children.length) {
       let i;
@@ -79,6 +61,18 @@ class PlayArea extends Component {
       return result;
     }
     return null;
+  };
+
+  putTagBack = tag => {
+    console.log("TCL: PlayArea -> tag", tag);
+
+    console.log(
+      "TCL: PlayArea -> this.state.allTags.find(t => t.id === tag)",
+      this.state.allTags
+    );
+    this.setState({
+      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag))
+    });
   };
 
   onDragEnd = result => {
@@ -117,6 +111,29 @@ class PlayArea extends Component {
           `h1-${this.props.buildingBlocks.length}`
         );
         break;
+      case "html":
+        newBlock = new Blocks.HTMLBlock(
+          [],
+          `html-${this.props.buildingBlocks.length}`
+        );
+        break;
+      case "head":
+        // newBlock = new Blocks.HeadBlock(
+        //   `head-${this.props.buildingBlocks.length}`
+        // );
+        break;
+      case "body":
+        newBlock = new Blocks.BodyBlock(
+          [],
+          `body-${this.props.buildingBlocks.length}`
+        );
+        break;
+      case "title":
+        newBlock = new Blocks.TitleBlock(
+          [new Blocks.TextBlock()],
+          `title-${this.props.buildingBlocks.length}`
+        );
+        break;
       case "img":
         newBlock = new Blocks.ImgBlock();
         break;
@@ -125,11 +142,23 @@ class PlayArea extends Component {
     }
 
     if (destination.droppableId === "building") {
+      this.state.tags.splice(
+        this.state.tags.indexOf(
+          this.state.tags.find(tag => tag.id === draggableId)
+        ),
+        1
+      );
       this.props.onAddBlock(newBlock);
     } else {
       let newBB = this.props.buildingBlocks.slice();
       let BB = { children: [...newBB], id: "building" };
       this.searchTree(BB, destination.droppableId, newBlock);
+      this.state.tags.splice(
+        this.state.tags.indexOf(
+          this.state.tags.find(tag => tag.id === draggableId)
+        ),
+        1
+      );
       this.props.onSetBB(newBB);
     }
   };
@@ -145,21 +174,54 @@ class PlayArea extends Component {
     this.setState(prevState => ({ overlay: !prevState.overlay }));
   };
 
-  componentDidMount() {}
+  componentDidMount = () => {
+    this.setState({
+      level: this.props.levels.find(
+        lvl => lvl.id === +this.props.match.params.levelID
+      ),
+      tags: [
+        ...this.props.levels.find(
+          lvl => lvl.id === +this.props.match.params.levelID
+        ).tags
+      ],
+      allTags: [
+        ...this.props.levels.find(
+          lvl => lvl.id === +this.props.match.params.levelID
+        ).tags
+      ]
+    });
+  };
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.match.params.levelID !== this.props.match.params.levelID) {
+      this.setState({
+        level: this.props.levels.find(
+          lvl => lvl.id === +this.props.match.params.levelID
+        ),
+        tags: [
+          ...this.props.levels.find(
+            lvl => lvl.id === +this.props.match.params.levelID
+          ).tags
+        ],
+        allTags: [
+          ...this.props.levels.find(
+            lvl => lvl.id === +this.props.match.params.levelID
+          ).tags
+        ]
+      });
+    }
+  };
   render() {
     return (
       <div className="play">
         <div className=" container mt-5">
-          <div className=" bg-warning play-header pt-5 pb-5 mt-2 ">
-            <h1 className="text-light"> أساسيات الجزيرة</h1>
+          <div className=" play-header pt-5 pb-5 mt-2 ">
+            <Link style={{ textDecorationLine: "none" }} to="/levels">
+              <h1 className="text-light"> أساسيات الجزيرة</h1>
+            </Link>
           </div>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <div className="col-12 main-content card  text-center">
-              {/* <Link style={{ textDecorationLine: "none" }} to="/levels">
-              <h1>قراصنة البرمجة</h1>
-            </Link> */}
-
               <Overlay overlay={this.state.overlay}>
                 <Tutorial toggleOverlay={this.toggleOverlay} />
               </Overlay>
@@ -174,18 +236,24 @@ class PlayArea extends Component {
                 <div className="col-10 list-of-blocks-board badage ">
                   <h2 className=" p-1 tool mb-5 ">منطقة الأدوات</h2>
 
-                  <ListOfBlock />
+                  <ListOfBlock tags={this.state.tags} />
                 </div>
               </div>
               <hr />
               <div className="row justify-content-center ">
                 <div className="col-6 building-board-area my-3 mr-2 card">
                   <h2 className="p-1 tool">منطقة البناء</h2>
-                  <BuildingBoard tags={this.props.buildingBlocks} />
+                  <BuildingBoard
+                    putTagBack={this.putTagBack}
+                    blocks={this.props.buildingBlocks}
+                  />
                 </div>
                 <div className="col-6 preview-borad-area my-3 ml-2 card">
                   <h2 className="p-1 tool">شاشة العرض</h2>
-                  <PreviewBorad buildingBlocks={this.props.buildingBlocks} />
+                  <PreviewBorad
+                    level={this.state.level}
+                    buildingBlocks={this.props.buildingBlocks}
+                  />
                 </div>
               </div>
             </div>
@@ -197,9 +265,9 @@ class PlayArea extends Component {
 }
 
 const mapStateToProps = state => ({
-  tags: state.mainReducer.tags,
   buildingBlocks: state.mainReducer.buildingBlocks,
-  textObj: state.mainReducer.textObj
+  textObj: state.mainReducer.textObj,
+  levels: state.levelsReducer.levels
 });
 
 const mapDispatchToProps = dispatch => ({

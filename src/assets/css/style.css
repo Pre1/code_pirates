@@ -13,7 +13,7 @@ body {
   width: 160%;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.5);
   border-top-right-radius: 70px;
 }
 .background {
@@ -27,11 +27,11 @@ body {
 .play {
   position: absolute;
   width: 100%;
-  height: 130%;
+  height: 150%;
   top: 0;
   left: 0;
   background-size: cover;
-  background-image: url("../images/49545-district-painted-poster-watercolor-shulin-green-painting.png");
+  background-image: url("../images/jungle-background_4623457.jpg");
 }
 .levels {
   position: absolute;
@@ -68,6 +68,7 @@ img.island {
   margin: 40px;
 }
 img.island:hover {
+  /* filter: brightness(100%); */
   transform: scale(1.2);
 }
 img.island2 {
@@ -94,7 +95,7 @@ img.island3:hover {
 .animatedCard {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 85%;
   top: 60%;
   left: 50%;
   -webkit-animation: movingIsland 2s ease-in-out 0s infinite alternate;
@@ -189,8 +190,8 @@ img.island3:hover {
 }
 .play-header {
   float: left;
-  background-color: #ffffff;
-  background-image: linear-gradient(315deg, #ffffff 0%, #82bc23 74%);
+  /* background-color: #ffffff; */
+  background-image: linear-gradient(360deg, rgb(0, 0, 0, 0) 2%, #16372b 80%);
   width: 885px;
   border-top-right-radius: 70px;
   /* border-bottom-right-radius: 70px; */
@@ -209,7 +210,7 @@ img.island3:hover {
   
   */
   border-radius: 5px 25px 5px 25px;
-  background-color: #82bc23;
+  background-color: #ba6c01;
   /* background-image: linear-gradient(900deg,  20%, #ffffff 64%); */
   color: white;
   font-weight: bold;
@@ -224,18 +225,18 @@ img.island3:hover {
   color: white;
   border-bottom-right-radius: 70px;
   border-bottom-left-radius: 70px;
-  background-color: #bc6f03;
-  background-image: linear-gradient(315deg, #bc6f03 0%, #874000 74%);
+  background-color: #679950;
 
   /* box-shadow: 5px 5px #888888; */
 }
 
 .building-board-area {
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 16px 16px 16px 16px;
   width: 50%;
   max-width: 50%;
   height: 665px;
   max-height: 665px;
+  margin-left: 6px;
 }
 
 .building-container {
@@ -244,7 +245,7 @@ img.island3:hover {
 }
 
 .preview-borad-area {
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 16px 16px 16px 16px;
   width: 48%;
   max-width: 48%;
   height: 665px;
@@ -610,6 +611,36 @@ img.island3:hover {
   font-size: 20px;
 }
 
+/* 
+
 .tag {
   color: #e11f5a;
+*/
+
+.tag {
+  color: #e11f5a;
+}
+
+.markdownPB pre {
+  top: 10px;
+  padding-top: 30px;
+  width: 100%;
+  margin: 10em;
+  padding: 10px;
+}
+
+.markdownPB {
+  font-family: "Baloo Bhaijaan", cursive;
+  padding: 1em;
+}
+.markdownPB h2 {
+  color: #4d535c;
+}
+
+.markdownPB p {
+  color: #9fa1a5;
+}
+
+.markdownPB ul {
+  margin-top: 20px;
 }

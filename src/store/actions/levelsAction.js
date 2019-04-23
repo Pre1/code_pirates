@@ -14,9 +14,22 @@ export const getLevelGoals = id => {
   };
 };
 
+export const setLevelInstruction = instruction => {
+  return {
+    type: actionTypes.SET_INSTRUCTION,
+    payload: instruction
+  };
+};
+
 export const setLevelGoals = (id, goals) => {
   return {
     type: actionTypes.SET_LEVEL_GOALS,
     payload: { id: id, goals: goals }
+  };
+};
+
+export const resetLevelGoals = () => {
+  return {
+    type: actionTypes.REST_LEVEL_GOALS
   };
 };
