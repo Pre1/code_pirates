@@ -37,8 +37,8 @@ class Block extends Component {
         className="card-body"
         style={{
           maxWidth: "300px",
-          background: "#f08080",
-          border: "3px solid #e96565",
+          backgroundColor: "#ba6c01",
+          border: "2px solid rgb(109, 64, 1)",
           borderRadius: "10px"
         }}
       >
@@ -51,19 +51,23 @@ class Block extends Component {
             >
               <button
                 style={{
-                  background: "lightpink",
                   color: "white",
-                  border: "3px solid #e96565",
+                  backgroundColor: "#bc6f03",
+                  backgroundImage:
+                    "linear-gradient(315deg, #bc6f03 0%, #874000 74%)",
+
                   borderRadius: "10px"
                 }}
                 onClick={() => this.deleteBlock(block)}
               >
                 <span>X</span>
               </button>
-              <p className="card-text" style={{ color: "white" }}>
+              <p
+                className="card-text"
+                style={{ color: "white", fontSize: "20px" }}
+              >
                 {"<" + block.name + ">"}
                 <br />
-                {/* change the way the children are displayed pls @sitah ^_^ */}
 
                 {block.children.map((child, cindex) => {
                   if (child.name === "text") {
@@ -74,9 +78,8 @@ class Block extends Component {
                         className="card-body"
                         style={{
                           maxWidth: "300px",
-                          background: "#e96565",
-                          border: "3px solid #e96565",
-                          borderRadius: "10px"
+                          backgroundColor: "gray",
+                          border: "2px solid rgb(109, 64, 1)"
                         }}
                       >
                         <TextBlock
@@ -110,7 +113,9 @@ class Block extends Component {
             );
           }
         })}
-        <p style={{ color: "white" }}>{"</" + block.name + ">"}</p>
+        <p style={{ color: "white", fontSize: "20px" }}>
+          {"</" + block.name + ">"}
+        </p>
       </div>
     );
   }

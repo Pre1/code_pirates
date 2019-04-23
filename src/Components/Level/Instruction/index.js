@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 import { withRouter, Link } from "react-router-dom";
 import { findDOMNode } from "react-dom";
-import { Button } from "react-bootstrap";
 
 import ReactTooltip from "react-tooltip";
-import assistant from "../../../assets/images/pirateBird.png";
-import lightImg from "../../../assets/images/lightbulb.svg";
 
+// images
+import assistant from "../../../assets/images/parrot.png";
+import lightImg from "../../../assets/images/lightbulb.svg";
 import * as actionCreators from "../../../store/actions";
 
 import { connect } from "react-redux";
@@ -162,7 +162,7 @@ class Instruction extends Component {
           <img
             id="instructBird"
             src={assistant}
-            style={{ width: "100%", marginTop: "15%" }}
+            style={{ width: "120%", top: "130%", left: "80%", botto: "30%" }}
             // data-tip="أهلا بالقرصان الصغير"
             data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
@@ -172,6 +172,7 @@ class Instruction extends Component {
             data-event="focus"
             data-for="instructBird"
             // data-tip
+            className="animatedCardBird"
           />
           <ReactTooltip
             id="instructBird"
@@ -188,23 +189,12 @@ class Instruction extends Component {
             // ]}
           />
 
-          {/* <Button
-            className="flex"
-            style={{
-              width: "20px",
-              height: "20%",
-              marginTop: "-20px",
-              postion: "absolute"
-            }}
-          >
-
-          </Button> */}
-          <div style={{ position: "absolute", left: "5px", bottom: "5px" }}>
+          <div style={{ position: "absolute", left: "1px", bottom: "2px" }}>
             <Link
               to={`/level/content`}
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <button className="col-12 btn-light">
+              <button className="col-8 btn btn-warning rounded-pill mt-5 ">
                 <img src={lightImg} alt="light" />
               </button>
             </Link>

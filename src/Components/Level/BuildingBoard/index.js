@@ -59,7 +59,7 @@ class BuildingBoard extends Component {
               ref={provided.innerRef}
               {...provided.droppableProps}
               className="card text-center"
-              style={{ backgroundColor: "aquamarine" }}
+              style={{ backgroundColor: "transparent", border: "transparent" }}
             >
               <div className="card-footer text-muted building-container">
                 <h1>+</h1>

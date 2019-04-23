@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import pirateBird from "../../assets/images/pirateBird.png";
+// import pirateBird from "../../assets/images/pirateBird.png";
 
 // Components
 import LevelCard from "./LevelCard";
@@ -16,17 +16,20 @@ class LevelList extends Component {
     ));
 
     return (
-      <div className="my-2">
-        <h2
-          className="mb-4"
-          style={{
-            color: `${this.props.lang[0].titleColor}`,
-            fontSize: "60px"
-          }}
-        >
-          {this.props.lang[0] && this.props.lang[0].name}
-        </h2>
-        <div className="row justify-content-center">{levelCards}</div>
+      <div className="my-2 levels">
+        <div className="">
+          <h2
+            className=" mt-4"
+            style={{
+              color: `${this.props.lang[0].titleColor}`,
+              fontSize: "90px"
+            }}
+          >
+            {this.props.lang[0] && this.props.lang[0].name}
+          </h2>
+        </div>
+
+        <div className="row justify-content-center ">{levelCards}</div>
         <br />
       </div>
     );

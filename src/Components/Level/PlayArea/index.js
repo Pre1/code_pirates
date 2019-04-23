@@ -213,46 +213,53 @@ class PlayArea extends Component {
   };
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="col-12 main-content text-center">
-          <Link style={{ textDecorationLine: "none" }} to="/levels">
-            <h1>قراصنة البرمجة</h1>
-          </Link>
-
-          <Overlay overlay={this.state.overlay}>
-            <Tutorial toggleOverlay={this.toggleOverlay} />
-          </Overlay>
-
-          <div className="row mt-4 justify-content-center">
-            <div className="col-10 mr-2 list-of-blocks-board">
-              <h2 className="mt-3">منطقة الأدوات</h2>
-              <ListOfBlock tags={this.state.tags} />
-            </div>
-            <div className="col-2 ml-2 instructions-board">
-              <Instruction
-                toggleOverlay={this.toggleOverlay}
-                overlay={this.state.overlay}
-              />
-            </div>
+      <div className="play">
+        <div className=" container mt-5">
+          <div className=" play-header pt-5 pb-5 mt-2 ">
+            <Link style={{ textDecorationLine: "none" }} to="/levels">
+              <h1 className="text-light"> أساسيات الجزيرة</h1>
+            </Link>
           </div>
-          <div className="row justify-content-center">
-            <div className="col-6 building-board-area my-3 mr-2">
-              <h2 className="mt-3">منطقة البناء</h2>
-              <BuildingBoard
-                putTagBack={this.putTagBack}
-                blocks={this.props.buildingBlocks}
-              />
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <div className="col-12 main-content card  text-center">
+              <Overlay overlay={this.state.overlay}>
+                <Tutorial toggleOverlay={this.toggleOverlay} />
+              </Overlay>
+
+              <div className="row  justify-content-center">
+                <div className="col-2 ml-2 instructions-board ">
+                  <Instruction
+                    toggleOverlay={this.toggleOverlay}
+                    overlay={this.state.overlay}
+                  />
+                </div>
+                <div className="col-10 list-of-blocks-board badage ">
+                  <h2 className=" p-1 tool mb-5 ">منطقة الأدوات</h2>
+
+                  <ListOfBlock tags={this.state.tags} />
+                </div>
+              </div>
+              <hr />
+              <div className="row justify-content-center ">
+                <div className="col-6 building-board-area my-3 mr-2 card">
+                  <h2 className="p-1 tool">منطقة البناء</h2>
+                  <BuildingBoard
+                    putTagBack={this.putTagBack}
+                    blocks={this.props.buildingBlocks}
+                  />
+                </div>
+                <div className="col-6 preview-borad-area my-3 ml-2 card">
+                  <h2 className="p-1 tool">شاشة العرض</h2>
+                  <PreviewBorad
+                    level={this.state.level}
+                    buildingBlocks={this.props.buildingBlocks}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="col-6 preview-borad-area my-3 ml-2">
-              {/* <h2 className="mt-3">شاشة العرض</h2> */}
-              <PreviewBorad
-                level={this.state.level}
-                buildingBlocks={this.props.buildingBlocks}
-              />
-            </div>
-          </div>
+          </DragDropContext>
         </div>
-      </DragDropContext>
+      </div>
     );
   }
 }
