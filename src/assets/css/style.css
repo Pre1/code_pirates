@@ -237,6 +237,7 @@ img.island3:hover {
   height: 665px;
   max-height: 665px;
   margin-left: 6px;
+  overflow: scroll;
 }
 
 .building-container {

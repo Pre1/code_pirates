@@ -176,7 +176,8 @@ class Instruction extends Component {
       ReactTooltip.show(findDOMNode(this.refs.instruct));
 
       setTimeout(() => {
-        ReactTooltip.hide(findDOMNode(this.refs.instruct));
+        // if you want to manully hide it, use this carrrrrfuly please!
+        // ReactTooltip.hide(findDOMNode(this.refs.instruct));
 
         this.setState({
           currentInstruct: currentInstruct + 1
@@ -218,8 +219,8 @@ class Instruction extends Component {
             data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
             ref="instruct"
-            data-place="top"
-            // data-offset="{'left': -30, 'top': -50}"
+            data-place="right"
+            data-offset="{'left': 40, 'top': 50}"
             data-event="focus"
             data-for="instructBird"
             // data-tip
