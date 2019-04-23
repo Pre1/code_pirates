@@ -29,7 +29,9 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
 
             <Route exact path="/level/content" component={Content} />
+
             <Route path="/level/:levelID" component={Playarea} />
+
             <Route path="/levels" component={LevelList} />
             <Redirect to="/levels" />
           </Switch>

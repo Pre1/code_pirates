@@ -7,7 +7,7 @@ class LevelCard extends Component {
   render() {
     const { level, name } = this.props;
     return (
-      <div className="card img-level col-4 mt-3 mr-3">
+      <div className=" img-level col-3 mt-3 mr-3">
         <div className="image m-3">
           <img
             className="card-img-top img-fluid"
@@ -18,7 +18,7 @@ class LevelCard extends Component {
         </div>
         <div className="card-body">
           <div className="row justify-content-center">
-            <button className="col-5 btn-light green-btn ml-4">
+            <button className="col-5 btn green-btn ml-4">
               <Link
                 to={level.isAvailable && `/level/${level.id}`}
                 style={{ color: "#fff", textDecoration: "none" }}
@@ -26,7 +26,7 @@ class LevelCard extends Component {
                 ابدأ التحدي
               </Link>
             </button>
-            <button className="col-2 btn-light ml-4">
+            <button className="col-2 btn btn-warning">
               <Link
                 to={level.isAvailable && `/level/content`}
                 style={{ color: "#fff", textDecoration: "none" }}

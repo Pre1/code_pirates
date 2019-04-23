@@ -2,11 +2,10 @@ import React, { Component } from "react";
 
 import { withRouter } from "react-router-dom";
 import { findDOMNode } from "react-dom";
-import { Button } from "react-bootstrap";
 
 import ReactTooltip from "react-tooltip";
-import assistant from "../../../assets/images/pirateBird.png";
-import barrel from "../../../assets/images/barrel.png";
+import assistant from "../../../assets/images/parrot.png";
+// import barrel from "../../../assets/images/barrel.png";
 
 import * as actionCreators from "../../../store/actions";
 
@@ -103,7 +102,7 @@ class Instruction extends Component {
           <img
             id="instructBird"
             src={assistant}
-            style={{ width: "100%", marginTop: "15%" }}
+            style={{ width: "140%", top: "130%", left: "90%" }}
             // data-tip="أهلا بالقرصان الصغير"
             data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
@@ -113,6 +112,7 @@ class Instruction extends Component {
             data-event="focus"
             data-for="instructBird"
             // data-tip
+            className="animatedCardBird"
           />
           <ReactTooltip
             id="instructBird"
@@ -129,7 +129,7 @@ class Instruction extends Component {
             // ]}
           />
 
-          <img
+          {/* <img
             src={barrel}
             className="flex"
             style={{
@@ -140,7 +140,7 @@ class Instruction extends Component {
             }}
             data-tip="أهلا بالقرصان الصغير"
             alt="pirateBird-instruct"
-          />
+          /> */}
         </div>
       </div>
     );

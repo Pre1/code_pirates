@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import boat from "../../../assets/images/Pirate Ship & Pirates.png";
 // import boat from "../../../assets/images/boat.png";
 // import cloud from "../../../assets/images/Cloud blue.png";
-import Pirate from "../../../assets/images/Pirate 1.png";
+// import Pirate from "../../../assets/images/Pirate 1.png";
 
 class LevelOne extends Component {
   state = {

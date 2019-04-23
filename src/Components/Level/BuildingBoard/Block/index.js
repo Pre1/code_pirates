@@ -30,8 +30,8 @@ class Block extends Component {
         className="card-body"
         style={{
           maxWidth: "300px",
-          background: "#f08080",
-          border: "3px solid #e96565",
+          backgroundColor: "#ffffff",
+          backgroundImage: "linear-gradient(315deg, #ffffff 0%, #82bc23 74%)",
           borderRadius: "10px"
         }}
       >
@@ -44,9 +44,10 @@ class Block extends Component {
             >
               <button
                 style={{
-                  background: "lightpink",
                   color: "white",
-                  border: "3px solid #e96565",
+                  backgroundColor: "#bc6f03",
+                  backgroundImage:
+                    "linear-gradient(315deg, #bc6f03 0%, #874000 74%)",
                   borderRadius: "10px"
                 }}
                 onClick={() => this.deleteBlock(tag)}
@@ -63,9 +64,9 @@ class Block extends Component {
                   className="card-body"
                   style={{
                     maxWidth: "300px",
-                    background: "#e96565",
-                    border: "3px solid #e96565",
-                    borderRadius: "10px"
+                    backgroundColor: "#bc6f03",
+                    backgroundImage:
+                      "linear-gradient(315deg, #bc6f03 0%, #874000 74%)"
                   }}
                 >
                   {tag.children.map((child, cindex) => {

@@ -1,14 +1,13 @@
 import * as actionTypes from "../actions/types";
 
 // for testing
-import pirateBird from "../../assets/images/pirateBird.png";
 import unlockedLevel from "../../assets/images/unlockedLevel.png";
 
 const initialState = {
   levels: [
     {
       id: 1,
-      name: "أساسيات الجزيزة",
+      name: "أساسيات الجزيرة",
       imageUrl: unlockedLevel,
 
       goals: ["HTML", "Head", "Title", "Body"],
