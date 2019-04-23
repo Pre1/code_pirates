@@ -1,7 +1,6 @@
 import * as actionTypes from "../actions/types";
 
 // for testing
-import pirateBird from "../../assets/images/pirateBird.png";
 import unlockedLevel from "../../assets/images/unlockedLevel.png";
 
 const initialState = {
