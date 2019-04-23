@@ -1,5 +1,8 @@
 import * as actionTypes from "../actions/types";
 
+// Content
+import * as Contents from "../../Components/Level/CoursesContent/contentData.js";
+
 // Images
 import barrel from "../../assets/images/barrel.png";
 import unlockedLevel from "../../assets/images/unlockedLevel.png";
@@ -32,42 +35,7 @@ const initialState = {
             { id: "body", content: "<body> </body>", tip: "الجسم" },
             { id: "title", content: "<title> </title>", tip: "العنوان" }
           ],
-          content: `
-          ## لماذا نتعلم HTML ؟
-          
-          HTML هي أساس كل لغات تطوير الويب، وبدونها لن نكون قادرين على التعامل مع النصوص والصور والفيديوهات على صفحات الويب. تعتبر HTML لغة وصفية لأنها تصف مكونات صفحات الويب عن طريق الوسوم Tags، وهي بداية كل شي تحتاج لتعلمه لتستطيع برمجة صفحات ويب جذابة.
-          
-          
-          ## ماهي الوسوم Tags ؟
-          
-          الوسوم Tags هي مجموعة من العناصر يتم استخدامها لعرض محتوى الصفحة والتأثير عليه.
-          
-          
-          ## الهيكل العام لصفحات الويب
-          
-          هكذا يبدو الهيكل العام لأي صفحة ويب على شبكة الانترنت.
-          
-          \`\`\`html
-          <DOCTYPE html!>
-          <html>
-          
-          <head>
-          <title/>عنوان الصفحة<title>
-          <head/>
-          
-          <body>
-          <p/>أهلا وسهلا<p>
-          <body/>
-          
-          <html/>
-          \`\`\`
-              
-          - يقوم الوسم <DOCTYPE html!> بتعريف نوع الصفحة ليسهل على المتصفح عرض صفحات HTML عرضا صحيحا.
-          - <html> </html> هو الوسم الرئيسي في كل صفحة ويب ويحتوي على جميع الوسوم Tags بداخله، بين بداية الوسم <html> ونهاية الوسم <html/>.
-          - الوسم <head> </head> يحتوي على معلومات وتعاريف الصفحة كما يحتوي بداخله على الوسم <title> </title> والذي يمثل عنوان الصفحة الذي يتم عرضه في المتصفح.
-          - الوسم <title> </title> يجب أن يكون مُضمّنا داخل وسم <head> </head>
-          - الوسم <body> </body> يحتوي على كل العناصر المعروضة في الصفحة، ويجب إضافة كل الوسوم التي نرغب بعرضها في صفحة الويب داخل الوسم  كما فعلنا مع الوسم <p></p>
-          `,
+          content: Contents,
           isAvailable: true,
           isPass: false
         },
