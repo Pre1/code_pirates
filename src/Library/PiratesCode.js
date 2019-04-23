@@ -197,9 +197,9 @@ class HTMLBlock extends Block {
 
   compile(className = "HTMLPiratesCode") {
     return `
-      <$div className="${className}">
+      <div className="${className}">
         ${this.children.map(child => child.compile()).join("")}
-      </$div>`;
+      </div>`;
   }
 
   jsxCompile(className = "HTMLPiratesCode") {
@@ -221,9 +221,9 @@ class HeadBlock extends Block {
 
   compile(className = "HeaderPiratesCode") {
     return `
-      <$div className="${className}">
+      <div className="${className}">
         ${this.children.map(child => child.compile()).join("")}
-      </$div>`;
+      </div>`;
   }
 
   jsxCompile(className = "HeaderPiratesCode") {
@@ -245,9 +245,9 @@ class BodyBlock extends Block {
 
   compile(className = "BodyPiratesCode") {
     return `
-      <$div className="${className}">
+      <div className="${className}">
         ${this.children.map(child => child.compile()).join("")}
-      </$div>`;
+      </div>`;
   }
 
   jsxCompile(className = "BodyPiratesCode") {
@@ -266,14 +266,14 @@ class TitleBlock extends Block {
     this.name = `title`;
   }
 
-  compile(className = "BodyPiratesCode") {
+  compile(className = "TitlePiratesCode") {
     return `
-      <$div className="${className}">
+      <div className="${className}">
         ${this.children.map(child => child.compile()).join("")}
-      </$div>`;
+      </div>`;
   }
 
-  jsxCompile(className = "BodyPiratesCode") {
+  jsxCompile(className = "TitlePiratesCode") {
     return (
       <div className={className}>
         {this.children.map(child => child.jsxCompile())}

@@ -41,36 +41,54 @@ class Instruction extends Component {
     lvlInstruct: [],
 
     currentInstruct: 0,
+
+    // just for testing, it'll be removed later
     next: false
   };
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (nextProps.lvlInstruction[0] === this.props.lvlInstruction[0]) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
   async componentDidMount() {
     let id = this.props.match.params.levelID;
-    ReactTooltip.rebuild();
+    // ReactTooltip.rebuild();
 
     await this.props.getGoals(id);
 
+    let goals = this.props.goals;
+    console.log("TCL: Instruction -> componentDidMount -> goals", goals);
+
+    let { overlay, lvlInstruction } = await this.props;
     console.log(
-      "TCL: Instruction -> lvlInstruct",
-      this.props.currentInstruction
+      "TCL: Instruction -> componentDidMount -> lvlInstruction",
+      lvlInstruction
     );
 
-    let goals = this.props.goals;
-
-    if (!this.props.overlay) {
+    if (!overlay) {
       ReactTooltip.show(findDOMNode(this.refs.instruct));
       setTimeout(() => {
         ReactTooltip.hide(findDOMNode(this.refs.instruct));
 
+        let initial = [
+          "أهلا بالقرصان الصغير",
+          "ابدا اللعبة",
+          " ضع القطع المناسبة في مكانها!"
+        ];
+
         this.setState(prevState => ({
-          currentInstruct: prevState.currentInstruct,
-          next: !prevState.next
+          // instruct: [...initial, ...lvlInstruction],
+          instruct: lvlInstruction,
+          currentInstruct: prevState.currentInstruct
         }));
       }, 4000);
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     let prevBuildingBlks = prevProps.buildingBlocks;
     let currentBuildingBlks = this.props.buildingBlocks;
 
@@ -81,63 +99,96 @@ class Instruction extends Component {
       currentBuildingBlks.map(elm => elm.compile()).join("")
     );
 
-    let { overlay } = this.props;
+    console.log(
+      "TCL: Instruction -> componentDidUpdate -> curStrHTML",
+      curStrHTML
+    );
+
+    let { overlay, lvlInstruction } = await this.props;
+
+    console.log(
+      "TCL: Instruction -> componentDidUpdate -> lvlInstruction",
+      lvlInstruction
+    );
     let { instruct, currentInstruct, next } = this.state;
 
-    let goals = compactWhitespace(this.props.goals);
-    if (prevStrHTML !== curStrHTML && goals !== curStrHTML) {
-      let { critics } = this.state;
-      let say = critics.getRandom();
+    // let goals = compactWhitespace(this.props.goals);
+
+    // if (prevStrHTML !== curStrHTML && goals !== curStrHTML) {
+    //   let { critics } = this.state;
+    //   let say = critics.getRandom();
+    //   this.setState({
+    //     instruct: [say],
+    //     currentInstruct: 0
+    //   });
+    // }
+
+    // if (goals) {
+    //   if (goals === curStrHTML) {
+    //     this.props.resetGoals();
+
+    //     this.setState({
+    //       instruct: ["آحسنت لقد اجتزت المرحلة!"],
+    //       currentInstruct: 0
+    //     });
+    //   }
+    // }
+
+    // check if the overlay is dism
+    // if (!overlay && !next) {
+    //   this.setState({ next: true });
+    // }
+
+    if (prevProps.lvlInstruction[0] !== lvlInstruction[0]) {
+      console.log("Instruction =====================================");
+      console.log(
+        "TCL: Instruction -> componentDidUpdate -> prevProps.lvlInstruction[0]",
+        prevProps.lvlInstruction
+      );
+
+      console.log(
+        "TCL: Instruction -> componentDidUpdate -> lvlInstruction",
+        lvlInstruction
+      );
+      console.log("Instruction =====================================");
+
       this.setState({
-        instruct: [say],
+        instruct: lvlInstruction,
         currentInstruct: 0
       });
     }
-
-    if (goals) {
-      if (goals === curStrHTML) {
-        this.props.resetGoals();
-
-        this.setState({
-          instruct: ["آحسنت لقد اجتزت المرحلة!"],
-          currentInstruct: 0
-        });
-      }
-    }
-
-    // check if the overlay is dism
-    if (!overlay && !next) {
-      this.setState({ next: true });
-    }
-
     // The initial Instructions for the Level
     // or you if you want to pass multiple sentences in
     if (
-      next &&
+      !overlay &&
       instruct[currentInstruct] &&
       currentInstruct <= instruct.length
     ) {
+      console.log(
+        "TCL: Instruction -> componentDidUpdate -> currentInstruct",
+        currentInstruct
+      );
+
+      console.log(
+        "TCL: Instruction -> componentDidUpdate -> instruct[currentInstruct]",
+        instruct[currentInstruct]
+      );
       ReactTooltip.show(findDOMNode(this.refs.instruct));
 
       setTimeout(() => {
         ReactTooltip.hide(findDOMNode(this.refs.instruct));
 
-        this.setState(prevState => ({
-          currentInstruct: prevState.currentInstruct + 1,
-          next: true
-        }));
-      }, 3000);
+        this.setState({
+          currentInstruct: currentInstruct + 1
+        });
+      }, 4000);
     }
-
-    // for testing
-    if (prevBuildingBlks.length !== currentBuildingBlks.length) {
-      //   let newStruct = instruct.slice();
-      //   newStruct.splice(currentInstruct, 0, "add a new Block yay");
-      //   this.setState({
-      //     instruct: ["add a new Block yay"],
-      //     currentInstruct: 0
-      //   });
-    }
+    // else if (next && currentInstruct >= instruct.length) {
+    //   this.setState({
+    //     instruct: lvlInstruction,
+    //     currentInstruct: 0
+    //   });
+    // }
   }
 
   toggleTip = () => {
@@ -176,8 +227,8 @@ class Instruction extends Component {
           />
           <ReactTooltip
             id="instructBird"
-            afterShow={e => console.log("img img img", e)}
-            afterHide={e => console.log("img img img", e)}
+            // afterShow={}
+            // afterHide={}
             // place="left"
             // offset={{ left: -50, top: 110 }}
 
@@ -209,7 +260,7 @@ const mapStateToProps = state => {
   return {
     buildingBlocks: state.mainReducer.buildingBlocks,
     goals: state.levelsReducer.currentGoals,
-    currentInstruction: state.levelsReducer.currentInstruction
+    lvlInstruction: state.levelsReducer.currentInstruction
   };
 };
 
