@@ -1,35 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import pirateBird from "../../assets/images/pirateBird.png";
 
 // Components
 import LevelCard from "./LevelCard";
 
 class LevelList extends Component {
   render() {
-    let levels = this.props.levels;
+    let selectedCourseId = this.props.match.params.courseID;
+    let currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
 
-    console.log("TCL: LevelList -> render -> levels", levels);
+    console.log("TCL: LevelList -> render -> currentCourse", currentCourse);
 
-    const levelCards = levels.map(lvl => (
-      <LevelCard key={lvl.id} level={lvl} name={lvl.name} />
+    const levelCards = currentCourse.levels.map(lvl => (
+      <LevelCard key={lvl.id} courseId={selectedCourseId} level={lvl} />
     ));
 
     return (
-      <div className="my-2 levels">
-        <div className="">
-          <h2
-            className=" mt-4"
-            style={{
-              color: `${this.props.lang[0].titleColor}`,
-              fontSize: "90px"
-            }}
-          >
-            {this.props.lang[0] && this.props.lang[0].name}
-          </h2>
-        </div>
-
-        <div className="row justify-content-center ">{levelCards}</div>
+      <div className="my-2">
+        <h2
+          className="mb-4"
+          style={{
+            color: `${this.props.courses[selectedCourseId - 1].titleColor}`,
+            fontSize: "60px"
+          }}
+        >
+          {this.props.courses[selectedCourseId - 1] &&
+            this.props.courses[selectedCourseId - 1].name}
+        </h2>
+        <div className="row justify-content-center">{levelCards}</div>
         <br />
       </div>
     );
@@ -38,8 +38,7 @@ class LevelList extends Component {
 
 const mapStateToProps = state => {
   return {
-    lang: state.languagesReducer.lang,
-    levels: state.levelsReducer.levels
+    courses: state.coursesReducer.courses
   };
 };
 
