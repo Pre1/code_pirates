@@ -68,8 +68,7 @@ img.island {
   margin: 40px;
 }
 img.island:hover {
-  /* filter: brightness(100%); */
-  transform: scale(1.2);
+  -webkit-animation: scale-up-center 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 img.island2 {
   width: 10%;
@@ -336,6 +335,14 @@ img.island3:hover {
 @-webkit-keyframes mike-float {
   50% {
     -webkit-transform: rotateZ(5deg) translateY(-5px);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
   }
 }
 .Pirate {
