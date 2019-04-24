@@ -7,7 +7,7 @@ import * as Blocks from "../../../Library/PiratesCode";
 
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions";
-import LevelOne from "../LevelOne";
+import Level from "../Level";
 
 class PreviewBoard extends Component {
   state = {
@@ -45,12 +45,13 @@ class PreviewBoard extends Component {
   };
 
   render() {
-    // let level = <LevelOne />;
     let level;
     switch (this.props.level.id) {
       case 1:
         level = (
-          <LevelOne
+          <Level
+            level={this.props.level}
+            tags={this.props.tags}
             buildingBlocks={this.props.buildingBlocks}
             setTag={this.setTag}
             levelSearchTree={this.levelSearchTree}

@@ -29,6 +29,14 @@ const initialState = {
 
           goalsList: ["HTML", "Head", "Title", "Body"],
 
+          /*******IMPORTANT CHANGE*******/
+          classNameForTag: {
+            html: "firstLevelHTML",
+            head: "firstLevelHead",
+            body: "firstLevelBody",
+            title: "firstLevelTitle"
+          },
+          /******************************/
           tags: [
             { id: "html", content: "<html> </html>", tip: "الحاوية" },
             { id: "head", content: "<head> </head>", tip: "الرأس" },
@@ -45,6 +53,14 @@ const initialState = {
           imageUrl: unlockedLevel,
           goals: ``,
           goalsList: [],
+          classNameForTag: {
+            h1: "secondLevelH1",
+            h2: "secondLevelH2",
+            h3: "secondLevelH3",
+            h4: "secondLevelH4",
+            h5: "secondLevelH5",
+            h6: "secondLevelH6"
+          },
           tags: [
             { id: "h1", content: "<h1> </h1>", tip: "h1" },
             { id: "h2", content: "<h2> </h2>", tip: "h2" },
@@ -63,6 +79,10 @@ const initialState = {
           imageUrl: unlockedLevel,
           goals: ``,
           goalsList: [],
+          classNameForTag: {
+            img: "thirdLevelImage",
+            imgMove: "thirdLevelImageMove"
+          },
           tags: [{ id: "img", content: "<img />", tip: "img" }],
           content: ``,
           isAvailable: false,
@@ -73,6 +93,11 @@ const initialState = {
           name: "أوامر القبطان",
           imageUrl: unlockedLevel,
           goals: ["ol", "ul", "li"],
+          classNameForTag: {
+            ol: "FourthLevelOl",
+            ul: "FourthLevelUl",
+            li: "FourthLevelLi"
+          },
           tags: [
             { id: "ol", content: "<ol> </ol>", tip: "ol" },
             { id: "ul", content: "<ul> </ul>", tip: "ul" },
@@ -87,6 +112,13 @@ const initialState = {
           name: "التجهيز للحرب",
           imageUrl: unlockedLevel,
           goals: ["hr", "br", "em", "strong", "small"],
+          classNameForTag: {
+            HR: "FifthLevelHR",
+            BR: "FifthLevelBR",
+            EM: "FifthLevelEM",
+            Strong: "FifthLevelStrong",
+            Small: "FifthLevelSmall"
+          },
           tags: [
             { id: "hr", content: "<hr />", tip: "hr" },
             { id: "br", content: "<br />", tip: "br" },
