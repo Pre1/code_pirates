@@ -29,10 +29,27 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
 
+            <Route
+              exact
+              path="/course/:courseID/level/:levelID/content"
+              component={Content}
+            />
+            {/* ***** Should delete the following Route ***** */}
             <Route exact path="/level/content" component={Content} />
+
+            <Route
+              path="/course/:courseID/level/:levelID"
+              component={Playarea}
+            />
+            {/* ***** Should delete the following Route ***** */}
             <Route path="/level/:levelID" component={Playarea} />
 
+            <Route path="/course/:courseID" component={LevelList} />
+            {/* ***** Should delete the following Route ***** */}
             <Route path="/levels" component={LevelList} />
+
+            <Redirect to="/" />
+            {/* ***** Should delete the following Route ***** */}
             <Redirect to="/levels" />
           </Switch>
         </div>

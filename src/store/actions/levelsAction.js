@@ -1,3 +1,5 @@
+// ***** Should delete this file ***** //
+
 import * as actionTypes from "./types";
 
 export const finishLvl = id => {

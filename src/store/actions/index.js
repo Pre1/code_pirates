@@ -4,6 +4,7 @@ export {
   deleteBlock
 } from "./mainActions";
 
+// ***** Should activate it ***** //
 // export {
 //   finishLvl,
 //   getLevelGoals,
@@ -12,6 +13,7 @@ export {
 //   setLevelInstruction
 // } from "./coursesActions";
 
+// ***** Should delete it ***** //
 export {
   finishLvl,
   getLevelGoals,
