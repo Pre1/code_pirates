@@ -14,17 +14,15 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
 import mainReducer from "./store/reducers/mainReducer";
+import coursesReducer from "./store/reducers/coursesReducer";
 import levelsReducer from "./store/reducers/levelsReducer";
-import languagesReducer from "./store/reducers/languagesReducer";
-import gameLevelReducer from "./store/reducers/gameLevelReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   mainReducer: mainReducer,
-  levelsReducer: levelsReducer,
-  languagesReducer: languagesReducer,
-  gameLevelReducer: gameLevelReducer
+  coursesReducer: coursesReducer,
+  levelsReducer: levelsReducer
 });
 
 const store = createStore(
