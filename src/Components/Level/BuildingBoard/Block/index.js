@@ -13,20 +13,12 @@ class Block extends Component {
       this.setState({ bb: this.props.buildingBlocks });
     }
   };
-  deleteBlock = block => {
-    console.log(
-      "TCL: Block -> this.props.buildingBlocksssss",
-      this.props.buildingBlocks
-    );
-    let newBB = this.props.buildingBlocks.slice();
-    console.log("TCL: Block -> newBB", newBB);
-    let BB = { children: newBB, id: "building" };
-    console.log("TCL: Block -> BB", BB);
-    this.props.searchTreeDelete(BB, block.id);
-    console.log("TCL: Block -> newBBA AFTER", newBB);
-    this.props.onSetBB(newBB);
 
-    // this.props.onDeleteBlock(block);
+  deleteBlock = block => {
+    let newBB = this.props.buildingBlocks.slice();
+    let BB = { children: newBB, id: "building" };
+    this.props.searchTreeDelete(BB, block.id);
+    this.props.onSetBB(newBB);
   };
 
   render() {

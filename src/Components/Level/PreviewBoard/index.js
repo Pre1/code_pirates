@@ -20,10 +20,11 @@ class PreviewBoard extends Component {
       this.setState({ buildingBlocks: this.props.buildingBlocks });
     }
   };
-
+  // goes somewhere
   levelSearchTree = (block, name) => {
     if (block.name === name) {
       this.setState({ answer: this.state.answer.concat(name) });
+      // return obj
       return block;
     } else if (block.children.length) {
       let i;
@@ -37,6 +38,7 @@ class PreviewBoard extends Component {
   };
 
   setTag = (bb, name) => {
+    // check if  the block is already added
     if (!this.state.buildingBlocks.find(block => block.name === name)) {
       return this.levelSearchTree(bb, name);
     }

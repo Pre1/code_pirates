@@ -11,13 +11,14 @@ class LevelOne extends Component {
     buildingBlocks: [],
     instructions: [
       ["ضع <html> في منطقة البناء"],
-      ["ضع <body> في <html>"],
       ["ضع <head> في <html>"],
+      ["ضع <body> في <html>"],
       ["ضع <title> في <head>"],
       [" لقد فزت!!"]
     ],
     currentInstruction: [],
-    steps: []
+    userSteps: [],
+    expectedSteps: ["html", "head", "body", "title"]
   };
 
   setView = () => {
@@ -30,48 +31,35 @@ class LevelOne extends Component {
       title = this.props.setTag(bb, "title");
 
       const { currentInstruction } = this.state;
+
       if (html) {
         // checks if i have the step done or not
-        if (!this.state.steps.includes(currentInstruction)) {
+        if (!this.state.userSteps.includes(currentInstruction)) {
           // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
           this.setState({
-            steps: this.state.steps.concat(currentInstruction),
+            userSteps: this.state.userSteps.concat("html"),
             currentInstruction: this.state.instructions[1]
           });
           this.props.onSetInstruction(this.state.instructions[1]);
         }
-        this.setState({
-          // head: "head",
-          active: "border"
-        });
-      }
-
-      if (body) {
-        if (!this.state.steps.includes(currentInstruction)) {
-          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+        if (!this.props.buildingBlocks.find(bb => bb.name === "html")) {
+          this.props.onSetInstruction(["NOOOO"]);
+        } else {
           this.setState({
-            steps: this.state.steps.concat(currentInstruction),
-            currentInstruction: this.state.instructions[2]
+            // head: "head",
+            active: "border"
           });
-          this.props.onSetInstruction(this.state.instructions[2]);
         }
-        this.setState({
-          active: "waves"
-        });
-      } else if (!body) {
-        this.setState({
-          active: ""
-        });
       }
 
       if (head) {
-        if (!this.state.steps.includes(currentInstruction)) {
+        if (!this.state.userSteps.includes(currentInstruction)) {
           // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
           this.setState({
-            steps: this.state.steps.concat(currentInstruction),
-            currentInstruction: this.state.instructions[3]
+            userSteps: this.state.userSteps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[2]
           });
-          this.props.onSetInstruction(this.state.instructions[3]);
+          this.props.onSetInstruction(this.state.instructions[2]);
         }
         this.setState({
           head: "head"
@@ -82,11 +70,31 @@ class LevelOne extends Component {
         });
       }
 
-      if (title) {
-        if (!this.state.steps.includes(currentInstruction)) {
+      if (body) {
+        if (!this.state.userSteps.includes(currentInstruction)) {
           // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
           this.setState({
-            steps: this.state.steps.concat(currentInstruction),
+            userSteps: this.state.userSteps.concat(currentInstruction),
+            currentInstruction: this.state.instructions[3]
+          });
+          this.props.onSetInstruction(this.state.instructions[3]);
+        }
+        this.setState({
+          active: "waves"
+        });
+      } else if (!body) {
+        this.setState({
+          active: ""
+        });
+      }
+
+      if (title) {
+        console.log("TCL: LevelOne -> setView -> title", title);
+
+        if (!this.state.userSteps.includes(currentInstruction)) {
+          // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+          this.setState({
+            userSteps: this.state.userSteps.concat(currentInstruction),
             currentInstruction: this.state.instructions[4]
           });
           this.props.onSetInstruction(this.state.instructions[4]);
@@ -120,6 +128,12 @@ class LevelOne extends Component {
   };
 
   componentDidUpdate = prevProps => {
+    console.log("TCL: LevelOne -> prevProps", prevProps);
+
+    console.log(
+      "TCL: LevelOne -> this.props.buildingBlocks",
+      this.props.buildingBlocks
+    );
     if (prevProps.buildingBlocks !== this.props.buildingBlocks) {
       this.setState({ buildingBlocks: this.props.buildingBlocks });
       this.setView();
