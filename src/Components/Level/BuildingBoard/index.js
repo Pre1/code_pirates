@@ -6,7 +6,8 @@ import * as Blocks from "../../../Library/PiratesCode";
 import * as actionCreators from "../../../store/actions";
 class BuildingBoard extends Component {
   state = {
-    blocks: this.props.blocks
+    blocks: this.props.blocks,
+    enableDrop: false
   };
   componentDidUpdate = prevProps => {
     if (prevProps.blocks !== this.props.blocks) {
@@ -14,6 +15,7 @@ class BuildingBoard extends Component {
     }
   };
 
+  // move to lib
   searchTreeDelete = (block, blockID) => {
     const blockObj = block.children.find(c => c.id === blockID);
     if (blockObj) {
@@ -31,6 +33,7 @@ class BuildingBoard extends Component {
     return null;
   };
 
+  // move to lib
   searchTreeText = (block, blockID, newText) => {
     if (block.id === blockID) {
       block.children.splice(
@@ -53,7 +56,10 @@ class BuildingBoard extends Component {
   render() {
     return (
       <div className="m-3 building-container">
-        <Droppable droppableId="building">
+        <Droppable
+          droppableId="building"
+          isDropDisabled={this.state.enableDrop}
+        >
           {provided => (
             <div
               ref={provided.innerRef}

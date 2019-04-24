@@ -8,36 +8,27 @@ import * as actionTypes from "../../../store/actions";
 import { connect } from "react-redux";
 
 class ListOfBlock extends Component {
-  // onDragEnd = result => {
-  //   const { destination, source, draggableId } = result;
-
-  //   if (!destination) {
-  //     return;
-  //   }
-
-  //   if (destination.droppableId === source.droppableId) {
-  //     return;
-  //   }
-  // };
-
   state = {
     tags: []
   };
+
   componentDidMount = () => {
     this.setState({
       tags: this.props.tags
     });
   };
+
   componentDidUpdate = prevProps => {
-    if (prevProps.tags !== this.props.tags)
+    if (prevProps.tags !== this.props.tags) {
       this.setState({
         tags: this.props.tags
       });
+    }
   };
+
   render() {
-    console.log("ListOfBlocks", this.props.tags);
+    console.log("ListOfBlocks -> mount", this.state.tags);
     return (
-      // <DragDropContext onDragEnd={this.onDragEnd}>
       <Droppable droppableId="list" direction="horizontal">
         {provided => (
           <div
@@ -47,7 +38,11 @@ class ListOfBlock extends Component {
           >
             {this.state.tags &&
               this.state.tags.map((tag, index) => (
-                <Draggable draggableId={tag.id} index={index} key={tag.id}>
+                <Draggable
+                  draggableId={`${tag.id}-${index}`}
+                  index={index}
+                  key={tag.id}
+                >
                   {provided => (
                     <div
                       className="alert tag-block mr-4 "
@@ -66,7 +61,6 @@ class ListOfBlock extends Component {
           </div>
         )}
       </Droppable>
-      // </DragDropContext>
     );
   }
 }

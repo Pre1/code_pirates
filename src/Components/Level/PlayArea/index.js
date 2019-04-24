@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ListOfBlock from "../ListOfBlock";
+import ListOfTags from "../ListOfBlock";
 import BuildingBoard from "../BuildingBoard";
 import PreviewBorad from "../PreviewBoard";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -35,11 +35,10 @@ class PlayArea extends Component {
     overlay: false,
     level: {},
     tags: [],
-    allTags: this.props.levels.find(
-      lvl => lvl.id === +this.props.match.params.levelID
-    ).tags
+    allTags: []
   };
 
+  // put inside library
   searchTree = (block, blockID, newBlock) => {
     /*  
     check if the block id from the object is the same as the one we're dropping into
@@ -63,18 +62,15 @@ class PlayArea extends Component {
     return null;
   };
 
+  // puts tag back after it's deleted
   putTagBack = tag => {
-    console.log("TCL: PlayArea -> tag", tag);
-
-    console.log(
-      "TCL: PlayArea -> this.state.allTags.find(t => t.id === tag)",
-      this.state.allTags
-    );
+    console.log("TCL: PlayArea -> tags", this.state.allTags);
     this.setState({
       tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag))
     });
   };
 
+  // the meat
   onDragEnd = result => {
     const { destination, source, draggableId } = result;
 
@@ -85,10 +81,6 @@ class PlayArea extends Component {
     if (destination.droppableId === source.droppableId) {
       return;
     }
-    // console.log(
-    //   "TCL: PlayArea -> destination.droppableId",
-    //   destination.droppableId
-    // );
 
     if (
       destination.droppableId === source.droppableId &&
@@ -98,42 +90,40 @@ class PlayArea extends Component {
     }
 
     let newBlock;
-    switch (draggableId) {
+    switch (draggableId.split("-")[0]) {
       case "p":
         newBlock = new Blocks.PBlock(
           [new Blocks.TextBlock("صغير بس فنان")],
-          `p-${this.props.buildingBlocks.length}`
+          draggableId
         );
+
         break;
       case "h1":
         newBlock = new Blocks.H1Block(
           [new Blocks.TextBlock("رهييب")],
-          `h1-${this.props.buildingBlocks.length}`
+          draggableId
         );
         break;
       case "html":
-        newBlock = new Blocks.HTMLBlock(
-          [],
-          `html-${this.props.buildingBlocks.length}`
-        );
+        newBlock = new Blocks.HTMLBlock([], draggableId);
         break;
       case "head":
-        newBlock = new Blocks.HeadBlock(
-          [],
-          `head-${this.props.buildingBlocks.length}`
-        );
+        if (destination.droppableId.split("-")[0] === "html") {
+          newBlock = new Blocks.HeadBlock([], draggableId);
+        }
         break;
       case "body":
-        newBlock = new Blocks.BodyBlock(
-          [],
-          `body-${this.props.buildingBlocks.length}`
-        );
+        if (destination.droppableId.split("-")[0] === "html") {
+          newBlock = new Blocks.BodyBlock([], draggableId);
+        }
         break;
       case "title":
-        newBlock = new Blocks.TitleBlock(
-          [new Blocks.TextBlock()],
-          `title-${this.props.buildingBlocks.length}`
-        );
+        if (destination.droppableId.split("-")[0] === "head") {
+          newBlock = new Blocks.TitleBlock(
+            [new Blocks.TextBlock()],
+            draggableId
+          );
+        }
         break;
       case "img":
         newBlock = new Blocks.ImgBlock();
@@ -141,26 +131,47 @@ class PlayArea extends Component {
       default:
         console.error(`draggableId: ${draggableId} is NOT Implemented!!`);
     }
+    if (newBlock) {
+      if (destination.droppableId === "building") {
+        const noNos = ["title", "text", "body", "head"];
+        if (!noNos.includes(newBlock.name)) {
+          // remove the tag from the tags list
+          this.state.tags.splice(
+            this.state.tags.indexOf(
+              this.state.tags.find(tag => tag.id === draggableId.split("-")[0])
+            ),
+            1
+          );
 
-    if (destination.droppableId === "building") {
-      this.state.tags.splice(
-        this.state.tags.indexOf(
-          this.state.tags.find(tag => tag.id === draggableId)
-        ),
-        1
-      );
-      this.props.onAddBlock(newBlock);
-    } else {
-      let newBB = this.props.buildingBlocks.slice();
-      let BB = { children: [...newBB], id: "building" };
-      this.searchTree(BB, destination.droppableId, newBlock);
-      this.state.tags.splice(
-        this.state.tags.indexOf(
-          this.state.tags.find(tag => tag.id === draggableId)
-        ),
-        1
-      );
-      this.props.onSetBB(newBB);
+          console.log("TCL: PlayArea -> case title newBlock", newBlock);
+          // add block
+          this.props.onAddBlock(newBlock);
+        }
+      } else {
+        let newBB = this.props.buildingBlocks.slice();
+        let BB = { children: [...newBB], id: "building" };
+        this.searchTree(BB, destination.droppableId, newBlock);
+        console.log(
+          "TCL: PlayArea -> case title droppableId -> BB",
+          destination.droppableId,
+          BB
+        );
+
+        // remove the tag
+        this.state.tags.splice(
+          this.state.tags.indexOf(
+            this.state.tags.find(tag => tag.id === draggableId.split("-")[0])
+          ),
+          1
+        );
+        // reset the list
+        this.props.onSetBB(newBB);
+
+        console.log(
+          "TCL: PlayArea -> case title this.props.buildingBlocks",
+          this.props.buildingBlocks
+        );
+      }
     }
   };
 
@@ -176,49 +187,81 @@ class PlayArea extends Component {
   };
 
   componentDidMount = () => {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    const tags = [...currentLevel.tags];
+    // console.log("TCL: PlayArea -> componentDidMount -> tags", tags);
+
     this.setState({
-      level: this.props.levels.find(
-        lvl => lvl.id === +this.props.match.params.levelID
-      ),
-      tags: [
-        ...this.props.levels.find(
-          lvl => lvl.id === +this.props.match.params.levelID
-        ).tags
-      ],
-      allTags: [
-        ...this.props.levels.find(
-          lvl => lvl.id === +this.props.match.params.levelID
-        ).tags
-      ]
+      level: currentLevel,
+      tags: [...tags],
+      allTags: [...tags]
     });
   };
 
   componentDidUpdate = prevProps => {
-    if (prevProps.match.params.levelID !== this.props.match.params.levelID) {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    const tags = [...currentLevel.tags];
+
+    if (
+      prevProps.match.params.courseID !== selectedCourseId ||
+      prevProps.match.params.levelID !== selectedLevelId
+    ) {
       this.setState({
-        level: this.props.levels.find(
-          lvl => lvl.id === +this.props.match.params.levelID
-        ),
-        tags: [
-          ...this.props.levels.find(
-            lvl => lvl.id === +this.props.match.params.levelID
-          ).tags
-        ],
-        allTags: [
-          ...this.props.levels.find(
-            lvl => lvl.id === +this.props.match.params.levelID
-          ).tags
-        ]
+        level: currentLevel,
+        tags: [...tags],
+        allTags: [...tags]
+      });
+    }
+
+    if (prevProps.buildingBlocks.length && !this.props.buildingBlocks.length) {
+      this.setState({
+        tags: [...tags]
       });
     }
   };
   render() {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    // const tags = currentLevel.tags;
+
     return (
       <div className="play">
         <div className=" container mt-5">
           <div className=" play-header pt-5 pb-5 mt-2 ">
-            <Link style={{ textDecorationLine: "none" }} to="/levels">
-              <h1 className="text-light"> أساسيات الجزيرة</h1>
+            <Link
+              style={{ textDecorationLine: "none" }}
+              to={`/course/${selectedCourseId}`}
+            >
+              <h1 className="text-light"> {currentLevel.name}</h1>
             </Link>
           </div>
           <DragDropContext onDragEnd={this.onDragEnd}>
@@ -237,7 +280,7 @@ class PlayArea extends Component {
                 <div className="col-10 list-of-blocks-board badage ">
                   <h2 className=" p-1 tool mb-5 ">منطقة الأدوات</h2>
 
-                  <ListOfBlock tags={this.state.tags} />
+                  <ListOfTags tags={this.state.tags} />
                 </div>
               </div>
               <hr />
@@ -268,7 +311,7 @@ class PlayArea extends Component {
 const mapStateToProps = state => ({
   buildingBlocks: state.mainReducer.buildingBlocks,
   textObj: state.mainReducer.textObj,
-  levels: state.levelsReducer.levels
+  courses: state.coursesReducer.courses
 });
 
 const mapDispatchToProps = dispatch => ({
