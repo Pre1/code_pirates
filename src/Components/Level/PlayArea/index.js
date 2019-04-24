@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ListOfBlock from "../ListOfBlock";
+import ListOfTags from "../ListOfBlock";
 import BuildingBoard from "../BuildingBoard";
 import PreviewBorad from "../PreviewBoard";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -35,9 +35,7 @@ class PlayArea extends Component {
     overlay: false,
     level: {},
     tags: [],
-    allTags: this.props.levels.find(
-      lvl => lvl.id === +this.props.match.params.levelID
-    ).tags
+    allTags: []
   };
 
   // put inside library
@@ -66,6 +64,7 @@ class PlayArea extends Component {
 
   // puts tag back after it's deleted
   putTagBack = tag => {
+    console.log("TCL: PlayArea -> tags", this.state.allTags);
     this.setState({
       tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag))
     });
@@ -112,7 +111,6 @@ class PlayArea extends Component {
         if (destination.droppableId.split("-")[0] === "html") {
           newBlock = new Blocks.HeadBlock([], draggableId);
         }
-        console.log("TCL: PlayArea -> case title newBlock", newBlock);
         break;
       case "body":
         if (destination.droppableId.split("-")[0] === "html") {
@@ -189,58 +187,81 @@ class PlayArea extends Component {
   };
 
   componentDidMount = () => {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    const tags = [...currentLevel.tags];
+    // console.log("TCL: PlayArea -> componentDidMount -> tags", tags);
+
     this.setState({
-      level: this.props.levels.find(
-        lvl => lvl.id === +this.props.match.params.levelID
-      ),
-      tags: [
-        ...this.props.levels.find(
-          lvl => lvl.id === +this.props.match.params.levelID
-        ).tags
-      ],
-      allTags: [
-        ...this.props.levels.find(
-          lvl => lvl.id === +this.props.match.params.levelID
-        ).tags
-      ]
+      level: currentLevel,
+      tags: [...tags],
+      allTags: [...tags]
     });
   };
 
   componentDidUpdate = prevProps => {
-    if (prevProps.match.params.levelID !== this.props.match.params.levelID) {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    const tags = [...currentLevel.tags];
+
+    if (
+      prevProps.match.params.courseID !== selectedCourseId ||
+      prevProps.match.params.levelID !== selectedLevelId
+    ) {
       this.setState({
-        level: this.props.levels.find(
-          lvl => lvl.id === +this.props.match.params.levelID
-        ),
-        tags: [
-          ...this.props.levels.find(
-            lvl => lvl.id === +this.props.match.params.levelID
-          ).tags
-        ],
-        allTags: [
-          ...this.props.levels.find(
-            lvl => lvl.id === +this.props.match.params.levelID
-          ).tags
-        ]
+        level: currentLevel,
+        tags: [...tags],
+        allTags: [...tags]
       });
     }
+
     if (prevProps.buildingBlocks.length && !this.props.buildingBlocks.length) {
       this.setState({
-        tags: [
-          ...this.props.levels.find(
-            lvl => lvl.id === +this.props.match.params.levelID
-          ).tags
-        ]
+        tags: [...tags]
       });
     }
   };
   render() {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    // const tags = currentLevel.tags;
+
     return (
       <div className="play">
         <div className=" container mt-5">
           <div className=" play-header pt-5 pb-5 mt-2 ">
-            <Link style={{ textDecorationLine: "none" }} to="/levels">
-              <h1 className="text-light"> أساسيات الجزيرة</h1>
+            <Link
+              style={{ textDecorationLine: "none" }}
+              to={`/course/${selectedCourseId}`}
+            >
+              <h1 className="text-light"> {currentLevel.name}</h1>
             </Link>
           </div>
           <DragDropContext onDragEnd={this.onDragEnd}>
@@ -259,7 +280,7 @@ class PlayArea extends Component {
                 <div className="col-10 list-of-blocks-board badage ">
                   <h2 className=" p-1 tool mb-5 ">منطقة الأدوات</h2>
 
-                  <ListOfBlock tags={this.state.tags} />
+                  <ListOfTags tags={this.state.tags} />
                 </div>
               </div>
               <hr />
@@ -290,7 +311,7 @@ class PlayArea extends Component {
 const mapStateToProps = state => ({
   buildingBlocks: state.mainReducer.buildingBlocks,
   textObj: state.mainReducer.textObj,
-  levels: state.levelsReducer.levels
+  courses: state.coursesReducer.courses
 });
 
 const mapDispatchToProps = dispatch => ({

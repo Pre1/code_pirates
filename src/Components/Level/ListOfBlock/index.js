@@ -27,7 +27,7 @@ class ListOfBlock extends Component {
   };
 
   render() {
-    console.log("ListOfBlocks", this.props.tags);
+    console.log("ListOfBlocks -> mount", this.state.tags);
     return (
       <Droppable droppableId="list" direction="horizontal">
         {provided => (
