@@ -54,19 +54,16 @@ class Instruction extends Component {
   // }
 
   async componentDidMount() {
-    let id = this.props.match.params.levelID;
+    let courseID = this.props.match.params.courseID;
+    let levelID = this.props.match.params.levelID;
+
     // ReactTooltip.rebuild();
 
-    await this.props.getGoals(id);
+    await this.props.getGoals(levelID);
 
     let goals = this.props.goals;
-    console.log("TCL: Instruction -> componentDidMount -> goals", goals);
 
     let { overlay, lvlInstruction } = await this.props;
-    console.log(
-      "TCL: Instruction -> componentDidMount -> lvlInstruction",
-      lvlInstruction
-    );
 
     if (!overlay) {
       ReactTooltip.show(findDOMNode(this.refs.instruct));
@@ -99,17 +96,8 @@ class Instruction extends Component {
       currentBuildingBlks.map(elm => elm.compile()).join("")
     );
 
-    console.log(
-      "TCL: Instruction -> componentDidUpdate -> curStrHTML",
-      curStrHTML
-    );
-
     let { overlay, lvlInstruction } = await this.props;
 
-    console.log(
-      "TCL: Instruction -> componentDidUpdate -> lvlInstruction",
-      lvlInstruction
-    );
     let { instruct, currentInstruct, next } = this.state;
 
     // let goals = compactWhitespace(this.props.goals);
@@ -141,15 +129,7 @@ class Instruction extends Component {
 
     if (prevProps.lvlInstruction[0] !== lvlInstruction[0]) {
       console.log("Instruction =====================================");
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> prevProps.lvlInstruction[0]",
-        prevProps.lvlInstruction
-      );
 
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> lvlInstruction",
-        lvlInstruction
-      );
       console.log("Instruction =====================================");
 
       this.setState({
@@ -164,15 +144,6 @@ class Instruction extends Component {
       instruct[currentInstruct] &&
       currentInstruct <= instruct.length
     ) {
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> currentInstruct",
-        currentInstruct
-      );
-
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> instruct[currentInstruct]",
-        instruct[currentInstruct]
-      );
       ReactTooltip.show(findDOMNode(this.refs.instruct));
 
       setTimeout(() => {
@@ -202,6 +173,9 @@ class Instruction extends Component {
     this.setState({ toolTip: !toolTip });
   };
   render() {
+    let courseID = this.props.match.params.courseID;
+    let levelID = this.props.match.params.levelID;
+
     let { buildingBlocks } = this.props;
     let { instruct, currentInstruct } = this.state;
 
@@ -210,7 +184,8 @@ class Instruction extends Component {
         {/* <Button variant="dark" onClick={this.toggleTip}>
           debug
         </Button> */}
-        <div onClick={() => this.props.toggleOverlay()}>
+        {/* onClick={() => this.props.toggleOverlay()} */}
+        <div>
           <img
             id="instructBird"
             src={assistant}
@@ -243,7 +218,7 @@ class Instruction extends Component {
 
           <div style={{ position: "absolute", left: "1px", bottom: "2px" }}>
             <Link
-              to={`/level/content`}
+              to={`/course/${courseID}/level/${levelID}/content`}
               style={{ color: "#fff", textDecoration: "none" }}
             >
               <button className="col-8 btn btn-warning rounded-pill mt-5 ">

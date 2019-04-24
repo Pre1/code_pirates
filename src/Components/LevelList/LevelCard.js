@@ -5,7 +5,8 @@ import lightImg from "../../assets/images/lightbulb.svg";
 
 class LevelCard extends Component {
   render() {
-    const { level, name } = this.props;
+    const { courseId, level } = this.props;
+
     return (
       <div className=" img-level col-3 mt-3 mr-3">
         <div className="image m-3 animatedCard">
@@ -13,7 +14,7 @@ class LevelCard extends Component {
             className="card-img-top img-fluid"
             style={{ width: "90%" }}
             src={level.isAvailable ? level.imageUrl : lockImg}
-            alt={name}
+            alt={level.name}
           />
         </div>
         <div className="card-body">
@@ -21,7 +22,9 @@ class LevelCard extends Component {
             {level.isAvailable ? (
               <button className="col-5 btn green-btn ml-4">
                 <Link
-                  to={level.isAvailable && `/level/${level.id}`}
+                  to={
+                    level.isAvailable && `/course/${courseId}/level/${level.id}`
+                  }
                   style={{ color: "#fff", textDecoration: "none" }}
                 >
                   ابدأ التحدي
@@ -35,7 +38,10 @@ class LevelCard extends Component {
 
             <button className="col-2 btn btn-warning">
               <Link
-                to={level.isAvailable && `/level/content`}
+                to={
+                  level.isAvailable &&
+                  `/course/${courseId}/level/${level.id}/content`
+                }
                 style={{ color: "#fff", textDecoration: "none" }}
               >
                 <img src={lightImg} />
@@ -45,7 +51,7 @@ class LevelCard extends Component {
           <br />
 
           <h5 className="card-title">
-            <h2>{name}</h2>
+            <h2>{level.name}</h2>
           </h5>
         </div>
       </div>
