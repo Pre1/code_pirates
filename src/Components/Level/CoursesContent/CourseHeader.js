@@ -3,21 +3,32 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class CourseHeader extends Component {
   render() {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
     return (
       <div className="col-12 content-header">
         <div className="row">
           <div className="col-6 text-right" style={{ fontSize: "40px" }}>
-            أساسيات اللغة
+            {currentLevel.name}
           </div>
           <div className="col-6 text-left">
             <button className="col-5 ml-4 content-start-btn">
               <Link
                 to={
-                  this.props.levels[0].isAvailable &&
-                  `/level/${this.props.levels[0].id}`
+                  currentLevel.isAvailable &&
+                  `course/${selectedCourseId}/level/${selectedLevelId}/`
                 }
                 style={{ color: "#1fc997", textDecoration: "none" }}
               >
@@ -25,7 +36,7 @@ class CourseHeader extends Component {
               </Link>
             </button>
             <Link
-              to={"/levels"}
+              to={`/course/${selectedCourseId}`}
               style={{ color: "#16ab7f", textDecoration: "none" }}
             >
               <span
@@ -50,7 +61,7 @@ class CourseHeader extends Component {
 
 const mapStateToProps = state => {
   return {
-    levels: state.levelsReducer.levels
+    courses: state.coursesReducer.courses
   };
 };
-export default connect(mapStateToProps)(CourseHeader);
+export default withRouter(connect(mapStateToProps)(CourseHeader));
