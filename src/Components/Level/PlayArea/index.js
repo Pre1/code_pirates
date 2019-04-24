@@ -295,6 +295,7 @@ class PlayArea extends Component {
                 <div className="col-6 preview-borad-area my-3 ml-2 card">
                   <h2 className="p-1 tool">شاشة العرض</h2>
                   <PreviewBorad
+                    tags={this.state.allTags}
                     level={this.state.level}
                     buildingBlocks={this.props.buildingBlocks}
                   />
