@@ -68,7 +68,7 @@ class PlayArea extends Component {
     }
 
     let newBlock;
-    const texters = ["p", "h1", "title"];
+    const texters = ["p", "h1", "h2", "h3", "h4", "h5", "h6", "title"];
     newBlock = new Blocks.ChildBlock(draggableId.split("-")[0], draggableId);
     if (texters.includes(newBlock.name)) {
       newBlock.addChild(newBlock.id, new Blocks.TextBlock());
