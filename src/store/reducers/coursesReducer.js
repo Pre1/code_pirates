@@ -46,10 +46,7 @@ const initialState = {
           ],
           content: content.mdContentOne,
           isAvailable: true,
-<<<<<<< HEAD
-          isPass: true
-=======
-          isPass: false,
+          isPass: true,
           instructions: [
             { content: ["ضع <html> في منطقة البناء"], expected: "html" },
             { content: ["ضع <head> في <html>"], expected: "head" },
@@ -57,7 +54,6 @@ const initialState = {
             { content: ["ضع <title> في <head>"], expected: "title" },
             { content: [" لقد فزت!!"], expected: "end" }
           ]
->>>>>>> bbc083171f4d6e0ebeb9383be98d845b33c005cb
         },
         {
           id: 2,
@@ -66,9 +62,6 @@ const initialState = {
           goals: ``,
           goalsList: [],
           classNameForBody: "secondLevelBody",
-          // LevelContainer: `
-          // <div className="secondLevelBoatMove"><img /></div>
-          //           `,
           classNameForTag: {
             h1: "secondLevelH1",
             h2: "secondLevelH2",
@@ -86,14 +79,10 @@ const initialState = {
             { id: "h5", content: "<h5> </h5>", tip: "العنوان ٥" },
             { id: "h6", content: "<h6> </h6>", tip: "العنوان ٦" }
           ],
-<<<<<<< HEAD
+
           content: content.mdContentTwo,
           isAvailable: true,
-          isPass: true
-=======
-          content: "",
-          isAvailable: false,
-          isPass: false,
+          isPass: true,
           instructions: [
             { content: ["ضع <h6> في منطقة البناء"], expected: "h6" },
             { content: ["ضع <h5> لمساعدة القرصان في النداء "], expected: "h5" },
@@ -103,7 +92,6 @@ const initialState = {
             { content: ["ضع <h1> ليرتفع صوته "], expected: "h1" },
             { content: [" لقد فزت!!"], expected: "end" }
           ]
->>>>>>> bbc083171f4d6e0ebeb9383be98d845b33c005cb
         },
         {
           id: 3,
@@ -116,16 +104,11 @@ const initialState = {
             imgMove: "thirdLevelImageMove"
           },
           tags: [{ id: "img", content: "<img />", tip: "img" }],
-<<<<<<< HEAD
+
           content: content.mdContentThree,
           isAvailable: true,
-          isPass: true
-=======
-          content: ``,
-          isAvailable: false,
-          isPass: false,
+          isPass: true,
           instructions: []
->>>>>>> bbc083171f4d6e0ebeb9383be98d845b33c005cb
         },
         {
           id: 4,
@@ -166,7 +149,7 @@ const initialState = {
             { id: "strong", content: "<strong> </strong>", tip: "strong" },
             { id: "small", content: "<small> </small>", tip: "small" }
           ],
-          content: "",
+          content: ``,
           isAvailable: false,
           isPass: false,
           instructions: []
