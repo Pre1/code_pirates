@@ -1,5 +1,4 @@
 import flat from "../../../assets/images/flat_chrome.png";
-export const levelStyles = `
 
 import island from "../../../assets/images/island.png";
 export const levelStyles = `
