@@ -623,13 +623,14 @@ img.island3:hover {
   color: #e11f5a;
 }
 
-.markdownPB pre {
+.markdownPB pre  {
   top: 10px;
   padding-top: 30px;
   width: 100%;
   margin: 10em;
   padding: 10px;
   border-radius: 16px;
+  font-size: 1.5em;
 }
 
 .markdownPB {
