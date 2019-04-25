@@ -84,7 +84,7 @@ const initialState = {
             imgMove: "thirdLevelImageMove"
           },
           tags: [{ id: "img", content: "<img />", tip: "img" }],
-          content: ``,
+          content: content.mdContentThree,
           isAvailable: true,
           isPass: true
         },

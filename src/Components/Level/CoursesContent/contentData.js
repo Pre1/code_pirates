@@ -1,3 +1,5 @@
+import safcsp from "../../../assets/images/safcsp.svg";
+
 export const mdContentOne = `
 ## لماذا نتعلم HTML ؟
 
@@ -120,6 +122,14 @@ export const mdContentThree = `
 
 \`\`\`
 
-ستظهر الصورة في صفحة الويب بالشكل التالي
+## ستظهر الصورة في صفحة الويب بالشكل التالي
+\n
+
+الفقرة الأولى
+\n
+![معسكر طويق البرمجي](${safcsp})
+\n
+الفقرة الثانية
+
 
 `;

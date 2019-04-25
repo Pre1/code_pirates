@@ -656,3 +656,10 @@ img.island3:hover {
 .markdownPB em {
   color: #e11f5a;
 }
+
+.markdownPB img {
+  border: 2px solid #f1f1f1;
+  border-radius: 16px;
+  padding: 15px;
+  width: 40%;
+}
