@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions";
 import styled from "styled-components";
+import island from "../../../assets/images/Island a.png";
+import pirate from "../../../assets/images/Pirate 2.png";
 import * as styles from "./styles";
 class Level extends Component {
   state = {
@@ -97,7 +99,6 @@ class Level extends Component {
 
   render() {
     const Container = styled.div`
-      background: grey;
       ${styles.levelStyles}
     `;
     console.log(
@@ -107,13 +108,20 @@ class Level extends Component {
     // const
     return (
       <Container>
-        {/* find a way to make this done with search tree */}
-        {this.props.buildingBlocks.map(bb =>
-          bb.nestedJsxCompile(
-            this.props.level.classNameForTag[bb.name],
-            this.props.level.classNameForTag
-          )
-        )}
+        <div className={this.props.level.classNameForBody}>
+          {/* find a way to make this done with search tree */}
+          {this.props.buildingBlocks.map(bb =>
+            bb.nestedJsxCompile(
+              this.props.level.classNameForTag[bb.name],
+              this.props.level.classNameForTag
+            )
+          )}
+          <div>
+            <img src={pirate} width="150px" height="150px" />
+            <img src={island} width="360px" height="180px" />
+          </div>
+          {/* {this.props.level.LevelContainer} */}
+        </div>
       </Container>
     );
   }
