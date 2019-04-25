@@ -9,48 +9,11 @@ class BuildingBoard extends Component {
     blocks: this.props.blocks,
     enableDrop: false
   };
+
   componentDidUpdate = prevProps => {
     if (prevProps.blocks !== this.props.blocks) {
       this.setState({ blocks: this.props.blocks });
     }
-  };
-
-  // move to lib
-  searchTreeDelete = (block, blockID) => {
-    const blockObj = block.children.find(c => c.id === blockID);
-    if (blockObj) {
-      block.children.splice(block.children.indexOf(blockObj), 1);
-      this.props.putTagBack(blockObj.name);
-      return block;
-    } else if (block.children.length) {
-      let i;
-      let result = null;
-      for (i = 0; result == null && i < block.children.length; i++) {
-        result = this.searchTreeDelete(block.children[i], blockID);
-      }
-      return result;
-    }
-    return null;
-  };
-
-  // move to lib
-  searchTreeText = (block, blockID, newText) => {
-    if (block.id === blockID) {
-      block.children.splice(
-        block.children.indexOf(block.children.find(c => c.name === "text")),
-        1,
-        newText
-      );
-      return block;
-    } else if (block.children.length) {
-      let i;
-      let result = null;
-      for (i = 0; result == null && i < block.children.length; i++) {
-        result = this.searchTreeText(block.children[i], blockID, newText);
-      }
-      return result;
-    }
-    return null;
   };
 
   render() {
@@ -78,8 +41,7 @@ class BuildingBoard extends Component {
           <Block
             onSetBB={this.props.onSetBB}
             buildingBlocks={this.props.buildingBlocks}
-            searchTreeDelete={this.searchTreeDelete}
-            searchTreeText={this.searchTreeText}
+            putTagBack={this.props.putTagBack}
             block={block}
             index={index}
             blocks={this.state.blocks}
@@ -89,17 +51,20 @@ class BuildingBoard extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     buildingBlocks: state.mainReducer.buildingBlocks
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     onDeleteBlock: block => dispatch(actionCreators.deleteBlock(block)),
     onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB))
   };
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

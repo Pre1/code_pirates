@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import { Droppable } from "react-beautiful-dnd";
 import TextBlock from "../TextBlock";
 import * as actionCreators from "../../../../store/actions";
+import * as Blocks from "../../../../Library/PiratesCode";
 
 class Block extends Component {
   state = {
     bb: this.props.buildingBlocks
   };
+
   componentDidUpdate = prevProps => {
     if (prevProps.buildingBlocks !== this.props.buildingBlocks) {
       this.setState({ bb: this.props.buildingBlocks });
@@ -16,13 +18,15 @@ class Block extends Component {
 
   deleteBlock = block => {
     let newBB = this.props.buildingBlocks.slice();
-    let BB = { children: newBB, id: "building" };
-    this.props.searchTreeDelete(BB, block.id);
-    this.props.onSetBB(newBB);
+    let building = new Blocks.ChildBlock("building", "building");
+    building.children = newBB;
+    building.deleteChild(block.id);
+    this.props.putTagBack(block.name);
+    this.props.onSetBB(building.children);
   };
 
   render() {
-    const { block, index, blocks, searchTreeText } = this.props;
+    const { block, index, blocks } = this.props;
 
     return (
       <div
@@ -75,7 +79,6 @@ class Block extends Component {
                         }}
                       >
                         <TextBlock
-                          searchTreeText={searchTreeText}
                           blocks={blocks}
                           block={block}
                           index={cindex}
@@ -96,8 +99,7 @@ class Block extends Component {
               <Block
                 onSetBB={this.props.onSetBB}
                 buildingBlocks={this.props.buildingBlocks}
-                searchTreeDelete={this.props.searchTreeDelete}
-                searchTreeText={searchTreeText}
+                putTagBack={this.props.putTagBack}
                 block={child}
                 blocks={block.children}
                 index={cindex}
