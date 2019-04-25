@@ -84,13 +84,24 @@ class Level extends Component {
       ${"" /* the classes that has movement and animation can be handled here this is gonna be by getting these classes from the courseReducer */}
       .firstLevelHTML {
         background: red;
-        width: 1000px;
-        height: 1000px;
+        width: 100px;
+        height: 100px;
       }
       .firstLevelHead {
         background: blue;
-        width: 1000px;
-        height: 1000px;
+        width: 100px;
+        height: 100px;
+      }
+      .firstLevelBody {
+        background: green;
+        width: 100px;
+        height: 100px;
+      }
+      .firstLevelTitle {
+        background: pink;
+        width: 100px;
+        color: yellow;
+        height: 100px;
       }
     `;
     // const
@@ -98,7 +109,10 @@ class Level extends Component {
       <Container>
         {/* find a way to make this done with search tree */}
         {this.props.buildingBlocks.map(bb =>
-          bb.jsxCompile(this.props.level.classNameForTag[bb.name])
+          bb.nestedJsxCompile(
+            this.props.level.classNameForTag[bb.name],
+            this.props.level.classNameForTag
+          )
         )}
       </Container>
     );

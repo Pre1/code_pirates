@@ -202,6 +202,17 @@ class HTMLBlock extends Block {
       </div>`;
   }
 
+  /******** added this ********/
+  nestedJsxCompile(className = "HTMLPiratesCode", childClassNames) {
+    return (
+      <div className={className}>
+        {this.children.map(child =>
+          child.jsxCompile(childClassNames[child.name])
+        )}
+      </div>
+    );
+  }
+
   jsxCompile(className = "HTMLPiratesCode") {
     return (
       <div className={className}>
@@ -224,6 +235,17 @@ class HeadBlock extends Block {
       <div className="${className}">
         ${this.children.map(child => child.compile()).join("")}
       </div>`;
+  }
+
+  /******** added this ********/
+  nestedJsxCompile(className = "HeaderPiratesCode", childClassNames) {
+    return (
+      <div className={className}>
+        {this.children.map(child =>
+          child.jsxCompile(childClassNames[child.name])
+        )}
+      </div>
+    );
   }
 
   jsxCompile(className = "HeaderPiratesCode") {
@@ -250,6 +272,17 @@ class BodyBlock extends Block {
       </div>`;
   }
 
+  /******** added this ********/
+  nestedJsxCompile(className = "BodyPiratesCode", childClassNames) {
+    return (
+      <div className={className}>
+        {this.children.map(child =>
+          child.jsxCompile(childClassNames[child.name])
+        )}
+      </div>
+    );
+  }
+
   jsxCompile(className = "BodyPiratesCode") {
     return (
       <div className={className}>
@@ -271,6 +304,17 @@ class TitleBlock extends Block {
       <div className="${className}">
         ${this.children.map(child => child.compile()).join("")}
       </div>`;
+  }
+
+  /******** added this ********/
+  nestedJsxCompile(className = "TitlePiratesCode", childClassNames) {
+    return (
+      <div className={className}>
+        {this.children.map(child =>
+          child.jsxCompile(childClassNames[child.name])
+        )}
+      </div>
+    );
   }
 
   jsxCompile(className = "TitlePiratesCode") {
