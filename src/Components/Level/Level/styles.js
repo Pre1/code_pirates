@@ -1,12 +1,13 @@
+import flat from "../../../assets/images/flat_chrome.png";
 export const levelStyles = `
-background: grey;
 ${
   "" /* the classes that has movement and animation can be handled here this is gonna be by getting these classes from the courseReducer */
 }
 .firstLevelHTML {
-  background: red;
-  width: 100px;
-  height: 100px;
+width: 100%;
+height: 70px;
+background-image: url(${flat});
+background-repeat: no-repeat;
 }
 .firstLevelHead {
   background: blue;
