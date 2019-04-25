@@ -17,19 +17,14 @@ function mapDispatchToProps(dispatch) {
 }
 class TextBlock extends Component {
   handleChange = event => {
-    console.log("TCL: TextBlock -> this.props.block", this.props.block);
     let newBB = this.props.buildingBlocks.slice();
-    let BB = { children: [...newBB], id: "building" };
-    console.log("TCL: TextBlock -> BB", BB);
-    console.log("TCL: TextBlock -> event.target.value", event.target.value);
-
-    this.props.searchTreeText(
-      BB,
+    let building = new Blocks.ChildBlock("building", "building");
+    building.children = newBB;
+    building.changeText(
       this.props.block.id,
       new Blocks.TextBlock(event.target.value)
     );
-    console.log("searchTreeText wtf");
-    this.props.onSetBB(newBB);
+    this.props.onSetBB(building.children);
   };
   render() {
     const { provided, block, index } = this.props;

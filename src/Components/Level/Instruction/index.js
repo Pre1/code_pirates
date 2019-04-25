@@ -89,13 +89,6 @@ class Instruction extends Component {
     let prevBuildingBlks = prevProps.buildingBlocks;
     let currentBuildingBlks = this.props.buildingBlocks;
 
-    let prevStrHTML = compactWhitespace(
-      prevBuildingBlks.map(elm => elm.compile()).join("")
-    );
-    let curStrHTML = compactWhitespace(
-      currentBuildingBlks.map(elm => elm.compile()).join("")
-    );
-
     let { overlay, lvlInstruction } = await this.props;
 
     let { instruct, currentInstruct, next } = this.state;
@@ -190,16 +183,15 @@ class Instruction extends Component {
             id="instructBird"
             src={assistant}
             style={{ width: "120%", top: "130%", left: "80%", botto: "30%" }}
-            // data-tip="أهلا بالقرصان الصغير"
-            data-tip={instruct[currentInstruct]}
+            data-tip="أهلا بالقرصان الصغير"
+            // data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
             ref="instruct"
             data-place="right"
             data-offset="{'left': 40, 'top': 50}"
-            data-event="focus"
             data-for="instructBird"
-            // data-tip
             className="animatedCardBird"
+            data-effect="solid"
           />
           <ReactTooltip
             id="instructBird"

@@ -12,6 +12,7 @@ import Level from "../Level";
 class PreviewBoard extends Component {
   state = {
     buildingBlocks: this.props.buildingBlocks,
+    level: this.props.level,
     answer: []
   };
 
@@ -27,7 +28,7 @@ class PreviewBoard extends Component {
       this.setState({ answer: this.state.answer.concat(name) });
       // return obj
       return block;
-    } else if (block.children.length) {
+    } else if (block.name.children && block.children.length) {
       let i;
       let result = null;
       for (i = 0; result == null && i < block.children.length; i++) {
