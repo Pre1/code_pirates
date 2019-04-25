@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions";
+// import Sound from 'react-sound';
 
 class LevelOne extends Component {
   state = {

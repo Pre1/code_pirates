@@ -15,6 +15,8 @@ import * as actionCreators from "../../../store/actions";
 import { connect } from "react-redux";
 
 import styled from "styled-components";
+import ReactAudioPlayer from "react-audio-player";
+import wildForest from "../../../../src/assets/sounds/wildForest.mp3";
 
 let Overlay = styled.div`
   position: fixed; /* Sit on top of the page content */
@@ -255,6 +257,13 @@ class PlayArea extends Component {
 
     return (
       <div className="play">
+        <ReactAudioPlayer
+          style={{ display: "none" }}
+          src={wildForest}
+          autoPlay
+          controls
+          volume={(0, 0.1)}
+        />
         <div className=" container mt-5">
           <div className=" play-header pt-5 pb-5 mt-2 ">
             <Link
