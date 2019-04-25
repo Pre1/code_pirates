@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/styles/prism";
+import { duotoneDark } from "react-syntax-highlighter/dist/styles/prism";
 
 class CodeBlock extends PureComponent {
   static propTypes = {
@@ -18,7 +18,7 @@ class CodeBlock extends PureComponent {
     return (
       <SyntaxHighlighter
         language={language}
-        style={darcula}
+        style={duotoneDark}
         showLineNumbers={true}
       >
         {value}
