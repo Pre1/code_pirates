@@ -32,6 +32,16 @@ class PBlock extends Block {
       </p>`;
   }
 
+  nestedJsxCompile(className = "PiratesCode", childClassNames) {
+    return (
+      <p className={className}>
+        {this.children.map(child =>
+          child.nestedJsxCompile(childClassNames[child.name], childClassNames)
+        )}
+      </p>
+    );
+  }
+
   jsxCompile(className = "PPiratesCode") {
     return (
       <p className={className}>
@@ -133,6 +143,10 @@ class TextBlock extends Block {
     return `<span className="${className}"> ${this.text} </span>`;
   }
 
+  nestedJsxCompile(className = "textPirateBird") {
+    return <span className={className}>{this.text}</span>;
+  }
+
   jsxCompile(className = "textPirateBird") {
     return <span className={className}>{this.text}</span>;
   }
@@ -207,7 +221,7 @@ class HTMLBlock extends Block {
     return (
       <div className={className}>
         {this.children.map(child =>
-          child.jsxCompile(childClassNames[child.name])
+          child.nestedJsxCompile(childClassNames[child.name], childClassNames)
         )}
       </div>
     );
@@ -242,7 +256,7 @@ class HeadBlock extends Block {
     return (
       <div className={className}>
         {this.children.map(child =>
-          child.jsxCompile(childClassNames[child.name])
+          child.nestedJsxCompile(childClassNames[child.name], childClassNames)
         )}
       </div>
     );
@@ -277,7 +291,7 @@ class BodyBlock extends Block {
     return (
       <div className={className}>
         {this.children.map(child =>
-          child.jsxCompile(childClassNames[child.name])
+          child.nestedJsxCompile(childClassNames[child.name], childClassNames)
         )}
       </div>
     );
@@ -311,7 +325,7 @@ class TitleBlock extends Block {
     return (
       <div className={className}>
         {this.children.map(child =>
-          child.jsxCompile(childClassNames[child.name])
+          child.nestedJsxCompile(childClassNames[child.name], childClassNames)
         )}
       </div>
     );

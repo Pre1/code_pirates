@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions";
 import styled from "styled-components";
-
+import * as styles from "./styles";
 class Level extends Component {
   state = {
     /***** to be removed ******/
@@ -28,6 +28,7 @@ class Level extends Component {
     expectedSteps: ["html", "head", "body", "title"]
   };
 
+  // this function basicaly checks if the instruction has been met and changes the instruction
   makeChanges = block => {
     const { currentInstruction } = this.state;
     if (block) {
@@ -51,6 +52,7 @@ class Level extends Component {
     }
   };
 
+  // loops over tags then loops over BBs calls setTags then sends the returned obj to makeChanges
   setView = () => {
     this.props.tags.forEach(tag => {
       this.props.buildingBlocks.map(bb => {
@@ -66,7 +68,7 @@ class Level extends Component {
       buildingBlocks: this.props.buildingBlocks,
       currentInstruction: this.state.instructions[0]
     });
-    await this.props.onSetInstruction(this.state.instructions[0]);
+    await this.props.onSetInstruction(this.state.instructions[0].content);
     this.setView();
   };
 
@@ -80,30 +82,12 @@ class Level extends Component {
   render() {
     const Container = styled.div`
       background: grey;
-
-      ${"" /* the classes that has movement and animation can be handled here this is gonna be by getting these classes from the courseReducer */}
-      .firstLevelHTML {
-        background: red;
-        width: 100px;
-        height: 100px;
-      }
-      .firstLevelHead {
-        background: blue;
-        width: 100px;
-        height: 100px;
-      }
-      .firstLevelBody {
-        background: green;
-        width: 100px;
-        height: 100px;
-      }
-      .firstLevelTitle {
-        background: pink;
-        width: 100px;
-        color: yellow;
-        height: 100px;
-      }
+      ${styles.levelStyles}
     `;
+    console.log(
+      " anas TCL: Level -> render -> this.props.buildingBlocks",
+      this.props.buildingBlocks
+    );
     // const
     return (
       <Container>

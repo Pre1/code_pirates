@@ -59,9 +59,9 @@ class Instruction extends Component {
 
     // ReactTooltip.rebuild();
 
-    await this.props.getGoals(levelID);
+    // await this.props.getGoals(levelID);
 
-    let goals = this.props.goals;
+    // let goals = this.props.goals;
 
     let { overlay, lvlInstruction } = await this.props;
 
