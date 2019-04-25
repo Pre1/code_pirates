@@ -101,17 +101,14 @@ class Level extends Component {
     const Container = styled.div`
       ${styles.levelStyles}
     `;
-    console.log(
-      " anas TCL: Level -> render -> this.props.buildingBlocks",
-      this.props.buildingBlocks
-    );
+
     // const
     return (
       <Container>
         <div className={this.props.level.classNameForBody}>
-          {/* find a way to make this done with search tree */}
-          {this.props.buildingBlocks.map(bb =>
-            bb.nestedJsxCompile(
+         {this.props.level.classNameForTag &&
+          this.props.buildingBlocks.map(bb =>
+            bb.jsxCompile(
               this.props.level.classNameForTag[bb.name],
               this.props.level.classNameForTag
             )
@@ -122,6 +119,7 @@ class Level extends Component {
           </div>
           {/* {this.props.level.LevelContainer} */}
         </div>
+
       </Container>
     );
   }
