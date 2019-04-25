@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Carousel, Button } from "react-bootstrap";
 
-import tutorial_1 from "../../../assets/images/tutorial/1.png";
-import building from "../../../assets/images/tutorial/building.gif";
-import preview from "../../../assets/images/tutorial/preview.gif";
-import guide from "../../../assets/images/tutorial/guide.gif";
+import tutorial_1 from "../../../assets/images/tutorial/1_v1.gif";
+import building from "../../../assets/images/tutorial/2_v2.gif";
+import preview from "../../../assets/images/tutorial/3_v2.gif";
+import guide from "../../../assets/images/tutorial/4_v4.gif";
 
 export default class Tutorial extends Component {
   state = {
@@ -37,8 +37,8 @@ export default class Tutorial extends Component {
             <img className=" w-50" src={tutorial_1} alt="First slide" />
             <Carousel.Caption>
               <div style={{ marginTop: "50px" }}>
-                <h3>عنوان اول شريحة</h3>
-                <p style={{ color: "black" }}>اهلا بكم في كوكب البيزا</p>
+                {/* <h3>عنوان اول شريحة</h3>
+                <p style={{ color: "black" }}>اهلا بكم في كوكب البيزا</p> */}
               </div>
             </Carousel.Caption>
           </Carousel.Item>
@@ -47,10 +47,10 @@ export default class Tutorial extends Component {
             <img className="w-25" src={building} alt="Third slide" />
 
             <Carousel.Caption className="my-2">
-              <h3>عنوان ثاني شريحة</h3>
+              {/* <h3>عنوان ثاني شريحة</h3>
               <p style={{ color: "black" }}>
                 اهلا بكم في كوكب البيزا اهلا بكم في كوكب البيزا
-              </p>
+              </p> */}
             </Carousel.Caption>
           </Carousel.Item>
 
@@ -58,8 +58,8 @@ export default class Tutorial extends Component {
             <img className="w-50" src={preview} alt="Third slide" />
 
             <Carousel.Caption className="my-5">
-              <h3>عنوان ثالث شريحة</h3>
-              <p style={{ color: "black" }}>اهلا بكم في كوكب البيزا</p>
+              {/* <h3>عنوان ثالث شريحة</h3>
+              <p style={{ color: "black" }}>اهلا بكم في كوكب البيزا</p> */}
             </Carousel.Caption>
           </Carousel.Item>
 
@@ -67,8 +67,7 @@ export default class Tutorial extends Component {
             <img className="w-25" src={guide} alt="Third slide" />
 
             <Carousel.Caption className="my-5">
-              <h3>عنوان رابع شريحة</h3>
-              <p style={{ color: "black" }}>انا هنا للمساعدة</p>
+              <p style={{ color: "white" }}>انا هنا للمساعدة</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

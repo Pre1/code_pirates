@@ -34,7 +34,7 @@ let Overlay = styled.div`
 
 class PlayArea extends Component {
   state = {
-    overlay: false,
+    overlay: true,
     level: null,
     tags: [],
     allTags: []
