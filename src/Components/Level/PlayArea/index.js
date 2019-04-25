@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import ListOfTags from "../ListOfBlock";
 import BuildingBoard from "../BuildingBoard";
 import PreviewBorad from "../PreviewBoard";
@@ -35,33 +35,9 @@ let Overlay = styled.div`
 class PlayArea extends Component {
   state = {
     overlay: true,
-    level: {},
+    level: null,
     tags: [],
     allTags: []
-  };
-
-  // put inside library
-  searchTree = (block, blockID, newBlock) => {
-    /*  
-    check if the block id from the object is the same as the one we're dropping into
-    if it is, insert whatever we dropped into its children.
-    */
-    console.log("TCL: PlayArea -> searchTree -> block.id", block.id);
-
-    if (block.id === blockID) {
-      // add to children
-      block.children.push(newBlock);
-
-      return block;
-    } else if (block.children.length) {
-      let i;
-      let result = null;
-      for (i = 0; result == null && i < block.children.length; i++) {
-        result = this.searchTree(block.children[i], blockID, newBlock);
-      }
-      return result;
-    }
-    return null;
   };
 
   // puts tag back after it's deleted
@@ -92,46 +68,10 @@ class PlayArea extends Component {
     }
 
     let newBlock;
-    switch (draggableId.split("-")[0]) {
-      case "p":
-        newBlock = new Blocks.PBlock(
-          [new Blocks.TextBlock("صغير بس فنان")],
-          draggableId
-        );
-
-        break;
-      case "h1":
-        newBlock = new Blocks.H1Block(
-          [new Blocks.TextBlock("رهييب")],
-          draggableId
-        );
-        break;
-      case "html":
-        newBlock = new Blocks.HTMLBlock([], draggableId);
-        break;
-      case "head":
-        if (destination.droppableId.split("-")[0] === "html") {
-          newBlock = new Blocks.HeadBlock([], draggableId);
-        }
-        break;
-      case "body":
-        if (destination.droppableId.split("-")[0] === "html") {
-          newBlock = new Blocks.BodyBlock([], draggableId);
-        }
-        break;
-      case "title":
-        if (destination.droppableId.split("-")[0] === "head") {
-          newBlock = new Blocks.TitleBlock(
-            [new Blocks.TextBlock()],
-            draggableId
-          );
-        }
-        break;
-      case "img":
-        newBlock = new Blocks.ImgBlock();
-        break;
-      default:
-        console.error(`draggableId: ${draggableId} is NOT Implemented!!`);
+    const texters = ["p", "h1", "title"];
+    newBlock = new Blocks.ChildBlock(draggableId.split("-")[0], draggableId);
+    if (texters.includes(newBlock.name)) {
+      newBlock.addChild(newBlock.id, new Blocks.TextBlock());
     }
     if (newBlock) {
       if (destination.droppableId === "building") {
@@ -145,18 +85,20 @@ class PlayArea extends Component {
             1
           );
 
-          console.log("TCL: PlayArea -> case title newBlock", newBlock);
           // add block
           this.props.onAddBlock(newBlock);
         }
       } else {
         let newBB = this.props.buildingBlocks.slice();
-        let BB = { children: [...newBB], id: "building" };
-        this.searchTree(BB, destination.droppableId, newBlock);
+        // let BB = { children: [...newBB], id: "building" };
+        let building = new Blocks.ChildBlock("building", "building");
+        building.children = newBB;
+        building.addChild(destination.droppableId, newBlock);
+        // this.searchTree();
         console.log(
-          "TCL: PlayArea -> case title droppableId -> BB",
+          "anas TCL: PlayArea -> case title droppableId -> BB",
           destination.droppableId,
-          BB
+          building
         );
 
         // remove the tag
@@ -167,7 +109,7 @@ class PlayArea extends Component {
           1
         );
         // reset the list
-        this.props.onSetBB(newBB);
+        this.props.onSetBB(building.children);
 
         console.log(
           "TCL: PlayArea -> case title this.props.buildingBlocks",
@@ -199,10 +141,8 @@ class PlayArea extends Component {
     const currentLevel = currentCourse.levels.find(
       level => level.id === +selectedLevelId
     );
-
     const tags = [...currentLevel.tags];
     // console.log("TCL: PlayArea -> componentDidMount -> tags", tags);
-
     this.setState({
       level: currentLevel,
       tags: [...tags],
@@ -261,9 +201,11 @@ class PlayArea extends Component {
           style={{ display: "none" }}
           src={wildForest}
           autoPlay
+          loop
           controls
           volume={(0, 0.1)}
         />
+
         <div className=" container mt-5">
           <div className=" play-header pt-5 pb-5 mt-2 ">
             <Link
@@ -303,11 +245,13 @@ class PlayArea extends Component {
                 </div>
                 <div className="col-6 preview-borad-area my-3 ml-2 card">
                   <h2 className="p-1 tool">شاشة العرض</h2>
-                  <PreviewBorad
-                    tags={this.state.allTags}
-                    level={this.state.level}
-                    buildingBlocks={this.props.buildingBlocks}
-                  />
+                  {this.state.level && (
+                    <PreviewBorad
+                      tags={this.state.allTags}
+                      level={this.state.level}
+                      buildingBlocks={this.props.buildingBlocks}
+                    />
+                  )}
                 </div>
               </div>
             </div>
@@ -332,3 +276,45 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(PlayArea);
+
+// switch (draggableId.split("-")[0]) {
+//   case "p":
+//     newBlock = new Blocks.PBlock(
+//       [new Blocks.TextBlock("صغير بس فنان")],
+//       draggableId
+//     );
+
+//     break;
+//   case "h1":
+//     newBlock = new Blocks.H1Block(
+//       [new Blocks.TextBlock("رهييب")],
+//       draggableId
+//     );
+//     break;
+//   case "html":
+//     newBlock = new Blocks.HTMLBlock([], draggableId);
+//     break;
+//   case "head":
+//     if (destination.droppableId.split("-")[0] === "html") {
+//       newBlock = new Blocks.HeadBlock([], draggableId);
+//     }
+//     break;
+//   case "body":
+//     if (destination.droppableId.split("-")[0] === "html") {
+//       newBlock = new Blocks.BodyBlock([], draggableId);
+//     }
+//     break;
+//   case "title":
+//     if (destination.droppableId.split("-")[0] === "head") {
+//       newBlock = new Blocks.TitleBlock(
+//         [new Blocks.TextBlock()],
+//         draggableId
+//       );
+//     }
+//     break;
+//   case "img":
+//     newBlock = new Blocks.ImgBlock();
+//     break;
+//   default:
+//     console.error(`draggableId: ${draggableId} is NOT Implemented!!`);
+// }

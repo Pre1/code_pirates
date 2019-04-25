@@ -89,13 +89,6 @@ class Instruction extends Component {
     let prevBuildingBlks = prevProps.buildingBlocks;
     let currentBuildingBlks = this.props.buildingBlocks;
 
-    let prevStrHTML = compactWhitespace(
-      prevBuildingBlks.map(elm => elm.compile()).join("")
-    );
-    let curStrHTML = compactWhitespace(
-      currentBuildingBlks.map(elm => elm.compile()).join("")
-    );
-
     let { overlay, lvlInstruction } = await this.props;
 
     let { instruct, currentInstruct, next } = this.state;
