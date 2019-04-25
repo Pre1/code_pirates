@@ -279,12 +279,12 @@ img.island3:hover {
   -webkit-animation: bg-move 5s ease-in infinite;
 }
 
-.secondLevelBody {
+/* .secondLevelBody {
   background: #1c6588 url("../images/island.png") repeat-x 15% -100px;
   height: 595px;
   background-size: 470px;
   -webkit-animation: bg-move 5s ease-in infinite;
-}
+} */
 .boat {
   width: 280px;
   position: absolute;
