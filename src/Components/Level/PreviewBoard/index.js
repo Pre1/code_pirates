@@ -12,6 +12,7 @@ import Level from "../Level";
 class PreviewBoard extends Component {
   state = {
     buildingBlocks: this.props.buildingBlocks,
+    level: this.props.level,
     answer: []
   };
 

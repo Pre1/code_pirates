@@ -17,15 +17,28 @@ class Level extends Component {
 
     // comes from the backend i added expected to tell us what type of tag we're expecting
     instructions: [
-      { content: ["ضع <html> في منطقة البناء"], expected: "html" },
-      { content: ["ضع <head> في <html>"], expected: "head" },
-      { content: ["ضع <body> في <html>"], expected: "body" },
-      { content: ["ضع <title> في <head>"], expected: "title" },
-      { content: [" لقد فزت!!"], expected: null }
+      //LEVEL ONE
+      // { content: ["ضع <html> في منطقة البناء"], expected: "html" },
+      // { content: ["ضع <head> في <html>"], expected: "head" },
+      // { content: ["ضع <body> في <html>"], expected: "body" },
+      // { content: ["ضع <title> في <head>"], expected: "title" },
+      // { content: [" لقد فزت!!"], expected: null }
+      //LEVEL TWO
+      // { content: ["ضع <h6> في منطقة البناء"], expected: "h6" },
+      // { content: ["ضع <h5> لمساعدة القرصان في النداء "], expected: "h5" },
+      // { content: ["ضع <h4> ليرتفع صوته"], expected: "h4" },
+      // { content: ["ضع <h3> ليرتفع صوته "], expected: "h3" },
+      // { content: ["ضع <h2> ليرتفع صوته "], expected: "h2" },
+      // { content: ["ضع <h1> ليرتفع صوته "], expected: "h1" },
+      // { content: [" لقد فزت!!"], expected: null }
     ],
     currentInstruction: [],
     userSteps: [],
-    expectedSteps: ["html", "head", "body", "title"]
+    //LEVEL ONE
+    // expectedSteps: ["html", "head", "body", "title"]
+
+    //LEVELTWO
+    expectedSteps: ["h6", "h5", "h4", "h3", "h2", "h1"]
   };
 
   // this function basicaly checks if the instruction has been met and changes the instruction
@@ -64,11 +77,14 @@ class Level extends Component {
   };
 
   componentDidMount = async () => {
+    const instructions = this.props.level.instructions;
+    console.log("instructions ", instructions);
     this.setState({
       buildingBlocks: this.props.buildingBlocks,
-      currentInstruction: this.state.instructions[0]
+      instructions: instructions,
+      currentInstruction: instructions[0]
     });
-    await this.props.onSetInstruction(this.state.instructions[0].content);
+    this.props.onSetInstruction(instructions[0].content);
     this.setView();
   };
 
