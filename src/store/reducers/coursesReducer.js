@@ -30,6 +30,7 @@ const initialState = {
           goalsList: ["HTML", "Head", "Title", "Body"],
 
           /*******IMPORTANT CHANGE*******/
+          classNameForBody: "firstLevel",
           classNameForTag: {
             html: "firstLevelHTML",
             head: "firstLevelHead",
@@ -60,13 +61,18 @@ const initialState = {
           imageUrl: unlockedLevel,
           goals: ``,
           goalsList: [],
+          classNameForBody: "secondLevelBody",
+          // LevelContainer: `
+          // <div className="secondLevelBoatMove"><img /></div>
+          //           `,
           classNameForTag: {
             h1: "secondLevelH1",
             h2: "secondLevelH2",
             h3: "secondLevelH3",
             h4: "secondLevelH4",
             h5: "secondLevelH5",
-            h6: "secondLevelH6"
+            h6: "secondLevelH6",
+            boat: "second"
           },
           tags: [
             { id: "h1", content: "<h1> </h1>", tip: "العنوان ١" },
