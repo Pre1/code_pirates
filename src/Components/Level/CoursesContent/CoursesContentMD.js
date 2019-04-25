@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import CodeBlock from "./CodeBlock";
 import * as Contents from "./contentData";
 import CourseHeader from "./CourseHeader";
-
+import safcsp from "../../../assets/images/safcsp.svg";
 export default class CoursesContent extends Component {
   render() {
     return (
@@ -16,9 +16,34 @@ export default class CoursesContent extends Component {
             <div className="col-11 text-right">
               <ReactMarkdown
                 className="markdownPB"
-                source={Contents.mdContentTwo}
+                source={Contents.mdContentThree}
                 renderers={{ code: CodeBlock }}
               />
+              <br />
+              <div
+                style={{
+                  border: "2px solid #f1f1f1",
+                  borderRadius: "16px",
+                  padding: "15px",
+                  marginRight: "2%",
+                  marginLeft: "2%"
+                }}
+              >
+                <p>الفقرة الأولى</p>
+                <br />
+                <img
+                  src={safcsp}
+                  width="40%"
+                  alt="معسكر طويق البرمجي"
+                  style={{
+                    border: "2px solid #f1f1f1",
+                    borderRadius: "16px",
+                    padding: "15px"
+                  }}
+                />
+                <p>الفقرة الثانية</p>
+              </div>
+              <br />
               <br />
             </div>
           </div>
