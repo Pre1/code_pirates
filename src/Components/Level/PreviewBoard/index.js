@@ -20,6 +20,7 @@ class PreviewBoard extends Component {
       this.setState({ buildingBlocks: this.props.buildingBlocks });
     }
   };
+
   // goes somewhere
   levelSearchTree = (block, name) => {
     if (block.name === name) {
@@ -45,24 +46,17 @@ class PreviewBoard extends Component {
   };
 
   render() {
-    let level;
-    switch (this.props.level.id) {
-      case 1:
-        level = (
-          <Level
-            level={this.props.level}
-            tags={this.props.tags}
-            buildingBlocks={this.props.buildingBlocks}
-            setTag={this.setTag}
-            levelSearchTree={this.levelSearchTree}
-          />
-        );
-        break;
-
-      default:
-        level = <></>;
-    }
-    return <div className="">{level}</div>;
+    return (
+      <div className="">
+        <Level
+          level={this.props.level}
+          tags={this.props.tags}
+          buildingBlocks={this.props.buildingBlocks}
+          setTag={this.setTag}
+          levelSearchTree={this.levelSearchTree}
+        />
+      </div>
+    );
   }
 }
 
