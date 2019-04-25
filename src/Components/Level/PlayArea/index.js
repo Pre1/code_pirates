@@ -35,7 +35,7 @@ let Overlay = styled.div`
 class PlayArea extends Component {
   state = {
     overlay: false,
-    level: {},
+    level: null,
     tags: [],
     allTags: []
   };
@@ -141,7 +141,6 @@ class PlayArea extends Component {
     const currentLevel = currentCourse.levels.find(
       level => level.id === +selectedLevelId
     );
-
     const tags = [...currentLevel.tags];
     // console.log("TCL: PlayArea -> componentDidMount -> tags", tags);
     this.setState({
@@ -195,12 +194,14 @@ class PlayArea extends Component {
     );
 
     // const tags = currentLevel.tags;
+
     return (
       <div className="play">
         <ReactAudioPlayer
           style={{ display: "none" }}
           src={wildForest}
           autoPlay
+          loop
           controls
           volume={(0, 0.1)}
         />
@@ -244,11 +245,13 @@ class PlayArea extends Component {
                 </div>
                 <div className="col-6 preview-borad-area my-3 ml-2 card">
                   <h2 className="p-1 tool">شاشة العرض</h2>
-                  <PreviewBorad
-                    tags={this.state.allTags}
-                    level={this.state.level}
-                    buildingBlocks={this.props.buildingBlocks}
-                  />
+                  {this.state.level && (
+                    <PreviewBorad
+                      tags={this.state.allTags}
+                      level={this.state.level}
+                      buildingBlocks={this.props.buildingBlocks}
+                    />
+                  )}
                 </div>
               </div>
             </div>

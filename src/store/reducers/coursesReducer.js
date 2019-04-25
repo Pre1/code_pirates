@@ -45,7 +45,14 @@ const initialState = {
           ],
           content: Contents,
           isAvailable: true,
-          isPass: false
+          isPass: false,
+          instructions: [
+            { content: ["ضع <html> في منطقة البناء"], expected: "html" },
+            { content: ["ضع <head> في <html>"], expected: "head" },
+            { content: ["ضع <body> في <html>"], expected: "body" },
+            { content: ["ضع <title> في <head>"], expected: "title" },
+            { content: [" لقد فزت!!"], expected: "end" }
+          ]
         },
         {
           id: 2,
@@ -62,16 +69,25 @@ const initialState = {
             h6: "secondLevelH6"
           },
           tags: [
-            { id: "h1", content: "<h1> </h1>", tip: "h1" },
-            { id: "h2", content: "<h2> </h2>", tip: "h2" },
-            { id: "h3", content: "<h3> </h3>", tip: "h3" },
-            { id: "h4", content: "<h4> </h4>", tip: "h4" },
-            { id: "h5", content: "<h5> </h5>", tip: "h5" },
-            { id: "h6", content: "<h6> </h6>", tip: "h6" }
+            { id: "h1", content: "<h1> </h1>", tip: "العنوان ١" },
+            { id: "h2", content: "<h2> </h2>", tip: "العنوان ٢" },
+            { id: "h3", content: "<h3> </h3>", tip: "العنوان ٣" },
+            { id: "h4", content: "<h4> </h4>", tip: "العنوان ٤" },
+            { id: "h5", content: "<h5> </h5>", tip: "العنوان ٥" },
+            { id: "h6", content: "<h6> </h6>", tip: "العنوان ٦" }
           ],
           content: "",
           isAvailable: false,
-          isPass: false
+          isPass: false,
+          instructions: [
+            { content: ["ضع <h6> في منطقة البناء"], expected: "h6" },
+            { content: ["ضع <h5> لمساعدة القرصان في النداء "], expected: "h5" },
+            { content: ["ضع <h4> ليرتفع صوته"], expected: "h4" },
+            { content: ["ضع <h3> ليرتفع صوته "], expected: "h3" },
+            { content: ["ضع <h2> ليرتفع صوته "], expected: "h2" },
+            { content: ["ضع <h1> ليرتفع صوته "], expected: "h1" },
+            { content: [" لقد فزت!!"], expected: "end" }
+          ]
         },
         {
           id: 3,
@@ -86,7 +102,8 @@ const initialState = {
           tags: [{ id: "img", content: "<img />", tip: "img" }],
           content: ``,
           isAvailable: false,
-          isPass: false
+          isPass: false,
+          instructions: []
         },
         {
           id: 4,
@@ -105,7 +122,8 @@ const initialState = {
           ],
           content: ``,
           isAvailable: false,
-          isPass: false
+          isPass: false,
+          instructions: []
         },
         {
           id: 5,
@@ -128,7 +146,8 @@ const initialState = {
           ],
           content: "",
           isAvailable: false,
-          isPass: false
+          isPass: false,
+          instructions: []
         }
       ]
     },
