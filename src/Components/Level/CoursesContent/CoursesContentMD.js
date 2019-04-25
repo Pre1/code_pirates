@@ -16,9 +16,10 @@ export default class CoursesContent extends Component {
             <div className="col-11 text-right">
               <ReactMarkdown
                 className="markdownPB"
-                source={Contents.mdContentOne}
+                source={Contents.mdContentTwo}
                 renderers={{ code: CodeBlock }}
               />
+              <br />
             </div>
           </div>
         </div>

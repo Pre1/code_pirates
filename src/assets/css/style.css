@@ -623,7 +623,7 @@ img.island3:hover {
   color: #e11f5a;
 }
 
-.markdownPB pre  {
+.markdownPB pre {
   top: 10px;
   padding-top: 30px;
   width: 100%;
@@ -637,7 +637,6 @@ img.island3:hover {
   font-family: "Baloo Bhaijaan", cursive;
   padding: 1em;
   line-height: 35px;
-  
 }
 .markdownPB h2 {
   color: #4d535c;

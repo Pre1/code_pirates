@@ -1,7 +1,7 @@
 import * as actionTypes from "../actions/types";
 
 // Content
-import * as Contents from "../../Components/Level/CoursesContent/contentData.js";
+import * as content from "../../Components/Level/CoursesContent/contentData.js";
 
 // Images
 import barrel from "../../assets/images/barrel.png";
@@ -15,7 +15,7 @@ const initialState = {
       imageUrl: barrel,
       titleColor: "#ea6228",
       isAvailable: true,
-      isPass: false,
+      isPass: true,
       currentGoal: "",
       levels: [
         {
@@ -43,9 +43,9 @@ const initialState = {
             { id: "body", content: "<body> </body>", tip: "الجسم" },
             { id: "title", content: "<title> </title>", tip: "العنوان" }
           ],
-          content: Contents,
+          content: content.mdContentOne,
           isAvailable: true,
-          isPass: false
+          isPass: true
         },
         {
           id: 2,
@@ -69,9 +69,9 @@ const initialState = {
             { id: "h5", content: "<h5> </h5>", tip: "h5" },
             { id: "h6", content: "<h6> </h6>", tip: "h6" }
           ],
-          content: "",
-          isAvailable: false,
-          isPass: false
+          content: content.mdContentTwo,
+          isAvailable: true,
+          isPass: true
         },
         {
           id: 3,
@@ -85,8 +85,8 @@ const initialState = {
           },
           tags: [{ id: "img", content: "<img />", tip: "img" }],
           content: ``,
-          isAvailable: false,
-          isPass: false
+          isAvailable: true,
+          isPass: true
         },
         {
           id: 4,
