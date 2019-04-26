@@ -52,11 +52,14 @@ class Level extends Component {
         !userSteps.includes(currentInstruction) &&
         currentInstruction.expected === block.name
       ) {
-        let { undoStep, clearUndo } = this.props;
-
         // TODO: we might need to move this to Play Area comompnent so we can
         // pass it around as prop to have more fine control
         // on how instructions triggers — Abdullah
+
+        // **************************************//
+        // **************************************//
+
+        let { undoStep, clearUndo } = this.props;
 
         // if (undoStep) {
         //   let prevInstructIndex;
@@ -75,6 +78,9 @@ class Level extends Component {
         //   this.props.onSetInstruction(instructions[prevInstructIndex].content);
         //   clearUndo();
         // }
+
+        // **************************************//
+        // **************************************//
 
         // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
         this.setState({
