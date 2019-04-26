@@ -1,4 +1,6 @@
-import safcsp from "../../../assets/images/safcsp.svg";
+import htmlTags from "../../../assets/images/htmlTags.png";
+import hTags from "../../../assets/images/hTags.png";
+import imgTag from "../../../assets/images/imgTag.png";
 
 export const mdContentOne = `
 ## لماذا نتعلم HTML ؟
@@ -33,6 +35,12 @@ export const mdContentOne = `
 
 </html>
 \`\`\`
+
+## الكود البرمجي السابق سيبني شكل صفحة الويب كما في الصورة التالية
+\n
+
+
+![HTML](${htmlTags})
     
 - يقوم الوسم *<DOCTYPE html!>* بتعريف نوع الصفحة ليسهل على المتصفح عرض صفحات HTML عرضا صحيحا.
 - *<html> </html>* هو الوسم الرئيسي في كل صفحة ويب ويحتوي على جميع الوسوم *Tags* بداخله.
@@ -65,6 +73,11 @@ export const mdContentTwo = `
 <h6>العنوان 6</h6>
 
 \`\`\`
+
+## الكود البرمجي السابق سيعرض تأثير الـ *Tags* على النصوص كما في الصورة التالية
+\n
+
+![<h> Tags](${hTags})
  
 ## ماهي أهمية العناوين:
 
@@ -125,11 +138,9 @@ export const mdContentThree = `
 ## ستظهر الصورة في صفحة الويب بالشكل التالي
 \n
 
-الفقرة الأولى
-\n
-![معسكر طويق البرمجي](${safcsp})
-\n
-الفقرة الثانية
+
+![معسكر طويق البرمجي](${imgTag})
+
 
 
 `;
