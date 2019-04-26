@@ -83,12 +83,18 @@ class ChildBlock extends Block {
     return null;
   };
 
-  instruct(tab = 0) {
-    let tabLvl = [...Array(tab)].map(_ => "\t").join("");
-    return (
-      `\n${tabLvl}[[${this.name}]]` +
-      this.children.map(elm => elm.instruct(tab + 1)).join("")
-    );
+  // instruct(tab = 0) {
+  //   let tabLvl = [...Array(tab)].map(_ => "\t").join("");
+  //   return (
+  //     `\n${tabLvl}[[${this.name}]]` +
+  //     this.children.map(elm => elm.instruct(tab + 1)).join("")
+  //   );
+  // }
+
+  instruct() {
+    return `"${this.name}" : {${this.children
+      .map(elm => elm.instruct())
+      .join("")}}, `;
   }
 
   compile(className = "PiratesCode", childClassNames) {
@@ -182,10 +188,15 @@ class TextBlock extends Block {
     this.name = "text";
   }
 
-  instruct(tab = 0) {
-    let tabLvl = [...Array(tab)].map(_ => "\t").join("");
-    return `\n${tabLvl}[[Text]]`;
+  // instruct(tab = 0) {
+  //   let tabLvl = [...Array(tab)].map(_ => "\t").join("");
+  //   return `\n${tabLvl}[[Text]]`;
+  // }
+
+  instruct() {
+    return `"${this.name}" : {}, `;
   }
+
   compile(className = "textPirateBird") {
     return `<span className="${className}"> ${this.text} </span>`;
   }
