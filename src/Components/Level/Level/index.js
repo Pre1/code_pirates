@@ -20,10 +20,10 @@ class Level extends Component {
     // comes from the backend i added expected to tell us what type of tag we're expecting
     instructions: [
       //LEVEL ONE
-      // { content: ["ضع <html> في منطقة البناء"], expected: "html" },
-      // { content: ["ضع <head> في <html>"], expected: "head" },
-      // { content: ["ضع <body> في <html>"], expected: "body" },
-      // { content: ["ضع <title> في <head>"], expected: "title" },
+      // { content: ["ضع <html> في منطقة البناء"], expected: "[[html]]" },
+      // { content: ["ضع <head> في <html>"], expected: "[[html]][[head]]" },
+      // { content: ["ضع <body> في <html>"], expected: { "html": { "head": {}, "body": {} } } },
+      // { content: ["ضع <title> في <head>"], expected: "title",
       // { content: [" لقد فزت!!"], expected: null }
       //LEVEL TWO
       // { content: ["ضع <h6> في منطقة البناء"], expected: "h6" },
@@ -52,13 +52,6 @@ class Level extends Component {
         !userSteps.includes(currentInstruction) &&
         currentInstruction.expected === block.name
       ) {
-        // TODO: we might need to move this to Play Area comompnent so we can
-        // pass it around as prop to have more fine control
-        // on how instructions triggers — Abdullah
-
-        // **************************************//
-        // **************************************//
-
         let { undoStep, clearUndo } = this.props;
 
         // if (undoStep) {
