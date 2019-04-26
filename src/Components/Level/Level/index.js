@@ -45,23 +45,51 @@ class Level extends Component {
 
   // this function basicaly checks if the instruction has been met and changes the instruction
   makeChanges = block => {
-    const { currentInstruction } = this.state;
+    const { currentInstruction, userSteps, instructions } = this.state;
+
     if (block) {
       if (
-        !this.state.userSteps.includes(currentInstruction) &&
+        !userSteps.includes(currentInstruction) &&
         currentInstruction.expected === block.name
       ) {
+        // TODO: we might need to move this to Play Area comompnent so we can
+        // pass it around as prop to have more fine control
+        // on how instructions triggers — Abdullah
+
+        // **************************************//
+        // **************************************//
+
+        let { undoStep, clearUndo } = this.props;
+
+        // if (undoStep) {
+        //   let prevInstructIndex;
+        //   let resSteps = userSteps.filter(stp => {
+        //     if (stp.expected === undoStep) {
+        //       prevInstructIndex = instructions.indexOf(stp);
+        //     }
+        //     return stp.expected !== undoStep;
+        //   });
+
+        //   this.setState({
+        //     userSteps: resSteps,
+        //     currentInstruction: instructions[prevInstructIndex]
+        //   });
+
+        //   this.props.onSetInstruction(instructions[prevInstructIndex].content);
+        //   clearUndo();
+        // }
+
+        // **************************************//
+        // **************************************//
+
         // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
         this.setState({
-          userSteps: this.state.userSteps.concat(currentInstruction),
-          currentInstruction: this.state.instructions[
-            this.state.instructions.indexOf(currentInstruction) + 1
-          ]
+          userSteps: userSteps.concat(currentInstruction),
+          currentInstruction:
+            instructions[instructions.indexOf(currentInstruction) + 1]
         });
         this.props.onSetInstruction(
-          this.state.instructions[
-            this.state.instructions.indexOf(currentInstruction) + 1
-          ].content
+          instructions[instructions.indexOf(currentInstruction) + 1].content
         );
       }
     }
@@ -81,7 +109,7 @@ class Level extends Component {
   componentDidMount = async () => {
     const instructions = this.props.level.instructions;
     console.log("instructions ", instructions);
-    this.setState({
+    await this.setState({
       buildingBlocks: this.props.buildingBlocks,
       instructions: instructions,
       currentInstruction: instructions[0]
@@ -95,6 +123,10 @@ class Level extends Component {
       this.setState({ buildingBlocks: this.props.buildingBlocks });
       this.setView();
     }
+
+    let { instructions, currentInstruction } = this.state;
+    console.log("TCL: Level -> instructions", instructions);
+    console.log("TCL: Level -> currentInstruction", currentInstruction);
   };
 
   render() {

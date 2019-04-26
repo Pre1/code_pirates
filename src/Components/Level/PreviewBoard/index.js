@@ -55,6 +55,8 @@ class PreviewBoard extends Component {
           buildingBlocks={this.props.buildingBlocks}
           setTag={this.setTag}
           levelSearchTree={this.levelSearchTree}
+          undoStep={this.props.undoStep}
+          clearUndo={this.props.clearUndo}
         />
       </div>
     );
