@@ -16,6 +16,10 @@ class Block {
   jsxCompile() {
     return this.compile();
   }
+
+  instruct(tab = 0) {
+    return "NOPE";
+  }
 }
 
 class ChildBlock extends Block {
@@ -78,6 +82,14 @@ class ChildBlock extends Block {
     }
     return null;
   };
+
+  instruct(tab = 0) {
+    let tabLvl = [...Array(tab)].map(_ => "\t").join("");
+    return (
+      `\n${tabLvl}[[${this.name}]]` +
+      this.children.map(elm => elm.instruct(tab + 1)).join("")
+    );
+  }
 
   compile(className = "PiratesCode", childClassNames) {
     const noNos = ["html", "head", "body", "title"];
@@ -170,6 +182,10 @@ class TextBlock extends Block {
     this.name = "text";
   }
 
+  instruct(tab = 0) {
+    let tabLvl = [...Array(tab)].map(_ => "\t").join("");
+    return `\n${tabLvl}[[Text]]`;
+  }
   compile(className = "textPirateBird") {
     return `<span className="${className}"> ${this.text} </span>`;
   }
