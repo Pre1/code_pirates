@@ -8,7 +8,6 @@ import ReactTooltip from "react-tooltip";
 // images
 import assistant from "../../../assets/images/parrot.png";
 import lightImg from "../../../assets/images/lightbulb.svg";
-import * as actionCreators from "../../../store/actions";
 
 import { connect } from "react-redux";
 // import Sound from "react-sound";
@@ -32,7 +31,8 @@ class Instruction extends Component {
       "وشرايك تضغط على الزر السفلي؟ آآررر",
       "غلطططط... امزح",
       "هل القراصنة يشربون القهوة؟ آآررر",
-      "اسمي روكو بالمناسبة، هل قلت هذا مسبقا؟ آررر"
+      "اسمي روكو بالمناسبة، هل قلت هذا مسبقا؟ آررر",
+      "لكل اداة مهمة، حاول ان تعرف ماهي"
     ],
 
     // for level-specific instrucions
@@ -45,11 +45,12 @@ class Instruction extends Component {
     let { overlay, lvlInstruction } = await this.props;
 
     if (!overlay) {
+      this.setState({
+        instruct: lvlInstruction,
+        currentInstruct: 0
+      });
+
       ReactTooltip.show(findDOMNode(this.refs.instruct));
-      // this.setState({
-      //   instruct: lvlInstruction,
-      //   currentInstruct: 0
-      // });
 
       // setTimeout(() => {
       //   ReactTooltip.hide(findDOMNode(this.refs.instruct));
@@ -97,32 +98,30 @@ class Instruction extends Component {
     }
     // The initial Instructions for the Level
     // or you if you want to pass multiple sentences in
-    if (
-      !overlay &&
-      instruct[currentInstruct] &&
-      currentInstruct <= instruct.length
-    ) {
-      ReactTooltip.show(findDOMNode(this.refs.instruct));
+    if (!overlay) {
+      if (instruct[currentInstruct] && currentInstruct <= instruct.length) {
+        ReactTooltip.show(findDOMNode(this.refs.instruct));
 
-      setTimeout(() => {
-        // if you want to manully hide it, use this carrrrrfuly please!
-        // ReactTooltip.hide(findDOMNode(this.refs.instruct));
+        setTimeout(() => {
+          // if you want to manully hide it, use this carrrrrfuly please!
+          // ReactTooltip.hide(findDOMNode(this.refs.instruct));
 
-        this.setState({
-          currentInstruct: currentInstruct + 1
-        });
-      }, 5000);
-    } else {
-      let { critics } = this.state;
-      let randomSay = critics.getRandom();
-      setTimeout(() => {
-        this.setState({
-          instruct: [randomSay, ...lvlInstruction],
-          currentInstruct: 0
-        });
-      }, 3000);
+          this.setState({
+            currentInstruct: currentInstruct + 1
+          });
+        }, 3000);
+      } else {
+        let { critics } = this.state;
+        let randomSay = critics.getRandom();
+        setTimeout(() => {
+          this.setState({
+            instruct: [randomSay, ...lvlInstruction],
+            currentInstruct: 0
+          });
+        }, 3000);
 
-      ReactTooltip.show(findDOMNode(this.refs.instruct));
+        ReactTooltip.show(findDOMNode(this.refs.instruct));
+      }
     }
   }
 
@@ -163,6 +162,7 @@ class Instruction extends Component {
             data-for="instructBird"
             className="animatedCardBird"
             data-effect="solid"
+            onClick={() => this.props.toggleOverlay()}
           />
           <ReactTooltip
             id="instructBird"
