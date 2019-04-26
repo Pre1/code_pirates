@@ -1,10 +1,65 @@
 import flat from "../../../assets/images/flat_chrome.png";
 
 import island from "../../../assets/images/island.png";
+import speach_bubble from "../../../assets/images/Speech_bubble.svg.png";
 export const levelStyles = `
 ${
   "" /* the classes that has movement and animation can be handled here this is gonna be by getting these classes from the courseReducer */
 }
+.Tags{
+  background-image:url(${speach_bubble});
+  background-repeat:no-repeat;
+  width: 100%;
+  height: 100%;
+}
+.playTags {
+  width: 100%;
+  top: 60%;
+  z-index: 20;
+  position: absolute;
+}
+.levelEl {
+  width: 100%;
+  height: 100%;
+}
+.island {
+  position: absolute;
+  bottom: 5%;
+  left: 10%;
+}
+.boy {
+  position: absolute;
+  left: 50%;
+  bottom: 40%;
+}
+.bubble 
+{
+position: relative;
+min-height: 100px;
+max-width: 190px;
+max-height: auto;
+
+padding: 0px;
+background: #FFFFFF;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+
+.bubble:after 
+{
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 13px 18px 13px 0;
+  border-color: transparent #FFFFFF;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -18px;
+  top: 27px;
+}
+
 .secondLevelBody {
   background: #1c6588;
   height: 595px;

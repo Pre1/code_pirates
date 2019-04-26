@@ -70,7 +70,9 @@ class ChildBlock extends Block {
       let i;
       let result = null;
       for (i = 0; result == null && i < this.children.length; i++) {
-        result = this.children[i].changeText(blockID, newText);
+        if (this.children[i].changeText) {
+          result = this.children[i].changeText(blockID, newText);
+        }
       }
       return result;
     }

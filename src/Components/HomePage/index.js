@@ -15,7 +15,7 @@ class HomePage extends Component {
           src={homesound}
           autoPlay
           controls
-          volume={(0, 0.3)}
+          volume={(1, 0.3)}
         />
         {/* <h1 className="text-light pt-5">هل أنت مستعد لرحلة البحث عن الكنز؟</h1> */}
         <div id="islandContainer" class="animated">

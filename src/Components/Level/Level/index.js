@@ -138,16 +138,22 @@ class Level extends Component {
     return (
       <Container>
         <div className={this.props.level.classNameForBody}>
-          {this.props.level.classNameForTag &&
-            this.props.buildingBlocks.map(bb =>
-              bb.jsxCompile(
-                this.props.level.classNameForTag[bb.name],
-                this.props.level.classNameForTag
-              )
-            )}
-          <div>
-            <img src={pirate} width="150px" height="150px" />
-            <img src={island} width="360px" height="180px" />
+          <div className="playTags">
+            <div className="bubble">
+              {this.props.level.classNameForTag &&
+                this.props.buildingBlocks.map(bb =>
+                  bb.jsxCompile(
+                    this.props.level.classNameForTag[bb.name],
+                    this.props.level.classNameForTag
+                  )
+                )}
+            </div>
+          </div>
+          <div className="levelEl">
+            <div className="island">
+              <img className="boy" src={pirate} width="150px" height="150px" />
+              <img src={island} width="360px" height="180px" />
+            </div>
           </div>
           {/* {this.props.level.LevelContainer} */}
         </div>
