@@ -34,19 +34,23 @@ let Overlay = styled.div`
 
 class PlayArea extends Component {
   state = {
-    overlay: true,
+    overlay: false,
     level: null,
     tags: [],
-    allTags: []
+    allTags: [],
+    undoStep: null
   };
 
   // puts tag back after it's deleted
   putTagBack = tag => {
     console.log("TCL: PlayArea -> tags", this.state.allTags);
     this.setState({
-      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag))
+      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag)),
+      undoStep: tag
     });
   };
+
+  clearUndo = () => this.setState({ undoStep: null });
 
   // the meat
   onDragEnd = result => {
@@ -250,6 +254,8 @@ class PlayArea extends Component {
                       tags={this.state.allTags}
                       level={this.state.level}
                       buildingBlocks={this.props.buildingBlocks}
+                      undoStep={this.state.undoStep}
+                      clearUndo={this.clearUndo}
                     />
                   )}
                 </div>
