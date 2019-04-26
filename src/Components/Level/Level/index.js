@@ -3,9 +3,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions";
 import styled from "styled-components";
-import island from "../../../assets/images/Island a.png";
+import island from "../../../assets/images/island.png";
 import pirate from "../../../assets/images/Pirate 2.png";
 import * as styles from "./styles";
+import boat from "../../../assets/images/Pirate Ship.png";
 class Level extends Component {
   state = {
     /***** to be removed ******/
@@ -16,6 +17,15 @@ class Level extends Component {
 
     // comes as props
     buildingBlocks: [],
+    isPass: this.props.level.isPass,
+    help: "",
+    say: [
+      "أعتقد أن هناك شخص ما؟",
+      "أسمع صوتاً!!!",
+      "ماهذا الصوت!!!",
+      "أعتقد أنني أتخيل",
+      "هل هناااااك احددددددد؟"
+    ],
 
     // comes from the backend i added expected to tell us what type of tag we're expecting
     instructions: [
@@ -52,11 +62,13 @@ class Level extends Component {
         currentInstruction.expected === block.name
       ) {
         // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+        let say = this.state.say.getRandom();
         this.setState({
           userSteps: this.state.userSteps.concat(currentInstruction),
           currentInstruction: this.state.instructions[
             this.state.instructions.indexOf(currentInstruction) + 1
-          ]
+          ],
+          help: [say]
         });
         this.props.onSetInstruction(
           this.state.instructions[
@@ -87,12 +99,17 @@ class Level extends Component {
       currentInstruction: instructions[0]
     });
     this.props.onSetInstruction(instructions[0].content);
+    console.log("instruct", instructions[0].content);
+
     this.setView();
   };
 
   componentDidUpdate = prevProps => {
     if (prevProps.buildingBlocks !== this.props.buildingBlocks) {
-      this.setState({ buildingBlocks: this.props.buildingBlocks });
+      this.setState({
+        buildingBlocks: this.props.buildingBlocks
+      });
+      // if(this.props.buildingBlocks)
       this.setView();
     }
   };
@@ -107,6 +124,7 @@ class Level extends Component {
       <Container>
         <div className={this.props.level.classNameForBody}>
           <div className="playTags">
+            {" "}
             <div className="bubble">
               {this.props.level.classNameForTag &&
                 this.props.buildingBlocks.map(bb =>
@@ -115,9 +133,13 @@ class Level extends Component {
                     this.props.level.classNameForTag
                   )
                 )}
-            </div>
+            </div>{" "}
           </div>
           <div className="levelEl">
+            <img className="boat" src={boat} />
+            <div className="PirateBubble">
+              <h6 className="text-dark">{this.state.help}</h6>
+            </div>
             <div className="island">
               <img className="boy" src={pirate} width="150px" height="150px" />
               <img src={island} width="360px" height="180px" />

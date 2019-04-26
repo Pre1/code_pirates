@@ -183,8 +183,8 @@ class Instruction extends Component {
             id="instructBird"
             src={assistant}
             style={{ width: "120%", top: "130%", left: "80%", botto: "30%" }}
-            data-tip="أهلا بالقرصان الصغير"
-            // data-tip={instruct[currentInstruct]}
+            // data-tip="أهلا بالقرصان الصغير"
+            data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
             ref="instruct"
             data-place="right"

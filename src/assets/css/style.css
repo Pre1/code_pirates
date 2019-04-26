@@ -250,8 +250,8 @@ img.island3:hover {
   max-width: 48%;
   height: 665px;
   max-height: 665px;
-  overflow-y: scroll;
-  background-color: white;
+  /* overflow-y: scroll; */
+  /* background-color: white; */
 }
 
 .instructions-board {
@@ -286,10 +286,10 @@ img.island3:hover {
   -webkit-animation: bg-move 5s ease-in infinite;
 } */
 .boat {
-  width: 280px;
+  width: 140px;
   position: absolute;
-  top: 20%;
-  left: 35%;
+  bottom: 70%;
+  left: 65%;
 }
 .boat img {
   width: 100%;
