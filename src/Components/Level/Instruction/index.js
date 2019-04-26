@@ -23,65 +23,42 @@ class Instruction extends Component {
   state = {
     toolTip: false,
 
-    instruct: [
-      "أهلا بالقرصان الصغير",
-      "ابدا اللعبة",
-      " ضع القطع المناسبة في مكانها!"
-    ],
+    instruct: ["أهلا بالقرصان الصغير"],
 
     critics: [
       "حاول ان ترى تأثير بنائك على شاشة العرض",
-      "رائع!",
+      "جوووعااان!",
       "آآآآرررررّّ",
       "وشرايك تضغط على الزر السفلي؟ آآررر",
-      "غلطططط... امزح"
+      "غلطططط... امزح",
+      "هل القراصنة يشربون القهوة؟ آآررر",
+      "اسمي روكو بالمناسبة، هل قلت هذا مسبقا؟ آررر"
     ],
 
     // for level-specific instrucions
     lvlInstruct: [],
 
-    currentInstruct: 0,
-
-    // just for testing, it'll be removed later
-    next: false
+    currentInstruct: 0
   };
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (nextProps.lvlInstruction[0] === this.props.lvlInstruction[0]) {
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   async componentDidMount() {
-    let courseID = this.props.match.params.courseID;
-    let levelID = this.props.match.params.levelID;
-
-    // ReactTooltip.rebuild();
-
-    // await this.props.getGoals(levelID);
-
-    // let goals = this.props.goals;
-
     let { overlay, lvlInstruction } = await this.props;
 
     if (!overlay) {
       ReactTooltip.show(findDOMNode(this.refs.instruct));
-      setTimeout(() => {
-        ReactTooltip.hide(findDOMNode(this.refs.instruct));
+      // this.setState({
+      //   instruct: lvlInstruction,
+      //   currentInstruct: 0
+      // });
 
-        let initial = [
-          "أهلا بالقرصان الصغير",
-          "ابدا اللعبة",
-          " ضع القطع المناسبة في مكانها!"
-        ];
+      // setTimeout(() => {
+      //   ReactTooltip.hide(findDOMNode(this.refs.instruct));
 
-        this.setState(prevState => ({
-          // instruct: [...initial, ...lvlInstruction],
-          instruct: lvlInstruction,
-          currentInstruct: prevState.currentInstruct
-        }));
-      }, 4000);
+      //   this.setState({
+      //     instruct: lvlInstruction,
+      //     currentInstruct: 0
+      //   });
+      // }, 4000);
     }
   }
 
@@ -90,41 +67,29 @@ class Instruction extends Component {
     let currentBuildingBlks = this.props.buildingBlocks;
 
     let { overlay, lvlInstruction } = await this.props;
+    let { instruct, currentInstruct } = this.state;
 
-    let { instruct, currentInstruct, next } = this.state;
+    console.log("TCL: Instruction -> componentDidUpdate -> instruct", instruct);
 
-    // let goals = compactWhitespace(this.props.goals);
-
-    // if (prevStrHTML !== curStrHTML && goals !== curStrHTML) {
-    //   let { critics } = this.state;
-    //   let say = critics.getRandom();
-    //   this.setState({
-    //     instruct: [say],
-    //     currentInstruct: 0
-    //   });
-    // }
-
-    // if (goals) {
-    //   if (goals === curStrHTML) {
-    //     this.props.resetGoals();
-
-    //     this.setState({
-    //       instruct: ["آحسنت لقد اجتزت المرحلة!"],
-    //       currentInstruct: 0
-    //     });
-    //   }
-    // }
-
-    // check if the overlay is dism
-    // if (!overlay && !next) {
-    //   this.setState({ next: true });
-    // }
-
+    // === Trigger 1 ===
     if (prevProps.lvlInstruction[0] !== lvlInstruction[0]) {
-      console.log("Instruction =====================================");
+      console.log(
+        "Instruction ================================== Trigger 1 ==="
+      );
 
-      console.log("Instruction =====================================");
+      console.log(
+        "TCL: Instruction -> componentDidUpdate -> prevProps.lvlInstruction[0]",
+        prevProps.lvlInstruction[0]
+      );
+      console.log(
+        "TCL: Instruction -> componentDidUpdate -> lvlInstruction",
+        lvlInstruction
+      );
+      console.log(
+        "Instruction ================================== Trigger 1 ==="
+      );
 
+      ReactTooltip.show(findDOMNode(this.refs.instruct));
       this.setState({
         instruct: lvlInstruction,
         currentInstruct: 0
@@ -146,14 +111,19 @@ class Instruction extends Component {
         this.setState({
           currentInstruct: currentInstruct + 1
         });
-      }, 4000);
+      }, 5000);
+    } else {
+      let { critics } = this.state;
+      let randomSay = critics.getRandom();
+      setTimeout(() => {
+        this.setState({
+          instruct: [randomSay, ...lvlInstruction],
+          currentInstruct: 0
+        });
+      }, 3000);
+
+      ReactTooltip.show(findDOMNode(this.refs.instruct));
     }
-    // else if (next && currentInstruct >= instruct.length) {
-    //   this.setState({
-    //     instruct: lvlInstruction,
-    //     currentInstruct: 0
-    //   });
-    // }
   }
 
   toggleTip = () => {
@@ -165,11 +135,13 @@ class Instruction extends Component {
 
     this.setState({ toolTip: !toolTip });
   };
+
   render() {
     let courseID = this.props.match.params.courseID;
     let levelID = this.props.match.params.levelID;
 
-    let { buildingBlocks } = this.props;
+    let { buildingBlocks, lvlInstruction } = this.props;
+    // console.log("TCL: Instruction -> render -> lvlInstruction", lvlInstruction);
     let { instruct, currentInstruct } = this.state;
 
     return (
@@ -183,8 +155,7 @@ class Instruction extends Component {
             id="instructBird"
             src={assistant}
             style={{ width: "120%", top: "130%", left: "80%", botto: "30%" }}
-            data-tip="أهلا بالقرصان الصغير"
-            // data-tip={instruct[currentInstruct]}
+            data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
             ref="instruct"
             data-place="right"
@@ -208,12 +179,12 @@ class Instruction extends Component {
             // ]}
           />
 
-          <div style={{ position: "absolute", left: "1px", bottom: "2px" }}>
+          <div style={{ position: "absolute", left: "-30px", bottom: "-30px" }}>
             <Link
               to={`/course/${courseID}/level/${levelID}/content`}
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <button className="col-8 btn btn-warning rounded-pill mt-5 ">
+              <button className="col-10 btn btn-warning rounded-pill mt-3 ">
                 <img src={lightImg} alt="light" />
               </button>
             </Link>
@@ -227,16 +198,15 @@ class Instruction extends Component {
 const mapStateToProps = state => {
   return {
     buildingBlocks: state.mainReducer.buildingBlocks,
-    goals: state.levelsReducer.currentGoals,
     lvlInstruction: state.levelsReducer.currentInstruction
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getGoals: id => dispatch(actionCreators.getLevelGoals(id)),
-    setGoals: (id, goals) => dispatch(actionCreators.setLevelGoals(id, goals)),
-    resetGoals: () => dispatch(actionCreators.resetLevelGoals())
+    // getGoals: id => dispatch(actionCreators.getLevelGoals(id)),
+    // setGoals: (id, goals) => dispatch(actionCreators.setLevelGoals(id, goals)),
+    // resetGoals: () => dispatch(actionCreators.resetLevelGoals())
   };
 };
 
