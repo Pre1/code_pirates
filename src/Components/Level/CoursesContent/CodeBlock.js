@@ -19,7 +19,7 @@ class CodeBlock extends PureComponent {
       <SyntaxHighlighter
         language={language}
         style={darcula}
-        showLineNumbers={true}
+        showLineNumbers={false}
       >
         {value}
       </SyntaxHighlighter>

@@ -1,7 +1,7 @@
 import * as actionTypes from "../actions/types";
 
 // Content
-import * as Contents from "../../Components/Level/CoursesContent/contentData.js";
+import * as content from "../../Components/Level/CoursesContent/contentData.js";
 
 // Images
 import barrel from "../../assets/images/barrel.png";
@@ -15,7 +15,7 @@ const initialState = {
       imageUrl: barrel,
       titleColor: "#ea6228",
       isAvailable: true,
-      isPass: false,
+      isPass: true,
       currentGoal: "",
       levels: [
         {
@@ -44,9 +44,9 @@ const initialState = {
             { id: "body", content: "<body> </body>", tip: "الجسم" },
             { id: "title", content: "<title> </title>", tip: "العنوان" }
           ],
-          content: Contents,
+          content: content.mdContentOne,
           isAvailable: true,
-          isPass: false,
+          isPass: true,
           instructions: [
             { content: ["ضع <html> في منطقة البناء"], expected: "html" },
             { content: ["ضع <head> في <html>"], expected: "head" },
@@ -62,9 +62,6 @@ const initialState = {
           goals: ``,
           goalsList: [],
           classNameForBody: "secondLevelBody",
-          // LevelContainer: `
-          // <div className="secondLevelBoatMove"><img /></div>
-          //           `,
           classNameForTag: {
             h1: "secondLevelH1",
             h2: "secondLevelH2",
@@ -82,9 +79,10 @@ const initialState = {
             { id: "h5", content: "<h5> </h5>", tip: "العنوان ٥" },
             { id: "h6", content: "<h6> </h6>", tip: "العنوان ٦" }
           ],
-          content: "",
-          isAvailable: false,
-          isPass: false,
+
+          content: content.mdContentTwo,
+          isAvailable: true,
+          isPass: true,
           instructions: [
             { content: ["ضع <h6> في منطقة البناء"], expected: "h6" },
             { content: ["ضع <h5> لمساعدة القرصان في النداء "], expected: "h5" },
@@ -106,9 +104,10 @@ const initialState = {
             imgMove: "thirdLevelImageMove"
           },
           tags: [{ id: "img", content: "<img />", tip: "img" }],
-          content: ``,
-          isAvailable: false,
-          isPass: false,
+
+          content: content.mdContentThree,
+          isAvailable: true,
+          isPass: true,
           instructions: []
         },
         {
@@ -150,7 +149,7 @@ const initialState = {
             { id: "strong", content: "<strong> </strong>", tip: "strong" },
             { id: "small", content: "<small> </small>", tip: "small" }
           ],
-          content: "",
+          content: ``,
           isAvailable: false,
           isPass: false,
           instructions: []

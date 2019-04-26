@@ -73,7 +73,7 @@ export default class Tutorial extends Component {
         </Carousel>
 
         <Button onClick={() => toggle()} variant="dark my-4">
-          بعدين يا شيخ
+          إغلاق التعليمات
         </Button>
       </div>
     );
