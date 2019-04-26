@@ -67,6 +67,14 @@ class Instruction extends Component {
     let prevBuildingBlks = prevProps.buildingBlocks;
     let currentBuildingBlks = this.props.buildingBlocks;
 
+    let curStrHTML = currentBuildingBlks.map(elm => elm.instruct()).join("");
+    console.log("TCL: zerozero", curStrHTML);
+
+    console.log(
+      "TCL: Instruction -> componentDidUpdate -> currentBuildingBlks",
+      currentBuildingBlks
+    );
+
     let { overlay, lvlInstruction } = await this.props;
     let { instruct, currentInstruct } = this.state;
 
