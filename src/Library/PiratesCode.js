@@ -92,9 +92,9 @@ class ChildBlock extends Block {
   // }
 
   instruct() {
-    return `"${this.name}" : {${this.children
+    return `"${this.name}":{${this.children
       .map(elm => elm.instruct())
-      .join("")}}, `;
+      .join("")}},`;
   }
 
   compile(className = "PiratesCode", childClassNames) {
@@ -194,7 +194,7 @@ class TextBlock extends Block {
   // }
 
   instruct() {
-    return `"${this.name}" : {}, `;
+    return `"${this.name}":{},`;
   }
 
   compile(className = "textPirateBird") {

@@ -47,11 +47,30 @@ const initialState = {
           content: content.mdContentOne,
           isAvailable: true,
           isPass: true,
+          // instructions: [
+          //   { content: ["ضع <html> في منطقة البناء"], expected: "html" },
+          //   { content: ["ضع <head> في <html>"], expected: "head" },
+          //   { content: ["ضع <body> في <html>"], expected: "body" },
+          //   { content: ["ضع <title> في <head>"], expected: "title" },
+          //   { content: [" لقد فزت!!"], expected: "end" }
+          // ],
           instructions: [
-            { content: ["ضع <html> في منطقة البناء"], expected: "html" },
-            { content: ["ضع <head> في <html>"], expected: "head" },
-            { content: ["ضع <body> في <html>"], expected: "body" },
-            { content: ["ضع <title> في <head>"], expected: "title" },
+            {
+              content: ["ضع <html> في منطقة البناء"],
+              expected: '"html":{},'
+            },
+            {
+              content: ["ضع <head> في <html>"],
+              expected: '"html":{"head":{},},'
+            },
+            {
+              content: ["ضع <body> في <html>"],
+              expected: '"html":{"head":{},"body":{},},'
+            },
+            {
+              content: ["ضع <title> في <head>"],
+              expected: '"html":{"head":{"title":{"text":{},},},"body":{},},'
+            },
             { content: [" لقد فزت!!"], expected: "end" }
           ]
         },
