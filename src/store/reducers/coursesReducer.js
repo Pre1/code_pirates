@@ -46,7 +46,7 @@ const initialState = {
           ],
           content: content.mdContentOne,
           isAvailable: true,
-          isPass: true,
+          isPass: false,
           // instructions: [
           //   { content: ["ضع <html> في منطقة البناء"], expected: "html" },
           //   { content: ["ضع <head> في <html>"], expected: "head" },
@@ -100,15 +100,36 @@ const initialState = {
           ],
 
           content: content.mdContentTwo,
-          isAvailable: true,
-          isPass: true,
+          isAvailable: false,
+          isPass: false,
           instructions: [
-            { content: ["ضع <h6> في منطقة البناء"], expected: "h6" },
-            { content: ["ضع <h5> لمساعدة القرصان في النداء "], expected: "h5" },
-            { content: ["ضع <h4> ليرتفع صوته"], expected: "h4" },
-            { content: ["ضع <h3> ليرتفع صوته "], expected: "h3" },
-            { content: ["ضع <h2> ليرتفع صوته "], expected: "h2" },
-            { content: ["ضع <h1> ليرتفع صوته "], expected: "h1" },
+            {
+              content: ["ضع <h6> في منطقة البناء"],
+              expected: '"h6":{"text":{},},'
+            },
+            {
+              content: ["ضع <h5> لمساعدة القرصان في النداء "],
+              expected: '"h6":{"text":{},},"h5":{"text":{},},'
+            },
+            {
+              content: ["ضع <h4> ليرتفع صوته"],
+              expected: '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},'
+            },
+            {
+              content: ["ضع <h3> ليرتفع صوته "],
+              expected:
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},'
+            },
+            {
+              content: ["ضع <h2> ليرتفع صوته "],
+              expected:
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},"h2":{"text":{},},'
+            },
+            {
+              content: ["ضع <h1> ليرتفع صوته "],
+              expected:
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},"h2":{"text":{},},"h1":{"text":{},},'
+            },
             { content: [" لقد فزت!!"], expected: "end" }
           ]
         },
@@ -125,8 +146,8 @@ const initialState = {
           tags: [{ id: "img", content: "<img />", tip: "img" }],
 
           content: content.mdContentThree,
-          isAvailable: true,
-          isPass: true,
+          isAvailable: false,
+          isPass: false,
           instructions: []
         },
         {
@@ -201,10 +222,16 @@ const initialState = {
 const coursesReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FINISH_LVL:
-      let newLevels = state.levels.slice();
+      let newLevels = state.courses
+        .find(course => course.id === +action.payload.courseId)
+        .levels.slice();
 
-      let lvl = { ...newLevels.find(obj => obj.id === action.payload) };
-      let nexLvl = { ...newLevels.find(obj => obj.id === action.payload + 1) };
+      let lvl = {
+        ...newLevels.find(obj => obj.id === +action.payload.levelId)
+      };
+      let nexLvl = {
+        ...newLevels.find(obj => obj.id === +action.payload.levelId + 1)
+      };
 
       if (nexLvl.id) {
         nexLvl.isAvailable = true;
@@ -215,8 +242,14 @@ const coursesReducer = (state = initialState, action) => {
 
       newLevels.splice(lvl.id - 1, 1, lvl);
 
+      let newCourses = state.courses.slice();
+      let newCourse = newCourses.find(
+        course => course.id === +action.payload.courseId
+      );
+      newCourse.levels = newLevels;
+      newCourses.splice(newCourses.indexOf(newCourses), 1, newCourse);
       return {
-        levels: newLevels
+        courses: newCourses
       };
 
     case actionTypes.GET_LEVEL_GOALS:

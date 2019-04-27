@@ -93,24 +93,24 @@ const levelsReducer = (state = initialState, action) => {
         ...state,
         currentInstruction: action.payload
       };
-    case actionTypes.FINISH_LVL:
-      let newLevels = state.levels.slice();
+    // case actionTypes.FINISH_LVL:
+    //   let newLevels = state.levels.slice();
 
-      let lvl = { ...newLevels.find(obj => obj.id === action.payload) };
-      let nexLvl = { ...newLevels.find(obj => obj.id === action.payload + 1) };
+    //   let lvl = { ...newLevels.find(obj => obj.id === action.payload) };
+    //   let nexLvl = { ...newLevels.find(obj => obj.id === action.payload + 1) };
 
-      if (nexLvl.id) {
-        nexLvl.isAvailable = true;
-        newLevels.splice(nexLvl.id - 1, 1, nexLvl);
-      }
+    //   if (nexLvl.id) {
+    //     nexLvl.isAvailable = true;
+    //     newLevels.splice(nexLvl.id - 1, 1, nexLvl);
+    //   }
 
-      lvl.isPass = true;
+    //   lvl.isPass = true;
 
-      newLevels.splice(lvl.id - 1, 1, lvl);
+    //   newLevels.splice(lvl.id - 1, 1, lvl);
 
-      return {
-        levels: newLevels
-      };
+    //   return {
+    //     levels: newLevels
+    //   };
 
     case actionTypes.GET_LEVEL_GOALS:
       let currentGoals = state.levels.find(lvl => lvl.id === +action.payload)
