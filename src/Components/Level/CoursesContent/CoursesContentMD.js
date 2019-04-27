@@ -5,7 +5,6 @@ import ReactMarkdown from "react-markdown";
 import CodeBlock from "./CodeBlock";
 import * as Contents from "./contentData";
 import CourseHeader from "./CourseHeader";
-import safcsp from "../../../assets/images/safcsp.svg";
 
 // Connection with redux centeral store
 import { connect } from "react-redux";

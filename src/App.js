@@ -8,6 +8,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 import "@atlaskit/css-reset";
 
+import tuwaikImg from "./assets/images/tuwaikImg.jpg";
+
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -43,8 +45,15 @@ class App extends Component {
         </div>
 
         <div className="row my-5 justify-content-center">
+          <img
+            src={tuwaikImg}
+            width="5%"
+            height="5%"
+            style={{ marginTop: "-15px" }}
+          />
           <span className="footer"> صنع بـ </span>
           <FontAwesomeIcon className="footer footer-heart" icon={faHeart} />
+
           <span className="footer">
             {" "}
             بواسطة فريق السعادة في معسكر طويق البرمجي | 2019
