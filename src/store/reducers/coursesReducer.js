@@ -62,9 +62,18 @@ const initialState = {
           goals: ``,
           goalsList: [],
           classNameForBody: "secondLevelBody",
-          // LevelContainer: `
-          // <div className="secondLevelBoatMove"><img /></div>
-          //           `,
+          LevelContainer: `<div className="levelEl">
+          <img className="boat" src={boat} alt="boat" />
+          <div className="PirateBubble">
+            <h6 className="text-dark">{this.state.help}</h6>
+          </div>
+          <div className="island">
+            <img className="boy" src={pirate} width="150px" height="150px" alt="pirate" />
+            <img src={island} width="360px" height="180px" alt="island"  />
+          </div>
+          </div>
+
+        `,
           classNameForTag: {
             h1: "secondLevelH1",
             h2: "secondLevelH2",

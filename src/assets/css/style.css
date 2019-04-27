@@ -19,7 +19,7 @@ body {
 .background {
   position: absolute;
   width: 100%;
-  height: 140%;
+  height: 110%;
   top: 0;
   left: 0;
   /* background: #fff; */
@@ -57,7 +57,7 @@ body {
   position: relative;
   width: 100%;
   /* height: 100%; */
-  top: 70%;
+  top: 55%;
   left: 50%;
   -webkit-transform: translate(-50%, -47%);
 }
@@ -76,8 +76,14 @@ img.island2 {
   margin: 40px;
   filter: grayscale();
 }
+img.island3:hover {
+  -webkit-animation: scale-up-center 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
 img.island2:hover {
   filter: none;
+}
+img.island25:hover {
+  -webkit-animation: scale-up-center 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 img.island3 {
   width: 20%;

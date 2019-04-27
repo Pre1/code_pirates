@@ -6,6 +6,7 @@ import styled from "styled-components";
 import island from "../../../assets/images/island.png";
 import pirate from "../../../assets/images/Pirate 2.png";
 import * as styles from "./styles";
+import * as Blocks from "../../../Library/PiratesCode";
 import boat from "../../../assets/images/Pirate Ship.png";
 class Level extends Component {
   state = {
@@ -100,9 +101,75 @@ class Level extends Component {
     });
     this.props.onSetInstruction(instructions[0].content);
     console.log("instruct", instructions[0].content);
+    // const levelJSX = new Blocks.ChildBlock("level", "level");
+    // let list = [
+    //   { name: "img", className: "boat", children: [] },
+    //   {
+    //     name: "div",
+    //     className: "PirateBubble",
+    //     children: [
+    //       {
+    //         name: "h6",
+    //         className: "text-dark",
+    //         children: [{ name: "text", text: "", children: [] }]
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     name: "div",
+    //     className: "",
+    //     children: [
+    //       { name: "img-1", className: "", children: [] },
+    //       { name: "img-2", className: "", children: [] }
+    //     ]
+    //   }
+    // ];
+    // list.map((el, index) =>
+    //   levelJSX.addChild(
+    //     levelJSX.id,
+    //     new Blocks.ChildBlock(el.name, `${el.name}-${index}`)
+    //   )
+    // );
+
+    /********* @ abdullah here ********/
+    // const levelDisgn = this.props.level.LevelContainer;
+    // let parse = new DOMParser();
+    // let objj = parse.parseFromString(levelDisgn, "text/html");
+    // let bb = objj.body;
+    // console.log("anas obj ", bb.children);
+    // let obj = new Blocks.ChildBlock("body", "body");
+    // let resultBlock = this.turnHTMLIntoBlock(obj, bb, null);
+
+    // console.log("anas ", resultBlock);
+    /********* @ abdullah here ********/
 
     this.setView();
   };
+
+  /********* @ abdullah here ********/
+  // turnHTMLIntoBlock = (obj, DOMobj, block) => {
+  //   if (block) {
+  //     obj.addChild(
+  //       block.id,
+  //       new Blocks.ChildBlock(DOMobj.localName, DOMobj.localName)
+  //     );
+  //   }
+  //   block = new Blocks.ChildBlock(DOMobj.localName, DOMobj.localName);
+
+  //   if (DOMobj.childElementCount === 0) {
+  //     // add to children
+  //     return obj;
+  //   } else if (DOMobj.childElementCount > 0) {
+  //     let i;
+  //     let result = null;
+  //     for (i = 0; result == null && i < DOMobj.children.length; i++) {
+  //       result = this.turnHTMLIntoBlock(obj, DOMobj.children[i], block);
+  //     }
+  //     return result;
+  //   }
+  //   return null;
+  // };
+  /********* @ abdullah here ********/
 
   componentDidUpdate = prevProps => {
     if (prevProps.buildingBlocks !== this.props.buildingBlocks) {
@@ -118,7 +185,32 @@ class Level extends Component {
     const Container = styled.div`
       ${styles.levelStyles}
     `;
-
+    const level = () => {
+      switch (this.props.level.id) {
+        case 1:
+          return;
+        case 2:
+          return (
+            <div>
+              <img className="boat" src={boat} />
+              <div className="PirateBubble">
+                <h6 className="text-dark">{this.state.help}</h6>
+              </div>
+              <div className="island">
+                <img
+                  className="boy"
+                  src={pirate}
+                  width="150px"
+                  height="150px"
+                />
+                <img src={island} width="360px" height="180px" />
+              </div>
+            </div>
+          );
+        default:
+          return;
+      }
+    };
     // const
     return (
       <Container>
@@ -135,17 +227,7 @@ class Level extends Component {
                 )}
             </div>{" "}
           </div>
-          <div className="levelEl">
-            <img className="boat" src={boat} />
-            <div className="PirateBubble">
-              <h6 className="text-dark">{this.state.help}</h6>
-            </div>
-            <div className="island">
-              <img className="boy" src={pirate} width="150px" height="150px" />
-              <img src={island} width="360px" height="180px" />
-            </div>
-          </div>
-          {/* {this.props.level.LevelContainer} */}
+          <div className="levelEl">{level()}</div>
         </div>
       </Container>
     );

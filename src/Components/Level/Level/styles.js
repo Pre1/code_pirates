@@ -12,12 +12,7 @@ ${
   width: 100%;
   height: 100%;
 }
-.playTags {
-  width: 100%;
-  top: 60%;
-  z-index: 20;
-  position: absolute;
-}
+
 .levelEl {
   width: 100%;
   height: 100%;
@@ -32,36 +27,7 @@ ${
   left: 5%;
   bottom: 40%;
 }
-.bubble 
-{
-position: relative;
- min-height: 70px;
-width:120px
-max-width: 180px;
-max-height: auto;
-right:35%;
-top:25%;
 
-padding: 0px;
-background: rgba(255, 255, 255, 0.5);
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;
-}
-
-.bubble:after 
-{
-  content: '';
-  position: absolute;
-  border-style: solid;
-  border-width: 13px 18px 13px 0;
-  border-color: transparent  rgba(255, 255, 255, 0.5);
-  display: block;
-  max-width: 0;
-  z-index: 1;
-  left: -18px;
-  top: 29px;
-}
 .PirateBubble 
 {
 position: relative;
@@ -98,6 +64,45 @@ top: 20%;
 
   background-size: 450px;
   animation: bg-move 5s ease-in infinite;
+  .playTags {
+    width: 100%;
+    top: 60%;
+    z-index: 20;
+    position: absolute;
+  }  
+  .bubble 
+    {
+    position: relative;
+    min-height: 70px;
+    width:120px
+    max-width: 180px;
+    max-height: auto;
+    right:35%;
+    top:25%;
+
+    padding: 0px;
+    background: rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    }
+
+    .bubble:after 
+    {
+      content: '';
+      position: absolute;
+      border-style: solid;
+      border-width: 13px 18px 13px 0;
+      border-color: transparent  rgba(255, 255, 255, 0.5);
+      display: block;
+      max-width: 0;
+      z-index: 1;
+      left: -18px;
+      top: 29px;
+    }
+  
+
+
 }
 
 // .firstLevelHTML {
