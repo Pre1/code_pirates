@@ -5,6 +5,8 @@ import PreviewBorad from "../PreviewBoard";
 import { DragDropContext } from "react-beautiful-dnd";
 import * as Blocks from "../../../Library/PiratesCode";
 
+import Modal from "react-responsive-modal";
+
 import { Link } from "react-router-dom";
 
 import Instruction from "../Instruction";
@@ -41,7 +43,8 @@ class PlayArea extends Component {
     undoStep: null,
     instructions: [],
     currentInstruction: [],
-    userSteps: []
+    userSteps: [],
+    modalOpen: false
   };
 
   // puts tag back after it's deleted
@@ -115,8 +118,6 @@ class PlayArea extends Component {
   };
 
   addInstruction = block => {
-    console.log("anas TCL: PlayArea -> block", block);
-    console.log(" anas TCL: PlayArea -> blockj", block.instruct());
     const { currentInstruction, userSteps, instructions } = this.state;
 
     let tags = [...this.state.tags];
@@ -131,14 +132,11 @@ class PlayArea extends Component {
     let building = new Blocks.ChildBlock("building", "building");
     building.children = newBB;
     console.log(
-      "anas TCL: PlayArea -> currentInstruction.expected === building.instruct()",
-      `"building":{${currentInstruction.expected}},`,
-      " === ",
-      building.instruct(),
-      " ? ",
-      `"building":{${currentInstruction.expected}},` === building.instruct()
+      "anas TCL: PlayArea -> instructions[instructions.indexOf(currentInstruction) + 1].expected",
+      instructions[instructions.indexOf(currentInstruction)].expected,
+      "\n",
+      building.instruct()
     );
-
     if (
       !userSteps.includes(currentInstruction) &&
       `"building":{${currentInstruction.expected}},` === building.instruct()
@@ -172,10 +170,6 @@ class PlayArea extends Component {
         currentInstruction:
           instructions[instructions.indexOf(currentInstruction) + 1]
       });
-      console.log(
-        "anas TCL: PlayArea -> instruction",
-        instructions[instructions.indexOf(currentInstruction) + 1].content
-      );
 
       if (
         instructions[instructions.indexOf(currentInstruction) + 1].expected ===
@@ -192,6 +186,15 @@ class PlayArea extends Component {
 
   finishLevel = () => {
     console.log("anas done");
+    this.setState({ modalOpen: true });
+    this.props.onSetBB([]);
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+    this.props.onFinishLevel(selectedCourseId, selectedLevelId);
+  };
+
+  closeModal = () => {
+    this.setState({ modalOpen: false });
   };
 
   componentDidMount = () => {
@@ -251,6 +254,7 @@ class PlayArea extends Component {
       });
     }
   };
+
   render() {
     const selectedCourseId = this.props.match.params.courseID;
     const selectedLevelId = this.props.match.params.levelID;
@@ -264,9 +268,20 @@ class PlayArea extends Component {
     );
 
     // const tags = currentLevel.tags;
-
+    let { modalOpen } = this.state;
     return (
       <div className="play">
+        <Modal open={modalOpen} center>
+          <div className=" play-header pt-5 pb-5 mt-2 ">
+            <Link
+              style={{ textDecorationLine: "none" }}
+              to={`/course/${selectedCourseId}`}
+              onClick={this.onClose}
+            >
+              <h1 className="text-light"> Continue playing </h1>
+            </Link>
+          </div>
+        </Modal>
         <ReactAudioPlayer
           style={{ display: "none" }}
           src={wildForest}
@@ -345,7 +360,8 @@ const mapDispatchToProps = dispatch => ({
   onAddBlock: block => dispatch(actionCreators.addBuildingBlock(block)),
   onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB)),
   onSetInstruction: instruction =>
-    dispatch(actionCreators.setLevelInstruction(instruction))
+    dispatch(actionCreators.setLevelInstruction(instruction)),
+  onFinishLevel: (CID, LID) => dispatch(actionCreators.finishLvl(CID, LID))
 });
 export default connect(
   mapStateToProps,
