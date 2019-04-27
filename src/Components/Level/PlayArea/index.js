@@ -38,7 +38,10 @@ class PlayArea extends Component {
     level: null,
     tags: [],
     allTags: [],
-    undoStep: null
+    undoStep: null,
+    instructions: [],
+    currentInstruction: [],
+    userSteps: []
   };
 
   // puts tag back after it's deleted
@@ -82,12 +85,6 @@ class PlayArea extends Component {
         const noNos = ["title", "text", "body", "head"];
         if (!noNos.includes(newBlock.name)) {
           // remove the tag from the tags list
-          this.state.tags.splice(
-            this.state.tags.indexOf(
-              this.state.tags.find(tag => tag.id === draggableId.split("-")[0])
-            ),
-            1
-          );
 
           // add block
           this.props.onAddBlock(newBlock);
@@ -99,39 +96,102 @@ class PlayArea extends Component {
         building.children = newBB;
         building.addChild(destination.droppableId, newBlock);
         // this.searchTree();
-        console.log(
-          "anas TCL: PlayArea -> case title droppableId -> BB",
-          destination.droppableId,
-          building
-        );
 
         // remove the tag
-        this.state.tags.splice(
-          this.state.tags.indexOf(
-            this.state.tags.find(tag => tag.id === draggableId.split("-")[0])
-          ),
-          1
-        );
+        // this.state.tags.splice(
+        //   this.state.tags.indexOf(
+        //     this.state.tags.find(tag => tag.id === draggableId.split("-")[0])
+        //   ),
+        //   1
+        // );
         // reset the list
         this.props.onSetBB(building.children);
+      }
+    }
+  };
 
-        console.log(
-          "TCL: PlayArea -> case title this.props.buildingBlocks",
-          this.props.buildingBlocks
+  toggleOverlay = () => {
+    this.setState(prevState => ({ overlay: !prevState.overlay }));
+  };
+
+  addInstruction = block => {
+    console.log("anas TCL: PlayArea -> block", block);
+    console.log(" anas TCL: PlayArea -> blockj", block.instruct());
+    const { currentInstruction, userSteps, instructions } = this.state;
+
+    let tags = [...this.state.tags];
+    tags.splice(
+      this.state.tags.indexOf(
+        this.state.tags.find(tag => tag.id === block.name)
+      ),
+      1
+    );
+    this.setState({ tags });
+    let newBB = this.props.buildingBlocks.slice();
+    let building = new Blocks.ChildBlock("building", "building");
+    building.children = newBB;
+    console.log(
+      "anas TCL: PlayArea -> currentInstruction.expected === building.instruct()",
+      `"building":{${currentInstruction.expected}},`,
+      " === ",
+      building.instruct(),
+      " ? ",
+      `"building":{${currentInstruction.expected}},` === building.instruct()
+    );
+
+    if (
+      !userSteps.includes(currentInstruction) &&
+      `"building":{${currentInstruction.expected}},` === building.instruct()
+    ) {
+      // let { undoStep, clearUndo } = this.props;
+
+      // if (undoStep) {
+      //   let prevInstructIndex;
+      //   let resSteps = userSteps.filter(stp => {
+      //     if (stp.expected === undoStep) {
+      //       prevInstructIndex = instructions.indexOf(stp);
+      //     }
+      //     return stp.expected !== undoStep;
+      //   });
+
+      //   this. tState({
+      //     userSteps: resSteps,
+      //     currentInstruction: instructions[prevInstructIndex]
+      //   });
+
+      //   this.props.onSetInstruction(instructions[prevInstructIndex].content);
+      //   clearUndo();
+      // }
+
+      // **************************************//
+      // **************************************//
+
+      // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+      this.setState({
+        userSteps: userSteps.concat(currentInstruction),
+        currentInstruction:
+          instructions[instructions.indexOf(currentInstruction) + 1]
+      });
+      console.log(
+        "anas TCL: PlayArea -> instruction",
+        instructions[instructions.indexOf(currentInstruction) + 1].content
+      );
+
+      if (
+        instructions[instructions.indexOf(currentInstruction) + 1].expected ===
+        "end"
+      ) {
+        this.finishLevel();
+      } else {
+        this.props.onSetInstruction(
+          instructions[instructions.indexOf(currentInstruction) + 1].content
         );
       }
     }
   };
 
-  handleDroppingBlock = newBlock => {
-    console.log(
-      "TCL: PlayArea -> handleDroppingBlock -> handleDroppingBlock",
-      newBlock
-    );
-  };
-
-  toggleOverlay = () => {
-    this.setState(prevState => ({ overlay: !prevState.overlay }));
+  finishLevel = () => {
+    console.log("anas done");
   };
 
   componentDidMount = () => {
@@ -150,8 +210,12 @@ class PlayArea extends Component {
     this.setState({
       level: currentLevel,
       tags: [...tags],
-      allTags: [...tags]
+      allTags: [...tags],
+      instructions: currentLevel.instructions,
+      currentInstruction: currentLevel.instructions[0]
     });
+
+    this.props.onSetInstruction(currentLevel.instructions[0].content);
   };
 
   componentDidUpdate = prevProps => {
@@ -175,7 +239,9 @@ class PlayArea extends Component {
       this.setState({
         level: currentLevel,
         tags: [...tags],
-        allTags: [...tags]
+        allTags: [...tags],
+        instructions: currentLevel.instructions,
+        currentInstruction: currentLevel.instructions[0]
       });
     }
 
@@ -251,7 +317,8 @@ class PlayArea extends Component {
                   <h2 className="p-1 tool">شاشة العرض</h2>
                   {this.state.level && (
                     <PreviewBorad
-                      tags={this.state.allTags}
+                      addInstruction={this.addInstruction}
+                      tags={this.state.tags}
                       level={this.state.level}
                       buildingBlocks={this.props.buildingBlocks}
                       undoStep={this.state.undoStep}
@@ -276,7 +343,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onAddBlock: block => dispatch(actionCreators.addBuildingBlock(block)),
-  onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB))
+  onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB)),
+  onSetInstruction: instruction =>
+    dispatch(actionCreators.setLevelInstruction(instruction))
 });
 export default connect(
   mapStateToProps,
