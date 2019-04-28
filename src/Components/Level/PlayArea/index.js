@@ -30,13 +30,13 @@ let Overlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 2;
+  z-index: 40;
   cursor: pointer;
 `;
 
 class PlayArea extends Component {
   state = {
-    overlay: false,
+    overlay: true,
     level: null,
     tags: [],
     allTags: [],
@@ -302,6 +302,7 @@ class PlayArea extends Component {
           </div>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <div className="col-12 main-content card  text-center">
+              {/* onClick={() => this.toggleOverlay()} */}
               <Overlay overlay={this.state.overlay}>
                 <Tutorial toggleOverlay={this.toggleOverlay} />
               </Overlay>
