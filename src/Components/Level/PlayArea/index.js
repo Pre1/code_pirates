@@ -170,11 +170,10 @@ class PlayArea extends Component {
         "end"
       ) {
         this.finishLevel();
-      } else {
-        this.props.onSetInstruction(
-          instructions[instructions.indexOf(currentInstruction) + 1].content
-        );
       }
+      this.props.onSetInstruction(
+        instructions[instructions.indexOf(currentInstruction) + 1].content
+      );
     }
   };
 
