@@ -45,14 +45,14 @@ class ListOfBlock extends Component {
                 >
                   {provided => (
                     <div
-                      className="alert tag-block mr-4 "
+                      className="blockAnime alert tag-block mr-4 "
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
-                      data-tip={tag.tip}
+                      // data-tip={tag.tip}
                     >
                       {tag.content}
-                      <ReactTooltip />
+                      {/* <ReactTooltip /> */}
                     </div>
                   )}
                 </Draggable>
