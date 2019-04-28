@@ -280,7 +280,9 @@ class PlayArea extends Component {
               style={{ textDecorationLine: "none" }}
               to={`/course/${selectedCourseId}/level/${+selectedLevelId + 1}`}
             >
-              <h1 className="text-light">لقد فزت! اضغط هنا لإنهاء المرحلة </h1>
+              <h1 className="text-light">
+                بطل لقد اجتزت المرحلة! اضغط هنا لإنهاء المرحلة{" "}
+              </h1>
             </Link>
           </div>
         )}

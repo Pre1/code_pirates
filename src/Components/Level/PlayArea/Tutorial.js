@@ -33,7 +33,7 @@ export default class Tutorial extends Component {
               width: "600px",
               height: "850px",
               maxHight: " 850px",
-              marginRight: "35%",
+              marginRight: "30%",
               backgroundColor: "rgba(0, 0, 0, 0.1)"
             }}
           >
