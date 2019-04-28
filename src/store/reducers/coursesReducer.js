@@ -1,7 +1,7 @@
 import * as actionTypes from "../actions/types";
 
 // Content
-import * as Contents from "../../Components/Level/CoursesContent/contentData.js";
+import * as content from "../../Components/Level/CoursesContent/contentData.js";
 
 // Images
 import barrel from "../../assets/images/barrel.png";
@@ -15,7 +15,7 @@ const initialState = {
       imageUrl: barrel,
       titleColor: "#ea6228",
       isAvailable: true,
-      isPass: false,
+      isPass: true,
       currentGoal: "",
       levels: [
         {
@@ -44,14 +44,33 @@ const initialState = {
             { id: "body", content: "<body> </body>", tip: "الجسم" },
             { id: "title", content: "<title> </title>", tip: "العنوان" }
           ],
-          content: Contents,
+          content: content.mdContentOne,
           isAvailable: true,
           isPass: false,
+          // instructions: [
+          //   { content: ["ضع <html> في منطقة البناء"], expected: "html" },
+          //   { content: ["ضع <head> في <html>"], expected: "head" },
+          //   { content: ["ضع <body> في <html>"], expected: "body" },
+          //   { content: ["ضع <title> في <head>"], expected: "title" },
+          //   { content: [" لقد فزت!!"], expected: "end" }
+          // ],
           instructions: [
-            { content: ["ضع <html> في منطقة البناء"], expected: "html" },
-            { content: ["ضع <head> في <html>"], expected: "head" },
-            { content: ["ضع <body> في <html>"], expected: "body" },
-            { content: ["ضع <title> في <head>"], expected: "title" },
+            {
+              content: ["ضع <html> في منطقة البناء"],
+              expected: '"html":{},'
+            },
+            {
+              content: ["ضع <head> في <html>"],
+              expected: '"html":{"head":{},},'
+            },
+            {
+              content: ["ضع <body> في <html>"],
+              expected: '"html":{"head":{},"body":{},},'
+            },
+            {
+              content: ["ضع <title> في <head>"],
+              expected: '"html":{"head":{"title":{"text":{},},},"body":{},},'
+            },
             { content: [" لقد فزت!!"], expected: "end" }
           ]
         },
@@ -91,16 +110,38 @@ const initialState = {
             { id: "h5", content: "<h5> </h5>", tip: "العنوان ٥" },
             { id: "h6", content: "<h6> </h6>", tip: "العنوان ٦" }
           ],
-          content: "",
+
+          content: content.mdContentTwo,
           isAvailable: false,
           isPass: false,
           instructions: [
-            { content: ["ضع <h6> في منطقة البناء"], expected: "h6" },
-            { content: ["ضع <h5> لمساعدة القرصان في النداء "], expected: "h5" },
-            { content: ["ضع <h4> ليرتفع صوته"], expected: "h4" },
-            { content: ["ضع <h3> ليرتفع صوته "], expected: "h3" },
-            { content: ["ضع <h2> ليرتفع صوته "], expected: "h2" },
-            { content: ["ضع <h1> ليرتفع صوته "], expected: "h1" },
+            {
+              content: ["ضع <h6> في منطقة البناء"],
+              expected: '"h6":{"text":{},},'
+            },
+            {
+              content: ["ضع <h5> لمساعدة القرصان في النداء "],
+              expected: '"h6":{"text":{},},"h5":{"text":{},},'
+            },
+            {
+              content: ["ضع <h4> ليرتفع صوته"],
+              expected: '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},'
+            },
+            {
+              content: ["ضع <h3> ليرتفع صوته "],
+              expected:
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},'
+            },
+            {
+              content: ["ضع <h2> ليرتفع صوته "],
+              expected:
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},"h2":{"text":{},},'
+            },
+            {
+              content: ["ضع <h1> ليرتفع صوته "],
+              expected:
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},"h2":{"text":{},},"h1":{"text":{},},'
+            },
             { content: [" لقد فزت!!"], expected: "end" }
           ]
         },
@@ -115,7 +156,8 @@ const initialState = {
             imgMove: "thirdLevelImageMove"
           },
           tags: [{ id: "img", content: "<img />", tip: "img" }],
-          content: ``,
+
+          content: content.mdContentThree,
           isAvailable: false,
           isPass: false,
           instructions: []
@@ -159,7 +201,7 @@ const initialState = {
             { id: "strong", content: "<strong> </strong>", tip: "strong" },
             { id: "small", content: "<small> </small>", tip: "small" }
           ],
-          content: "",
+          content: ``,
           isAvailable: false,
           isPass: false,
           instructions: []
@@ -192,10 +234,16 @@ const initialState = {
 const coursesReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FINISH_LVL:
-      let newLevels = state.levels.slice();
+      let newLevels = state.courses
+        .find(course => course.id === +action.payload.courseId)
+        .levels.slice();
 
-      let lvl = { ...newLevels.find(obj => obj.id === action.payload) };
-      let nexLvl = { ...newLevels.find(obj => obj.id === action.payload + 1) };
+      let lvl = {
+        ...newLevels.find(obj => obj.id === +action.payload.levelId)
+      };
+      let nexLvl = {
+        ...newLevels.find(obj => obj.id === +action.payload.levelId + 1)
+      };
 
       if (nexLvl.id) {
         nexLvl.isAvailable = true;
@@ -206,8 +254,14 @@ const coursesReducer = (state = initialState, action) => {
 
       newLevels.splice(lvl.id - 1, 1, lvl);
 
+      let newCourses = state.courses.slice();
+      let newCourse = newCourses.find(
+        course => course.id === +action.payload.courseId
+      );
+      newCourse.levels = newLevels;
+      newCourses.splice(newCourses.indexOf(newCourses), 1, newCourse);
       return {
-        levels: newLevels
+        courses: newCourses
       };
 
     case actionTypes.GET_LEVEL_GOALS:

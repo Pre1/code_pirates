@@ -25,10 +25,14 @@ class PreviewBoard extends Component {
   // goes somewhere
   levelSearchTree = (block, name) => {
     if (block.name === name) {
+      console.log(
+        "anas TCL: PreviewBoard -> levelSearchTree -> result",
+        block.name
+      );
       this.setState({ answer: this.state.answer.concat(name) });
       // return obj
       return block;
-    } else if (block.name.children && block.children.length) {
+    } else if (block.children && block.children.length) {
       let i;
       let result = null;
       for (i = 0; result == null && i < block.children.length; i++) {
@@ -41,20 +45,21 @@ class PreviewBoard extends Component {
 
   setTag = (bb, name) => {
     // check if  the block is already added
-    if (!this.state.buildingBlocks.find(block => block.name === name)) {
-      return this.levelSearchTree(bb, name);
-    }
+    return this.levelSearchTree(bb, name);
   };
 
   render() {
     return (
       <div className="">
         <Level
+          addInstruction={this.props.addInstruction}
           level={this.props.level}
           tags={this.props.tags}
           buildingBlocks={this.props.buildingBlocks}
           setTag={this.setTag}
           levelSearchTree={this.levelSearchTree}
+          undoStep={this.props.undoStep}
+          clearUndo={this.props.clearUndo}
         />
       </div>
     );

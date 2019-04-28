@@ -6,8 +6,24 @@ import CodeBlock from "./CodeBlock";
 import * as Contents from "./contentData";
 import CourseHeader from "./CourseHeader";
 
-export default class CoursesContent extends Component {
+// Connection with redux centeral store
+import { connect } from "react-redux";
+
+class CoursesContent extends Component {
   render() {
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
+
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
+
+    console.log("TCL: CoursesContent => render => currentLevel", currentLevel);
+
     return (
       <div className="col-12 content-container mt-5">
         <CourseHeader />
@@ -16,9 +32,10 @@ export default class CoursesContent extends Component {
             <div className="col-11 text-right">
               <ReactMarkdown
                 className="markdownPB"
-                source={Contents.mdContentOne}
+                source={currentLevel.content}
                 renderers={{ code: CodeBlock }}
               />
+              <br />
             </div>
           </div>
         </div>
@@ -26,3 +43,9 @@ export default class CoursesContent extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  courses: state.coursesReducer.courses
+});
+
+export default connect(mapStateToProps)(CoursesContent);

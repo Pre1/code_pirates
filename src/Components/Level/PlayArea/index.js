@@ -5,6 +5,8 @@ import PreviewBorad from "../PreviewBoard";
 import { DragDropContext } from "react-beautiful-dnd";
 import * as Blocks from "../../../Library/PiratesCode";
 
+import Modal from "react-responsive-modal";
+
 import { Link } from "react-router-dom";
 
 import Instruction from "../Instruction";
@@ -28,7 +30,7 @@ let Overlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 2;
+  z-index: 40;
   cursor: pointer;
 `;
 
@@ -37,16 +39,24 @@ class PlayArea extends Component {
     overlay: true,
     level: null,
     tags: [],
-    allTags: []
+    allTags: [],
+    undoStep: null,
+    instructions: [],
+    currentInstruction: [],
+    userSteps: [],
+    gameFinishActive: false
   };
 
   // puts tag back after it's deleted
   putTagBack = tag => {
     console.log("TCL: PlayArea -> tags", this.state.allTags);
     this.setState({
-      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag))
+      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag)),
+      undoStep: tag
     });
   };
+
+  clearUndo = () => this.setState({ undoStep: null });
 
   // the meat
   onDragEnd = result => {
@@ -78,12 +88,6 @@ class PlayArea extends Component {
         const noNos = ["title", "text", "body", "head"];
         if (!noNos.includes(newBlock.name)) {
           // remove the tag from the tags list
-          this.state.tags.splice(
-            this.state.tags.indexOf(
-              this.state.tags.find(tag => tag.id === draggableId.split("-")[0])
-            ),
-            1
-          );
 
           // add block
           this.props.onAddBlock(newBlock);
@@ -95,39 +99,96 @@ class PlayArea extends Component {
         building.children = newBB;
         building.addChild(destination.droppableId, newBlock);
         // this.searchTree();
-        console.log(
-          "anas TCL: PlayArea -> case title droppableId -> BB",
-          destination.droppableId,
-          building
-        );
 
         // remove the tag
-        this.state.tags.splice(
-          this.state.tags.indexOf(
-            this.state.tags.find(tag => tag.id === draggableId.split("-")[0])
-          ),
-          1
-        );
+        // this.state.tags.splice(
+        //   this.state.tags.indexOf(
+        //     this.state.tags.find(tag => tag.id === draggableId.split("-")[0])
+        //   ),
+        //   1
+        // );
         // reset the list
         this.props.onSetBB(building.children);
+      }
+    }
+  };
 
-        console.log(
-          "TCL: PlayArea -> case title this.props.buildingBlocks",
-          this.props.buildingBlocks
+  toggleOverlay = () => {
+    this.setState(prevState => ({ overlay: !prevState.overlay }));
+  };
+
+  addInstruction = block => {
+    const { currentInstruction, userSteps, instructions } = this.state;
+
+    let tags = [...this.state.tags];
+    tags.splice(
+      this.state.tags.indexOf(
+        this.state.tags.find(tag => tag.id === block.name)
+      ),
+      1
+    );
+    this.setState({ tags });
+    let newBB = this.props.buildingBlocks.slice();
+    let building = new Blocks.ChildBlock("building", "building");
+    building.children = newBB;
+    if (
+      !userSteps.includes(currentInstruction) &&
+      `"building":{${currentInstruction.expected}},` === building.instruct()
+    ) {
+      // let { undoStep, clearUndo } = this.props;
+
+      // if (undoStep) {
+      //   let prevInstructIndex;
+      //   let resSteps = userSteps.filter(stp => {
+      //     if (stp.expected === undoStep) {
+      //       prevInstructIndex = instructions.indexOf(stp);
+      //     }
+      //     return stp.expected !== undoStep;
+      //   });
+
+      //   this. tState({
+      //     userSteps: resSteps,
+      //     currentInstruction: instructions[prevInstructIndex]
+      //   });
+
+      //   this.props.onSetInstruction(instructions[prevInstructIndex].content);
+      //   clearUndo();
+      // }
+
+      // **************************************//
+      // **************************************//
+
+      // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
+      this.setState({
+        userSteps: userSteps.concat(currentInstruction),
+        currentInstruction:
+          instructions[instructions.indexOf(currentInstruction) + 1]
+      });
+
+      if (
+        instructions[instructions.indexOf(currentInstruction) + 1].expected ===
+        "end"
+      ) {
+        this.finishLevel();
+      } else {
+        this.props.onSetInstruction(
+          instructions[instructions.indexOf(currentInstruction) + 1].content
         );
       }
     }
   };
 
-  handleDroppingBlock = newBlock => {
-    console.log(
-      "TCL: PlayArea -> handleDroppingBlock -> handleDroppingBlock",
-      newBlock
-    );
+  finishLevel = () => {
+    console.log("anas done");
+    this.setState({ gameFinishActive: true });
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+    this.props.onFinishLevel(selectedCourseId, selectedLevelId);
   };
 
-  toggleOverlay = () => {
-    this.setState(prevState => ({ overlay: !prevState.overlay }));
+  closeModal = () => {
+    this.setState({ gameFinishActive: false });
+    this.props.onSetBB([]);
   };
 
   componentDidMount = () => {
@@ -146,8 +207,12 @@ class PlayArea extends Component {
     this.setState({
       level: currentLevel,
       tags: [...tags],
-      allTags: [...tags]
+      allTags: [...tags],
+      instructions: currentLevel.instructions,
+      currentInstruction: currentLevel.instructions[0]
     });
+
+    this.props.onSetInstruction(currentLevel.instructions[0].content);
   };
 
   componentDidUpdate = prevProps => {
@@ -164,14 +229,22 @@ class PlayArea extends Component {
 
     const tags = [...currentLevel.tags];
 
+    console.log(
+      "anas TCL: PlayArea -> selectedLevelId",
+      selectedLevelId,
+      prevProps.match.params.levelID
+    );
     if (
-      prevProps.match.params.courseID !== selectedCourseId ||
-      prevProps.match.params.levelID !== selectedLevelId
+      +prevProps.match.params.courseID !== +selectedCourseId ||
+      +prevProps.match.params.levelID !== +selectedLevelId
     ) {
+      this.closeModal();
       this.setState({
         level: currentLevel,
         tags: [...tags],
-        allTags: [...tags]
+        allTags: [...tags],
+        instructions: currentLevel.instructions,
+        currentInstruction: currentLevel.instructions[0]
       });
     }
 
@@ -181,6 +254,7 @@ class PlayArea extends Component {
       });
     }
   };
+
   render() {
     const selectedCourseId = this.props.match.params.courseID;
     const selectedLevelId = this.props.match.params.levelID;
@@ -194,9 +268,23 @@ class PlayArea extends Component {
     );
 
     // const tags = currentLevel.tags;
-
+    let { gameFinishActive } = this.state;
     return (
       <div className="play">
+        {gameFinishActive && (
+          <div
+            className="btn peach-gradient btn-lg btn-b lock fixed-top"
+            // onClick={() => this.onClose()}
+          >
+            <Link
+              style={{ textDecorationLine: "none" }}
+              to={`/course/${selectedCourseId}/level/${+selectedLevelId + 1}`}
+            >
+              <h1 className="text-light">لقد فزت! اضغط هنا لإنهاء المرحلة </h1>
+            </Link>
+          </div>
+        )}
+
         <ReactAudioPlayer
           style={{ display: "none" }}
           src={wildForest}
@@ -217,6 +305,7 @@ class PlayArea extends Component {
           </div>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <div className="col-12 main-content card  text-center">
+              {/* onClick={() => this.toggleOverlay()} */}
               <Overlay overlay={this.state.overlay}>
                 <Tutorial toggleOverlay={this.toggleOverlay} />
               </Overlay>
@@ -250,9 +339,12 @@ class PlayArea extends Component {
                   <h2 className="p-1 tool">شاشة العرض</h2>
                   {this.state.level && (
                     <PreviewBorad
-                      tags={this.state.allTags}
+                      addInstruction={this.addInstruction}
+                      tags={this.state.tags}
                       level={this.state.level}
                       buildingBlocks={this.props.buildingBlocks}
+                      undoStep={this.state.undoStep}
+                      clearUndo={this.clearUndo}
                     />
                   )}
                 </div>
@@ -273,7 +365,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onAddBlock: block => dispatch(actionCreators.addBuildingBlock(block)),
-  onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB))
+  onSetBB: newBB => dispatch(actionCreators.setBuildingBlocks(newBB)),
+  onSetInstruction: instruction =>
+    dispatch(actionCreators.setLevelInstruction(instruction)),
+  onFinishLevel: (CID, LID) => dispatch(actionCreators.finishLvl(CID, LID))
 });
 export default connect(
   mapStateToProps,

@@ -632,12 +632,6 @@ img.island3:hover {
   font-size: 20px;
 }
 
-/* 
-
-.tag {
-  color: #e11f5a;
-*/
-
 .tag {
   color: #e11f5a;
 }
@@ -648,11 +642,14 @@ img.island3:hover {
   width: 100%;
   margin: 10em;
   padding: 10px;
+  border-radius: 16px;
+  font-size: 1.5em;
 }
 
 .markdownPB {
   font-family: "Baloo Bhaijaan", cursive;
   padding: 1em;
+  line-height: 35px;
 }
 .markdownPB h2 {
   color: #4d535c;
@@ -660,8 +657,22 @@ img.island3:hover {
 
 .markdownPB p {
   color: #9fa1a5;
+  font-size: 18px;
 }
 
 .markdownPB ul {
   margin-top: 20px;
+  font-size: 18px;
+  color: #9fa1a5;
+}
+
+.markdownPB em {
+  color: #e11f5a;
+}
+
+.markdownPB img {
+  border: 2px solid #f1f1f1;
+  border-radius: 16px;
+  padding: 15px;
+  width: 70%;
 }

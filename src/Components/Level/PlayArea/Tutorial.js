@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Carousel, Button } from "react-bootstrap";
+import { Carousel, Button, Card } from "react-bootstrap";
 
 import tutorial_1 from "../../../assets/images/tutorial/1_v1.gif";
 import building from "../../../assets/images/tutorial/2_v2.gif";
@@ -23,58 +23,62 @@ export default class Tutorial extends Component {
   render() {
     let toggle = this.props.toggleOverlay;
     let { index, direction } = this.state;
+    let images = [tutorial_1, building, preview, guide];
+
+    let carousel = images.map((image, indx) => {
+      return (
+        <Carousel.Item className="">
+          <Card
+            style={{
+              width: "600px",
+              height: "850px",
+              maxHight: " 850px",
+              marginRight: "35%",
+              backgroundColor: "rgba(0, 0, 0, 0.1)"
+            }}
+          >
+            <Button
+              onClick={() => toggle()}
+              variant="danger my-4"
+              style={{
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                borderRadius: "16px"
+              }}
+            >
+              إغلاق التعليمات
+            </Button>
+            <Card.Img
+              variant="top"
+              src={image}
+              style={{
+                width: "auto",
+                hight: "auto",
+                maxWidth: "700px",
+                maxHight: "auto",
+                border: "2px solid black",
+                margin: "10px",
+                borderRadius: "16px"
+              }}
+            />
+            <Card.Body />
+          </Card>
+        </Carousel.Item>
+      );
+    });
 
     return (
       <div className="Container my-5">
         <Carousel
+          className=""
           activeIndex={index}
           direction={direction}
           onSelect={this.handleSelect}
           interval="10000"
           indicators={false}
         >
-          <Carousel.Item>
-            <img className=" w-50" src={tutorial_1} alt="First slide" />
-            <Carousel.Caption>
-              <div style={{ marginTop: "50px" }}>
-                {/* <h3>عنوان اول شريحة</h3>
-                <p style={{ color: "black" }}>اهلا بكم في كوكب البيزا</p> */}
-              </div>
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img className="w-25" src={building} alt="Third slide" />
-
-            <Carousel.Caption className="my-2">
-              {/* <h3>عنوان ثاني شريحة</h3>
-              <p style={{ color: "black" }}>
-                اهلا بكم في كوكب البيزا اهلا بكم في كوكب البيزا
-              </p> */}
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img className="w-50" src={preview} alt="Third slide" />
-
-            <Carousel.Caption className="my-5">
-              {/* <h3>عنوان ثالث شريحة</h3>
-              <p style={{ color: "black" }}>اهلا بكم في كوكب البيزا</p> */}
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img className="w-25" src={guide} alt="Third slide" />
-
-            <Carousel.Caption className="my-5">
-              <p style={{ color: "white" }}>انا هنا للمساعدة</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+          {carousel}
         </Carousel>
-
-        <Button onClick={() => toggle()} variant="dark my-4">
-          بعدين يا شيخ
-        </Button>
       </div>
     );
   }
