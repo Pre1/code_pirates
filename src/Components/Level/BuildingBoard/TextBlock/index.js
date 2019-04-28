@@ -35,9 +35,8 @@ class TextBlock extends Component {
           type="text"
           //   value={this.state[`text-${block.name}-${index}`]}
           onChange={this.handleChange}
-          style={{ width: "140px" }}
+          style={{ width: "100%" }}
         />
-        <label> النص</label>
       </div>
     );
   }
