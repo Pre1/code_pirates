@@ -34,9 +34,9 @@ position: relative;
 width: 140px;
 max-height: 35px;
 min-height:35px
-padding: 0px;
-top:8%
-right:33%;
+padding-top: 5px;
+margin-top:10%
+right:32%;
 background:rgba(255, 255, 255, 0.5);
 -webkit-border-radius: 12px;
 -moz-border-radius: 12px;
@@ -60,8 +60,7 @@ top: 20%;
 
 .secondLevelBody {
   background: rgb(66, 106, 123);
-  height: 630px;
-
+  height: 570px;
   background-size: 450px;
   animation: bg-move 5s ease-in infinite;
   .playTags {
@@ -72,15 +71,13 @@ top: 20%;
   }  
   .bubble 
     {
+    padding:5px
     position: relative;
     min-height: 70px;
-    width:120px
-    max-width: 180px;
+    width:130px
+    max-width: 200px;
     max-height: auto;
     right:35%;
-    top:25%;
-
-    padding: 0px;
     background: rgba(255, 255, 255, 0.5);
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -98,7 +95,7 @@ top: 20%;
       max-width: 0;
       z-index: 1;
       left: -18px;
-      top: 29px;
+      top: 25px;
     }
   
 
@@ -147,13 +144,5 @@ background-repeat: no-repeat;
     background-position: -250% -220px;
   }
 }
-.secondLevelH1{
-  color:white;
-}
-.secondLevelH2{
-  color:white;
-}
-.secondLevelH3{
-  color:white;
-}
+
 `;
