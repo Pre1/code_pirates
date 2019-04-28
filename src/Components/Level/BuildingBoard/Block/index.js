@@ -74,7 +74,7 @@ class Block extends Component {
                         className="card-body"
                         style={{
                           maxWidth: "300px",
-                          backgroundColor: "gray",
+                          backgroundColor: "#f7f7f7",
                           border: "2px solid rgb(109, 64, 1)"
                         }}
                       >
