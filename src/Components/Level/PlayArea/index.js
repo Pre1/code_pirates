@@ -44,7 +44,7 @@ class PlayArea extends Component {
     instructions: [],
     currentInstruction: [],
     userSteps: [],
-    modalOpen: false
+    gameFinishActive: false
   };
 
   // puts tag back after it's deleted
@@ -131,12 +131,6 @@ class PlayArea extends Component {
     let newBB = this.props.buildingBlocks.slice();
     let building = new Blocks.ChildBlock("building", "building");
     building.children = newBB;
-    console.log(
-      "anas TCL: PlayArea -> instructions[instructions.indexOf(currentInstruction) + 1].expected",
-      instructions[instructions.indexOf(currentInstruction)].expected,
-      "\n",
-      building.instruct()
-    );
     if (
       !userSteps.includes(currentInstruction) &&
       `"building":{${currentInstruction.expected}},` === building.instruct()
@@ -186,15 +180,15 @@ class PlayArea extends Component {
 
   finishLevel = () => {
     console.log("anas done");
-    this.setState({ modalOpen: true });
-    this.props.onSetBB([]);
+    this.setState({ gameFinishActive: true });
     const selectedCourseId = this.props.match.params.courseID;
     const selectedLevelId = this.props.match.params.levelID;
     this.props.onFinishLevel(selectedCourseId, selectedLevelId);
   };
 
   closeModal = () => {
-    this.setState({ modalOpen: false });
+    this.setState({ gameFinishActive: false });
+    this.props.onSetBB([]);
   };
 
   componentDidMount = () => {
@@ -235,10 +229,16 @@ class PlayArea extends Component {
 
     const tags = [...currentLevel.tags];
 
+    console.log(
+      "anas TCL: PlayArea -> selectedLevelId",
+      selectedLevelId,
+      prevProps.match.params.levelID
+    );
     if (
-      prevProps.match.params.courseID !== selectedCourseId ||
-      prevProps.match.params.levelID !== selectedLevelId
+      +prevProps.match.params.courseID !== +selectedCourseId ||
+      +prevProps.match.params.levelID !== +selectedLevelId
     ) {
+      this.closeModal();
       this.setState({
         level: currentLevel,
         tags: [...tags],
@@ -268,20 +268,23 @@ class PlayArea extends Component {
     );
 
     // const tags = currentLevel.tags;
-    let { modalOpen } = this.state;
+    let { gameFinishActive } = this.state;
     return (
       <div className="play">
-        <Modal open={modalOpen} center>
-          <div className=" play-header pt-5 pb-5 mt-2 ">
+        {gameFinishActive && (
+          <div
+            className="btn peach-gradient btn-lg btn-b lock fixed-top"
+            // onClick={() => this.onClose()}
+          >
             <Link
               style={{ textDecorationLine: "none" }}
-              to={`/course/${selectedCourseId}`}
-              onClick={this.onClose}
+              to={`/course/${selectedCourseId}/level/${+selectedLevelId + 1}`}
             >
-              <h1 className="text-light"> Continue playing </h1>
+              <h1 className="text-light">لقد فزت! اضغط هنا لإنهاء المرحلة </h1>
             </Link>
           </div>
-        </Modal>
+        )}
+
         <ReactAudioPlayer
           style={{ display: "none" }}
           src={wildForest}
