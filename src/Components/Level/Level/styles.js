@@ -12,12 +12,7 @@ ${
   width: 100%;
   height: 100%;
 }
-.playTags {
-  width: 100%;
-  top: 60%;
-  z-index: 20;
-  position: absolute;
-}
+
 .levelEl {
   width: 100%;
   height: 100%;
@@ -29,68 +24,108 @@ ${
 }
 .boy {
   position: absolute;
-  left: 50%;
+  left: 5%;
   bottom: 40%;
 }
-.bubble 
+
+.PirateBubble 
 {
 position: relative;
-min-height: 100px;
-max-width: 190px;
-max-height: auto;
-
-padding: 0px;
-background: #FFFFFF;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;
+width: 140px;
+max-height: 35px;
+min-height:35px
+padding-top: 5px;
+margin-top:10%
+right:32%;
+background:rgba(255, 255, 255, 0.5);
+-webkit-border-radius: 12px;
+-moz-border-radius: 12px;
+border-radius: 12px;
 }
 
-.bubble:after 
+.PirateBubble:after 
 {
-  content: '';
-  position: absolute;
-  border-style: solid;
-  border-width: 13px 18px 13px 0;
-  border-color: transparent #FFFFFF;
-  display: block;
-  width: 0;
-  z-index: 1;
-  left: -18px;
-  top: 27px;
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 0 5px 11px;
+border-color: transparent rgba(255, 255, 255, 0.5);
+display: block;
+width: 0;
+z-index: 1;
+right: -11px;
+top: 20%;
 }
+
 
 .secondLevelBody {
-  background: #1c6588;
-  height: 595px;
-  background-size: 470px;
+  background: rgb(66, 106, 123);
+  height: 570px;
+  background-size: 450px;
   animation: bg-move 5s ease-in infinite;
-}
-.firstLevel {
-  background: red;
-  height: 595px;
+  .playTags {
+    width: 100%;
+    top: 60%;
+    z-index: 20;
+    position: absolute;
+  }  
+  .bubble 
+    {
+    padding:5px
+    position: relative;
+    min-height: 70px;
+    width:130px
+    max-width: 200px;
+    max-height: auto;
+    right:35%;
+    background: rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    }
+
+    .bubble:after 
+    {
+      content: '';
+      position: absolute;
+      border-style: solid;
+      border-width: 13px 18px 13px 0;
+      border-color: transparent  rgba(255, 255, 255, 0.5);
+      display: block;
+      max-width: 0;
+      z-index: 1;
+      left: -18px;
+      top: 25px;
+    }
+  
+
 
 }
-.firstLevelHTML {
-width: 100%;
+
+// .firstLevelHTML {
+// width: 100%;
+// height: 70px;
+// background-image: url(${flat});
+// background-repeat: no-repeat;
+// }
+.firstLevelHead {
+  width: 100%;
 height: 70px;
 background-image: url(${flat});
 background-repeat: no-repeat;
 }
-.firstLevelHead {
-  background: blue;
-  width: 100px;
-  height: 100px;
-}
 .firstLevelBody {
-  background: green;
-  width: 100px;
-  height: 100px;
+  background: #1c6588 url(${island}) repeat-x 15% -100px;
+  height: 595px;
+  background-size: 470px;
+  -webkit-animation: bg-move 5s ease-in infinite;
 }
 .firstLevelTitle {
-  background: pink;
   width: 100px;
-  color: yellow;
+  padding-top:3%;
+  margin-right:60%;
+
+  color: balck;
   height: 100px;
 }
 .secondLevelH1 {
@@ -109,4 +144,5 @@ background-repeat: no-repeat;
     background-position: -250% -220px;
   }
 }
+
 `;

@@ -332,7 +332,10 @@ class PlayArea extends Component {
                     blocks={this.props.buildingBlocks}
                   />
                 </div>
-                <div className="col-6 preview-borad-area my-3 ml-2 card">
+                <div
+                  className="col-6 preview-borad-area my-3 ml-2 card "
+                  style={{ backgroundColor: "rgb(66, 106, 123)" }}
+                >
                   <h2 className="p-1 tool">شاشة العرض</h2>
                   {this.state.level && (
                     <PreviewBorad

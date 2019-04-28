@@ -19,7 +19,7 @@ body {
 .background {
   position: absolute;
   width: 100%;
-  height: 140%;
+  height: 110%;
   top: 0;
   left: 0;
   /* background: #fff; */
@@ -57,7 +57,7 @@ body {
   position: relative;
   width: 100%;
   /* height: 100%; */
-  top: 70%;
+  top: 55%;
   left: 50%;
   -webkit-transform: translate(-50%, -47%);
 }
@@ -76,8 +76,14 @@ img.island2 {
   margin: 40px;
   filter: grayscale();
 }
+img.island3:hover {
+  -webkit-animation: scale-up-center 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
 img.island2:hover {
   filter: none;
+}
+img.island25:hover {
+  -webkit-animation: scale-up-center 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 img.island3 {
   width: 20%;
@@ -250,8 +256,8 @@ img.island3:hover {
   max-width: 48%;
   height: 665px;
   max-height: 665px;
-  overflow-y: scroll;
-  background-color: white;
+  /* overflow-y: scroll; */
+  /* background-color: white; */
 }
 
 .instructions-board {
@@ -286,10 +292,10 @@ img.island3:hover {
   -webkit-animation: bg-move 5s ease-in infinite;
 } */
 .boat {
-  width: 280px;
+  width: 140px;
   position: absolute;
-  top: 20%;
-  left: 35%;
+  bottom: 70%;
+  left: 65%;
 }
 .boat img {
   width: 100%;

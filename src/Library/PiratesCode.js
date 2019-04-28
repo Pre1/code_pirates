@@ -180,7 +180,7 @@ class ImgBlock extends Block {
 }
 
 class TextBlock extends Block {
-  constructor(text = "Sample", id, description) {
+  constructor(text = "ساعدوني", id, description) {
     super([], id, description);
     this.description = description;
     this.id = id;
