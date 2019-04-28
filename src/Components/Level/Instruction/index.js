@@ -38,7 +38,9 @@ class Instruction extends Component {
     // for level-specific instrucions
     lvlInstruct: [],
 
-    currentInstruct: 0
+    currentInstruct: 0,
+
+    show: true
   };
 
   async componentDidMount() {
@@ -64,21 +66,29 @@ class Instruction extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    let prevBuildingBlks = prevProps.buildingBlocks;
-    let currentBuildingBlks = this.props.buildingBlocks;
-
-    let curStrHTML = currentBuildingBlks.map(elm => elm.instruct()).join("");
-    console.log("TCL: zerozero", curStrHTML);
-
-    console.log(
-      "TCL: Instruction -> componentDidUpdate -> currentBuildingBlks",
-      currentBuildingBlks
-    );
-
     let { overlay, lvlInstruction } = await this.props;
     let { instruct, currentInstruct } = this.state;
 
-    console.log("TCL: Instruction -> componentDidUpdate -> instruct", instruct);
+    const selectedCourseId = this.props.match.params.courseID;
+    const selectedLevelId = this.props.match.params.levelID;
+
+    // const currentCourse = this.props.courses.find(
+    //   course => course.id === +selectedCourseId
+    // );
+
+    // const currentLevel = currentCourse.levels.find(
+    //   level => level.id === +selectedLevelId
+    // );
+
+    if (
+      +prevProps.match.params.courseID !== +selectedCourseId ||
+      +prevProps.match.params.levelID !== +selectedLevelId
+    ) {
+      this.setState({
+        instruct: ["اهلا بك في المرحلة الثانية.. آآآآررررر"],
+        currentInstruct: 0
+      });
+    }
 
     // === Trigger 1 ===
     if (prevProps.lvlInstruction[0] !== lvlInstruction[0]) {
@@ -98,11 +108,13 @@ class Instruction extends Component {
         "Instruction ================================== Trigger 1 ==="
       );
 
-      ReactTooltip.show(findDOMNode(this.refs.instruct));
+      // ReactTooltip.show(findDOMNode(this.refs.instruct));
       this.setState({
         instruct: lvlInstruction,
         currentInstruct: 0
       });
+
+      this.showToolTip();
     }
     // The initial Instructions for the Level
     // or you if you want to pass multiple sentences in
@@ -110,26 +122,34 @@ class Instruction extends Component {
       if (instruct[currentInstruct] && currentInstruct <= instruct.length) {
         ReactTooltip.show(findDOMNode(this.refs.instruct));
 
-        setTimeout(() => {
-          // if you want to manully hide it, use this carrrrrfuly please!
-          // ReactTooltip.hide(findDOMNode(this.refs.instruct));
+        // setTimeout(() => {
+        //   // ReactTooltip.hide(findDOMNode(this.refs.instruct));
 
-          this.setState({
-            currentInstruct: currentInstruct + 1
-          });
-        }, 3000);
-      } else {
-        let { critics } = this.state;
-        let randomSay = critics.getRandom();
-        setTimeout(() => {
-          this.setState({
-            instruct: [randomSay, ...lvlInstruction],
-            currentInstruct: 0
-          });
-        }, 3000);
+        //   this.setState({
+        //     currentInstruct: currentInstruct + 1
+        //   });
+        // }, 6000);
 
-        ReactTooltip.show(findDOMNode(this.refs.instruct));
+        // this.setState({
+        //   currentInstruct: currentInstruct + 1
+        // });
       }
+      // else {
+      //   let { critics } = this.state;
+      //   let randomSay = critics.getRandom();
+      //   // setTimeout(() => {
+      //   //   this.setState({
+      //   //     instruct: [randomSay, ...lvlInstruction],
+      //   //     currentInstruct: 0
+      //   //   });
+      //   // }, 3000);
+
+      //   this.setState({
+      //     instruct: lvlInstruction,
+      //     currentInstruct: 0
+      //   });
+      //   ReactTooltip.show(findDOMNode(this.refs.instruct));
+      // }
     }
   }
 
@@ -143,12 +163,18 @@ class Instruction extends Component {
     this.setState({ toolTip: !toolTip });
   };
 
+  showToolTip = () => {
+    let show = this.state.show;
+
+    if (show) ReactTooltip.show(findDOMNode(this.refs.instruct));
+
+    this.setState({ show: true });
+  };
+
   render() {
     let courseID = this.props.match.params.courseID;
     let levelID = this.props.match.params.levelID;
-
-    let { buildingBlocks, lvlInstruction } = this.props;
-    // console.log("TCL: Instruction -> render -> lvlInstruction", lvlInstruction);
+    let { lvlInstruction } = this.props;
     let { instruct, currentInstruct } = this.state;
 
     return (
