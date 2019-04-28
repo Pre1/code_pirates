@@ -30,7 +30,7 @@ class Block extends Component {
 
     return (
       <div
-        className="card-body"
+        className="bblockAnime card-body"
         style={{
           maxWidth: "300px",
           backgroundColor: "#ba6c01",
