@@ -56,7 +56,6 @@ class Level extends Component {
     expectedSteps: ["h6", "h5", "h4", "h3", "h2", "h1"]
   };
 
-
   // loops over tags then loops over BBs calls setTags then sends the returned obj to makeChanges
   setView = () => {
     const BB = new Blocks.ChildBlock("building", "building");
@@ -65,6 +64,8 @@ class Level extends Component {
       let block;
       block = this.props.setTag(BB, tag.id);
       if (block) {
+        let say = this.state.say.getRandom();
+        this.setState({ help: [say] });
         this.props.addInstruction(block);
       }
     });
@@ -78,8 +79,10 @@ class Level extends Component {
       // instructions: instructions,
       // currentInstruction: instructions[0]
     });
-    this.props.onSetInstruction(instructions[0].content);
-    console.log("instruct", instructions[0].content);
+
+    // this.props.onSetInstruction(instructions[0].content);
+    // console.log("instruct", instructions[0].content);
+
     // const levelJSX = new Blocks.ChildBlock("level", "level");
     // let list = [
     //   { name: "img", className: "boat", children: [] },
