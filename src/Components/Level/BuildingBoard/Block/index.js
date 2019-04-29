@@ -19,7 +19,9 @@ class Block extends Component {
   deleteBlock = block => {
     let newBB = this.props.buildingBlocks.slice();
     let building = new Blocks.ChildBlock("building", "building");
+    console.log("ABDULLAH : ", block);
     building.children = newBB;
+    this.props.addInstruction(block, block.name);
     building.deleteChild(block.id);
     this.props.putTagBack(block);
     this.props.onSetBB(building.children);
@@ -97,6 +99,7 @@ class Block extends Component {
           if (child.name !== "text") {
             return (
               <Block
+                addInstruction={this.props.addInstruction}
                 onSetBB={this.props.onSetBB}
                 buildingBlocks={this.props.buildingBlocks}
                 putTagBack={this.props.putTagBack}
