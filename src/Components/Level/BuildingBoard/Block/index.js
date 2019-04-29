@@ -21,7 +21,7 @@ class Block extends Component {
     let building = new Blocks.ChildBlock("building", "building");
     building.children = newBB;
     building.deleteChild(block.id);
-    this.props.putTagBack(block.name);
+    this.props.putTagBack(block);
     this.props.onSetBB(building.children);
   };
 
