@@ -57,21 +57,29 @@ const initialState = {
           instructions: [
             {
               content: ["ضع <html> في منطقة البناء"],
-              expected: '"html":{},'
+              expected: '"html":{},',
+              currentBlock: "html"
             },
             {
               content: ["ضع <head> في <html>"],
-              expected: '"html":{"head":{},},'
+              expected: '"html":{"head":{},},',
+              currentBlock: "head"
             },
             {
               content: ["ضع <body> في <html>"],
-              expected: '"html":{"head":{},"body":{},},'
+              expected: '"html":{"head":{},"body":{},},',
+              currentBlock: "body"
             },
             {
               content: ["ضع <title> في <head>"],
-              expected: '"html":{"head":{"title":{"text":{},},},"body":{},},'
+              expected: '"html":{"head":{"title":{"text":{},},},"body":{},},',
+              currentBlock: "title"
             },
-            { content: [" لقد فزت!!"], expected: "end" }
+            {
+              content: [" لقد فزت!! آآرررررر"],
+              expected: "end",
+              currentBlock: null
+            }
           ]
         },
         {
@@ -117,32 +125,43 @@ const initialState = {
           instructions: [
             {
               content: ["ضع <h6> في منطقة البناء"],
-              expected: '"h6":{"text":{},},'
+              expected: '"h6":{"text":{},},',
+              currentBlock: "h6"
             },
             {
               content: ["ضع <h5> لمساعدة القرصان في النداء "],
-              expected: '"h6":{"text":{},},"h5":{"text":{},},'
+              expected: '"h6":{"text":{},},"h5":{"text":{},},',
+              currentBlock: "h5"
             },
             {
               content: ["ضع <h4> ليرتفع صوته"],
-              expected: '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},'
+              expected:
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},',
+              currentBlock: "h4"
             },
             {
               content: ["ضع <h3> ليرتفع صوته "],
               expected:
-                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},'
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},',
+              currentBlock: "h3"
             },
             {
               content: ["ضع <h2> ليرتفع صوته "],
               expected:
-                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},"h2":{"text":{},},'
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},"h2":{"text":{},},',
+              currentBlock: "h2"
             },
             {
               content: ["ضع <h1> ليرتفع صوته "],
               expected:
-                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},"h2":{"text":{},},"h1":{"text":{},},'
+                '"h6":{"text":{},},"h5":{"text":{},},"h4":{"text":{},},"h3":{"text":{},},"h2":{"text":{},},"h1":{"text":{},},',
+              currentBlock: "h1"
             },
-            { content: [" لقد فزت!!"], expected: "end" }
+            {
+              content: [" لقد فزت!! آرررر احتاج قهوة"],
+              expected: "end",
+              currentBlock: null
+            }
           ]
         },
         {

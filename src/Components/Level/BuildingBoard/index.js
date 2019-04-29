@@ -39,6 +39,7 @@ class BuildingBoard extends Component {
         </Droppable>
         {this.state.blocks.map((block, index) => (
           <Block
+            addInstruction={this.props.addInstruction}
             onSetBB={this.props.onSetBB}
             buildingBlocks={this.props.buildingBlocks}
             putTagBack={this.props.putTagBack}
