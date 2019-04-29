@@ -23,7 +23,7 @@ class Block extends Component {
     building.children = newBB;
     this.props.addInstruction(block, block.name);
     building.deleteChild(block.id);
-    this.props.putTagBack(block.name);
+    this.props.putTagBack(block);
     this.props.onSetBB(building.children);
   };
 

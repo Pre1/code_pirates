@@ -48,11 +48,22 @@ class PlayArea extends Component {
   };
 
   // puts tag back after it's deleted
-  putTagBack = tag => {
-    this.setState({
-      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag)),
-      undoStep: tag
-    });
+
+  putTagBack = async tag => {
+    let tagFound = this.state.allTags.find(t => t.id === tag.name);
+    if (tagFound) {
+      await this.setState({
+        tags: this.state.tags.concat(tagFound),
+        undoStep: tag.name
+      });
+    }
+    if (tag.children && tag.children.length) {
+      let i;
+      let result = null;
+      for (i = 0; result == null && i < tag.children.length; i++) {
+        result = this.putTagBack(tag.children[i]);
+      }
+    }
   };
 
   clearUndo = () => this.setState({ undoStep: null });
@@ -198,7 +209,6 @@ class PlayArea extends Component {
   };
 
   finishLevel = () => {
-    console.log("anas done");
     this.setState({ gameFinishActive: true });
     const selectedCourseId = this.props.match.params.courseID;
     const selectedLevelId = this.props.match.params.levelID;
@@ -256,11 +266,6 @@ class PlayArea extends Component {
 
     const tags = [...currentLevel.tags];
 
-    console.log(
-      "anas TCL: PlayArea -> selectedLevelId",
-      selectedLevelId,
-      prevProps.match.params.levelID
-    );
     if (
       +prevProps.match.params.courseID !== +selectedCourseId ||
       +prevProps.match.params.levelID !== +selectedLevelId
