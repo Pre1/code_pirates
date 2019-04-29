@@ -6,13 +6,14 @@ import * as content from "../../Components/Level/CoursesContent/contentData.js";
 // Images
 import barrel from "../../assets/images/barrel.png";
 import unlockedLevel from "../../assets/images/unlockedLevel.png";
+import topic01 from "../../assets/images/topic01.png";
 
 const initialState = {
   courses: [
     {
       id: 1,
       name: "</ جـز يـرة HTML >",
-      imageUrl: barrel,
+      imageUrl: topic01,
       titleColor: "#ea6228",
       isAvailable: true,
       isPass: true,
@@ -226,7 +227,7 @@ const initialState = {
     {
       id: 2,
       name: "</ جـز يـرة CSS >",
-      imageUrl: barrel,
+      imageUrl: topic01,
       titleColor: "#29a4d9",
       isAvailable: false,
       isPass: false,
@@ -236,7 +237,37 @@ const initialState = {
     {
       id: 3,
       name: "</ جـز يـرة JavaScript >",
-      imageUrl: barrel,
+      imageUrl: topic01,
+      titleColor: "#f6d43c",
+      isAvailable: false,
+      isPass: false,
+      currentGoal: "",
+      levels: []
+    },
+    {
+      id: 4,
+      name: "</ جـز يـرة JavaScript >",
+      imageUrl: topic01,
+      titleColor: "#f6d43c",
+      isAvailable: false,
+      isPass: false,
+      currentGoal: "",
+      levels: []
+    },
+    {
+      id: 5,
+      name: "</ جـز يـرة JavaScript >",
+      imageUrl: topic01,
+      titleColor: "#f6d43c",
+      isAvailable: false,
+      isPass: false,
+      currentGoal: "",
+      levels: []
+    },
+    {
+      id: 6,
+      name: "</ جـز يـرة JavaScript >",
+      imageUrl: topic01,
       titleColor: "#f6d43c",
       isAvailable: false,
       isPass: false,

@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 // Components
 import LevelCard from "./LevelCard";
+
+// Images
+import map from "../../assets/images/map5.png";
+import topic_1_Img from "../../assets/images/topic01.png";
+import topic_3_Img from "../../assets/images/floating-island-lowpoly-mountains.png";
+import topic_4_Img from "../../assets/images/floating-island (1).png";
+import map2 from "../../assets/images/map2.png";
+import lightImg from "../../assets/images/lightbulb.svg";
+
+// import sun from "../../assets/images/sun.png";
 
 class LevelList extends Component {
   render() {
@@ -18,19 +29,29 @@ class LevelList extends Component {
     ));
 
     return (
-      <div className="my-2">
-        <h2
-          className="mb-4"
-          style={{
-            color: `${this.props.courses[selectedCourseId - 1].titleColor}`,
-            fontSize: "60px"
-          }}
-        >
-          {this.props.courses[selectedCourseId - 1] &&
-            this.props.courses[selectedCourseId - 1].name}
-        </h2>
-        <div className="row justify-content-center">{levelCards}</div>
-        <br />
+      <div className="levels-container">
+        <img src={map} className="levels-container" />
+        <div className="levels-components">
+          <div className="my-2">
+            <h2
+              className="mb-4"
+              style={{
+                color: `${this.props.courses[selectedCourseId - 1].titleColor}`,
+                fontSize: "60px"
+              }}
+            >
+              {this.props.courses[selectedCourseId - 1] &&
+                this.props.courses[selectedCourseId - 1].name}
+            </h2>
+            <div
+              className="row justify-content-center"
+              style={{ marginLeft: "5%" }}
+            >
+              {levelCards}
+            </div>
+            <br />
+          </div>
+        </div>
       </div>
     );
   }

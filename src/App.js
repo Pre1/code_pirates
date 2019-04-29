@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <div className="container text-center">
-        <div className="row justify-content-center mt-4">
+        <div className="row justify-content-center">
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route

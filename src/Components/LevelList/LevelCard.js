@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
+// Images
+import topic01Img from "../../assets/images/topic01.png";
+
 import lockImg from "../../assets/images/lockedLevel.png";
 import lightImg from "../../assets/images/lightbulb.svg";
+
+import topic_1_Img from "../../assets/images/topic01.png";
 
 class LevelCard extends Component {
   render() {
     const { courseId, level } = this.props;
-
     return (
-      <div className=" img-level col-3 mt-3 mr-3">
+      <div className=" img-level col-3 mr-3">
         <div className="image m-3 animatedCard">
           <img
             className="card-img-top img-fluid"
-            style={{ width: "90%" }}
+            style={{ width: "70%" }}
             src={level.isAvailable ? level.imageUrl : lockImg}
             alt={level.name}
           />
@@ -27,7 +32,7 @@ class LevelCard extends Component {
                   }
                   style={{ color: "#fff", textDecoration: "none" }}
                 >
-                  ابدأ التحدي
+                  <img src={lightImg} />
                 </Link>
               </button>
             ) : (
