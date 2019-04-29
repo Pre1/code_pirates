@@ -160,7 +160,12 @@ const initialState = {
           content: content.mdContentThree,
           isAvailable: false,
           isPass: false,
-          instructions: []
+          instructions: [
+            {
+              content: [""],
+              expected: ""
+            }
+          ]
         },
         {
           id: 4,
@@ -180,7 +185,12 @@ const initialState = {
           content: ``,
           isAvailable: false,
           isPass: false,
-          instructions: []
+          instructions: [
+            {
+              content: [""],
+              expected: ""
+            }
+          ]
         },
         {
           id: 5,
@@ -204,7 +214,12 @@ const initialState = {
           content: ``,
           isAvailable: false,
           isPass: false,
-          instructions: []
+          instructions: [
+            {
+              content: [""],
+              expected: ""
+            }
+          ]
         }
       ]
     },

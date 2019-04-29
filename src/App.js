@@ -50,6 +50,7 @@ class App extends Component {
             width="5%"
             height="5%"
             style={{ marginTop: "-15px" }}
+            alt="someisland"
           />
           <span className="footer"> صنع بـ </span>
           <FontAwesomeIcon className="footer footer-heart" icon={faHeart} />
