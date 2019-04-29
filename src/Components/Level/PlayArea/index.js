@@ -194,6 +194,11 @@ class PlayArea extends Component {
     const selectedCourseId = this.props.match.params.courseID;
     const selectedLevelId = this.props.match.params.levelID;
 
+    console.log(
+      "ZERO TCL: PlayArea -> componentDidMount -> selectedLevelId",
+      selectedLevelId
+    );
+
     const currentCourse = this.props.courses.find(
       course => course.id === +selectedCourseId
     );
@@ -201,6 +206,10 @@ class PlayArea extends Component {
     const currentLevel = currentCourse.levels.find(
       level => level.id === +selectedLevelId
     );
+
+    if (!currentLevel.isAvailable)
+      this.props.history.push(`/course/${selectedCourseId}`);
+
     const tags = [...currentLevel.tags];
     // console.log("TCL: PlayArea -> componentDidMount -> tags", tags);
     this.setState({
