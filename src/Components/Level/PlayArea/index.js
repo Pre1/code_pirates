@@ -48,12 +48,22 @@ class PlayArea extends Component {
   };
 
   // puts tag back after it's deleted
-  putTagBack = tag => {
-    console.log("TCL: PlayArea -> tags", this.state.allTags);
-    this.setState({
-      tags: this.state.tags.concat(this.state.allTags.find(t => t.id === tag)),
-      undoStep: tag
-    });
+
+  putTagBack = async tag => {
+    let tagFound = this.state.allTags.find(t => t.id === tag.name);
+    if (tagFound) {
+      await this.setState({
+        tags: this.state.tags.concat(tagFound),
+        undoStep: tag.name
+      });
+    }
+    if (tag.children && tag.children.length) {
+      let i;
+      let result = null;
+      for (i = 0; result == null && i < tag.children.length; i++) {
+        result = this.putTagBack(tag.children[i]);
+      }
+    }
   };
 
   clearUndo = () => this.setState({ undoStep: null });
@@ -117,7 +127,8 @@ class PlayArea extends Component {
     this.setState(prevState => ({ overlay: !prevState.overlay }));
   };
 
-  addInstruction = block => {
+  addInstruction = (block, undoStep = null) => {
+    console.log("ABDULLAH TCL: PlayArea -> block", block);
     const { currentInstruction, userSteps, instructions } = this.state;
 
     let tags = [...this.state.tags];
@@ -131,33 +142,53 @@ class PlayArea extends Component {
     let newBB = this.props.buildingBlocks.slice();
     let building = new Blocks.ChildBlock("building", "building");
     building.children = newBB;
-    if (
+
+    if (undoStep) {
+      console.log(
+        "ABDULLAH TCL: PlayArea -> addInstruction -> undoStep",
+        undoStep
+      );
+      let prevInstructIndex;
+      console.log(
+        "ABDULLAH TCL: PlayArea -> addInstruction -> prevInstructIndex",
+        prevInstructIndex
+      );
+      let resSteps = userSteps.filter(stp => {
+        if (stp.currentBlock === undoStep) {
+          console.log("ABDULLAH TCL: PlayArea -> addInstruction -> stp", stp);
+          prevInstructIndex = instructions.indexOf(stp);
+        }
+        return stp.currentBlock !== undoStep;
+      });
+
+      console.log(
+        "ABDULLAH TCL: PlayArea -> addInstruction -> resSteps",
+        prevInstructIndex
+      );
+
+      console.log(
+        "ABDULLAH TCL: PlayArea -> addInstruction -> resSteps",
+        resSteps
+      );
+
+      this.setState({
+        userSteps: resSteps,
+        currentInstruction: instructions[prevInstructIndex]
+      });
+
+      console.log(
+        "ABDULLAH => currentInstruction: ",
+        this.state.currentInstruction
+      );
+
+      this.props.onSetInstruction(instructions[prevInstructIndex].content);
+      // let lastInstruct = resSteps.length - 1;
+      // this.props.onSetInstruction(resSteps[lastInstruct].content);
+    } else if (
       !userSteps.includes(currentInstruction) &&
       `"building":{${currentInstruction.expected}},` === building.instruct()
     ) {
-      // let { undoStep, clearUndo } = this.props;
-
-      // if (undoStep) {
-      //   let prevInstructIndex;
-      //   let resSteps = userSteps.filter(stp => {
-      //     if (stp.expected === undoStep) {
-      //       prevInstructIndex = instructions.indexOf(stp);
-      //     }
-      //     return stp.expected !== undoStep;
-      //   });
-
-      //   this. tState({
-      //     userSteps: resSteps,
-      //     currentInstruction: instructions[prevInstructIndex]
-      //   });
-
-      //   this.props.onSetInstruction(instructions[prevInstructIndex].content);
-      //   clearUndo();
-      // }
-
-      // **************************************//
-      // **************************************//
-
+      console.log("ABDULLAH userSteps", userSteps);
       // here i would call this.props.[name of the fuction that changes the tooltip] and make it go to the next step
       this.setState({
         userSteps: userSteps.concat(currentInstruction),
@@ -178,7 +209,6 @@ class PlayArea extends Component {
   };
 
   finishLevel = () => {
-    console.log("anas done");
     this.setState({ gameFinishActive: true });
     const selectedCourseId = this.props.match.params.courseID;
     const selectedLevelId = this.props.match.params.levelID;
@@ -211,7 +241,6 @@ class PlayArea extends Component {
       this.props.history.push(`/course/${selectedCourseId}`);
 
     const tags = [...currentLevel.tags];
-    // console.log("TCL: PlayArea -> componentDidMount -> tags", tags);
     this.setState({
       level: currentLevel,
       tags: [...tags],
@@ -237,11 +266,6 @@ class PlayArea extends Component {
 
     const tags = [...currentLevel.tags];
 
-    console.log(
-      "anas TCL: PlayArea -> selectedLevelId",
-      selectedLevelId,
-      prevProps.match.params.levelID
-    );
     if (
       +prevProps.match.params.courseID !== +selectedCourseId ||
       +prevProps.match.params.levelID !== +selectedLevelId
@@ -352,6 +376,7 @@ class PlayArea extends Component {
                     منطقة البناء
                   </h2>
                   <BuildingBoard
+                    addInstruction={this.addInstruction}
                     putTagBack={this.putTagBack}
                     blocks={this.props.buildingBlocks}
                   />

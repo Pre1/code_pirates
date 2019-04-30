@@ -72,42 +72,34 @@ class Instruction extends Component {
     const selectedCourseId = this.props.match.params.courseID;
     const selectedLevelId = this.props.match.params.levelID;
 
-    // const currentCourse = this.props.courses.find(
-    //   course => course.id === +selectedCourseId
-    // );
+    const currentCourse = this.props.courses.find(
+      course => course.id === +selectedCourseId
+    );
 
-    // const currentLevel = currentCourse.levels.find(
-    //   level => level.id === +selectedLevelId
-    // );
+    const currentLevel = currentCourse.levels.find(
+      level => level.id === +selectedLevelId
+    );
 
     if (
       +prevProps.match.params.courseID !== +selectedCourseId ||
       +prevProps.match.params.levelID !== +selectedLevelId
     ) {
+      let name = currentLevel.name;
       this.setState({
-        instruct: ["اهلا بك في المرحلة الثانية.. آآآآررررر"],
+        instruct: [`اهلا بك في مرحلة ${name}.. آآآآررررر`],
+        currentInstruct: 0
+      });
+    }
+
+    if (prevProps.overlay !== overlay) {
+      this.setState({
+        instruct: lvlInstruction,
         currentInstruct: 0
       });
     }
 
     // === Trigger 1 ===
-    if (prevProps.lvlInstruction[0] !== lvlInstruction[0]) {
-      console.log(
-        "Instruction ================================== Trigger 1 ==="
-      );
-
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> prevProps.lvlInstruction[0]",
-        prevProps.lvlInstruction[0]
-      );
-      console.log(
-        "TCL: Instruction -> componentDidUpdate -> lvlInstruction",
-        lvlInstruction
-      );
-      console.log(
-        "Instruction ================================== Trigger 1 ==="
-      );
-
+    if (!overlay && prevProps.lvlInstruction[0] !== lvlInstruction[0]) {
       // ReactTooltip.show(findDOMNode(this.refs.instruct));
       this.setState({
         instruct: lvlInstruction,
@@ -176,13 +168,11 @@ class Instruction extends Component {
     let levelID = this.props.match.params.levelID;
     let { lvlInstruction } = this.props;
     let { instruct, currentInstruct } = this.state;
-
     return (
       <div>
         {/* <Button variant="dark" onClick={this.toggleTip}>
           debug
         </Button> */}
-        {/* onClick={() => this.props.toggleOverlay()} */}
         <div>
           <img
             id="instructBird"
@@ -200,17 +190,30 @@ class Instruction extends Component {
           />
           <ReactTooltip
             id="instructBird"
+            className="RocoSay"
+            delayHide={1000}
+            effect="solid"
             // afterShow={}
-            // afterHide={}
-            // place="left"
-            // offset={{ left: -50, top: 110 }}
-
-            // getContent={[
-            //   () => {
-            //     return ["أهلا بالقرصان الصغير"];
-            //   },
-            //   1000
-            // ]}
+            afterHide={e => {
+              console.log("ZERO TCL: Instruction -> e", e);
+              // ReactTooltip.show(findDOMNode(this.refs.instruct));
+            }}
+            getContent={[
+              dataTool => {
+                console.log("ZERO TCL: Instruction -> dataTool", dataTool);
+                let { critics } = this.state;
+                let randomSay = critics.getRandom();
+                let result = [
+                  randomSay,
+                  dataTool,
+                  dataTool,
+                  dataTool,
+                  dataTool
+                ].getRandom();
+                return result;
+              },
+              5000
+            ]}
           />
 
           <div style={{ position: "absolute", left: "-5px", bottom: "-1px" }}>
@@ -232,16 +235,13 @@ class Instruction extends Component {
 const mapStateToProps = state => {
   return {
     buildingBlocks: state.mainReducer.buildingBlocks,
-    lvlInstruction: state.levelsReducer.currentInstruction
+    lvlInstruction: state.levelsReducer.currentInstruction,
+    courses: state.coursesReducer.courses
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    // getGoals: id => dispatch(actionCreators.getLevelGoals(id)),
-    // setGoals: (id, goals) => dispatch(actionCreators.setLevelGoals(id, goals)),
-    // resetGoals: () => dispatch(actionCreators.resetLevelGoals())
-  };
+  return {};
 };
 
 export default withRouter(

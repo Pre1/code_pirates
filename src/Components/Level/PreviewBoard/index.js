@@ -25,10 +25,6 @@ class PreviewBoard extends Component {
   // goes somewhere
   levelSearchTree = (block, name) => {
     if (block.name === name) {
-      console.log(
-        "anas TCL: PreviewBoard -> levelSearchTree -> result",
-        block.name
-      );
       this.setState({ answer: this.state.answer.concat(name) });
       // return obj
       return block;
