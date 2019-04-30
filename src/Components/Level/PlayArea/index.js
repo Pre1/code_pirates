@@ -381,7 +381,7 @@ class PlayArea extends Component {
                     blocks={this.props.buildingBlocks}
                   />
                 </div>
-                <div className="col-9 preview-borad-area my-3 mr-3 ml-2 card ">
+                <div className="col-9 preview-borad-area  my-3 mr-3 ml-2 card ">
                   <h2
                     className="p-1 tool"
                     style={{

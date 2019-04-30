@@ -110,14 +110,14 @@ top: 20%;
 // background-repeat: no-repeat;
 // }
 .firstLevelHead {
-  background-size: 1200px;
-  height: 100px;
+  background-size: 1300px;
+  height: 120px;
   background-image: url(${flat});
   background-repeat: no-repeat;
 }
 .firstLevelBody {
   background: #1c6588 url(${island}) repeat-x 15% -100px;
-  height: 545px;
+  height: 535px;
   background-size: 470px;
   -webkit-animation: bg-move 15s ease-in infinite;
 }

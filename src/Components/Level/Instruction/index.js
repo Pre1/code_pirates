@@ -177,7 +177,7 @@ class Instruction extends Component {
           <img
             id="instructBird"
             src={assistant}
-            style={{ width: "70%", top: "30%", left: "30%" }}
+            style={{ width: "60%", top: "30%", left: "30%" }}
             data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
             ref="instruct"

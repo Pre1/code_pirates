@@ -3,31 +3,26 @@
 @import url("https://fonts.googleapis.com/css?family=Changa");
 
 body {
-  /* font-family: "El Messiri", sans-serif; */
   font-family: "Changa", sans-serif;
   direction: rtl;
+  max-height: 100%;
+}
+.container {
+  max-height: 10%;
 }
 
 .main-content {
-  height: 160%;
+  height: 150%;
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.5);
-  /* border-top-right-radius: 70px; */
 }
-.background {
-  position: absolute;
-  width: 100%;
-  height: 110%;
-  top: 0;
-  left: 0;
-  /* background: #fff; */
-}
+
 .play {
   position: absolute;
   width: 100%;
-  height: 110%;
+  height: 130%;
   top: 0;
   left: 0;
   background-size: cover;
@@ -35,7 +30,6 @@ body {
 }
 .levels {
   position: absolute;
-  /* width: 100%; */
   height: 200%;
   top: 0;
   left: 0;
@@ -44,20 +38,23 @@ body {
 }
 
 .background {
+  position: absolute;
+  width: 100% !important;
+  height: 100%;
+  overflow: hidden;
   background: -webkit-radial-gradient(
     center,
     ellipse cover,
     #47d3ff 0%,
-    #1c6588 100%
+    #1c6588 100% 
   );
   background: radial-gradient(ellipse at center, #47d3ff 0%, #1c6588 100%);
 }
 
 .background #islandContainer {
-  position: relative;
+  position: absolute;
   width: 100%;
-  /* height: 100%; */
-  top: 55%;
+  top: 5%;
   left: 50%;
   -webkit-transform: translate(-50%, -47%);
 }
@@ -67,7 +64,7 @@ body {
 }
 img.island {
   width: 30%;
-  max-height: 70%;
+  max-height: 90%;
   margin: 40px;
 }
 img.island:hover {
@@ -75,9 +72,8 @@ img.island:hover {
 }
 img.island2 {
   width: 10%;
-  max-height: 70%;
+  max-height: 80%;
   margin: 40px;
-  filter: grayscale();
 }
 img.island3:hover {
   -webkit-animation: scale-up-center 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
@@ -104,7 +100,7 @@ img.island3:hover {
   position: relative;
   width: 100%;
   height: 70%;
-  top: 60%;
+  top: 57%;
   left: 50%;
   -webkit-animation: movingIsland 2s ease-in-out 0s infinite alternate;
 }
@@ -205,20 +201,14 @@ img.island3:hover {
 }
 
 .tag-block {
-  /* border: 1px solid rgb(233, 101, 101);
-  
-  */
   border-radius: 5px 25px 5px 25px;
   background-color: #ba6c01cf;
-  /* background-image: linear-gradient(900deg,  20%, #ffffff 64%); */
   color: white;
   font-weight: bold;
   font-size: 20px;
   display: flex;
   width: 200px;
   height: 50px;
-  /* padding-right: 40px;
-  padding-left: 40px; */
   justify-content: center;
   align-items: center;
 }
@@ -227,16 +217,14 @@ img.island3:hover {
   border-bottom-right-radius: 70px;
   border-bottom-left-radius: 70px;
   background-color: #679950;
-
-  /* box-shadow: 5px 5px #888888; */
 }
 
 .building-board-area {
   border-radius: 16px 16px 16px 16px;
   width: 50%;
   max-width: 20%;
-  height: 690px;
-  max-height: 690px;
+  height: 700px;
+  max-height: 700px;
   margin-left: 6px;
   overflow: scroll;
 }
@@ -250,10 +238,8 @@ img.island3:hover {
   border-radius: 16px 16px 16px 16px;
   width: 100%;
   max-width: 100%;
-  height: 690px;
-  max-height: 690px;
-  /* overflow-y: scroll; */
-  /* background-color: white; */
+  height: 700px;
+  max-height: 700px;
 }
 
 .instructions-board {
@@ -262,7 +248,7 @@ img.island3:hover {
   height: 70px;
   max-height: 70px;
   border-radius: 5px 25px 5px 5px;
-  margin-top: 8%;
+  margin-top: 5%;
 }
 .head {
   width: 100%;
@@ -281,12 +267,6 @@ img.island3:hover {
   -webkit-animation: bg-move 5s ease-in infinite;
 }
 
-/* .secondLevelBody {
-  background: #1c6588 url("../images/island.png") repeat-x 15% -100px;
-  height: 595px;
-  background-size: 470px;
-  -webkit-animation: bg-move 5s ease-in infinite;
-} */
 .boat {
   width: 150px;
   position: absolute;
@@ -350,9 +330,11 @@ img.island3:hover {
 @keyframes scale-up-center {
   0% {
     transform: scale(1);
+    opacity: 0.5;
   }
   100% {
     transform: scale(1.1);
+    opacity: 1;
   }
 }
 .Pirate {
@@ -415,7 +397,8 @@ img.island3:hover {
 
 .footer {
   font-size: 20px;
-  color: #c5c5c5;
+  color: #b1b1b1;
+  position: relative;
 }
 
 .footer-heart {
@@ -423,7 +406,7 @@ img.island3:hover {
 }
 
 .content-container {
-  border: 2px solid #f1f1f1;
+  border: 2px solid #c7c7c7;
   height: 100%;
   min-height: 600px;
   border-radius: 16px;
@@ -560,7 +543,7 @@ img.island3:hover {
   }
   to {
     left: calc(100% - 100px);
-  } /* animate to left: 100%-50px */
+  } 
 }
 
 .pirate {
@@ -570,12 +553,6 @@ img.island3:hover {
 
 .sailboat {
   animation: go-left-right 5s infinite alternate;
-  /* apply the animation "go-left-right" to the element
-     duration 3 seconds
-     number of times: infinite
-     alternate direction every time
-  */
-
   position: relative;
   width: 50px;
   height: 20px;
@@ -710,7 +687,7 @@ img.island3:hover {
   0% {
     transform: translateY(-45px);
     animation-timing-function: ease-in;
-    opacity: 1;
+    opacity: 0.5;
   }
   24% {
     opacity: 1;
@@ -745,6 +722,75 @@ img.island3:hover {
   }
 }
 
+.topic-style {
+  width: 80%;
+  max-width: 80%;
+  height: 80%;
+  max-height: 80%;
+  justify-content: center;
+  align-items: center;
+}
+
+.levels-container {
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    #47d3ff 0%,
+    #1c6588 100%
+  );
+  background: radial-gradient(ellipse at center, #3f3930 0%, #64d4e621 100%);
+  font-family: "Baloo Bhaijaan", cursive;
+  position: absolute;
+  width: 100%;
+  height: 110%;
+  top: 10; 
+  left: 0; 
+  background-size: cover;
+}
+
+.levels-components {
+  position: absolute;
+  font-family: "Baloo Bhaijaan", cursive;
+  right: 0;
+  margin-right: 10%;
+  width: 78%;
+  margin-top: 3%;
+  height: 100%;
+
+}
+
+.animatedLevelImg {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  top: 34%;
+  right: -50%;
+  -webkit-animation: movingIsland 2s ease-in-out 0s infinite alternate;
+}
+
+.cards-slider-wrapper {
+  display: flex;
+  position: relative;
+  margin-top: 30%;
+  height: 100%;
+}
+.course {   
+  flex: 1;
+  min-width: 200px;
+  
+  opacity: 0.5;
+}
+
+.cards-slider {
+  display: flex;
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: scroll;
+  /* margin-top: 30%; */
+  margin-left: -26%;
+  right: 0;
+}
 .RocoSay {
   font-size: 25px !important;
   pointer-events: auto !important;
