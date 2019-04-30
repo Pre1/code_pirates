@@ -3,7 +3,6 @@
 @import url("https://fonts.googleapis.com/css?family=Changa");
 
 body {
-  /* font-family: "El Messiri", sans-serif; */
   font-family: "Changa", sans-serif;
   direction: rtl;
   max-height: 100%;
@@ -13,18 +12,17 @@ body {
 }
 
 .main-content {
-  height: 100%;
-  width: 160%;
+  height: 150%;
+  width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.5);
-  border-top-right-radius: 70px;
 }
 
 .play {
   position: absolute;
   width: 100%;
-  height: 150%;
+  height: 130%;
   top: 0;
   left: 0;
   background-size: cover;
@@ -32,7 +30,6 @@ body {
 }
 .levels {
   position: absolute;
-  /* width: 100%; */
   height: 200%;
   top: 0;
   left: 0;
@@ -57,12 +54,14 @@ body {
 .background #islandContainer {
   position: absolute;
   width: 100%;
-  /* height: 100%; */
   top: 5%;
   left: 50%;
   -webkit-transform: translate(-50%, -47%);
 }
-
+.play_container {
+  margin: 80px;
+  height: 50%;
+}
 img.island {
   width: 30%;
   max-height: 90%;
@@ -75,7 +74,6 @@ img.island2 {
   width: 10%;
   max-height: 80%;
   margin: 40px;
-  /* filter: grayscale(); */
 }
 img.island3:hover {
   -webkit-animation: scale-up-center 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
@@ -185,45 +183,32 @@ img.island3:hover {
 }
 .list-of-blocks-board {
   background-repeat: no-repeat;
-  height: 170px;
-  max-height: 200px;
+  height: 130px;
+  max-height: 130px;
   width: 80%;
   max-width: 80%;
-  /* border-radius: 25px 5px 5px 5px; */
   flex-direction: column;
-  /* overflow-x: scroll; */
-  /* background-color: white; */
 }
 .play-header {
-  float: left;
-  /* background-color: #ffffff; */
   background-image: linear-gradient(360deg, rgb(0, 0, 0, 0) 2%, #16372b 80%);
-  width: 885px;
-  border-top-right-radius: 70px;
-  /* border-bottom-right-radius: 70px; */
+  border-bottom-right-radius: 70px;
 }
 
 .list-tags-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* s */
-  /* padding-right: 5px !important; */
 }
 
 .tag-block {
-  /* border: 1px solid rgb(233, 101, 101);
-  
-  */
   border-radius: 5px 25px 5px 25px;
-  background-color: #ba6c01;
-  /* background-image: linear-gradient(900deg,  20%, #ffffff 64%); */
+  background-color: #ba6c01cf;
   color: white;
   font-weight: bold;
+  font-size: 20px;
   display: flex;
-  height: auto;
-  /* padding-right: 40px;
-  padding-left: 40px; */
+  width: 200px;
+  height: 50px;
   justify-content: center;
   align-items: center;
 }
@@ -232,16 +217,14 @@ img.island3:hover {
   border-bottom-right-radius: 70px;
   border-bottom-left-radius: 70px;
   background-color: #679950;
-
-  /* box-shadow: 5px 5px #888888; */
 }
 
 .building-board-area {
   border-radius: 16px 16px 16px 16px;
   width: 50%;
-  max-width: 50%;
-  height: 665px;
-  max-height: 665px;
+  max-width: 20%;
+  height: 700px;
+  max-height: 700px;
   margin-left: 6px;
   overflow: scroll;
 }
@@ -253,21 +236,19 @@ img.island3:hover {
 
 .preview-borad-area {
   border-radius: 16px 16px 16px 16px;
-  width: 48%;
-  max-width: 48%;
-  height: 665px;
-  max-height: 665px;
-  /* overflow-y: scroll; */
-  /* background-color: white; */
+  width: 100%;
+  max-width: 100%;
+  height: 700px;
+  max-height: 700px;
 }
 
 .instructions-board {
   width: 20%;
   max-width: 20%;
-  height: 200px;
-  max-height: 110px;
+  height: 70px;
+  max-height: 70px;
   border-radius: 5px 25px 5px 5px;
-  margin-top: 12%;
+  margin-top: 5%;
 }
 .head {
   width: 100%;
@@ -286,17 +267,12 @@ img.island3:hover {
   -webkit-animation: bg-move 5s ease-in infinite;
 }
 
-/* .secondLevelBody {
-  background: #1c6588 url("../images/island.png") repeat-x 15% -100px;
-  height: 595px;
-  background-size: 470px;
-  -webkit-animation: bg-move 5s ease-in infinite;
-} */
 .boat {
-  width: 140px;
+  width: 150px;
   position: absolute;
   bottom: 70%;
-  left: 65%;
+  top: 10%;
+  left: 75%;
 }
 .boat img {
   width: 100%;
@@ -423,7 +399,6 @@ img.island3:hover {
   font-size: 20px;
   color: #b1b1b1;
   position: relative;
-  /* margin-top: 85%; */
 }
 
 .footer-heart {
@@ -568,7 +543,7 @@ img.island3:hover {
   }
   to {
     left: calc(100% - 100px);
-  } /* animate to left: 100%-50px */
+  } 
 }
 
 .pirate {
@@ -578,12 +553,6 @@ img.island3:hover {
 
 .sailboat {
   animation: go-left-right 5s infinite alternate;
-  /* apply the animation "go-left-right" to the element
-     duration 3 seconds
-     number of times: infinite
-     alternate direction every time
-  */
-
   position: relative;
   width: 50px;
   height: 20px;
@@ -763,7 +732,6 @@ img.island3:hover {
 }
 
 .levels-container {
-  /* background-color: #d9d3b2; */
   background: -webkit-radial-gradient(
     center,
     ellipse cover,
@@ -813,9 +781,6 @@ img.island3:hover {
   opacity: 0.5;
 }
 
-
-
-
 .cards-slider {
   display: flex;
   position: relative;
@@ -825,4 +790,14 @@ img.island3:hover {
   /* margin-top: 30%; */
   margin-left: -26%;
   right: 0;
+}
+.RocoSay {
+  font-size: 25px !important;
+  pointer-events: auto !important;
+}
+
+.RocoSay:hover {
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-size: 35px !important;
 }
