@@ -25,7 +25,7 @@ class CoursesContent extends Component {
     console.log("TCL: CoursesContent => render => currentLevel", currentLevel);
 
     return (
-      <div className="col-12 content-container mt-5">
+      <div className="col-12 content-container mt-5 mb-5">
         <CourseHeader />
         <div className="col-12 mt-4">
           <div className="row justify-content-center">

@@ -15,50 +15,50 @@ class LevelCard extends Component {
     return (
       <div className=" img-level col-3 mr-3">
         <div className="image m-3 animatedCard">
-          <img
-            className="card-img-top img-fluid"
-            style={{ width: "70%" }}
-            src={level.isAvailable ? level.imageUrl : lockImg}
-            alt={level.name}
-          />
+          <Link
+            to={
+              level.isAvailable &&
+              `/course/${courseId}/level/${level.id}/content`
+            }
+            style={{
+              color: "#fff",
+              textDecoration: "none"
+            }}
+          >
+            <img
+              src={lightImg}
+              style={{
+                marginTop: "-20px",
+                marginRight: "90px",
+                boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.1)",
+                backgroundColor: "rgb(241, 188, 47)",
+                padding: "10px",
+                borderRadius: "26px"
+              }}
+            />
+          </Link>
+          <Link
+            to={level.isAvailable && `/course/${courseId}/level/${level.id}`}
+            style={{ color: "#fff", textDecoration: "none" }}
+          >
+            <img
+              className="card-img-top img-fluid"
+              style={{ width: "70%" }}
+              src={level.isAvailable ? level.imageUrl : lockImg}
+              alt={level.name}
+            />
+            <h5 className="card-title">
+              <h2 style={{ color: "#fff" }}>{level.name}</h2>
+            </h5>
+          </Link>
         </div>
-        <div className="card-body">
-          <div className="row justify-content-center">
-            {level.isAvailable ? (
-              <button className="col-5 btn green-btn ml-4">
-                <Link
-                  to={
-                    level.isAvailable && `/course/${courseId}/level/${level.id}`
-                  }
-                  style={{ color: "#fff", textDecoration: "none" }}
-                >
-                  <img src={lightImg} />
-                </Link>
-              </button>
-            ) : (
-              <button className="col-5 btn bg-light ml-4" disabled>
-                مغلق
-              </button>
-            )}
 
-            <button className="col-2 btn btn-warning">
-              <Link
-                to={
-                  level.isAvailable &&
-                  `/course/${courseId}/level/${level.id}/content`
-                }
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
-                <img src={lightImg} />
-              </Link>
-            </button>
-          </div>
-          <br />
+        <br />
 
-          <h5 className="card-title">
+        {/* <h5 className="card-title">
             <h2>{level.name}</h2>
-          </h5>
-        </div>
+          </h5> */}
+        {/* </div> */}
       </div>
     );
   }

@@ -6,6 +6,10 @@ body {
   /* font-family: "El Messiri", sans-serif; */
   font-family: "Changa", sans-serif;
   direction: rtl;
+  max-height: 100%;
+}
+.container {
+  max-height: 10%;
 }
 
 .main-content {
@@ -45,7 +49,7 @@ body {
     center,
     ellipse cover,
     #47d3ff 0%,
-    #1c6588 100%
+    #1c6588 100% 
   );
   background: radial-gradient(ellipse at center, #47d3ff 0%, #1c6588 100%);
 }
@@ -419,7 +423,7 @@ img.island3:hover {
   font-size: 20px;
   color: #b1b1b1;
   position: relative;
-  margin-top: 85%;
+  /* margin-top: 85%; */
 }
 
 .footer-heart {
@@ -427,7 +431,7 @@ img.island3:hover {
 }
 
 .content-container {
-  border: 2px solid #f1f1f1;
+  border: 2px solid #c7c7c7;
   height: 100%;
   min-height: 600px;
   border-radius: 16px;
@@ -766,7 +770,7 @@ img.island3:hover {
     #47d3ff 0%,
     #1c6588 100%
   );
-  background: radial-gradient(ellipse at center, #47d3ff 0%, #1c6588 100%);
+  background: radial-gradient(ellipse at center, #3f3930 0%, #64d4e621 100%);
   font-family: "Baloo Bhaijaan", cursive;
   position: absolute;
   width: 100%;

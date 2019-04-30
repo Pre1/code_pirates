@@ -3,6 +3,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Island from "./Island";
 
+import tuwaikImg from "../../assets/images/tuwaikImg.jpg";
+
+// Fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
 // Sounds
 import ReactAudioPlayer from "react-audio-player";
 import homesound from "../../assets/sounds/homesound.mp3";

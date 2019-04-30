@@ -19,7 +19,15 @@ class Island extends Component {
           />
         </Link>
         <div className="text-center justify-content-center">
-          <h1>{course.name}</h1>
+          <h1
+            style={{
+              color: `${course.titleColor}`,
+              opacity: `${course.isAvailable === true ? 1 : 0.5}`,
+              fontSize: "35px"
+            }}
+          >
+            {course.name}
+          </h1>
         </div>
       </div>
     );

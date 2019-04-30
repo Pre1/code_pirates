@@ -33,16 +33,24 @@ class LevelList extends Component {
         <img src={map} className="levels-container" />
         <div className="levels-components">
           <div className="my-2">
-            <h2
-              className="mb-4"
+            <Link
+              to="/"
               style={{
-                color: `${this.props.courses[selectedCourseId - 1].titleColor}`,
-                fontSize: "60px"
+                textDecoration: "none"
               }}
             >
-              {this.props.courses[selectedCourseId - 1] &&
-                this.props.courses[selectedCourseId - 1].name}
-            </h2>
+              <h2
+                className="mb-4"
+                style={{
+                  color: "rgba(0,0,0,0.6)",
+                  fontSize: "40px"
+                }}
+              >
+                {this.props.courses[selectedCourseId - 1] &&
+                  this.props.courses[selectedCourseId - 1].name}
+              </h2>
+            </Link>
+
             <div
               className="row justify-content-center"
               style={{ marginLeft: "5%" }}
