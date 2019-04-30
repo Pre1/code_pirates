@@ -20,7 +20,7 @@ const initialState = {
       levels: [
         {
           id: 1,
-          name: "أساسيات الجزيزة",
+          name: "أساسيات الجزيرة",
           imageUrl: unlockedLevel,
           goals: `
           <p className="PiratesCode">

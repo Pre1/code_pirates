@@ -185,7 +185,7 @@ class Level extends Component {
                   width="150px"
                   height="150px"
                 />
-                <img src={island} width="360px" height="180px" />
+                <img src={island} width="390px" height="290px" />
               </div>
             </div>
           );

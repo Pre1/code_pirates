@@ -187,7 +187,7 @@ class Instruction extends Component {
           <img
             id="instructBird"
             src={assistant}
-            style={{ width: "120%", top: "130%", left: "80%", botto: "30%" }}
+            style={{ width: "70%", top: "30%", left: "30%" }}
             data-tip={instruct[currentInstruct]}
             alt="pirateBird-instruct"
             ref="instruct"
@@ -213,12 +213,12 @@ class Instruction extends Component {
             // ]}
           />
 
-          <div style={{ position: "absolute", left: "-30px", bottom: "-30px" }}>
+          <div style={{ position: "absolute", left: "-5px", bottom: "-1px" }}>
             <Link
               to={`/course/${courseID}/level/${levelID}/content`}
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <button className="col-10 btn btn-warning rounded-pill mt-3 ">
+              <button className="col-10 btn btn-warning rounded-pill mt-1 ">
                 <img src={lightImg} alt="light" />
               </button>
             </Link>

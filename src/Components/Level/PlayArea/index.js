@@ -304,10 +304,10 @@ class PlayArea extends Component {
           volume={(0, 0.1)}
         />
 
-        <div className=" container mt-5">
-          <div className=" play-header pt-5 pb-5 mt-2 ">
+        <div className=" play_container mt-4">
+          <div className=" play-header pt-5 pb-5  ">
             <Link
-              style={{ textDecorationLine: "none" }}
+              style={{ textDecorationLine: "none", fontSize: "20px" }}
               to={`/course/${selectedCourseId}`}
             >
               <h1 className="text-light"> {currentLevel.name}</h1>
@@ -328,25 +328,43 @@ class PlayArea extends Component {
                   />
                 </div>
                 <div className="col-10 list-of-blocks-board badage ">
-                  <h2 className=" p-1 tool mb-5 ">منطقة الأدوات</h2>
+                  <h2
+                    className=" p-1 tool mb-5"
+                    style={{
+                      fontSize: "25px"
+                    }}
+                  >
+                    منطقة الأدوات
+                  </h2>
 
                   <ListOfTags tags={this.state.tags} />
                 </div>
               </div>
-              <hr />
+
               <div className="row justify-content-center ">
                 <div className="col-6 building-board-area my-3 mr-2 card">
-                  <h2 className="p-1 tool">منطقة البناء</h2>
+                  <h2
+                    className="p-1 tool"
+                    style={{
+                      fontSize: "25px"
+                    }}
+                  >
+                    منطقة البناء
+                  </h2>
                   <BuildingBoard
                     putTagBack={this.putTagBack}
                     blocks={this.props.buildingBlocks}
                   />
                 </div>
-                <div
-                  className="col-6 preview-borad-area my-3 ml-2 card "
-                  style={{ backgroundColor: "rgb(66, 106, 123)" }}
-                >
-                  <h2 className="p-1 tool">شاشة العرض</h2>
+                <div className="col-9 preview-borad-area my-3 mr-3 ml-2 card ">
+                  <h2
+                    className="p-1 tool"
+                    style={{
+                      fontSize: "25px"
+                    }}
+                  >
+                    شاشة العرض
+                  </h2>
                   {this.state.level && (
                     <PreviewBorad
                       addInstruction={this.addInstruction}

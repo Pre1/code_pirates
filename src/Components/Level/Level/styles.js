@@ -13,10 +13,10 @@ ${
   height: 100%;
 }
 
-.levelEl {
-  width: 100%;
-  height: 100%;
-}
+// .levelEl {
+//   width: 100%;
+//   height: 100%;
+// }
 .island {
   position: absolute;
   bottom: 5%;
@@ -30,13 +30,12 @@ ${
 
 .PirateBubble 
 {
-position: relative;
+position: absolute;
 width: 140px;
 max-height: 35px;
 min-height:35px
 padding-top: 5px;
-margin-top:10%
-right:32%;
+right:22%;
 background:rgba(255, 255, 255, 0.5);
 -webkit-border-radius: 12px;
 -moz-border-radius: 12px;
@@ -59,15 +58,16 @@ top: 20%;
 
 
 .secondLevelBody {
-  background: rgb(66, 106, 123);
-  height: 570px;
-  background-size: 450px;
+  background: rgb(208, 235, 244);;
+  height: 655px;
+  background-size:cover;
+  background-size: 540px;
   animation: bg-move 5s ease-in infinite;
   .playTags {
     width: 100%;
     top: 60%;
     z-index: 20;
-    position: absolute;
+    position: relative;
   }  
   .bubble 
     {
@@ -77,7 +77,8 @@ top: 20%;
     width:130px
     max-width: 200px;
     max-height: auto;
-    right:35%;
+    right:68%;
+    bottom:44px;
     background: rgba(255, 255, 255, 0.5);
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -109,21 +110,21 @@ top: 20%;
 // background-repeat: no-repeat;
 // }
 .firstLevelHead {
-  width: 100%;
-height: 70px;
-background-image: url(${flat});
-background-repeat: no-repeat;
+  background-size: 1200px;
+  height: 100px;
+  background-image: url(${flat});
+  background-repeat: no-repeat;
 }
 .firstLevelBody {
   background: #1c6588 url(${island}) repeat-x 15% -100px;
-  height: 595px;
+  height: 545px;
   background-size: 470px;
-  -webkit-animation: bg-move 5s ease-in infinite;
+  -webkit-animation: bg-move 15s ease-in infinite;
 }
 .firstLevelTitle {
   width: 100px;
   padding-top:3%;
-  margin-right:60%;
+  margin-right:80%;
 
   color: balck;
   height: 100px;

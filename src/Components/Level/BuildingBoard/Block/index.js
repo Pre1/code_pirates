@@ -32,9 +32,9 @@ class Block extends Component {
       <div
         className="bblockAnime card-body"
         style={{
-          maxWidth: "300px",
-          backgroundColor: "#ba6c01",
-          border: "2px solid rgb(109, 64, 1)",
+          maxWidth: "400px",
+          backgroundColor: "rgba(186, 108, 0, 0.5)",
+          border: "2px solid rgb(109, 64, 2)",
           borderRadius: "10px"
         }}
       >
