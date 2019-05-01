@@ -32,10 +32,10 @@ ${
 {
 position: absolute;
 width: 140px;
-max-height: 35px;
-min-height:35px
+min-height:35px 
 padding-top: 5px;
-right:22%;
+top:15%;
+right:25%;
 background:rgba(255, 255, 255, 0.5);
 -webkit-border-radius: 12px;
 -moz-border-radius: 12px;

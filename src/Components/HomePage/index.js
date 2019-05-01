@@ -11,7 +11,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 // Sounds
 import ReactAudioPlayer from "react-audio-player";
-import homesound from "../../assets/sounds/homesound.mp3";
+import homesound from "../../assets/sounds/part1.mp3";
 
 class HomePage extends Component {
   state = {
@@ -48,15 +48,15 @@ class HomePage extends Component {
     ));
     return (
       <div className="row justify-content-center">
+        <ReactAudioPlayer
+          style={{ display: "none" }}
+          src={homesound}
+          autoPlay
+          loop
+          controls
+          volume={(0, 0.7)}
+        />
         <div className="background container-faild">
-          <ReactAudioPlayer
-            style={{ display: "none" }}
-            src={homesound}
-            autoPlay
-            controls
-            volume={(1, 0.3)}
-          />
-
           <div className={`cards-slider active-slide-2`}>
             <div
               className="cards-slider-wrapper"

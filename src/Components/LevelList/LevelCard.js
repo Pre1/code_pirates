@@ -48,17 +48,10 @@ class LevelCard extends Component {
               alt={level.name}
             />
             <h5 className="card-title">
-              <h2 style={{ color: "#fff" }}>{level.name}</h2>
+              <h2 style={{ color: "whitesmoke" }}>{level.name}</h2>
             </h5>
           </Link>
         </div>
-
-        <br />
-
-        {/* <h5 className="card-title">
-            <h2>{level.name}</h2>
-          </h5> */}
-        {/* </div> */}
       </div>
     );
   }

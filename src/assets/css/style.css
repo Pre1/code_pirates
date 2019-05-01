@@ -46,7 +46,7 @@ body {
     center,
     ellipse cover,
     #47d3ff 0%,
-    #1c6588 100% 
+    #1c6588 100%
   );
   background: radial-gradient(ellipse at center, #47d3ff 0%, #1c6588 100%);
 }
@@ -274,20 +274,7 @@ img.island3:hover {
   top: 10%;
   left: 75%;
 }
-.boat img {
-  width: 100%;
-}
-.boat::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 120px;
-  background-size: 100px;
-  position: absolute;
-  top: -2%;
-  left: 1%;
-  opacity: 0;
-}
+
 .boat {
   -webkit-animation: rock-boat 2s ease-in-out infinite;
 }
@@ -406,7 +393,7 @@ img.island3:hover {
 }
 
 .content-container {
-  border: 2px solid #c7c7c7;
+  border: 2px solid #f1f1f1;
   height: 100%;
   min-height: 600px;
   border-radius: 16px;
@@ -543,7 +530,7 @@ img.island3:hover {
   }
   to {
     left: calc(100% - 100px);
-  } 
+  }
 }
 
 .pirate {
@@ -742,9 +729,9 @@ img.island3:hover {
   font-family: "Baloo Bhaijaan", cursive;
   position: absolute;
   width: 100%;
-  height: 110%;
-  top: 10; 
-  left: 0; 
+  height: 100%;
+  top: 10;
+  left: 0;
   background-size: cover;
 }
 
@@ -754,9 +741,8 @@ img.island3:hover {
   right: 0;
   margin-right: 10%;
   width: 78%;
-  margin-top: 3%;
+  margin-top: 2%;
   height: 100%;
-
 }
 
 .animatedLevelImg {
@@ -771,13 +757,13 @@ img.island3:hover {
 .cards-slider-wrapper {
   display: flex;
   position: relative;
-  margin-top: 30%;
+  margin-top: 33%;
   height: 100%;
 }
-.course {   
+.course {
   flex: 1;
   min-width: 200px;
-  
+
   opacity: 0.5;
 }
 
@@ -792,12 +778,12 @@ img.island3:hover {
   right: 0;
 }
 .RocoSay {
-  font-size: 25px !important;
+  font-size: 22px !important;
   pointer-events: auto !important;
 }
 
 .RocoSay:hover {
   visibility: visible !important;
   opacity: 1 !important;
-  font-size: 35px !important;
+  font-size: 25px !important;
 }

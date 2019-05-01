@@ -101,6 +101,7 @@ class Level extends Component {
     return (
       <Container>
         <div className={this.props.level.classNameForBody}>
+          <div className="levelEl">{level()}</div>
           <div className="playTags">
             {" "}
             <div className="bubble">
@@ -113,7 +114,6 @@ class Level extends Component {
                 )}
             </div>{" "}
           </div>
-          <div className="levelEl">{level()}</div>
         </div>
       </Container>
     );

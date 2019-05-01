@@ -12,6 +12,9 @@ import topic_3_Img from "../../assets/images/floating-island-lowpoly-mountains.p
 import topic_4_Img from "../../assets/images/floating-island (1).png";
 import map2 from "../../assets/images/map2.png";
 import lightImg from "../../assets/images/lightbulb.svg";
+import ReactAudioPlayer from "react-audio-player";
+
+import homesound from "../../assets/sounds/part2.mp3";
 
 // import sun from "../../assets/images/sun.png";
 
@@ -30,6 +33,14 @@ class LevelList extends Component {
 
     return (
       <div className="levels-container">
+        <ReactAudioPlayer
+          style={{ display: "none" }}
+          src={homesound}
+          autoPlay
+          loop
+          controls
+          volume={(0, 0.4)}
+        />
         <img src={map} className="levels-container" />
         <div className="levels-components">
           <div className="my-2">
@@ -39,8 +50,8 @@ class LevelList extends Component {
                 textDecoration: "none"
               }}
             >
-              <h2
-                className="mb-4"
+              <h1
+                className="mb-5"
                 style={{
                   color: "rgba(0,0,0,0.6)",
                   fontSize: "40px"
@@ -48,7 +59,7 @@ class LevelList extends Component {
               >
                 {this.props.courses[selectedCourseId - 1] &&
                   this.props.courses[selectedCourseId - 1].name}
-              </h2>
+              </h1>
             </Link>
 
             <div
