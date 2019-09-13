@@ -271,6 +271,7 @@ class PlayArea extends Component {
       +prevProps.match.params.levelID !== +selectedLevelId
     ) {
       this.closeModal();
+      this.props.onSetBB([]);
       this.setState({
         level: currentLevel,
         tags: [...tags],
