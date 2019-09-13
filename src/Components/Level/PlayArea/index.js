@@ -326,7 +326,7 @@ class PlayArea extends Component {
           autoPlay
           loop
           controls
-          volume={(0, 0.1)}
+          volume={(0, 0.8)}
         />
 
         <div className=" play_container mt-4">

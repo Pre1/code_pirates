@@ -182,7 +182,7 @@ class Instruction extends Component {
             alt="pirateBird-instruct"
             ref="instruct"
             data-place="right"
-            data-offset="{'left': 40, 'top': 50}"
+            data-offset="{'left': 20, 'top': 5}"
             data-for="instructBird"
             className="animatedCardBird"
             data-effect="solid"
