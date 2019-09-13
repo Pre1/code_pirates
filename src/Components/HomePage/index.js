@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Island from "./Island";
 
+// Image Assets
 import tuwaikImg from "../../assets/images/tuwaikImg.jpg";
-
+import { cloudP } from "../../assets/images/cloud.png";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -46,6 +47,8 @@ class HomePage extends Component {
     const course = this.props.courses.map(course => (
       <Island key={course.id} course={course} />
     ));
+
+    const cloudP = "https://abdullahsaif.s3.us-east-2.amazonaws.com/cloud.png";
     return (
       <div className="row justify-content-center">
         <div className="background container-faild">
@@ -68,17 +71,21 @@ class HomePage extends Component {
               {course}
             </div>
           </div>
-          <div id="islandContainer" class="animated">
+          <div id="islandContainer" className="animated">
+            {/* 
+            the orginal cloud img link was broken
+            and I made a new one. Right now, the img tag
+            can't load the image from the asset folder
+            idk maybe it's a bug.
+
+            sidenote: mind you, the new cloud is temporary...
+             */}
             <img
-              src="http://www.dejanlukac.com/test/_img/small-cloud.png"
-              class="cloudSmall animated"
+              src={cloudP}
+              className="cloudSmall animated"
               alt="small cloud"
             />
-            <img
-              src="http://www.dejanlukac.com/test/_img/big-cloud.png"
-              class="cloudBig animated"
-              alt="big cloud"
-            />
+            <img src={cloudP} className="cloudBig animated" alt="big cloud" />
           </div>
         </div>
       </div>

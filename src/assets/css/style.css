@@ -46,7 +46,7 @@ body {
     center,
     ellipse cover,
     #47d3ff 0%,
-    #1c6588 100% 
+    #1c6588 100%
   );
   background: radial-gradient(ellipse at center, #47d3ff 0%, #1c6588 100%);
 }
@@ -54,7 +54,7 @@ body {
 .background #islandContainer {
   position: absolute;
   width: 100%;
-  top: 5%;
+  top: 1%;
   left: 50%;
   -webkit-transform: translate(-50%, -47%);
 }
@@ -116,9 +116,10 @@ img.island3:hover {
 .background img.cloudBig {
   position: absolute;
   height: auto;
-  top: -40%;
+  top: -50%;
   left: 51%;
-  opacity: 0;
+  opacity: 80;
+  z-index: -100;
 }
 
 .background img.cloudSmall {
@@ -127,6 +128,7 @@ img.island3:hover {
   top: -2%;
   left: 37%;
   opacity: 0;
+  z-index: -99;
 }
 .background img.cloudSmall.animated {
   -webkit-animation: smallCloudAnimation 25s linear 0s infinite;
@@ -543,7 +545,7 @@ img.island3:hover {
   }
   to {
     left: calc(100% - 100px);
-  } 
+  }
 }
 
 .pirate {
@@ -743,8 +745,8 @@ img.island3:hover {
   position: absolute;
   width: 100%;
   height: 110%;
-  top: 10; 
-  left: 0; 
+  top: 10;
+  left: 0;
   background-size: cover;
 }
 
@@ -756,7 +758,6 @@ img.island3:hover {
   width: 78%;
   margin-top: 3%;
   height: 100%;
-
 }
 
 .animatedLevelImg {
@@ -774,10 +775,10 @@ img.island3:hover {
   margin-top: 30%;
   height: 100%;
 }
-.course {   
+.course {
   flex: 1;
   min-width: 200px;
-  
+
   opacity: 0.5;
 }
 
